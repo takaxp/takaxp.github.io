@@ -4,7 +4,7 @@
   <title><![CDATA[Blog by org-mode]]></title>
   <link href="http://takaxp.github.com/atom.xml" rel="self"/>
   <link href="http://takaxp.github.com/"/>
-  <updated>2013-03-22T08:43:40+09:00</updated>
+  <updated>2013-03-22T08:45:58+09:00</updated>
   <id>http://takaxp.github.com/</id>
   <author>
     <name><![CDATA[Takaaki ISHIKAWA]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[title-a]]></title>
+    <link href="http://takaxp.github.com/blog/2013-03-22-test.html"/>
+    <updated>2013-03-22T00:00:00+09:00</updated>
+    <id>http://takaxp.github.com/blog/test</id>
+    <content type="html"><![CDATA[<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">ヘッドライン</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">ここは？</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" >
+
+
+<colgroup>
+<col class="left"/>
+
+<col class="left"/>
+</colgroup>
+<tbody>
+<tr>
+<td class="left">a</td>
+<td class="left">b</td>
+</tr>
+
+<tr>
+<td class="left">c</td>
+<td class="left">d</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<!-- more -->
+</p>
+</div>
+</div>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[new post]]></title>
