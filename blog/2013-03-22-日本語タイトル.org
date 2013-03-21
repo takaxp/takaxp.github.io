@@ -1,0 +1,12 @@
+#+TITLE: 日本語タイトル
+#+DATE: 2013-03-22
+#+SETUPFILE: ~/Dropbox/octopress/setupfile.org
+#+JEKYLL_LAYOUT: post
+#+JEKYLL_CATEGORIES: 
+#+JEKYLL_PUBLISHED: true
+
+* 日本語のタイトルはどうか
+
+やっぱり日本語でブログ書きたいですね．
+
+{{{more}}}

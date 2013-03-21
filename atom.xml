@@ -4,7 +4,7 @@
   <title><![CDATA[Blog by org-mode]]></title>
   <link href="http://takaxp.github.com/atom.xml" rel="self"/>
   <link href="http://takaxp.github.com/"/>
-  <updated>2013-03-22T08:53:56+09:00</updated>
+  <updated>2013-03-22T08:59:22+09:00</updated>
   <id>http://takaxp.github.com/</id>
   <author>
     <name><![CDATA[Takaaki ISHIKAWA]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[日本語タイトル]]></title>
+    <link href="http://takaxp.github.com/blog/2013-03-22-%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%82%BF%E3%82%A4%E3%83%88%E3%83%AB.html"/>
+    <updated>2013-03-22T00:00:00+09:00</updated>
+    <id>http://takaxp.github.com/blog/日本語タイトル</id>
+    <content type="html"><![CDATA[<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">日本語のタイトルはどうか</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+やっぱり日本語でブログ書きたいですね．
+</p>
+
+<p>
+<!-- more -->
+</p>
+</div>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[title-a]]></title>
