@@ -4,7 +4,7 @@
   <title><![CDATA[Blog by org-mode]]></title>
   <link href="http://takaxp.github.com/atom.xml" rel="self"/>
   <link href="http://takaxp.github.com/"/>
-  <updated>2013-03-22T08:45:58+09:00</updated>
+  <updated>2013-03-22T08:48:07+09:00</updated>
   <id>http://takaxp.github.com/</id>
   <author>
     <name><![CDATA[Takaaki ISHIKAWA]]></name>
@@ -44,6 +44,15 @@
 </tr>
 </tbody>
 </table>
+
+<p>
+\(f(x)\)
+</p>
+
+\begin{equation}
+\label{eq_ssim_mu_x}
+\mu_{x} = \frac{1}{N}\sum_{i=1}^{N}x_{i}
+\end{equation}
 
 <p>
 <!-- more -->
