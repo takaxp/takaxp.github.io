@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Blog by org-mode]]></title>
+  <link href="http://takaxp.github.com/atom.xml" rel="self"/>
+  <link href="http://takaxp.github.com/"/>
+  <updated>2013-03-21T23:54:13+09:00</updated>
+  <id>http://takaxp.github.com/</id>
+  <author>
+    <name><![CDATA[Takaaki ISHIKAWA]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[new post]]></title>
+    <link href="http://takaxp.github.com/blog/2013-03-21-new-post.html"/>
+    <updated>2013-03-21T22:51:00+09:00</updated>
+    <id>http://takaxp.github.com/blog/new-post</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
