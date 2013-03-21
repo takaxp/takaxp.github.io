@@ -5,12 +5,23 @@
 #+JEKYLL_CATEGORIES: 
 #+JEKYLL_PUBLISHED: true
 
-* ヘッドライン
+* ここはヘッドラインでタイトルではない
 
-** ここは？
+初めてのorgからの入力．YYYY-MM-DD-title.org を編集中に，
+
+  - 書き出し
+  - デプロイ
+
+の順番で更新する．
+
+=C-c C-e P x octopress ENT= して， =rake gen_deploy= でOK！
+
+** テーブルはどうか
 
 | a | b |
 | c | d |
+
+** 数式はどうか
 
 $f(x)$
 

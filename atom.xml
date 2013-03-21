@@ -4,7 +4,7 @@
   <title><![CDATA[Blog by org-mode]]></title>
   <link href="http://takaxp.github.com/atom.xml" rel="self"/>
   <link href="http://takaxp.github.com/"/>
-  <updated>2013-03-22T08:49:04+09:00</updated>
+  <updated>2013-03-22T08:52:43+09:00</updated>
   <id>http://takaxp.github.com/</id>
   <author>
     <name><![CDATA[Takaaki ISHIKAWA]]></name>
@@ -19,10 +19,30 @@
     <updated>2013-03-22T00:00:00+09:00</updated>
     <id>http://takaxp.github.com/blog/test</id>
     <content type="html"><![CDATA[<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">ヘッドライン</h2>
+<h2 id="sec-1">ここはヘッドラインでタイトルではない</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1">ここは？</h3>
+<p>
+初めてのorgからの入力．YYYY-MM-DD-title.org を編集中に，
+</p>
+
+<ul class="org-ul">
+<li>書き出し
+</li>
+<li>デプロイ
+</li>
+</ul>
+
+<p>
+の順番で更新する．
+</p>
+
+<p>
+<code>C-c C-e P x octopress ENT</code> して， <code>rake gen_deploy</code> でOK！
+</p>
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">テーブルはどうか</h3>
 <div class="outline-text-3" id="text-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" >
 
@@ -44,7 +64,11 @@
 </tr>
 </tbody>
 </table>
-
+</div>
+</div>
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">数式はどうか</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 \(f(x)\)
 </p>
