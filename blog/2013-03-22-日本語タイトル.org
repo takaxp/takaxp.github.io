@@ -7,6 +7,6 @@
 
 * 日本語のタイトルはどうか
 
-やっぱり日本語でブログ書きたいですね．
+[[http://octopress.org/][octopress]] を使うと，github のページを使って簡単にブログを作れますが，記述方法が Markdown なので残念です．これを org-mode で編集できるようにしてくれたのが，[[https://github.com/yoshinari-nomura/org-octopress][org-octopress]] です．感謝！
 
 {{{more}}}
