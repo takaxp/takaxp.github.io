@@ -9,4 +9,6 @@
 
 [[http://octopress.org/][octopress]] を使うと，github のページを使って簡単にブログを作れますが，記述方法が Markdown なので残念です．これを org-mode で編集できるようにしてくれたのが，[[https://github.com/yoshinari-nomura/org-octopress][org-octopress]] です．感謝！
 
+[[http://orgmode.org/img/org-mode-unicorn-logo.png]]
+
 {{{more}}}
