@@ -1,0 +1,11 @@
+#+TITLE: My Online Documents
+#+AUTHOR: Takaaki ISHIKAWA
+#+SETUPFILE: theme-readtheorg.setup
+
+* Configurations for GNU Emacs
+  - [[./init.html][init.el]]
+  - [[./utility.html][utility.el]]
+
+* Links
+  - [[https://about.me/takaxp]]
+
