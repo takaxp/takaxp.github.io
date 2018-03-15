@@ -6,6 +6,10 @@
   - [[./init.html][init.el]]
   - [[./utility.html][utility.el]]
 
+* Org Mode Manual (Japanese translation)
+
+ - [[./org-ja.html][org-ja.html (v7.5)]]
+
 * Links
   - [[https://about.me/takaxp]]
 
