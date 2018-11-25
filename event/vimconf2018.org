@@ -1,5 +1,5 @@
 #+title:	A brief introduction to vim-orgmode
-#+date: 	[2018-11-25 Sun 07:44]
+#+date: 	[2018-11-25 Sun 17:09]
 #+author:	Takaaki ISHIKAWA <takaxp@ieee.org>
 #+options: \n:t
 #+startup: content
@@ -13,7 +13,7 @@
 #+end_src
 
 * Introduction
-** Who am I?                                  :attach:
+** Who am I?                                                         :attach:
               #+attr_html: :width 128
                                [[file:data/C1/731A23-4184-41AF-B17C-984F2991675D/twitter_2010-12-12_2018-11-23_01-45-23.jpg]]
 
@@ -21,9 +21,9 @@
               | Twitter | [[https://twitter.com/takaxp][@takaxp]]                                 |
               | Job     | Researcher, Lecturer, Software engineer |
               |         | An expert of ISO/IEC JTC 1/SC 29        |
-              | Lang.   | ﾁｮｯﾄﾀﾞｹ C/C++ and Perl                  |
+              | Lang.   | ﾁｮｯﾄﾀﾞｹ C, C++, and Perl                |
 
-** Personally,                                :attach:
+** Personally,                                                       :attach:
    :PROPERTIES:
    :ID:       DE3A8AA4-D0B4-4D6E-BD65-9B7D14F60AB1
    :attachments: DjKpFufUwAA1pp_2018-11-23_10-16-53.jpg
@@ -51,7 +51,7 @@
                 - Organizing your tasks and actions (e.g. [[https://gettingthingsdone.com/][GTD]])
                 - Writing meeting minutes or technical reports
                 - Capturing and recording everything as /plain text/
-** Capabilities                               :attach:
+** Capabilities                                                      :attach:
 
    - See the official website: https://github.com/jceb/vim-orgmode
      - [ ] Syntax highlighting
@@ -64,7 +64,7 @@
      - [ ] Generating well-structured document
      - [-] Export to other formats (via Emacs’ Org-Mode)
        - [X] Literate programming (Jupyter notebook? *NO*)
-       - [ ] Reproduce research
+       - [ ] Reproducible research
 ** Where can we see Org?
 
 #+begin_example
