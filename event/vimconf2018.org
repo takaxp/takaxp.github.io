@@ -1,5 +1,5 @@
 #+title:	A brief introduction to vim-orgmode
-#+date: 	[2018-11-25 Sun 17:09]
+#+date: 	[2018-12-02 Sun 11:18]
 #+author:	Takaaki ISHIKAWA <takaxp@ieee.org>
 #+options: \n:t
 #+startup: content
@@ -11,6 +11,10 @@
   (setq line-spacing 0)
   (org-tree-slide-play-with-timer))
 #+end_src
+
+* Abstract
+
+What is the reason why you use Vim on a daily basis? Use it for editing some configurations? Or writing lots of source code? That’s good. But some of you may want to use Vim for other purposes. For such users, Vim-orgmode has been developed by Jan Christoph Ebersbach as a Vim plugin from 2011. The vim-orgmode provides attractive capabilities to Vim users who potentially want to manage a bunch of TODO items, to write blog posts, and to edit technical articles or reports. In this lighting talk, the basic functionalities of vim-orgmode and remarkable features of the original Org Mode of Emacs are briefly introduced.
 
 * Introduction
 ** Who am I?                                                         :attach:

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-11-30 Fri 08:23 -->
+<!-- 2018-12-02 Sun 11:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A brief introduction to vim-orgmode</title>
@@ -253,47 +253,57 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd76f376">1. Introduction</a>
+<li><a href="#org9fc967c">1. Abstract</a></li>
+<li><a href="#org6504921">2. Introduction</a>
 <ul>
-<li><a href="#org3eb0b93">1.1. Who am I?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
-<li><a href="#orgf2376d6">1.2. Personally,&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
+<li><a href="#orgc0a1f68">2.1. Who am I?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
+<li><a href="#org2d27ce3">2.2. Personally,&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org6d02a57">2. vim-orgmode</a>
+<li><a href="#orgacc3e89">3. vim-orgmode</a>
 <ul>
-<li><a href="#org6166a8a">2.1. What is vim-orgmode?</a></li>
-<li><a href="#org90ef97a">2.2. Capabilities&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
-<li><a href="#orgbc38bf5">2.3. Where can we see Org?</a></li>
-<li><a href="#org3017134">2.4. Supporting Org in other editors</a></li>
+<li><a href="#orgaa79f31">3.1. What is vim-orgmode?</a></li>
+<li><a href="#orga8a1ec0">3.2. Capabilities&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
+<li><a href="#orgeb5f702">3.3. Where can we see Org?</a></li>
+<li><a href="#org9c9b6a1">3.4. Supporting Org in other editors</a></li>
 </ul>
 </li>
-<li><a href="#org9cddfed">3. Org Mode</a>
+<li><a href="#org81e5f4d">4. Org Mode</a>
 <ul>
-<li><a href="#orgbc59c58">3.1. What is this?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
-<li><a href="#org7319abc">3.2. Change your situation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
-<li><a href="#org2a88e2b">3.3. What is your requirements to text editor?</a></li>
-<li><a href="#orgd23b6c2">3.4. But the ideal goal is&#x2026;</a></li>
-<li><a href="#org6a3d742">3.5. Do not work too much&#xa0;&#xa0;&#xa0;<span class="tag"><span class="secret">secret</span></span></a></li>
+<li><a href="#org58fe152">4.1. What is this?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
+<li><a href="#orgae58dc4">4.2. Change your situation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></a></li>
+<li><a href="#org61bea95">4.3. What is your requirements to text editor?</a></li>
+<li><a href="#org0af6a96">4.4. But the ideal goal is&#x2026;</a></li>
+<li><a href="#org06a50bd">4.5. Do not work too much&#xa0;&#xa0;&#xa0;<span class="tag"><span class="secret">secret</span></span></a></li>
 </ul>
 </li>
-<li><a href="#org0496988">4. Problems</a>
+<li><a href="#org9916018">5. Problems</a>
 <ul>
-<li><a href="#org6adcd32">4.1. Current status of development</a></li>
-<li><a href="#org8291e68">4.2. Now we are in the middle of the way</a></li>
+<li><a href="#orgfac9c39">5.1. Current status of development</a></li>
+<li><a href="#org02e4fec">5.2. Now we are in the middle of the way</a></li>
 </ul>
 </li>
-<li><a href="#org3988a0b">5. Conclusion</a></li>
+<li><a href="#orgcaf534f">6. Conclusion</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd76f376" class="outline-2">
-<h2 id="orgd76f376"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org9fc967c" class="outline-2">
+<h2 id="org9fc967c"><span class="section-number-2">1</span> Abstract</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+What is the reason why you use Vim on a daily basis? Use it for editing some configurations? Or writing lots of source code? That’s good. But some of you may want to use Vim for other purposes. For such users, Vim-orgmode has been developed by Jan Christoph Ebersbach as a Vim plugin from 2011. The vim-orgmode provides attractive capabilities to Vim users who potentially want to manage a bunch of TODO items, to write blog posts, and to edit technical articles or reports. In this lighting talk, the basic functionalities of vim-orgmode and remarkable features of the original Org Mode of Emacs are briefly introduced.<br />
+</p>
 </div>
-<div id="outline-container-org3eb0b93" class="outline-3">
-<h3 id="org3eb0b93"><span class="section-number-3">1.1</span> Who am I?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
-<div class="outline-text-3" id="text-1-1">
+</div>
+
+<div id="outline-container-org6504921" class="outline-2">
+<h2 id="org6504921"><span class="section-number-2">2</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc0a1f68" class="outline-3">
+<h3 id="orgc0a1f68"><span class="section-number-3">2.1</span> Who am I?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
+<div class="outline-text-3" id="text-2-1">
 
 <div class="figure">
 <p><img src="data/C1/731A23-4184-41AF-B17C-984F2991675D/twitter_2010-12-12_2018-11-23_01-45-23.jpg" alt="twitter_2010-12-12_2018-11-23_01-45-23.jpg" width="128" /><br />
@@ -338,9 +348,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgf2376d6" class="outline-3">
-<h3 id="orgf2376d6"><span class="section-number-3">1.2</span> Personally,&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org2d27ce3" class="outline-3">
+<h3 id="org2d27ce3"><span class="section-number-3">2.2</span> Personally,&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
+<div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li><p>
 I love <b>Pasta</b> without <b>Spaghetti source code</b>.<br />
@@ -356,13 +366,13 @@ I love <b>Pasta</b> without <b>Spaghetti source code</b>.<br />
 </div>
 </div>
 
-<div id="outline-container-org6d02a57" class="outline-2">
-<h2 id="org6d02a57"><span class="section-number-2">2</span> vim-orgmode</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgacc3e89" class="outline-2">
+<h2 id="orgacc3e89"><span class="section-number-2">3</span> vim-orgmode</h2>
+<div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org6166a8a" class="outline-3">
-<h3 id="org6166a8a"><span class="section-number-3">2.1</span> What is vim-orgmode?</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-orgaa79f31" class="outline-3">
+<h3 id="orgaa79f31"><span class="section-number-3">3.1</span> What is vim-orgmode?</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 A Vim plugin of&#x2026;<br />
 </p>
@@ -387,9 +397,9 @@ A Vim plugin of&#x2026;<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-org90ef97a" class="outline-3">
-<h3 id="org90ef97a"><span class="section-number-3">2.2</span> Capabilities&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orga8a1ec0" class="outline-3">
+<h3 id="orga8a1ec0"><span class="section-number-3">3.2</span> Capabilities&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
+<div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>See the official website: <a href="https://github.com/jceb/vim-orgmode">https://github.com/jceb/vim-orgmode</a><br />
 <ul class="org-ul">
@@ -412,9 +422,9 @@ A Vim plugin of&#x2026;<br />
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbc38bf5" class="outline-3">
-<h3 id="orgbc38bf5"><span class="section-number-3">2.3</span> Where can we see Org?</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-orgeb5f702" class="outline-3">
+<h3 id="orgeb5f702"><span class="section-number-3">3.3</span> Where can we see Org?</h3>
+<div class="outline-text-3" id="text-3-3">
 <pre class="example">
 ┌────────────────────────────────┐
 │        README on GitHub        │
@@ -437,9 +447,9 @@ e.g.<br />
 </div>
 </div>
 
-<div id="outline-container-org3017134" class="outline-3">
-<h3 id="org3017134"><span class="section-number-3">2.4</span> Supporting Org in other editors</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-org9c9b6a1" class="outline-3">
+<h3 id="org9c9b6a1"><span class="section-number-3">3.4</span> Supporting Org in other editors</h3>
+<div class="outline-text-3" id="text-3-4">
 <ol class="org-ol">
 <li><b>Sublime text</b>: orgmode for Sublime Text 2 &amp; 3<br />
 <ul class="org-ul">
@@ -467,13 +477,13 @@ e.g.<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org9cddfed" class="outline-2">
-<h2 id="org9cddfed"><span class="section-number-2">3</span> Org Mode</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org81e5f4d" class="outline-2">
+<h2 id="org81e5f4d"><span class="section-number-2">4</span> Org Mode</h2>
+<div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgbc59c58" class="outline-3">
-<h3 id="orgbc59c58"><span class="section-number-3">3.1</span> What is this?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org58fe152" class="outline-3">
+<h3 id="org58fe152"><span class="section-number-3">4.1</span> What is this?&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 IMO, Org Mode is&#x2026;<br />
 </p>
@@ -487,9 +497,9 @@ IMO, Org Mode is&#x2026;<br />
 </div>
 </div>
 
-<div id="outline-container-org7319abc" class="outline-3">
-<h3 id="org7319abc"><span class="section-number-3">3.2</span> Change your situation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-orgae58dc4" class="outline-3">
+<h3 id="orgae58dc4"><span class="section-number-3">4.2</span> Change your situation&#xa0;&#xa0;&#xa0;<span class="tag"><span class="attach">attach</span></span></h3>
+<div class="outline-text-3" id="text-4-2">
 
 <div class="figure">
 <p><img src="data/0C/8C7577-DA2E-4C69-B32D-05B5DEDE08A6/vimconf2018_2018-11-24_12-11-11.png" alt="vimconf2018_2018-11-24_12-11-11.png" width="800" /><br />
@@ -498,9 +508,9 @@ IMO, Org Mode is&#x2026;<br />
 </div>
 </div>
 
-<div id="outline-container-org2a88e2b" class="outline-3">
-<h3 id="org2a88e2b"><span class="section-number-3">3.3</span> What is your requirements to text editor?</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org61bea95" class="outline-3">
+<h3 id="org61bea95"><span class="section-number-3">4.3</span> What is your requirements to text editor?</h3>
+<div class="outline-text-3" id="text-4-3">
 <ol class="org-ol">
 <li>Visual feedback (e.g. syntax highlighting)<br /></li>
 
@@ -518,9 +528,9 @@ etc&#x2026;<br /></li>
 </div>
 </div>
 
-<div id="outline-container-orgd23b6c2" class="outline-3">
-<h3 id="orgd23b6c2"><span class="section-number-3">3.4</span> But the ideal goal is&#x2026;</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org0af6a96" class="outline-3">
+<h3 id="org0af6a96"><span class="section-number-3">4.4</span> But the ideal goal is&#x2026;</h3>
+<div class="outline-text-3" id="text-4-4">
 <pre class="example">
 ┌──────────────────────────────────────────────┐
 │     Just imagine, then get the results.      │
@@ -533,9 +543,9 @@ Question:<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org6a3d742" class="outline-3">
-<h3 id="org6a3d742"><span class="section-number-3">3.5</span> Do not work too much&#xa0;&#xa0;&#xa0;<span class="tag"><span class="secret">secret</span></span></h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-org06a50bd" class="outline-3">
+<h3 id="org06a50bd"><span class="section-number-3">4.5</span> Do not work too much&#xa0;&#xa0;&#xa0;<span class="tag"><span class="secret">secret</span></span></h3>
+<div class="outline-text-3" id="text-4-5">
 <pre class="example">
                 *Just imagine, then get the results!*
              ┌────────────────┐       ┌────────────────┐
@@ -556,13 +566,13 @@ I cannot remember but I know...   →   Search and find it from org files
 </div>
 </div>
 
-<div id="outline-container-org0496988" class="outline-2">
-<h2 id="org0496988"><span class="section-number-2">4</span> Problems</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org9916018" class="outline-2">
+<h2 id="org9916018"><span class="section-number-2">5</span> Problems</h2>
+<div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-org6adcd32" class="outline-3">
-<h3 id="org6adcd32"><span class="section-number-3">4.1</span> Current status of development</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orgfac9c39" class="outline-3">
+<h3 id="orgfac9c39"><span class="section-number-3">5.1</span> Current status of development</h3>
+<div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li><p>
 vim-orgmode doesn't support full functionalities of Org Mode in Emacs.<br />
@@ -616,9 +626,9 @@ vim-orgmode doesn't support full functionalities of Org Mode in Emacs.<br />
 </div>
 
 
-<div id="outline-container-org8291e68" class="outline-3">
-<h3 id="org8291e68"><span class="section-number-3">4.2</span> Now we are in the middle of the way</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org02e4fec" class="outline-3">
+<h3 id="org02e4fec"><span class="section-number-3">5.2</span> Now we are in the middle of the way</h3>
+<div class="outline-text-3" id="text-5-2">
 <ul class="org-ul">
 <li>Human being needs your contributions to expand <b>vim-orgmode</b> ;-)<br /></li>
 </ul>
@@ -632,9 +642,9 @@ m9(^Д^) you!<br />
 </div>
 </div>
 
-<div id="outline-container-org3988a0b" class="outline-2">
-<h2 id="org3988a0b"><span class="section-number-2">5</span> Conclusion</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgcaf534f" class="outline-2">
+<h2 id="orgcaf534f"><span class="section-number-2">6</span> Conclusion</h2>
+<div class="outline-text-2" id="text-6">
 <pre class="example">
 ┌───────────────────────────────────┐
 │     Jump in Org Mode, today!      │
@@ -662,9 +672,9 @@ Thanks to:<br />
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2018-11-25 Sun 17:09</p>
+<p class="date">Date: 2018-12-02 Sun 11:18</p>
 <p class="author">Author: Takaaki ISHIKAWA &lt;takaxp@ieee.org&gt;</p>
-<p class="date">Created: 2018-11-30 Fri 08:23</p>
+<p class="date">Created: 2018-12-02 Sun 11:18</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
