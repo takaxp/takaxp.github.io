@@ -1,9 +1,10 @@
 #+title:  My Online Documents
 #+author: Takaaki ISHIKAWA
-#+date:   [2018-11-25 Sun 07:48]
+#+date:   [2019-03-22 Fri 16:18]
 #+setupfile: theme-readtheorg.setup
 
 * Configurations for GNU Emacs
+
   - [[./init.html][init.el]]
   - [[./utility.html][utility.el]]
 
