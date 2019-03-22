@@ -1,6 +1,6 @@
 #+title:  My Online Documents
 #+author: Takaaki ISHIKAWA
-#+date:   [2019-03-22 Fri 16:18]
+#+date:   [2019-03-22 Fri 16:23]
 #+setupfile: theme-readtheorg.setup
 
 * Configurations for GNU Emacs
@@ -18,4 +18,4 @@
 
 * Links
   - [[https://about.me/takaxp]]
-
+  - https://pxaka.tokyo
