@@ -1,8 +1,10 @@
-#+TITLE: My Online Documents
-#+AUTHOR: Takaaki ISHIKAWA
-#+SETUPFILE: theme-readtheorg.setup
+#+title:  My Online Documents
+#+author: Takaaki ISHIKAWA
+#+date:   [2019-03-22 Fri 16:23]
+#+setupfile: theme-readtheorg.setup
 
 * Configurations for GNU Emacs
+
   - [[./init.html][init.el]]
   - [[./utility.html][utility.el]]
 
@@ -10,6 +12,10 @@
 
  - [[./org-ja.html][org-ja.html (v7.5)]]
 
+* Talks
+
+ - [[./event/vimconf2018.html][VimConf 2018]]
+
 * Links
   - [[https://about.me/takaxp]]
-
+  - https://pxaka.tokyo

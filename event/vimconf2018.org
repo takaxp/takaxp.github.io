@@ -1,0 +1,203 @@
+#+title:	A brief introduction to vim-orgmode
+#+date: 	[2018-12-02 Sun 11:18]
+#+author:	Takaaki ISHIKAWA <takaxp@ieee.org>
+#+options: \n:t
+#+startup: content
+#+setupfile: theme-readtheorg.setup
+
+#+begin_src emacs-lisp :results none :exports none
+(when (require 'org-tree-slide nil t)
+  (my-mode-line-on)
+  (setq line-spacing 0)
+  (org-tree-slide-play-with-timer))
+#+end_src
+
+* Abstract
+
+What is the reason why you use Vim on a daily basis? Use it for editing some configurations? Or writing lots of source code? That’s good. But some of you may want to use Vim for other purposes. For such users, Vim-orgmode has been developed by Jan Christoph Ebersbach as a Vim plugin from 2011. The vim-orgmode provides attractive capabilities to Vim users who potentially want to manage a bunch of TODO items, to write blog posts, and to edit technical articles or reports. In this lighting talk, the basic functionalities of vim-orgmode and remarkable features of the original Org Mode of Emacs are briefly introduced.
+
+* Introduction
+** Who am I?                                                         :attach:
+              #+attr_html: :width 128
+                               [[file:data/C1/731A23-4184-41AF-B17C-984F2991675D/twitter_2010-12-12_2018-11-23_01-45-23.jpg]]
+
+              | Name    | Takaaki ISHIKAWA                        |
+              | Twitter | [[https://twitter.com/takaxp][@takaxp]]                                 |
+              | Job     | Researcher, Lecturer, Software engineer |
+              |         | An expert of ISO/IEC JTC 1/SC 29        |
+              | Lang.   | ﾁｮｯﾄﾀﾞｹ C, C++, and Perl                |
+
+** Personally,                                                       :attach:
+   :PROPERTIES:
+   :ID:       DE3A8AA4-D0B4-4D6E-BD65-9B7D14F60AB1
+   :attachments: DjKpFufUwAA1pp_2018-11-23_10-16-53.jpg
+   :END:
+
+              - I love *Pasta* without *Spaghetti source code*.
+
+                #+attr_html: :width 400
+                [[file:data/DE/3A8AA4-D0B4-4D6E-BD65-9B7D14F60AB1/DjKpFufUwAA1pp_2018-11-23_10-16-53.jpg]]
+
+* vim-orgmode
+** What is vim-orgmode?
+
+                A Vim plugin of...
+#+begin_example
+                ┌──────────────────────────────────────────────┐
+                │  Text outlining and task management for Vim  │
+                │           based on Emacs' Org-Mode           │
+                └──────────────────────────────────────────────┘
+#+end_example
+                - https://github.com/jceb/vim-orgmode
+
+               *What for?*
+                - Not limited to writing source code
+                - Organizing your tasks and actions (e.g. [[https://gettingthingsdone.com/][GTD]])
+                - Writing meeting minutes or technical reports
+                - Capturing and recording everything as /plain text/
+** Capabilities                                                      :attach:
+
+   - See the official website: https://github.com/jceb/vim-orgmode
+     - [ ] Syntax highlighting
+     - [ ] Markup (not Markdown)
+     - [ ] Cycle visibility of headings (folding)
+     - [ ] Edit the structure of the document:
+       - add, move, promote, denote headings and more
+     - [ ] Hyperlinks within vim-orgmode and outside (files, webpages, etc.)
+     - [ ] TODO list management
+     - [ ] Generating well-structured document
+     - [-] Export to other formats (via Emacs’ Org-Mode)
+       - [X] Literate programming (Jupyter notebook? *NO*)
+       - [ ] Reproducible research
+** Where can we see Org?
+
+#+begin_example
+                      ┌────────────────────────────────┐
+                      │        README on GitHub        │
+                      └────────────────────────────────┘
+#+end_example
+                                   Markdown?
+                                 Absolutely NO!
+
+                     e.g.
+                      - https://github.com/jceb/vim-orgmode
+                        - [[https://raw.githubusercontent.com/jceb/vim-orgmode/master/README.org][README.org]] ← ☆
+
+** Supporting Org in other editors
+
+        1. *Sublime text*: orgmode for Sublime Text 2 & 3
+           - https://packagecontrol.io/packages/orgmode
+
+        2. *VS Code*: Emacs Org Mode for Visual Studio Code
+           - https://github.com/vscode-org-mode/vscode-org-mode
+             - In Progress, contributions are welcome
+
+        3. *Atom*: Atom grammar for org-mode syntax
+           - https://atom.io/packages/org-mode
+
+        4. *GNU Emacs*: Org Mode (the original)
+           - https://orgmode.org
+* Org Mode
+** What is this?                                                     :attach:
+   :PROPERTIES:
+   :ID:       503D84E8-DE69-4774-8BF8-29ACE564A8C8
+   :attachments: brain-crash_2018-11-24_11-37-26.png vimconf2018_2018-11-24_11-52-25.png
+   :END:
+
+     IMO, Org Mode is...
+
+#+begin_example
+     ┌────────────────────────┐          ┌────────────────────────┐
+     │    the second brain    │    or    │        Exocortex       │
+     └────────────────────────┘          └────────────────────────┘
+                                          An extension to your brain
+#+end_example
+
+** Change your situation                                             :attach:
+   :PROPERTIES:
+   :ID:       0C8C7577-DA2E-4C69-B32D-05B5DEDE08A6
+   :attachments: vimconf2018_2018-11-24_12-05-15.png vimconf2018_2018-11-24_12-11-11.png
+   :END:
+
+  #+attr_html: :width 800
+  [[file:data/0C/8C7577-DA2E-4C69-B32D-05B5DEDE08A6/vimconf2018_2018-11-24_12-11-11.png]]
+
+** What is your requirements to text editor?
+
+
+          1. Visual feedback (e.g. syntax highlighting)
+
+          2. Efficiency
+             - you don't like duplicated works
+
+          3. *Snippet* or *code completion*
+             - since we have /limited memory in brain/
+                                                             etc...
+
+** But the ideal goal is...
+
+#+begin_example
+                ┌──────────────────────────────────────────────┐
+                │     Just imagine, then get the results.      │
+                └──────────────────────────────────────────────┘
+#+end_example
+
+                  Question:
+                     Why are you typing your keyboard now?
+** Do not work too much                                              :secret:
+
+#+begin_example
+                     *Just imagine, then get the results!*
+                  ┌────────────────┐       ┌────────────────┐
+                  │     Imagine    │   →   │    Results!    │
+                  └────────────────┘       └────────────────┘
+                 ---------------------------------------------
+
+     Need a report in Microsoft Word   →   Export it from an org file
+
+     I cannot remember but I know...   →   Search and find it from org files
+
+        When I have to go to Vimconf   →   Get a reminder from Org
+
+                           Security?   →   just encrypt data
+
+#+end_example
+
+* Problems
+** Current status of development
+
+  - vim-orgmode doesn't support full functionalities of Org Mode in Emacs.
+
+   #+caption: basic statistics based on GitHub or git repository
+   |               | Org Mode      | Vim-orgmode      |  vscode-org-mode |
+   |---------------+---------------+------------------+------------------|
+   | Starting date | 2003-mm-dd    | [2011-06-25 Sat] | [2017-04-02 Sun] |
+   | Contributors  | 100 (approx.) | 34               |                7 |
+   | Commits       | 21,579        | /*997*/          |              203 |
+
+
+** Now we are in the middle of the way
+
+       - Human being needs your contributions to expand *vim-orgmode* ;-)
+
+
+
+                                  m9(^Д^) you!
+
+* Conclusion
+
+#+begin_example
+                      ┌───────────────────────────────────┐
+                      │     Jump in Org Mode, today!      │
+                      └───────────────────────────────────┘
+#+end_example
+                            visit https://orgmode.org
+                                      and
+                               vim-orgmode ([[https://github.com/jceb/vim-orgmode][GitHub]])
+        Thanks to:
+         1. [[https://orgmode.org/ja/][Org Mode]]
+         2. [[https://github.com/takaxp/org-tree-slide][org-tree-slide.el]] (as presentation module)
+
+        /This presentation was delivered by *GNU Emacs* and [[https://orgmode.org/][Org Mode]]/
+           - Sorry, not using Vim...
+           - but near future, *vim-orgmode* may achieve this!
