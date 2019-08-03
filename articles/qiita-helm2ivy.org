@@ -1,0 +1,1419 @@
+#+title: helm を背に ivy の門を叩く
+#+setupfile: theme-readtheorg.setup
+#+html_head: <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+#+startup: content
+
+#+begin_src emacs-lisp :exports none :results none
+;; (when (org-html-export-to-html)
+;;   (shell-command-to-string
+;;    (concat "scp -o ConnectTimeout=5 " "./qiita-helm2ivy.html "
+;;            "orz:/srv/www/pxaka.tokyo/htsdocs/articles")))
+;; (org-open-link-from-string "https://pxaka.tokyo/articles")
+#+end_src
+
+* COMMENT 確認事項
+  :PROPERTIES:
+  :CREATED:  [2019-07-29 Mon 17:19]
+  :END:
+ - [X] 用語にブレがある．選択対象，候補リスト，補完システム
+   - [X] ivy/counsel, ivy, ivy-mode
+ - [X] ホームページを先に整備して，客を誘導する．
+ - [X] 文章を校正しながら，GIFアニメを追加する．
+ - [X] リンクを増やす．
+
+* はじめに
+
+~ivy~ は， ~helm~ と双璧を成す Emacs の補完システムです．リスト表示された多くの選択肢から，自分が使いたいものを高速に絞り込んで，効率良く選び出す．このシンプル，かつ極めて重要なタスクを， ~ivy~ や ~helm~ が手助けしてくれます．
+
+過去を振り返れば，特に理由もなく私は ~anything.el~ から（強いて言えばメンテナス状況が良かった） ~helm.el~ に移行し，そして今回， ~helm.el~ から ~ivy.el~ に移行することにしました． ~ivy~ への移行の理由はいくつかありますが，シンプル軽量であり，ミニバッファで完結するインターフェイスに安定感があり，なにより ~all-the-icons.el~ との相性が良いことです．
+
+特に普段からモードラインを表示しない派の方は，全体的にスッキリ・シャープな Emacs に生まれ変わりますので，移行をオススメします．
+
+よければEmacs勉強会の[[https://speakerdeck.com/takaxp/counsel][講演資料]]と[[https://gist.github.com/takaxp/86158fe74b8268843571c42b48a4336c][設定集]]もご参照ください．また， ~ivy~ 以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．この記事のソースも公開しています．
+
+#+begin_export html
+![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif)
+↑GUI
+#+end_export
+
+#+begin_export html
+![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif)
+↑ターミナル
+#+end_export
+
+* インストール
+
+いくつかのインストール方法がありますが，パッケージ管理ツールを使うのが楽です． ~ivy.el~ をインストールする時は，プリセット関数を集めている ~counsel.el~ と， =helm-swoop= 相当の機能を提供する ~swiper.el~ も同時に入れるのが一般的です．
+
+~counsel.el~ が ~swiper.el~ に， ~swiper.el~ が ~ivy.el~ に依存しているので，パッケージ管理ツールを使う場合は， ~counsel.el~ をインストールすれば，3つのパッケージを同時にインストールできます．うまくいかない場合は，3つとも指定すれば良いです...
+
+なお当方の環境は ~macOS~ で，それ以外の環境では動作未確認ですが，大きな違いは無いと思います．
+
+ - [[https://github.com/abo-abo/swiper][abo-abo/swiper: Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview, and more. Oh, man!]]
+
+** MELPA
+
+~counsel~ をインストールします．Cask使いの場合は，一行追加で．
+
+#+begin_src emacs-lisp
+(depends-on "counsel")
+#+end_src
+
+** el-get
+
+~swiper~ のリポジトリを指定します．
+
+#+begin_src emacs-lisp
+(el-get-bundle "abo-abo/swiper")
+#+end_src
+
+* 基本設定
+ここでは基本的な設定と配色， ~ivy~ の流儀と選択候補のソーティング変数を紹介します．
+** 設定例
+
+個別の設定や細かなハックに移る前に，まずは，これさえあればとりあえず動くという設定を施します．
+
+*** ivy.el
+
+まずは ~ivy~ を使えるようにします．ほぼ素のままで良いです．
+
+#+begin_src emacs-lisp
+(when (require 'ivy nil t)
+
+  ;; M-o を ivy-dispatching-done-hydra に割り当てる．
+  (require 'ivy-hydra)
+
+  ;; `ivy-switch-buffer' (C-x b) のリストに recent files と bookmark を含める．
+  (setq ivy-use-virtual-buffers t)
+
+  ;; ミニバッファでコマンド発行を認める
+  (when (setq enable-recursive-minibuffers t)
+    (minibuffer-depth-indicate-mode 1)) ;; 何回層入ったかプロンプトに表示．
+
+  ;; ESC連打でミニバッファを閉じる
+  (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
+
+  ;; アクティベート
+  (ivy-mode 1))
+#+end_src
+
+*** counsel.el
+
+~counsel.el~ は， ~ivy~ の骨格関数である =ivy-read= を様々なコマンドに拡張し，それらをプリセットとして収録しています．全文探索の =counsel-ag= など，よく使うコマンドを別途インストールする必要がありません．
+
+#+begin_src emacs-lisp
+(when (require 'counsel nil t)
+
+  ;; キーバインドは一例です．好みに変えましょう．
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "M-y") 'counsel-yank-pop)
+  (global-set-key (kbd "C-M-z") 'counsel-fzf)
+  (global-set-key (kbd "C-M-r") 'counsel-recentf)
+  (global-set-key (kbd "C-x C-b") 'counsel-ibuffer)
+  (global-set-key (kbd "C-M-f") 'counsel-ag)
+
+  ;; アクティベート
+  (counsel-mode 1))
+#+end_src
+
+*** swiper
+
+~swiper~ は， =helm-swoop= のような文字列探索機能を提供します．カーソル位置の単語をキーに，バッファ内を探索．絞り込まれた選択候補を =C-n/C-p= で変えると，それに合わせてバッファの表示も変わり，連続してプレビューできます．なお， =swiper-all-thing-at-point= も実装されていて，これは開いているすべてのバッファを探索します．
+
+#+begin_export html
+![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/33506056-af67-6a9f-b1b7-6e61a04a82a2.gif)
+#+end_export
+
+#+begin_src emacs-lisp
+(when (require 'swiper nil t)
+
+  ;; キーバインドは一例です．好みに変えましょう．
+  (global-set-key (kbd "M-s M-s") 'swiper-thing-at-point))
+#+end_src
+
+** 検索語のハイライト
+
+デフォルトの配色は，なかなかに個性的なので自分の好みに書き換えましょう．中途半端に書き換えると，デフォルトの配色が表に出てくるので，次にリストしたフェイスはすべて書き換える方が安全です．なお， =(setq ivy-display-style t)= とすると，配色を無効にできます．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 13.07.34.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/744505f0-f2c2-d7aa-a5cf-4aea008f6d2d.png)
+#+end_export
+
+ - ivy-current-match
+   - ミニバッファ内カーソル行の配色． ~:background~ を使うと，絞り込み中のカーソル行の文字色にも反映されてしまう． ~:distant-foreground~ を使うと反映されない．ただし，指定する色の明るさに依存して期待通りにならないこともある．微調整が必要．
+ - ivy-minibuffer-match-face-1
+   - パターンマッチした文字列範囲の配色．ただし， =ivy-re-builders-alist= で指定するフィルタの種別に依存して使われたり，使われなかったりする．デフォルトの =ivy--regex-plus= の場合は，使われる．
+     #+begin_export html
+     ![Screen Shot 2019-08-03 at 12.57.10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/198cc1c6-f676-b703-c121-ec83cab34217.png)
+     #+end_export
+ - ivy-minibuffer-match-face-{2,3,4}
+   - 検索語のハイライトに使われる．検索語が3つを超える時は，ループして使う．
+     #+begin_export html
+     ![Screen Shot 2019-08-03 at 13.02.04.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/64f74be6-f61c-07c6-7750-c409e327bd9e.png)
+     #+end_export
+
+より詳細は，[[https://oremacs.com/swiper/#faces][マニュアル]]を参照してください．
+
+#+begin_src emacs-lisp
+(custom-set-faces
+ '(ivy-current-match
+   ((((class color) (background light))
+     :background "#FFF3F3" :distant-foreground "#000000")
+    (((class color) (background dark))
+     :background "#404040" :distant-foreground "#abb2bf")))
+ '(ivy-minibuffer-match-face-1
+   ((((class color) (background light)) :foreground "#666666")
+    (((class color) (background dark)) :foreground "#999999")))
+ '(ivy-minibuffer-match-face-2
+   ((((class color) (background light)) :foreground "#c03333" :underline t)
+    (((class color) (background dark)) :foreground "#e04444" :underline t)))
+ '(ivy-minibuffer-match-face-3
+   ((((class color) (background light)) :foreground "#8585ff" :underline t)
+    (((class color) (background dark)) :foreground "#7777ff" :underline t)))
+ '(ivy-minibuffer-match-face-4
+   ((((class color) (background light)) :foreground "#439943" :underline t)
+    (((class color) (background dark)) :foreground "#33bb33" :underline t))))
+#+end_src
+
+** まず始めに知っておくべき機能
+
+~ivy~ への移行に際して，知っておくべきデフォルト機能・コマンドがあります．それらは ~helm~ とは流儀が異なるので，少々戸惑うかもしれませんが，すぐ慣れます．
+
+~counsel-M-x~ 等の ~ivy~ インターフェイスで，選択候補がリスト表示されていると，次のコマンドを使えるようになります．
+
+| コマンド | 効果                                                             |
+|----------+------------------------------------------------------------------|
+| M-o      | 選択項目に対するアクションを選択できる                           |
+| C-o      | ミニバッファを表示したままコマンドを発行．jk移動．gプレビュー．  |
+| C-M-n    | 候補を切り替えるとバッファも切り替わりプレビューできる（順方向） |
+| C-M-p    | 候補を切り替えるとバッファも切り替わりプレビューできる（逆方向） |
+| C-M-m    | 候補リストの表示を維持したまま，現在の選択候補をプレビューする   |
+| C-M-j    | 選択候補を無視して，入力中の値を使う                             |
+
+=C-M-m=, =C-M-n=, =C-M-p= は，[[https://github.com/elpa-host/helm-file-preview][helm-file-preview]] の機能をデフォルト実装した印象です． ~swiper~ もそうですが， ~QuickLook~ 的にファイルの内容を確認できるのがとても便利です．
+
+その他， ~M-x ivy-resume~ すれば，いつでも前回のセッションに戻れます．頻繁にリジュームする人は，キーバインドを設定するべきかもしれません．また，プロンプトでユーザが入力する検索語は，一部の正規表現に対応しているので， ~^~ を付ければ先頭マッチ， ~$~ 末尾マッチというように制御できます．
+
+** ソーティングとフィルタ設定
+
+少し細かい話になりますが， ~ivy~ には絞り込み時の振る舞いに影響する重要な変数がいくつか定義されています．基本的に「すべてのコマンドに対する設定（全体設定）」と「個別のコマンドに対する設定」の双方を定義できます．
+
+後述の ~prescient.el~ を導入すると「すべてのコマンドに対する設定」を上書きするため，導入の影響で振る舞いが変化し，それが気に入らないこともありえます．その場合には，各設定を上書きしないようにするフラグ(=ivy-prescient-enable-filtering=)がありますので，とりあえずフラグをOFFの状態で使い始めるのも良さそうです．
+
+| 変数                             | 全体設定        |
+|----------------------------------+-----------------|
+| ivy-sort-functions-alist         | ivy-string<     |
+| ivy-sort-matches-functions-alist | nil             |
+| ivy-re-builders-alist            | ivy--regex-plus |
+
+ - ivy-sort-functions-alist
+   - 絞り込み開始前のリストの並び方を設定します
+   - まだ何もしていない時の選択候補の並びが気になる時は，この変数を設定します．
+   - ~prescient.el~ を導入し， =ivy-prescient-enable-sorting= などを正しく設定すれば，使用頻度の高い項目を上位に上げるなど，良きに計らってくれます．
+ - ivy-sort-matches-functions-alist
+   - 絞り込み開始後のリストの並び方を設定します
+ - ivy-re-builders-alist
+   - フィルタは =ivy--regex=, =regexp-quote=, =ivy--regex-plus=, =ivy--regex-fuzzy=, =ivy--regex-ignore-order= から選べます．独自実装した関数を設定することも可能です．
+   - =ivy--regex-ignore-order= が ~helm~ の振る舞いに一番近そうです．
+   - ~prescient.el~ は，「すべてのコマンド」に対して =ivy-prescient-re-builder= を設定します．
+     - =ivy-prescient-enable-filtering= が =nil= ならば，設定されません．
+   - 絞り込み時の face に影響を与えます．デフォルトの振る舞いが気に入っている場合は， =ivy--regex-plus= を「すべてのコマンド」に対して設定しましょう．
+     - =ivy--regex-ignore-order= は，enc org と org enc で結果が同じ． =ivy-minibuffer-match-face-1= 不使用．
+     - =ivy--regex-plus= は，enc org と org enc で結果が異なる． =ivy-minibuffer-match-face-1= 使用．
+
+* デフォルト機能を便利に使う
+
+~ivy-mode~ を使えるようになったら，まず ~counsel.el~ にプリセットされているデフォルト機能から使い始めましょう．いくつかをピックアップして紹介します．必要に応じてカスタマイズすれば，さらに便利に使えるようになります．
+
+** counsel.el にプリセットされているコマンド
+
+counsel.el (0.12.0) には，82個のコマンドが実装されています．頻繁に使うであろうコマンドと，注目のコマンドを抜粋します．完全なリストは，記事の下に示します．
+
+| コマンド              | 機能                           |
+|-----------------------+--------------------------------|
+| counsel-minor         | マイナーモードの一覧           |
+| counsel-unicode-char  | ユニコード文字の入力補助       |
+| counsel-yank-pop      | ペーストした文字列の選択       |
+| counsel-mark-ring     | マーク位置の選択               |
+| counsel-fzf           | fzf インターフェイス           |
+| counsel-ag            | ag インターフェイス            |
+| counsel-locate        | locate インターフェイス        |
+| counsel-recentf       | recentf インターフェイス       |
+| counsel-find-library  | Emacs Lisp ライブラリの選択    |
+| counsel-faces         | フェイスの一覧                 |
+| counsel-colors-emacs  | カラーリスト                   |
+| counsel-colors-web    | カラーリスト（Webカラー）      |
+| counsel-M-x           | コマンド一覧                   |
+| counsel-set-variable  | 変数の一覧と書き換え           |
+| counsel-bookmark      | ブックマーク選択               |
+| counsel-switch-buffer | バッファリスト（プレビュー付） |
+| counsel-ibuffer       | iBuffer インターフェイス       |
+
+=counsel-minor= はマイナーモードを表示して有効・無効化ができるので地味に便利です．ただ見やすさの点では，[[https://github.com/ShingoFukuyama/manage-minor-mode][manage-minor-mode.el]]がオススメです．
+
+** org.el と共に使う
+
+~counsel.el~ には，[[https://orgmode.org/][org mode]] ユーザ向けのコマンドとして， =counsel-org-tag=, =counsel-org-tag-agenda=, =counsel-org-goto=, =counsel-org-goto-all=, =counsel-org-file=, =counsel-org-entity=, =counsel-org-capture=, =counsel-org-agenda-headlines= が実装されています．
+
+=counsel-org-tag= は，タグの書き換え時に ~ivy~ を使いますが，どうやってタグを削除するのかがよくわからないと思います．私も戸惑いましたが，そんな時は， =C-M-j= (ivy-immediate-done) を呼び出せばよいです．
+
+もし， =org-capture= にも ~ivy~ を使いたい場合は，次の設定を使います．ただ， =org-capture= については，多くのユーザがキーバインドを記憶して呼び出していると思うので，それほど役立たない気もします．
+
+#+begin_src emacs-lisp
+(define-key counsel-mode-map [remap org-capture]  'counsel-org-capture)
+#+end_src
+
+以下は， ~swiper~ を使う時に，カーソル位置の単語を自動選択から ~org mode~ の見出しを除外するためのハックです．
+
+#+begin_src emacs-lisp
+(when (require 'swiper nil t)
+  (defun ad:swiper-thing-at-point ()
+    "`swiper' with `ivy-thing-at-point'."
+    (interactive)
+    (let ((thing (if (thing-at-point-looking-at "^\\*+")
+                     nil
+                   (ivy-thing-at-point))))
+      (when (use-region-p)
+        (deactivate-mark))
+      (swiper thing)))
+
+  (advice-add 'swiper-thing-at-point :override #'ad:swiper-thing-at-point))
+#+end_src
+
+** dired.el と共に使う
+
+=ivy-dired-history= を導入すると， dired (=C-x d=) で訪問した場所を記録してソート表示してくれます．さらに，diredにコピー(=C=)と移動(=R=)機能を与えてくれます．ただし，コピーや移動先の表示順位を上げる機能ではないので要注意です．履歴の保存は， ~session.el~ で明示的に管理しています．一般には =savehist= を使うことが推奨されているようです．
+
+#+begin_src emacs-lisp
+(when (require 'ivy-dired-history nil t)
+  (define-key dired-mode-map "," 'dired)
+  (with-eval-after-load "session"
+    (add-to-list 'session-globals-include 'ivy-dired-history-variable)))
+#+end_src
+
+なお，最近 ~dired~ で開いたディレクトリを =M-x dired-recent-open= で一覧できる [[https://github.com/Vifon/dired-recent.el][dired-recent]] も ~ivy~ に対応しています．こちらは規定の =dired-recent-directories-file= に履歴が記録されます．
+
+** magit.el と共に使う
+
+~magit~ の branch の選択などが ~ivy~ インターフェイスになります．後述の ~prescient.el~ を導入すれば，選択項目を上に上げたり，履歴を保存できます．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "magit"
+  (setq magit-completing-read-function 'ivy-completing-read))
+#+end_src
+
+** eldoc.el と共に使う
+
+~eldoc~ は =eldoc-idle-delay= の値を用いて一定時間が経過したらミニバッファに情報を出します． ~helm~ は別ウィンドウに情報を出すため衝突しませんが， ~ivy~ はミニバッファを使うため，高頻度で衝突します． =eldoc-message= をハックします．
+
+なお =(setq eldoc-print-after-edit t)= でも同様の効果がありますが，いろいろ試した結果，不十分とわかりました（例：Org を開き，counsel-recentf して，org に戻り，treeを移動した時に， ~org-eldoc~ が反応する．）
+
+#+begin_src emacs-lisp
+(with-eval-after-load "eldoc"
+  (defun ad:eldoc-message (f &optional string)
+    (unless (active-minibuffer-window)
+      (funcall f string)))
+  (advice-add 'eldoc-message :around #'ad:eldoc-message))
+#+end_src
+
+** mic-paren.el と共に使う
+
+~eldoc~ と同様に，ミニバッファで衝突します．以下のコードで回避できます．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "mic-paren"
+  (defun ad:mic-paren-highlight (f)
+    (if (active-minibuffer-window)
+        (let ((paren-display-message 'never))
+          (funcall f))
+      (funcall f)))
+  (advice-add 'mic-paren-highlight :around #'ad:mic-paren-highlight))
+#+end_src
+
+** counsel-find-file を使わない
+
+=counsel-find-file= が =find-file= を置き換えますが，私は素の =find-file= を気に入っているので， =counsel-find-file= を無効化します．
+
+#+begin_src emacs-lisp
+;; completion-in-region-function も一時的にデフォに戻さないと，TAB補完時に
+;; ivy が有効化されてしまう．
+(defun my-disable-counsel-find-file (&rest args)
+  "Disable `counsel-find-file' and use the original `find-file' with ARGS."
+  (let ((completing-read-function #'completing-read-default)
+        (completion-in-region-function #'completion--in-region))
+    (apply #'read-file-name-default args)))
+(setq read-file-name-function #'my-disable-counsel-find-file)
+;; (counsel-mode 1) を設定しても counsel-find-file が呼ばれないようにする．
+(define-key counsel-mode-map [remap find-file]  nil)
+#+end_src
+
+ - see https://emacs.stackexchange.com/questions/45929/disable-ivy-for-find-file
+
+** find-library のバグを回避
+
+厳密に言えばバグではないのですが，最初に =find-library= を使うと，大量の ~./~ を表示する問題があります．これは =find-library= ではなく =counsel-find-library= を直接呼べば回避できます．しかし， ~M-x~ した時のコマンド候補には依然として =find-library= が出てきますので，誤選択の原因になります．
+
+この問題は， =find-library= から ~interactive~ を取ることで解決します．advice では無意味で，再定義が必要です．
+
+#+begin_src emacs-lisp
+(when (require 'find-func nil t)
+  (defun find-library (library)
+    "Override the original `find-library' to hide in command list."
+    (prog1
+        (switch-to-buffer (find-file-noselect (find-library-name library)))
+      (run-hooks 'find-function-after-hook))))
+#+end_src
+
+*** COMMENT ノート
+;; a. (make-obsolete 'find-library 'counsel-find-library)
+;; b. (put 'find-library 'disabled t)
+** counsel-M-x
+
+~helm~ や ~ivy~ を使う大きな目的として，コマンドの絞り込みがあります． ~helm~ から ~ivy~ に移行すると， ~M-x~ の印象がかなり違うので，必要に応じて ~helm~ 流になるように設定して使います．4点ほど設定・カスタマイズします．
+
+まず， ~smex~ 或いは ~amx~ を導入して，コマンドの使用履歴を保存・利用します． ~amx~ がインストールされていると， ~smex~ よりも優先的に使われます．なお残念ながら =helm-M-x= で培った履歴をそのまま使うのは難しいようです．
+
+#+begin_src emacs-lisp
+(when (require 'smex nil t)
+  (setq smex-history-length 35)
+  (setq smex-completion-method 'ivy))
+#+end_src
+
+次に， ~M-x ^~ とデフォルトで入力される ~^~ 前方マッチ記号を非表示にします． =ivy-initial-inputs-alist= を設定します．
+
+#+begin_src emacs-lisp
+(setq ivy-initial-inputs-alist
+      '((org-agenda-refile . "^")
+        (org-capture-refile . "^")
+        ;; (counsel-M-x . "^") ;; 削除．必要に応じて他のコマンドも除外する．
+        (counsel-describe-function . "^")
+        (counsel-describe-variable . "^")
+        (Man-completion-table . "^")
+        (woman . "^")))
+#+end_src
+
+さらに， =ivy-re-builders-alist= でフィルタを指定します．私は =ivy--regex-ignore-order= を選択．デフォルトは =ivy--regex-plus= です．
+
+#+begin_src emacs-lisp
+(setf (alist-get 'counsel-M-x ivy-re-builders-alist) #'ivy--regex-ignore-order)
+#+end_src
+
+最後に，絞り込み開始後のソーティング方法をカスタマイズします．
+
+#+begin_src emacs-lisp
+(defun ivy--sort-by-len (name candidates)
+  "Sort CANDIDATES based on similarity of their length with NAME."
+  (let ((name-len (length name))
+        (candidates-count (length candidates)))
+    (if (< 500 candidates-count)
+        candidates
+      (seq-sort-by #'length
+                   (lambda (a b)
+                     (< (abs (- name-len a))
+                        (abs (- name-len b))))
+                   candidates))))
+
+(setf (alist-get 'counsel-M-x ivy-sort-matches-functions-alist)
+      #'ivy--sort-by-len)
+#+end_src
+see https://github.com/abo-abo/swiper/issues/1294
+
+** counsel-ag
+
+=counsel-ag= は， ~grep~ と同様に全文検索する ~ag~ コマンドのインターフェイスを提供します．私はカーソル位置の単語を使って全文検索する頻度が高いので，そのようにハックします．
+
+#+begin_src emacs-lisp
+(defun ad:counsel-ag (f &optional initial-input initial-directory extra-ag-args ag-prompt caller)
+  (apply f (or initial-input (ivy-thing-at-point))
+         (unless current-prefix-arg
+           (or initial-directory default-directory))
+         extra-ag-args ag-prompt caller))
+
+(advice-add 'counsel-ag :around #'ad:counsel-ag)
+#+end_src
+
+さらに，デフォルトではカレントディレクトリ以下の範囲で全文検索しますが，ディレクトリを変えて再検索したいこともあります．検索語を再入力せずディレクトリを変えるために，次の関数を実装して， ~M-o r~ で呼び出せるようにします．
+
+#+begin_src emacs-lisp
+;; directory を指定して ag やり直し．クエリは再利用する
+(defun my-counsel-ag-in-dir (_arg)
+  "Search again with new root directory."
+  (let ((current-prefix-arg '(4)))
+    (counsel-ag ivy-text nil ""))) ;; also disable extra-ag-args
+
+(ivy-add-actions
+ 'counsel-ag
+ '(("r" my-counsel-ag-in-dir "search in directory")))
+#+end_src
+
+=counsel-cd= が上記の機能を意図しているようですが，想像と少々異なる振る舞いをするので，私は =counsel-cd= を使っていません．
+
+#+begin_src emacs-lisp
+(define-key counsel-ag-map (kbd "C-x C-d") 'counsel-cd)
+#+end_src
+
+と設定しておけば， =counsel-ag= 使用中に =M-o= せず直接 =C-x C-d= すれば =counsel-cd= を呼べます．
+
+** counsel-fzf
+
+=counsel-ag= の場合と同様に，カーソル位置の単語を使って =counsel-fzf= を起動するようにハックします．
+
+#+begin_src emacs-lisp
+(defun ad:counsel-fzf (f &optional initial-input initial-directory fzf-prompt)
+  (apply f (or initial-input
+               (ivy-thing-at-point))
+         (or initial-directory default-directory)
+         fzf-prompt))
+
+(advice-add 'counsel-fzf :around #'ad:counsel-fzf)
+#+end_src
+
+さらに，検索語を維持したまま探索範囲を変えるための関数を登録します． =counsel-fzf= を利用中に， =M-o r= で発動します．
+
+#+begin_src emacs-lisp
+(defun my-counsel-fzf-in-dir (_arg)
+  "Search again with new root directory."
+  (counsel-fzf ivy-text
+               (read-directory-name
+                (concat (car (split-string counsel-fzf-cmd))
+                        " in directory: "))))
+
+(ivy-add-actions
+ 'counsel-fzf
+ '(("r" my-counsel-fzf-in-dir "search in directory")))
+#+end_src
+
+*** 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）
+
+~ivy~ で検索語を入力しても，ヒットしないことがよくあります．入力ミス等なら再入力で済みますが，実は =recentf= に記録されていないだけ，とか，探索範囲が狭すぎるだけなこともあります．そんな時は，検索語を再入力せずに探索範囲だけを広げたいと思うでしょう．
+
+以下の設定では，検索がヒットしない時に，一定時間が過ぎたら =counsel-fzf= に接続するかを ~[y/n]~ で問うように設定しています．常に問われると煩雑なので，一つの ~ivy~ セッションで1回だけ問うようにしています．
+
+=counsel-fzf= に誘導する機能を追加したい場合は， =my-nocand-then-fzf-commands= にコマンドを追加して下さい．
+
+また，選択候補が無いと確定してから =my-nocand-then-fzf-idle-time= 秒後に ~[y/n]~ を問うようにカスタマイズできます．
+
+#+begin_export html
+![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/b9f71785-9ba6-d146-681b-7c275bf03a46.gif)
+#+end_export
+
+このデモでは，次のフローで所望のファイルを見つけています．
+
+1. "test" "heading" で =recentf= を探索
+2. 見つからないので =counsel-fzf= に接続
+3. カレントディレクトリ以下にも存在しない
+4. =M-o r= で =counsel-fzf= を再呼び出しして，探索範囲を変更
+5. 発見
+
+#+begin_src emacs-lisp
+;; 発動するコマンドを限定
+(defcustom my-nocand-then-fzf-commands '(counsel-find-flie
+                                         counsel-recentf
+                                         counsel-projectile-find-file
+                                         counsel-projectile-switch-project)
+  "List of commands for applying extension no candidates then `counsel-fzf'."
+  :group 'ivy
+  :type '(list symbol))
+
+;; 無応答の時[y/n]を出す．待ち時間を[s]で指定
+(defcustom my-nocand-then-fzf-idle-time 0.8
+  "Idle time for showing prompt."
+  :group 'ivy
+  :type 'float)
+
+(defvar my--nocand-then-fzf t)
+(defun my-nocand-then-fzf-reset ()
+  (setq my--nocand-then-fzf t))
+
+(defun my-nocand-then-fzf (prompt)
+  (when (= ivy--length 0)
+    (if (eq (read-char prompt) ?y) ;; y-or-n-p is not applicable
+        (ivy-exit-with-action
+         (lambda (x)
+           (counsel-fzf ivy-text default-directory)))
+      (setq my--nocand-then-fzf nil))))
+
+(defun ad:fzf:ivy--insert-prompt ()
+  (when (and my--nocand-then-fzf
+             (memq (ivy-state-caller ivy-last) my-nocand-then-fzf-commands)
+             (= ivy--length 0))
+    (let* ((std-props '(front-sticky t rear-nonsticky t field t read-only t))
+           (prompt (concat (my-ivy-prompt-prefix) "Switch to Counsel-fzf? [y/n] ")))
+      (set-text-properties 0 (length prompt)
+                           `(face minibuffer-prompt ,@std-props) prompt)
+      (run-with-idle-timer my-nocand-then-fzf-idle-time
+                           nil #'my-nocand-then-fzf prompt))))
+
+;; ivy--insert-prompt を adivce する．
+(advice-add 'ivy--insert-prompt :before #'ad:fzf:ivy--insert-prompt)
+
+;; セッションを抜けたらフラグを戻す
+(add-hook 'minibuffer-setup-hook #'my-nocand-then-fzf-reset)
+(add-hook 'minibuffer-exit-hook #'my-nocand-then-fzf-reset)
+#+end_src
+
+** counsel-recentf
+
+デフォルトでは ~/~ からファイルの表示が始まりますが， ~~~ から始める方が好みなので =counsel-recentf= を再設定します．
+
+#+begin_src emacs-lisp
+(defun ad:counsel-recentf ()
+  "Find a file on `recentf-list'."
+  (interactive)
+  (require 'recentf)
+  (recentf-mode)
+  (ivy-read "Recentf: "
+            (progn
+              (mapcar #'substring-no-properties recentf-list) ;; no need?
+              (mapcar #'abbreviate-file-name recentf-list)) ;; ~/
+            :action (lambda (f)
+                      (with-ivy-window
+                        (find-file f)))
+            :require-match t
+            :caller 'counsel-recentf))
+(advice-add 'counsel-recentf :override #'ad:counsel-recentf)
+#+end_src
+
+さらに，所望のファイルがヒットしない時に， ~M-o z~ で =counsel-fzf= に移れるようにします．検索語は引き継がれるので，再入力する手間を省けます．
+
+#+begin_src emacs-lisp
+;; 以下の関数は，counsel-projectile-* と counsel-recentf にぶら下げる．
+(defun my-counsel-fzf-in-default-dir (_arg)
+  "Search the current directory with fzf."
+  (counsel-fzf ivy-text default-directory))
+
+;; add an action for counsel-recentf (M-o z)
+(ivy-add-actions
+ 'counsel-recentf
+ '(("z" my-counsel-fzf-in-default-dir "switch to fzf")))
+#+end_src
+
+なお， ~recentf~ のリストには，頻繁に自動更新される一方で，実際には自分が中身を触ることがほぼないファイルも含まれます．例えば ~bookmarks~ です．それらは，使用しないにも関わらずリストの上部に上がってきますので，除外しておくべきです． ~ivy~ 側の設定で =counsel-find-file-ignore-regexp= を =(regexp-opt '("~/.emacs.d/bookmarks"))= などとすれば回避できますが，それよりも， ~recentf~ の設定で除外しておくのがよいでしょう．
+
+#+begin_src emacs-lisp
+(custom-set-variables
+ '(recentf-exclude
+   '(".recentf" "bookmarks" "org-recent-headings.dat" "^/tmp\\.*"
+     "^/private\\.*" "^/var/folders\\.*" "/TAGS$")))
+#+end_src
+
+* パッケージの移行
+
+~helm~ で便利に使っていた外部パッケージは，同等の機能を ~ivy~ 向けに提供するパッケージが公開されています．一部は，フラグメントとして公開されているものです．幸いながら，私はほぼすべてのパッケージを無事に移行できました．
+
+** helm と ivy-counsel のコマンド対応表
+
+個人的に ~helm~ で依存していたコマンドの対応表です．現在メインで使用しているコマンドは概ねカバーしています．表中の「X」は，デフォルト実装されているコマンドを表します．
+
+| 機能              |   | Helm                     |   | Ivy/Counsel                  |
+|-------------------+---+--------------------------+---+------------------------------|
+| コマンド選択      | X | helm-M-x                 | X | counsel-M-x                  |
+| bookmark.el I/F   | X | helm-bookmark            | X | counsel-bookmark             |
+| locate I/F        | X | helm-locate              | X | counsel-locate (1)           |
+| バッファ切り替え  | X | helm-buffers-list        | X | counsel-ibuffer              |
+| recentf.el I/F    | X | helm-recentf             | X | counsel-recentf              |
+| キーバインド表示  |   | helm-descbinds           | X | counsel-descbinds            |
+| ag I/F            |   | helm-ag                  | X | counsel-ag                   |
+| 複数単語検索      |   | helm-swoop               | X | swiper                       |
+| bm.el I/F         |   | helm-bm                  |   | counsel-bm (2)               |
+| projectile.el I/F |   | helm-projectile          |   | counsel-projectile (3)       |
+| 単語の辞書記録    |   | flyspell-correct-helm    |   | flyspell-correct-ivy (4)     |
+| heading の選択    |   | org-recent-headings-helm |   | org-recent-headings-ivy (5)  |
+| global I/F        |   | helm-gtags               |   | counsel-gtags (6)            |
+| dired 履歴        |   | helm-dired-history       |   | ivy-dired-history (7)        |
+| selected.el I/F   |   | helm-selected            |   | counsel-selected (8)         |
+| flycheck.el I/F   |   | helm-flycheck            |   | counsel-flycheck (9)         |
+| pass I/F          |   | helm-pass                |   | ivy-pass (10)                |
+| emms.el I/F       |   | helm-emms                |   | nil                          |
+| emmet I/F         |   | helm-emmet               |   | nil                          |
+|-------------------+---+--------------------------+---+------------------------------|
+
+(1) [[https://oremacs.com/swiper/#example---counsel-locate][counsel-locate]]
+(2) [[https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/][counsel-bm]] (fragment)
+(3) [[https://github.com/ericdanan/counsel-projectile][counsel-projectile]]
+(4) [[https://github.com/d12frosted/flyspell-correct][flyspell-correct-ivy]]
+(5) [[https://github.com/alphapapa/org-recent-headings][org-recent-headings-ivy]]
+(6) [[https://github.com/syohex/emacs-counsel-gtags][counsel-gtags]]
+(7) [[https://github.com/jixiuf/ivy-dired-history][ivy-dired-history]]
+(8) [[https://github.com/takaxp/counsel-selected][counsel-selected]]
+(9) [[https://github.com/nathankot/dotemacs/blob/master/init.el#L709][counsel-flycheck]] (fragment)
+(10) [[https://github.com/ecraven/ivy-pass][ivy-pass]]
+
+** counsel-flycheck (fragment)
+
+https://github.com/nathankot/dotemacs/blob/master/init.el#L709 にありますので．拝借しました．関数名を変更して， ~caller~ を追加しています．
+
+#+begin_src emacs-lisp
+(defvar counsel-flycheck-history nil
+  "History for `counsel-flycheck'")
+
+(defun counsel-flycheck ()
+  (interactive)
+  (if (not (bound-and-true-p flycheck-mode))
+      (message "Flycheck mode is not available or enabled")
+    (ivy-read "Error: "
+              (let ((source-buffer (current-buffer)))
+                (with-current-buffer
+                    (or (get-buffer flycheck-error-list-buffer)
+                        (progn
+                          (with-current-buffer
+                              (get-buffer-create flycheck-error-list-buffer)
+                            (flycheck-error-list-mode)
+                            (current-buffer))))
+                  (flycheck-error-list-set-source source-buffer)
+                  (flycheck-error-list-reset-filter)
+                  (revert-buffer t t t)
+                  (split-string (buffer-string) "\n" t " *")))
+              :action (lambda (s &rest _)
+                        (-when-let* ( (error (get-text-property 0 'tabulated-list-id s))
+                                      (pos (flycheck-error-pos error)) )
+                          (goto-char (flycheck-error-pos error))))
+              :history 'counsel-flycheck-history
+              :caller 'counsel-flycheck)))
+#+end_src
+
+** counsel-bm (fragment)
+
+https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ に公開されているコードをアレンジしました． ~ivy~ とは無関係ですが， ~<f10>~ で ~bm.el~ の =bm-toggle= を呼び出し， ~C-<f10>~ で次のブックマークに移動するように設定しています．詳細は， [[https://takaxp.github.io/init.html#orgd5942d14][Configurations for GNU Emacs::4.9 [bm.el] カーソル位置をブックマークして追う]] を参照ください．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 14.54.29.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/0c1bb5f2-def7-c0f8-71d7-506adf648815.png)
+#+end_export
+
+#+begin_src emacs-lisp
+(when (require 'bm nil t)
+  (defun counsel-bm-get-list (bookmark-overlays)
+    (-map (lambda (bm)
+            (with-current-buffer (overlay-buffer bm)
+              (let* ((line (replace-regexp-in-string
+                            "\n$" ""
+                            (buffer-substring (overlay-start bm)
+                                              (overlay-end bm))))
+                     ;; line numbers start on 1
+                     (line-num
+                      (+ 1 (count-lines (point-min) (overlay-start bm))))
+                     (name (format "%s:%d - %s" (buffer-name) line-num line)))
+                `(,name . ,bm))))
+          bookmark-overlays))
+
+  (defun counsel-bm ()
+    (interactive)
+    (let* ((bm-list (counsel-bm-get-list (bm-overlays-lifo-order t)))
+           (bm-hash-table (make-hash-table :test 'equal))
+           (search-list (-map (lambda (bm) (car bm)) bm-list)))
+      (-each bm-list (lambda (bm)
+                       (puthash (car bm) (cdr bm) bm-hash-table)
+                       ))
+      (ivy-read "Find bookmark(bm.el): "
+                search-list
+                :require-match t
+                :keymap counsel-describe-map
+                :action (lambda (chosen)
+                          (let ((bookmark (gethash chosen bm-hash-table)))
+                            (switch-to-buffer (overlay-buffer bookmark))
+                            (bm-goto bookmark)
+                            ))
+                :sort t)))
+
+  (global-set-key (kbd "<S-f10>") 'counsel-bm))
+#+end_src
+
+** counsel-world-clock.el
+
+[[https://github.com/kchenphy/counsel-world-clock][counsel-world-clock]] は，タイムゾーンから時刻と時差を調べるツールです．ビルトインの =display-time-world= でも似たことができますが， ~ivy~ でタイムゾーンを絞り込めるので圧倒的に便利です．
+
+デフォルトではソートされないので，[[https://github.com/raxod502/prescient.el][prescient.el]] を導入して，直近の選択を上位に移すソーティングと履歴保存を有効にしましょう．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 14.49.12.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/67564635-e10d-4595-35a7-3080473fef6e.png)
+#+end_export
+
+#+begin_src emacs-lisp
+(with-eval-after-load "ivy"
+  ;; package 経由のインストールなら，M-x counsel-world-clock ですぐ使える．
+  (require 'counsel-world-clock nil t))
+#+end_src
+
+** counsel-selected.el
+
+拙作の [[https://github.com/takaxp/helm-selected][helm-selected]] を ~ivy~ に移植しました．どちらかといえば，絞り込みしたいと言うより，領域選択から ~l~ 押下で，メニューを表示し，設定項目を思い出すために使います．
+
+#+begin_src emacs-lisp
+(when (require 'counsel-selected nil t)
+  (define-key selected-keymap (kbd "l") 'counsel-selected))
+#+end_src
+
+** counsel-osx-app.el
+
+~counse.el~ には Linuxのアプリケーションを呼び出すためのインターフェイスである =counsel-linux-app= が実装されています． macOS用のコマンドは [[https://github.com/d12frosted/counsel-osx-app][counsel-osx-app]] に公開されています．以前はOS側のランチャーを呼び出して使っていましたが，このコマンドのおかげで，Emacs から直接アプリケーションを呼び出せるので，かなり重宝しています．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 14.56.28.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/9d840790-b665-fddc-23d2-b4b6d7ecee18.png)
+#+end_export
+
+=counsel-osx-app-location= を正しく設定すれば，サブディレクトリに含まれるアプリケーションもリストに入れてくれます．
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-M-1") 'counsel-osx-app)
+(with-eval-after-load "counsel-osx-app"
+  (custom-set-variables
+   '(counsel-osx-app-location
+     '("/Applications" "/Applications/Utilities"
+       "/Applications/Microsoft Remote Desktop.localized"))))
+#+end_src
+
+** counsel-projectile.el
+
+[[https://github.com/ericdanan/counsel-projectile][counsel-projectile.el]]は，~project.el~ に ~ivy~ インターフェイスを提供するパッケージです． =projectile-find-file= は =counsel-git= に近い気もします．下記の =my-counsel-fzf-in-default-dir= は， =counsel-recentf= に紐付けたアクションと同じです．
+
+#+begin_src emacs-lisp
+;; 以下の関数は，counsel-projectile-* と counsel-recentf にぶら下げる．
+(defun my-counsel-fzf-in-default-dir (_arg)
+  "Search the current directory with fzf."
+  (counsel-fzf ivy-text default-directory))
+
+(with-eval-after-load "projectile"
+  (when (require 'counsel-projectile nil t)
+    ;; M-o z で fzf を呼び出せる．
+    ;; https://twitter.com/takaxp/status/1134481340458360832
+    ;; あれ，これなんで動いてるの？関数に add-to-list できるの？
+    ;; 以下の2つの関数は，動的に生成される defcustom で規定される．すごい．
+    (add-to-list 'counsel-projectile-switch-project-action
+                 '("z" my-counsel-fzf-in-default-dir
+                   "switch to fzf") t)
+    (add-to-list 'counsel-projectile-find-file-action
+                 '("z" my-counsel-fzf-in-default-dir
+                   "switch to fzf") t)
+
+    (setq projectile-completion-system 'ivy)
+    (setq counsel-projectile-sort-files t) ;; 当該プロジェクト内リストをソート
+    (setq counsel-projectile-sort-projects t) ;; プロジェクトリストをソート
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (counsel-projectile-mode 1)))
+#+end_src
+
+** counsel-gtags.el
+
+安全安心の @syohex製 https://github.com/syohex/emacs-counsel-gtags
+
+#+begin_src emacs-lisp
+(when (require 'counsel-gtags nil t)
+  (setq counsel-gtags-update-interval-second 10)
+  (dolist (hook '(c-mode-hook c++-mode-hook))
+    (add-hook hook 'counsel-gtags-mode)))
+#+end_src
+
+** flyspell-correct-ivy.el
+
+[[https://github.com/d12frosted/flyspell-correct][flyspell-correct.el]] は， ~flyspell~ の ~ivy~ インターフェイスです．私は使用頻度が高いので，このパッケージが使えるのは必須要件です．当初，新しい単語を追加する ~save~ を helm のように，[[https://github.com/d12frosted/flyspell-correct/issues/10][選択リストに含める方法]]を選択しましたが， ~ivy~ を使い込んでいくうちに， ~M-o~ で追加メニューを表示する ~ivy~ のお作法になれる方が生産的と気づきました．
+
+#+begin_src emacs-lisp
+(when (require 'flyspell-correct-ivy nil t)
+  (setq flyspell-correct-interface '#'flyspell-correct-ivy)
+  (global-set-key (kbd "<f7>") 'flyspell-correct-word-generic))
+#+end_src
+
+** ivy-pass.el
+
+特に設定はしていませんが，基本的にバグっている気がします．私の環境だけかもしれません...
+
+ - see https://github.com/ecraven/ivy-pass
+
+** TODO org-recent-headings-ivy (in org-recent-headings.el)
+
+最近使用した ~org mode~ の見出しを *高精度に* 記録してくれる [[https://github.com/alphapapa/org-recent-headings][org-recent-headings.el]] の ~ivy~ インターフェイスです．とても便利でオススメなのですが，残念ながら，org の HEAD では壊れて使えないため，少し前の version で使ってください．動作確認ができたら，記事を後日更新します．
+
+なお，現状では履歴のcleanup機能が無いので， ~~/.emacs.d/org-recent-headings.dat~ は端末間で共有しない方がよいと思います．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "ivy"
+  ;; デフォルトだと `ivy-string<' が使われてしまい，使用履歴が反映されない．
+  ;; つまり， recent-headings.dat に記録された順が反映されない．
+  (add-to-list 'ivy-sort-functions-alist
+               '(org-recent-headings-ivy . nil))
+
+  ;; Originally located in org-recent-headings.el. For texting.
+  (defun org-recent-headings-ivy ()
+    "Choose from recent Org headings with Ivy."
+    (interactive)
+    (org-recent-headings :completing-read-fn #'ivy-completing-read)))
+
+;; for Ivy interface
+(global-set-key (kbd "C-c f r") 'org-recent-headings-ivy)
+
+(with-eval-after-load "org-recent-headings"
+  (custom-set-variables
+   '(org-recent-headings-save-file "~/.emacs.d/org-recent-headings.dat")
+   '(org-recent-headings-show-entry-function
+     'org-recent-headings--show-entry-direct)
+   '(org-recent-headings-advise-functions
+     '(org-agenda-goto
+       org-agenda-show
+       org-agenda-show-mouse
+       org-show-entry ;; having a bug, so just disabled
+       org-reveal
+       org-refile
+       org-tree-to-indirect-buffer
+       org-bookmark-jump))))
+
+(defun ad:org-recent-headings-activate ()
+  (interactive)
+  (when (and (require 'dash-functional nil t) ;; FIXME
+             (require 'org-recent-headings nil t))
+    (org-recent-headings-mode)
+    (advice-remove 'org-recent-headings-ivy
+                   #'ad:org-recent-headings-activate)))
+(advice-add 'org-recent-headings-ivy :before
+            #'ad:org-recent-headings-activate)
+#+end_src
+
+* prescient.el
+
+[[https://github.com/raxod502/prescient.el][ivy-prescient.el]] を導入すると，各 ~ivy~ インターフェイスの使用履歴が記録され，最近選択した項目を上位に出してくれるようになります．ただし，すべてのコマンドが影響下に入るわけではなく， =ivy-read= に正しく ~:caller~ が設定されている場合に限られます．また， ~:sort nil~ または ~:sort~ 設定が存在しない =ivy-read= の場合は， =ivy-prescient-sort-commands= に対象コマンドを追加することで， ~ivy-prescient.el~ の影響下に置くことができます．
+
+もう一つの機能として，イニシャル入力が可能になります．例えば ~counsel-M-x~ で ~M-x fap~ と入力すると， =find-file-at-point= が最上位で表示されます． =counsel-recentf= などでは，サブディレクトリの先頭の頭文字を入力すると，当該の情報が上位にきます．慣れれば極めて高速に絞り込みできるようになります．ただ，すべてのコマンドについてイニシャル入力を有効にすると，現状では ~face~ を思うように制御できないので， =ivy-re-builders-alist= を設定して，イニシャル入力を有効化するコマンドを限定することをオススメします．
+
+#+begin_export html
+![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/ecd14135-2bf9-12bb-b7ab-273444f27a8b.gif)
+#+end_export
+
+イニシャル入力の設定周りがややこしいと感じる場合は，下記設定の2箇所の =ivy-re-builders-alist= に関わる設定を使わず，代わりに =(setq ivy-prescient-enable-filtering nil)= を設定すればうまく行きます．このように設定しても，使用履歴の保存には影響がありません．
+
+なお， ~prescient.el~ の内部アルゴリズムは ~ivy~ 以外にも ~company-mode~ でも使えるようです．
+
+#+begin_src emacs-lisp
+(when (require 'prescient nil t)
+
+  ;; ivy インターフェイスでコマンドを実行するたびに，キャッシュをファイル保存
+  (setq prescient-aggressive-file-save t)
+
+  ;; ファイルの保存先
+  (setq prescient-save-file
+        (expand-file-name "~/.emacs.d/prescient-save.el"))
+
+  ;; アクティベート
+  (prescient-persist-mode 1))
+
+(when (require 'ivy-prescient nil t)
+
+  ;; =ivy= の face 情報を引き継ぐ（ただし，完全ではない印象）
+  (setq ivy-prescient-retain-classic-highlighting t)
+
+  ;; コマンドを追加
+  (dolist (command '(counsel-world-clock ;; Merged!
+                     counsel-app)) ;; add :caller
+    (add-to-list 'ivy-prescient-sort-commands command))
+
+  ;; フィルタの影響範囲を限定する．以下の3つは順番が重要．
+  ;; (1) マイナーモードの有効化
+  (ivy-prescient-mode 1)
+  ;; (2) =counsel-M-x= をイニシャル入力対応にする
+  (setf (alist-get 'counsel-M-x ivy-re-builders-alist)
+        #'ivy-prescient-re-builder)
+  ;; (3) デフォルトのイニシャル入力を上書きする
+  (setf (alist-get t ivy-re-builders-alist) #'ivy--regex-ignore-order))
+#+end_src
+
+* 視覚化
+
+~ivy~ の良いところは，アイコンを導入して視覚的な見やすさを簡単に向上できるところです．プロンプト，候補リストにアイコンを導入すると，選択対象がどのカテゴリのファイルなのかをファイル名や拡張子ではなく，アイコンで視覚的に把握できるようになります．
+
+** プロンプトを改良
+
+プロンプトは，選択候補の数とコマンド名の組み合わせで構成されます． =ivy-count-format= をカスタマイズすれば，現在のカーソル位置が，候補リストの何番目に位置するかも表示できます．
+
+#+begin_src emacs-lisp
+(setq ivy-count-format "(%d/%d) ")
+#+end_src
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.05.44.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1c131697-3b3f-b2c4-829c-c9d34addff72.png)
+#+end_export
+
+さらに，以下のようなハックを施すと，プロンプトの前に任意の情報を書き込む事ができます．例えば，プロンプトの上部に一行空行を入れて，さらに，プロンプトの直前にアイコンを入れることも可能です．モードラインを使わない派にオススメの設定です．
+
+ただハックの方法としては =ivy--insert-prompt= を advice で override する必要があるので，落ち着いたら公式にPR出そうと考えています．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.07.07.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea2ce23-c433-7c5a-27da-dd7981934f98.png)
+↑適用前
+#+end_export
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.07.43.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/8f54e3d0-7fe4-7b4b-d171-70994d921793.png)
+↑適用後
+#+end_export
+
+#+begin_src emacs-lisp
+(with-eval-after-load "ivy"
+  (defvar my-ivy-prompt-prefix t)
+  (defun my-toggle-ivy-prompt-prefix ()
+    "Toggle showing a header line before the ivy prompt."
+    (interactive)
+    (setq my-ivy-prompt-prefix (not my-ivy-prompt-prefix)))
+
+  (defun my-ivy-prompt-prefix ()
+    "Return a header line for the ivy prompt."
+    (when my-ivy-prompt-prefix
+      (if window-system
+          (format "%s\n%s "
+                  (make-string (frame-width) ?\x5F) ;; "__"
+                  (all-the-icons-faicon "sort-amount-asc")) ;; ""
+        (format "%s\n" (make-string (1- (frame-width)) ?\x2D))))) ;; "--"
+
+  (defun ivy--insert-prompt ()
+    "Update the prompt according to `ivy--prompt'."
+    (when (setq ivy--prompt (ivy-prompt))
+      (unless (memq this-command '(ivy-done ivy-alt-done ivy-partial-or-done
+                                            counsel-find-symbol))
+        (setq ivy--prompt-extra ""))
+      (let (head tail)
+        (if (string-match "\\(.*?\\)\\(:? ?\\)\\'" ivy--prompt)
+            (progn
+              (setq head (match-string 1 ivy--prompt))
+              (setq tail (match-string 2 ivy--prompt)))
+          (setq head ivy--prompt)
+          (setq tail ""))
+        (let ((inhibit-read-only t)
+              (std-props '(front-sticky t rear-nonsticky t field t read-only t))
+              (n-str
+               (concat
+                (if (and (bound-and-true-p minibuffer-depth-indicate-mode)
+                         (> (minibuffer-depth) 1))
+                    (format "[%d] " (minibuffer-depth))
+                  "")
+                (concat
+                 (if (string-match "%d.*%d" ivy-count-format)
+                     (format head
+                             (1+ ivy--index)
+                             (or (and (ivy-state-dynamic-collection ivy-last)
+                                      ivy--full-length)
+                                 ivy--length))
+                   (format head
+                           (or (and (ivy-state-dynamic-collection ivy-last)
+                                    ivy--full-length)
+                               ivy--length)))
+                 ivy--prompt-extra
+                 tail)))
+              (d-str (if ivy--directory
+                         (abbreviate-file-name ivy--directory)
+                       "")))
+          (save-excursion
+            (goto-char (point-min))
+            (delete-region (point-min) (minibuffer-prompt-end))
+            (let ((len-n (length n-str))
+                  (len-d (length d-str))
+                  (ww (window-width)))
+              (setq n-str
+                    (cond ((> (+ len-n len-d) ww)
+                           (concat n-str "\n" d-str "\n"))
+                          ((> (+ len-n len-d (length ivy-text)) ww)
+                           (concat n-str d-str "\n"))
+                          (t
+                           (concat n-str d-str)))))
+            ;; ADDED
+            (when my-ivy-prompt-prefix
+              (setq n-str (concat (my-ivy-prompt-prefix) n-str)))
+            ;;
+            (when ivy-add-newline-after-prompt
+              (setq n-str (concat n-str "\n")))
+            (let ((regex (format "\\([^\n]\\{%d\\}\\)[^\n]" (window-width))))
+              (while (string-match regex n-str)
+                (setq n-str (replace-match
+                             (concat (match-string 1 n-str) "\n")
+                             nil t n-str 1))))
+            (set-text-properties 0 (length n-str)
+                                 `(face minibuffer-prompt ,@std-props)
+                                 n-str)
+            (setq n-str (funcall ivy-set-prompt-text-properties-function
+                                 n-str std-props))
+            (insert n-str))
+          ;; Mark prompt as selected if the user moves there or it is the only
+          ;; option left.  Since the user input stays put, we have to manually
+          ;; remove the face as well.
+          (when ivy--use-selectable-prompt
+            (if (= ivy--index -1)
+                (ivy-add-face-text-property
+                 (minibuffer-prompt-end) (line-end-position) 'ivy-prompt-match)
+              (remove-list-of-text-properties
+               (minibuffer-prompt-end) (line-end-position) '(face))))
+          ;; get out of the prompt area
+          (constrain-to-field nil (point-max))))))
+  (advice-add 'ivy--insert-prompt :override #'ad:ivy--insert-prompt))
+#+end_src
+
+** 現在の選択候補をわかりやすくする
+
+=ivy-format-functions-alist= にカスタマイズした関数を追加すれば，プロンプトの下部に位置するカーソル行の表示を変更できます． ~all-the-icons~ を導入して，好みのアイコンでカーソル行のある選択候補を目立たせましょう．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.10.49.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea701d0-7d19-ccd0-e98b-808e1928ac3c.png)
+↑適用前（ivy-format-function-arrow利用）
+#+end_export
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.11.10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/65cc0caf-5dae-1962-f6ee-eaed3e4e6609.png)
+↑適用後（my-ivy-format-function-arrow利用）
+#+end_export
+
+#+begin_src emacs-lisp
+(defface my-ivy-arrow-visible
+  '((((class color) (background light)) :foreground "orange")
+    (((class color) (background dark)) :foreground "#EE6363"))
+  "Face used by Ivy for highlighting the arrow.")
+
+(defface my-ivy-arrow-invisible
+  '((((class color) (background light)) :foreground "#FFFFFF")
+    (((class color) (background dark)) :foreground "#31343F"))
+  "Face used by Ivy for highlighting the invisible arrow.")
+
+(if window-system
+    (when (require 'all-the-icons nil t)
+      (defun my-ivy-format-function-arrow (cands)
+        "Transform CANDS into a string for minibuffer."
+        (ivy--format-function-generic
+         (lambda (str)
+           (concat (all-the-icons-faicon
+                    "hand-o-right"
+                    :v-adjust -0.2 :face 'my-ivy-arrow-visible)
+                   " " (ivy--add-face str 'ivy-current-match)))
+         (lambda (str)
+           (concat (all-the-icons-faicon
+                    "hand-o-right" :face 'my-ivy-arrow-invisible) " " str))
+         cands
+         "\n"))
+      (setq ivy-format-functions-alist
+            '((t . my-ivy-format-function-arrow))))
+  (setq ivy-format-functions-alist '((t . ivy-format-function-arrow))))
+#+end_src
+
+** all-the-icons-ivy.el
+
+[[https://github.com/asok/all-the-icons-ivy][all-the-icons-ivy.el]]は， ~ivy~ インターフェイスにアイコンを追加するパッケージです． ~all-the-icons.el~ が少々導入の難しいパッケージなのですが，一度設定がうまくいけば，殺伐とした Emacs バッファに安らぎがもたらされます．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.30.28.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/c1b4ad28-aff6-6e56-9e09-8fa5a7c4cf66.png)
+↑neotree, dired, ivy のすべてで all-the-icons を使う場合の表示例
+#+end_export
+
+いくつかのコマンドは，すでにアイコンを出すように設定されています．アイコンが表示されないコマンドを見つけたら， =all-the-icons-ivy-buffer-commands= と =all-the-icons-ivy-file-commands= にコマンドを追加すれば，アイコンが表示されるようになります．
+
+なお，試した感じでは， ~all-the-icons-ivy~ と ~ivy-rich~ を併用するのは厳しそうです．
+
+#+begin_src emacs-lisp
+(when (require 'all-the-icons-ivy nil t)
+  (dolist (command '(counsel-projectile-switch-project
+                     counsel-ibuffer))
+    (add-to-list 'all-the-icons-ivy-buffer-commands command))
+  (all-the-icons-ivy-setup))
+#+end_src
+
+~all-the-icons~ を導入した結果，候補リストの行頭が揃わない場合には，次の設定が効果を発揮するかもしれません．このあたりは難しく，まだ制御しきれていません．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "all-the-icons-ivy"
+      (defvar my-tab-width tab-width)
+      (defun my-tab-width-2 () (setq tab-width 2))
+      (defun my-tab-width-1 () (setq tab-width 1))
+      (defun my-tab-width-8 () (setq tab-width 8))
+      (defun my-tab-width-original ()
+        (setq tab-width my-tab-width))
+      (add-hook 'minibuffer-setup-hook #'my-tab-width-2)
+      (add-hook 'minibuffer-exit-hook #'my-tab-width-original))
+#+end_src
+
+*** COMMENT all-the-icons は鬼門
+ - all-the-icons-dired--display, neo-buffer--insert-fold-symbol, Google Drive が壊れるやつ．これは，'all-the-icons-dir-icon-alist の設定を最適化すると回避できる．モードライン使わない派には特におすすめ．とてもスッキリする．
+
+  ;; ivy-read で呼び出す関数ごとに，ソートのアイコンを切り替えたいね．
+  ;; ソート種類をアイコンで明示するとか．絞り込み入力のたびに回転させるとか．
+  ;; 🌑🌒🌓🌔🌕🌖🌗🌘
+  ;; (all-the-icons-faicon "toggle-off") ;; 
+  ;; (all-the-icons-faicon "toggle-on") ;; 
+  ;; (all-the-icons-faicon "sort") ;; 
+  ;; (all-the-icons-faicon "sort-alpha-asc") ;; 使える．"ivy-string<"
+  ;; (all-the-icons-faicon "sort-alpha-desc") ;; 
+  ;; (all-the-icons-faicon "sort-amount-asc")
+  ;; (all-the-icons-faicon "sort-amount-desc") ;; 
+  ;; (all-the-icons-faicon "sort-asc")
+  ;; (all-the-icons-faicon "sort-desc") ;; 
+  ;; (all-the-icons-faicon "sort-numeric-asc")
+  ;; (all-the-icons-faicon "sort-numeric-desc") ;; 
+  ;; (all-the-icons-faicon "list") ;; 
+  ;; (all-the-icons-faicon "list-alt") ;; 
+  ;; (all-the-icons-faicon "list-ol") ;; 
+  ;; (all-the-icons-faicon "list-ul") ;; 
+  ;; (all-the-icons-faicon "th-list") ;;          ?
+  ;; (all-the-icons-wicon "time-3") ;;            ?
+
+
+  ;; %s:\t(%s\t%s)\nt:\t(%s\t%s)\n
+  ;; (ivy-state-caller ivy-last)
+  ;; (alist-get (ivy-state-caller ivy-last) ivy-sort-functions-alist)
+  ;; (alist-get (ivy-state-caller ivy-last) ivy-re-builders-alist)
+  ;; (alist-get t ivy-sort-functions-alist)
+  ;; (alist-get t ivy-re-builders-alist)
+  ;; (cond ((= ivy--length 0)
+  ;;        (all-the-icons-faicon "volume-off"))
+  ;;       ((or (eq (alist-get (ivy-state-caller ivy-last) ivy-sort-functions-alist)
+  ;;                'ivy-string<)
+  ;;            (eq (alist-get t ivy-sort-functions-alist)
+  ;;                'ivy-string<))
+  ;;        (all-the-icons-faicon "sort-amount-asc"))
+  ;;       ((or (eq (alist-get (ivy-state-caller ivy-last) ivy-sort-functions-alist)
+  ;;                'ivy-prescient-sort-function)
+  ;;            (eq (alist-get t ivy-sort-functions-alist)
+  ;;                'ivy-prescient-sort-function))
+  ;;        (all-the-icons-faicon "paw"))
+  ;;       ((or (eq (alist-get (ivy-state-caller ivy-last) ivy-sort-functions-alist)
+  ;;                'ivy-string>)
+  ;;            (eq (alist-get (ivy-state-caller ivy-last) ivy-sort-functions-alist)
+  ;;                'ivy-string>))
+  ;;        (all-the-icons-faicon "sort-amount-desc"))
+  ;;       (t
+  ;;        (all-the-icons-faicon "sort-amount-asc")))
+
+
+;; minibuffer では常に font-lock する．
+;; (defun my-ivy-font-lock-activate ()
+;;   (font-lock-mode 1))
+;; (add-hook 'minibuffer-setup-hook #'my-ivy-font-lock-activate)
+
+** ivy-rich.el
+
+ミニバッファに候補リストを表示する ~ivy~ は，大きな画面で横方向に複数のウィンドウを表示する状況で，画面上に無駄なスペースが多く生じます．[[https://github.com/Yevgnen/ivy-rich][ivy-rich.el]]を導入すると，アイコンが追加され，さらに追加の情報が空きスペースに記述されるようになります．[[https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf#%E6%A4%9C%E7%B4%A2%E3%81%AA%E3%81%A9%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9----swipercounsel-ivy-rich][Emacsモダン化計画 -かわEmacs編-]] (by [[https://qiita.com/Ladicle][@Ladicle]]) が詳しいです．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.20.31.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/f3f30fa9-f603-ccb6-dd6c-108bb1c491c1.png)
+![Screen Shot 2019-08-03 at 15.20.09.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/4d8958f2-173b-4fb3-cba2-cb5587a0aaa8.png)
+#+end_export
+
+ただし，私のように普段は80桁縛りで Emacs を使う人には相性が悪いかもしれません．
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.19.54.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/5d382033-bd2f-16a2-7db1-06ef55248eb3.png)
+↑見切れてしまう...
+#+end_export
+
+#+begin_src emacs-lisp
+(when (require 'ivy-rich nil t)
+  (ivy-rich-mode 1))
+#+end_src
+
+** ivy-posframe.el
+
+~ivy-posframe~ を使うと，通常はミニバッファに表示されるリストを任意の位置に出すことができます．私自身，まだ使いこなせていないので今後の課題です．以下は， =counsel-M-x= でコマンドリストを表示するときだけカーソル位置にフレームを出す設定です．なお，当初 =ivy-posframe= はマイナーモード化されておらず不便でしたが，[[https://qiita.com/conao3][@conao3]] 氏の[[https://github.com/tumashu/ivy-posframe/pull/43][尽力]]により，現在は =(ivy-posframe-mode 1)=, =(ivy-posframe-mode -1)= で ON/OFFできます．Thanks!
+
+#+begin_export html
+![Screen Shot 2019-08-03 at 15.26.44.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1016e998-c672-8d7e-6c2b-9883eb19310c.png)
+↑未調整なため，かなり変
+#+end_export
+
+#+begin_src emacs-lisp
+(with-eval-after-load "ivy-posframe"
+  (setq ivy-posframe-display-functions-alist
+        '((counsel-M-x . ivy-posframe-display-at-point)
+          (t           . ivy-posframe-display)))
+  (ivy-posframe-mode 1))
+#+end_src
+
+* 分析
+** 読み込みコスト
+
+~ivy.el~ と ~helm.el~ の読み込み時間の計測を比較しました．それぞれ依存関係のパッケージの読み込みを含みます．計測は私の貧弱環境です．3回平均の単位は[ms]です．
+
+思った以上に ~ivy.el~ の読み込みに時間を要しています． ~ivy.el~ 自体は約140[ms] ですが，さらに ~ffap.el~ の読み込みで約120[ms]程度消費します．
+
+|             |   1 |   2 |   3 | Ave. |
+|-------------+-----+-----+-----+------|
+| helm.el     | 201 | 207 | 175 |  194 |
+| ivy.el      | 430 | 412 | 403 |  415 |
+| counsel.el  | 101 | 102 | 121 |  108 |
+| ivy+counsel | 531 | 514 | 524 |  523 |
+
+** パッケージサイズ
+
+~ivy~ と ~helm~ でMALPA経由でインストールする場合のパッケージサイズを比較します．バイトコンパイル済みです．単位は[MB]です．
+
+結果， ~ivy~  (1.36[MB]) と ~helm~ (3.27[MB]) で ~ivy~ が軽量のようです．ただし， ~ivy~ は，いくつかのコマンドが init.el 側に記述されています．フラグメントなのでサイズ増加のインパクトは小さいです．
+
+| helm                                 | size  |
+|--------------------------------------+-------|
+| flyspell-correct-helm-20181205.1932/ | 0.016 |
+| helm-20190726.943/                   |   1.9 |
+| helm-ag-20170209.1545/               |   0.1 |
+| helm-bm-20160321.1331/               | 0.024 |
+| helm-core-20190726.1001/             | 0.766 |
+| helm-descbinds-20190501.935/         | 0.032 |
+| helm-dired-history-20170524.1046/    | 0.020 |
+| helm-flycheck-20160710.829/          | 0.024 |
+| helm-gtags-20170116.529/             | 0.116 |
+| helm-pass-20190315.1335/             | 0.020 |
+| helm-projectile-20190721.842/        | 0.112 |
+| helm-swoop-20180215.1154/            | 0.136 |
+| SUM                                  |  3.26 |
+
+| ivy                                |  size |
+|------------------------------------+-------|
+| flyspell-correct-ivy-20181205.1932 | 0.016 |
+| all-the-icons-ivy-20190508.1803/   | 0.024 |
+| ivy-20190726.2134/                 | 0.492 |
+| ivy-dired-history-20170626.556/    | 0.028 |
+| ivy-pass-20170812.1955/            | 0.016 |
+| ivy-rich-20190707.107/             | 0.052 |
+| counsel-20190726.1745/             | 0.440 |
+| counsel-projectile-20190724.1903/  | 0.144 |
+| counsel-world-clock-20190709.2211/ | 0.036 |
+| swiper-20190726.1746/              | 0.116 |
+| SUM                                |  1.37 |
+
+** helm と共存の可能性
+
+いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ基本的には同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， ~org-trello~ が ~helm~ に依存しているので，私はしばらく ~helm~ 環境を残すことになりそうです．
+
+なお， ~org-recent-headings~ をインストールしていると共存が厳しくなります．これはバイトコンパイルせずに使うことで回避できます．
+
+** counsel.el にプリセットされている ivy-read 一覧
+
+実装されているコマンド一覧です． ~autoload~ 指定された関数は85個ありますが，エイリアスだったりするので，有効なのは82個です．
+
+（除外した関数）
+  - counsel--org-get-tags
+  - counsel-outline (counsel-org-goto)
+  - counsel-mode (minor-mode)
+
+ | Command                            | DOC STRING                                                   |
+ |------------------------------------+--------------------------------------------------------------|
+ | counsel-el                         | Elisp completion at point.                                   |
+ | counsel-cl                         | Common Lisp completion at point.                             |
+ | counsel-jedi                       | Python completion at point.                                  |
+ | counsel-clj                        | Clojure completion at point.                                 |
+ | counsel-company                    | Complete using `company-candidates'.                         |
+ | counsel-irony                      | Inline C/C++ completion using Irony.                         |
+ | counsel-describe-variable          | Forward to `describe-variable'.                              |
+ | counsel-describe-function          | Forward to `describe-function'.                              |
+ | counsel-set-variable               | Set a variable SYM, with completion.                         |
+ | counsel-apropos                    | Show all matching symbols.                                   |
+ | counsel-info-lookup-symbol         | Forward SYMBOL to `info-lookup-symbol'                       |
+ | counsel-M-x                        | Ivy version of `execute-extended-command'.                   |
+ | counsel-command-history            | Show the history of commands.                                |
+ | counsel-load-library               | Load a selected the Emacs Lisp library.                      |
+ | counsel-find-library               | Visit a selected the Emacs Lisp library.                     |
+ | counsel-load-theme                 | Forward to `load-theme'.                                     |
+ | counsel-descbinds                  | Show a list of all defined keys and their definitions.       |
+ | counsel-describe-face              | Completion for `describe-face'.                              |
+ | counsel-faces                      | Complete faces with preview.                                 |
+ | counsel-git                        | Find file in the current Git repository.                     |
+ | counsel-git-grep                   | Grep for a string in the current Git repository.             |
+ | counsel-git-stash                  | Search through all available git stashes.                    |
+ | counsel-git-change-worktree        | Find the file corresponding to the current buffer            |
+ | counsel-git-checkout               | Call the \"git checkout\" command.                           |
+ | counsel-git-log                    | Call the \"git log --grep\" shell command.                   |
+ | counsel-find-file                  | Forward to `find-file'.                                      |
+ | counsel-dired                      | Forward to `dired'.                                          |
+ | counsel-recentf                    | Find a file on `recentf-list'.                               |
+ | counsel-bookmark                   | Forward to `bookmark-jump'                                   |
+ | counsel-bookmarked-directory       | Ivy interface for bookmarked directories.                    |
+ | counsel-file-register              | Search file in register.                                     |
+ | counsel-locate-action-extern       | Pass X to `xdg-open'                                         |
+ | counsel-locate                     | Call the \"locate\" shell command.                           |
+ | counsel-fzf                        | Open a file using the fzf shell command.                     |
+ | counsel-dpkg                       | Call the \"dpkg\" shell command.                             |
+ | counsel-rpm                        | Call the \"rpm\" shell command.                              |
+ | counsel-file-jump                  | Jump to a file below the current directory.                  |
+ | counsel-dired-jump                 | Jump to a directory (see `dired-jump')                       |
+ | counsel-ag                         | Grep for a string in the current directory using ag.         |
+ | counsel-pt                         | Grep for a string in the current directory using pt.         |
+ | counsel-ack                        | Grep for a string in the current directory using ack.        |
+ | counsel-rg                         | Grep for a string in the current directory using rg.         |
+ | counsel-grep                       | Grep for a string in the file visited by the current buffer  |
+ | counsel-grep-backward              | Grep for a string similar to `swiper-backward'               |
+ | counsel-grep-or-swiper             | Call `swiper' for small buffers and `counsel-grep'           |
+ | counsel-grep-or-swiper-backward    | Call `swiper-backward'  and `counsel-grep-backward'          |
+ | counsel-recoll                     | Search for a string in the recoll database.                  |
+ | counsel-org-tag                    | Add or remove tags in `org-mode'.                            |
+ | counsel-org-tag-agenda             | Set tags for the current agenda item.                        |
+ | counsel-org-goto                   | "Jump to an outline heading with completion."                |
+ | counsel-org-goto-all               | Go to a different location in any org file.                  |
+ | counsel-org-file                   | Browse all attachments for current Org file.                 |
+ | counsel-org-entity                 | Complete Org entities using Ivy.                             |
+ | counsel-org-capture                | Capture something.                                           |
+ | counsel-org-agenda-headlines       | Choose from headers of `org-mode' files in the agenda.       |
+ | counsel-mark-ring                  | Browse `mark-ring' interactively.                            |
+ | counsel-package                    | Install or delete packages.                                  |
+ | counsel-tmm                        | Text-mode emulation of looking and choosing from a menubar.  |
+ | counsel-yank-pop                   | Ivy replacement for `yank-pop'.                              |
+ | counsel-register                   | Interactively choose a register.                             |
+ | counsel-evil-registers             | Ivy replacement for `evil-show-registers'.                   |
+ | counsel-imenu                      | Jump to a buffer position indexed by imenu.                  |
+ | counsel-list-processes             | Offer completion for `process-list'.                         |
+ | counsel-minibuffer-history         | "Browse minibuffer history."                                 |
+ | counsel-esh-history                | "Browse Eshell history."                                     |
+ | counsel-shell-history              | "Browse shell history."                                      |
+ | counsel-hydra-heads                | Call a head of the current/last hydra.                       |
+ | counsel-semantic                   | "Jump to a semantic tag in the current buffer."              |
+ | counsel-semantic-or-imenu          |                                                              |
+ | counsel-ibuffer                    | Use ibuffer to switch to another buffer.                     |
+ | counsel-switch-to-shell-buffer     | Switch to a shell buffer, or create one.                     |
+ | counsel-unicode-char               | Insert COUNT copies of a Unicode character at point.         |
+ | counsel-colors-emacs               | "Show a list of all supported colors for a particular frame. |
+ | counsel-colors-web                 | Show a list of all W3C web colors for use in CSS.            |
+ | counsel-rhythmbox                  | Choose a song from the Rhythmbox library to play or enqueue. |
+ | counsel-linux-app                  | "Launch a Linux desktop application, similar to Alt-<F2>.    |
+ | counsel-wmctrl                     | "Select a desktop window using wmctrl."                      |
+ | counsel-switch-buffer              | Switch to another buffer.                                    |
+ | counsel-switch-buffer-other-window | Switch to another buffer in another window.                  |
+ | counsel-compile                    | Call `compile' completing with smart suggestions             |
+ | counsel-compile-env                | Update `counsel-compile-env' interactively.                  |
+ | counsel-minor                      | Enable or disable minor mode.                                |
+
+* まとめ
+
+この記事では（長々と） ~helm~ から ~ivy~ に移行した時に得られた知見と設定について解説しました．幸いながら，私の ~helm~ の利用レベルはそれほど高くなく，移行しても全く後悔はないですが， ~helm~ への依存度がより高い人の場合は，色々と気に入らない点があるかもしれません．また， ~org-trello.el~ 等， ~helm~ 依存で ~ivy~ が使えないパッケージもまだあるので，移行に慎重な人は，自分が依存するパッケージの ~ivy~ インターフェイスが存在するかを一度確認してみるのをオススメします．それ以外の人は，もう「えいや！」で移行しても後悔しないと思います．
+
+*いかがでしたか？()*
+
+最後に，今後試してみたいパッケージの一覧です．
+1. [[https://github.com/Kungsgeten/ivy-todo][Kungsgeten/ivy-todo: Manage org-mode TODOs with ivy]]
+2. [[https://github.com/squiter/ivy-youtube][squiter/ivy-youtube: Search for an Youtube video inside Emacs with Ivy]]
+3. [[https://github.com/nlamirault/emacs-gitlab][nlamirault/emacs-gitlab: A Gitlab client for Emacs]]
+4. [[https://github.com/momomo5717/avy-migemo][momomo5717/avy-migemo: avy with migemo]]
+
+* 謝辞
+
+ - 数ヶ月に渡り，私の ~helm2ivy~ を Twitter 上で見守ってくださった心優しい Emacs ユーザの方々に感謝いたします．励ましの声が無ければ，この記事は生まれませんでした．
+ - この記事を執筆するためのすべての機能を提供してくれた [[https://www.gnu.org/software/emacs/][Emacs]] と [[https://orgmode.org][Org mode]]，そして，Qiita exporter である [[https://github.com/0x60df/ox-qmd][ox-qmd]] に心から感謝致します．こんな便利なツールは外にありません．Vim ユーザはすぐに Emacs に乗り換えてください．或いは，[[https://github.com/jceb/vim-orgmode][vim-orgmode]]を導入しましょう．
+
+* References
+ - [[https://oremacs.com/swiper/][Ivy User Manual]]
+ - [[https://speakerdeck.com/takaxp/counsel][さよならhelm、ようこそivy/counsel - Speaker Deck]]
+ - [[https://oremacs.com/2015/04/16/ivy-mode/][Introducing ivy-mode · (or emacs]]
+ - [[https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html][Ivy, Counsel and Swiper]]
+ - [[https://blog.jft.rocks/emacs/helm-to-ivy.html][Switching to ivy from helm]]
+ - [[https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf][Emacsモダン化計画 -かわEmacs編- - Qiita]]
+ - [[https://github.com/abo-abo/swiper/blob/596461e1ff09431eb417877a9870e53c452e1b62/doc/Changelog.org][swiper/Changelog.org at 596461e1ff09431eb417877a9870e53c452e1b62 · abo-abo/swiper]]
+ - [[https://github.com/abo-abo/swiper/issues/309][It is impossible (or unclear, how exactly) to use the swiper from within itself. · Issue #309 · abo-abo/swiper]]
+ - [[https://github.com/abo-abo/swiper/issues/924][`ivy-alt-done` wipes out buffer when called via M-x from nested minibuffer · Issue #924 · abo-abo/swiper]]
+ - [[https://www.reddit.com/r/emacs/comments/7vcrwo/helm_vs_ivy_what_are_the_differences_what_are_the/][Helm vs Ivy: What are the differences, what are the advantages? : emacs]]
+ - [[https://www.reddit.com/r/emacs/comments/51lqn9/helm_or_ivy/][Helm or ivy? : emacs]]
+ - [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/13/Dynamic-sorting-with-ivy/][Dynamic sorting with ivy]]
+
+* COMMENT drafting
+  ;; (define-key counsel-ag-map (kbd "C-x C-d") 'counsel-cd) ;; 必要．
+  ;; これは (setq enable-recursive-minibuffers t) で発動
+  ;; M-o 経由なら (setq enable-recursive-minibuffers nil) でも大丈夫．
+  ;; でも C-x C-d を ivy 関係なく，違うコマンドに割り当てていると，
+  ;; そちらが反応することがある．
+
+ - http://kitchingroup.cheme.cmu.edu/blog/2016/06/13/Dynamic-sorting-with-ivy/
+   - 人力でリストを書き換える方法かな？
+   - 履歴は取れるのかな？
+   - https://www.youtube.com/watch?v=nFKfM3MOAd0
+
+#+begin_src emacs-lisp
+(require 'avy-migemo)
+(require 'avy-migemo-e.g.ivy)
+(require 'avy-migemo-e.g.swiper)
+(setf (alist-get 'swiper ivy-re-builders-alist) #'ivy--regex-plus)
+(avy-migemo-mode 1)
+#+end_src
