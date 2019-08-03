@@ -29,7 +29,7 @@
 
 特に普段からモードラインを表示しない派の方は，全体的にスッキリ・シャープな Emacs に生まれ変わりますので，移行をオススメします．
 
-よければEmacs勉強会の[[https://speakerdeck.com/takaxp/counsel][講演資料]]と[[https://gist.github.com/takaxp/86158fe74b8268843571c42b48a4336c][設定集]]もご参照ください．また， ~ivy~ 以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．この記事のソースも公開しています．
+よければEmacs勉強会の[[https://speakerdeck.com/takaxp/counsel][講演資料]]と[[https://gist.github.com/takaxp/86158fe74b8268843571c42b48a4336c][設定集]]もご参照ください．また， ~ivy~ 以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．この記事の[[https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-helm2ivy.org][ソースも公開]]しています．
 
 #+begin_export html
 ![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif)
@@ -1251,7 +1251,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 | helm-pass-20190315.1335/             | 0.020 |
 | helm-projectile-20190721.842/        | 0.112 |
 | helm-swoop-20180215.1154/            | 0.136 |
-| SUM                                  |  3.26 |
+| SUM                                  |  3.27 |
 
 | ivy                                |  size |
 |------------------------------------+-------|
@@ -1265,7 +1265,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 | counsel-projectile-20190724.1903/  | 0.144 |
 | counsel-world-clock-20190709.2211/ | 0.036 |
 | swiper-20190726.1746/              | 0.116 |
-| SUM                                |  1.37 |
+| SUM                                |  1.36 |
 
 ** helm と共存の可能性
 
