@@ -819,52 +819,42 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
  - see https://github.com/ecraven/ivy-pass
 
-** TODO org-recent-headings-ivy (in org-recent-headings.el)
+** org-recent-headings.el
 
-最近使用した ~org mode~ の見出しを *高精度に* 記録してくれる [[https://github.com/alphapapa/org-recent-headings][org-recent-headings.el]] の ~ivy~ インターフェイスです．とても便利でオススメなのですが，残念ながら，org の HEAD では壊れて使えないため，少し前の version で使ってください．動作確認ができたら，記事を後日更新します．
+最近使用した ~org mode~ の見出しを *高精度に* 記録してくれる [[https://github.com/alphapapa/org-recent-headings][org-recent-headings.el]] の ~ivy~ インターフェイスです．とても便利でオススメなのです． +が，残念ながら，org の HEAD では壊れて使えないため，少し前の version で使ってください．動作確認ができたら，記事を後日更新します．+
 
-なお，現状では履歴のcleanup機能が無いので， ~~/.emacs.d/org-recent-headings.dat~ は端末間で共有しない方がよいと思います．
+~org-recent-headings.el~ の[[https://github.com/alphapapa/org-recent-headings/commit/339390571264acefc6c05e1c9a0f2cf219aae47f][依存関係の修正]]が適用されたこともあり，無事に動くようになりました．[[https://www.mail-archive.com/emacs-orgmode@gnu.org/msg123997.html][org mode (v9.2.5)]]とのペアで正しく動作することを確認しています．(updated: 2019-08-06)
+
+なお，現状では履歴の cleanup 機能が無いので， ~org-recent-headings-save-file~ は端末間で共有しない方がよいと思います．
 
 #+begin_src emacs-lisp
-(with-eval-after-load "ivy"
-  ;; デフォルトだと `ivy-string<' が使われてしまい，使用履歴が反映されない．
-  ;; つまり， recent-headings.dat に記録された順が反映されない．
-  (add-to-list 'ivy-sort-functions-alist
-               '(org-recent-headings-ivy . nil))
-
-  ;; Originally located in org-recent-headings.el. For texting.
-  (defun org-recent-headings-ivy ()
-    "Choose from recent Org headings with Ivy."
-    (interactive)
-    (org-recent-headings :completing-read-fn #'ivy-completing-read)))
-
 ;; for Ivy interface
 (global-set-key (kbd "C-c f r") 'org-recent-headings-ivy)
 
 (with-eval-after-load "org-recent-headings"
-  (custom-set-variables
-   '(org-recent-headings-save-file "~/.emacs.d/org-recent-headings.dat")
-   '(org-recent-headings-show-entry-function
-     'org-recent-headings--show-entry-direct)
-   '(org-recent-headings-advise-functions
-     '(org-agenda-goto
-       org-agenda-show
-       org-agenda-show-mouse
-       org-show-entry ;; having a bug, so just disabled
-       org-reveal
-       org-refile
-       org-tree-to-indirect-buffer
-       org-bookmark-jump))))
+  ;; デフォルトだと `ivy-string<' が使われてしまい，使用履歴が反映されない．
+  ;; つまり， recent-headings.dat に記録された順が反映されない．
+  (setf (alist-get 'org-recent-headings-ivy ivy-sort-functions-alist) nil)
 
-(defun ad:org-recent-headings-activate ()
-  (interactive)
-  (when (and (require 'dash-functional nil t) ;; FIXME
-             (require 'org-recent-headings nil t))
-    (org-recent-headings-mode)
-    (advice-remove 'org-recent-headings-ivy
-                   #'ad:org-recent-headings-activate)))
-(advice-add 'org-recent-headings-ivy :before
-            #'ad:org-recent-headings-activate)
+  ;; 履歴の保存先を調整
+  (setq org-recent-headings-save-file "~/.emacs.d/org-recent-headings.dat")
+
+  ;; 選択した箇所に直接移動する (C-M-n/C-M-p のプレビューは効かない)
+  (setq org-recent-headings-show-entry-function
+        'org-recent-headings--show-entry-direct)
+
+  ;; 履歴の更新をキックするコマンドの指定
+  (setq org-recent-headings-advise-functions
+        '(org-agenda-goto
+          org-agenda-show
+          org-agenda-show-mouse
+          org-show-entry
+          org-reveal
+          org-refile
+          org-tree-to-indirect-buffer
+          org-bookmark-jump))
+
+  (org-recent-headings-mode))
 #+end_src
 
 * prescient.el
@@ -1271,11 +1261,11 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ基本的には同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， ~org-trello~ が ~helm~ に依存しているので，私はしばらく ~helm~ 環境を残すことになりそうです．
 
-なお， ~org-recent-headings~ をインストールしていると共存が厳しくなります．これはバイトコンパイルせずに使うことで回避できます．
++なお， ~org-recent-headings~ をインストールしていると共存が厳しくなります．これはバイトコンパイルせずに使うことで回避できます．+ (updated: 2019-08-06)
 
 ** counsel.el にプリセットされている ivy-read 一覧
 
-実装されているコマンド一覧です． ~autoload~ 指定された関数は85個ありますが，エイリアスだったりするので，有効なのは82個です．
+実装されているコマンド一覧です． ~autoload~ 指定された関数は85個ありますが，エイリアスだったりするので，有効なのは82個です．意外なコマンドがすでに実装されているかもしれないので，一度，ざっと目を通してみてはいかがでしょう．
 
 （除外した関数）
   - counsel--org-get-tags
