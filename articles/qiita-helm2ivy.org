@@ -832,7 +832,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 (global-set-key (kbd "C-c f r") 'org-recent-headings-ivy)
 
 (with-eval-after-load "org-recent-headings"
-  ;; デフォルトだと `ivy-string<' が使われてしまい，使用履歴が反映されない．
+  ;; デフォルトでは `ivy-string<' が使われてしまい，使用履歴が反映されない．
   ;; つまり， recent-headings.dat に記録された順が反映されない．
   (setf (alist-get 'org-recent-headings-ivy ivy-sort-functions-alist) nil)
 
@@ -854,6 +854,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
           org-tree-to-indirect-buffer
           org-bookmark-jump))
 
+  ;; アクティベート
   (org-recent-headings-mode))
 #+end_src
 
@@ -922,7 +923,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 さらに，以下のようなハックを施すと，プロンプトの前に任意の情報を書き込む事ができます．例えば，プロンプトの上部に一行空行を入れて，さらに，プロンプトの直前にアイコンを入れることも可能です．モードラインを使わない派にオススメの設定です．
 
-ただハックの方法としては =ivy--insert-prompt= を advice で override する必要があるので，落ち着いたら公式にPR出そうと考えています．
++ただハックの方法としては =ivy--insert-prompt= を advice で override する必要があるので，落ち着いたら公式にPR出そうと考えています．+
+
+無事にマージされました． =ivy-pre-prompt-function= に任意の関数を設定するだけになりました．(update: 2019-08-08)
 
 #+begin_export html
 ![Screen Shot 2019-08-03 at 15.07.07.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea2ce23-c433-7c5a-27da-dd7981934f98.png)
@@ -936,100 +939,13 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 #+begin_src emacs-lisp
 (with-eval-after-load "ivy"
-  (defvar my-ivy-prompt-prefix t)
-  (defun my-toggle-ivy-prompt-prefix ()
-    "Toggle showing a header line before the ivy prompt."
-    (interactive)
-    (setq my-ivy-prompt-prefix (not my-ivy-prompt-prefix)))
-
-  (defun my-ivy-prompt-prefix ()
-    "Return a header line for the ivy prompt."
-    (when my-ivy-prompt-prefix
-      (if window-system
-          (format "%s\n%s "
-                  (make-string (frame-width) ?\x5F) ;; "__"
-                  (all-the-icons-faicon "sort-amount-asc")) ;; ""
-        (format "%s\n" (make-string (1- (frame-width)) ?\x2D))))) ;; "--"
-
-  (defun ivy--insert-prompt ()
-    "Update the prompt according to `ivy--prompt'."
-    (when (setq ivy--prompt (ivy-prompt))
-      (unless (memq this-command '(ivy-done ivy-alt-done ivy-partial-or-done
-                                            counsel-find-symbol))
-        (setq ivy--prompt-extra ""))
-      (let (head tail)
-        (if (string-match "\\(.*?\\)\\(:? ?\\)\\'" ivy--prompt)
-            (progn
-              (setq head (match-string 1 ivy--prompt))
-              (setq tail (match-string 2 ivy--prompt)))
-          (setq head ivy--prompt)
-          (setq tail ""))
-        (let ((inhibit-read-only t)
-              (std-props '(front-sticky t rear-nonsticky t field t read-only t))
-              (n-str
-               (concat
-                (if (and (bound-and-true-p minibuffer-depth-indicate-mode)
-                         (> (minibuffer-depth) 1))
-                    (format "[%d] " (minibuffer-depth))
-                  "")
-                (concat
-                 (if (string-match "%d.*%d" ivy-count-format)
-                     (format head
-                             (1+ ivy--index)
-                             (or (and (ivy-state-dynamic-collection ivy-last)
-                                      ivy--full-length)
-                                 ivy--length))
-                   (format head
-                           (or (and (ivy-state-dynamic-collection ivy-last)
-                                    ivy--full-length)
-                               ivy--length)))
-                 ivy--prompt-extra
-                 tail)))
-              (d-str (if ivy--directory
-                         (abbreviate-file-name ivy--directory)
-                       "")))
-          (save-excursion
-            (goto-char (point-min))
-            (delete-region (point-min) (minibuffer-prompt-end))
-            (let ((len-n (length n-str))
-                  (len-d (length d-str))
-                  (ww (window-width)))
-              (setq n-str
-                    (cond ((> (+ len-n len-d) ww)
-                           (concat n-str "\n" d-str "\n"))
-                          ((> (+ len-n len-d (length ivy-text)) ww)
-                           (concat n-str d-str "\n"))
-                          (t
-                           (concat n-str d-str)))))
-            ;; ADDED
-            (when my-ivy-prompt-prefix
-              (setq n-str (concat (my-ivy-prompt-prefix) n-str)))
-            ;;
-            (when ivy-add-newline-after-prompt
-              (setq n-str (concat n-str "\n")))
-            (let ((regex (format "\\([^\n]\\{%d\\}\\)[^\n]" (window-width))))
-              (while (string-match regex n-str)
-                (setq n-str (replace-match
-                             (concat (match-string 1 n-str) "\n")
-                             nil t n-str 1))))
-            (set-text-properties 0 (length n-str)
-                                 `(face minibuffer-prompt ,@std-props)
-                                 n-str)
-            (setq n-str (funcall ivy-set-prompt-text-properties-function
-                                 n-str std-props))
-            (insert n-str))
-          ;; Mark prompt as selected if the user moves there or it is the only
-          ;; option left.  Since the user input stays put, we have to manually
-          ;; remove the face as well.
-          (when ivy--use-selectable-prompt
-            (if (= ivy--index -1)
-                (ivy-add-face-text-property
-                 (minibuffer-prompt-end) (line-end-position) 'ivy-prompt-match)
-              (remove-list-of-text-properties
-               (minibuffer-prompt-end) (line-end-position) '(face))))
-          ;; get out of the prompt area
-          (constrain-to-field nil (point-max))))))
-  (advice-add 'ivy--insert-prompt :override #'ad:ivy--insert-prompt))
+  (defun my-pre-prompt-function ()
+    (if window-system
+        (format "%s\n%s "
+                (make-string (frame-width) ?\x5F) ;; "__"
+                (all-the-icons-faicon "sort-amount-asc")) ;; ""
+      (format "%s\n" (make-string (1- (frame-width)) ?\x2D))))
+  (setq ivy-pre-prompt-function #'my-pre-prompt-function))
 #+end_src
 
 ** 現在の選択候補をわかりやすくする
