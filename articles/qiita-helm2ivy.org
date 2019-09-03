@@ -192,7 +192,9 @@
 
 =C-M-m=, =C-M-n=, =C-M-p= は，[[https://github.com/elpa-host/helm-file-preview][helm-file-preview]] の機能をデフォルト実装した印象です． ~swiper~ もそうですが， ~QuickLook~ 的にファイルの内容を確認できるのがとても便利です．
 
-その他， ~M-x ivy-resume~ すれば，いつでも前回のセッションに戻れます．頻繁にリジュームする人は，キーバインドを設定するべきかもしれません．また，プロンプトでユーザが入力する検索語は，一部の正規表現に対応しているので， ~^~ を付ければ先頭マッチ， ~$~ 末尾マッチというように制御できます．
+その他， ~ivy-resume~ を使うと，いつでも前回のセッションに戻れます．ただし， =counsel-M-x= を常用する場合や頻繁にリジュームする人は，キーバインドを設定するべきです． ~C-c C-r~ が推奨されているようですが，私は =org-reveal= との衝突をさけるために， ~C-c i r~ をアサインしています．
+
+プロンプトでユーザが入力する検索語は，一部の正規表現に対応しているので， ~^~ を付ければ先頭マッチ， ~$~ 末尾マッチというように制御できます．
 
 ** ソーティングとフィルタ設定
 
@@ -764,7 +766,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 ** counsel-projectile.el
 
-[[https://github.com/ericdanan/counsel-projectile][counsel-projectile.el]]は，~project.el~ に ~ivy~ インターフェイスを提供するパッケージです． =projectile-find-file= は =counsel-git= に近い気もします．下記の =my-counsel-fzf-in-default-dir= は， =counsel-recentf= に紐付けたアクションと同じです．
+[[https://github.com/ericdanan/counsel-projectile][counsel-projectile.el]]は， ~projectile.el~ に ~ivy~ インターフェイスを提供するパッケージです． =projectile-find-file= は =counsel-git= に近い気もします．下記の =my-counsel-fzf-in-default-dir= は， =counsel-recentf= に紐付けたアクションと同じです．
 
 #+begin_src emacs-lisp
 ;; 以下の関数は，counsel-projectile-* と counsel-recentf にぶら下げる．
@@ -1175,7 +1177,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 ** helm と共存の可能性
 
-いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ基本的には同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， ~org-trello~ が ~helm~ に依存しているので，私はしばらく ~helm~ 環境を残すことになりそうです．
+いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， ~org-trello~ が ~helm~ に依存しているので，私はしばらく ~helm~ 環境を残すことになりそうです．
 
 +なお， ~org-recent-headings~ をインストールしていると共存が厳しくなります．これはバイトコンパイルせずに使うことで回避できます．+ (updated: 2019-08-06)
 
@@ -1275,7 +1277,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 * まとめ
 
-この記事では（長々と） ~helm~ から ~ivy~ に移行した時に得られた知見と設定について解説しました．幸いながら，私の ~helm~ の利用レベルはそれほど高くなく，移行しても全く後悔はないですが， ~helm~ への依存度がより高い人の場合は，色々と気に入らない点があるかもしれません．また， ~org-trello.el~ 等， ~helm~ 依存で ~ivy~ が使えないパッケージもまだあるので，移行に慎重な人は，自分が依存するパッケージの ~ivy~ インターフェイスが存在するかを一度確認してみるのをオススメします．それ以外の人は，もう「えいや！」で移行しても後悔しないと思います．
+この記事では（長々と） ~helm~ から ~ivy~ に移行した時に得られた知見と設定について解説しました．幸いながら，私の ~helm~ の利用レベルはそれほど高くなく，移行しても全く後悔はないですが， ~helm~ への依存度がより高い人の場合は，色々と気に入らない点があるかもしれません．また， ~org-trello.el~ 等， ~helm~ 依存で ~ivy~ が使えないパッケージもまだあるので，移行に慎重な人は，依存しているパッケージの ~ivy~ インターフェイスが存在するかを一度確認してみることをオススメします．それ以外の人は，もう「えいや！」で移行しても後悔しないと思います．
 
 *いかがでしたか？()*
 
