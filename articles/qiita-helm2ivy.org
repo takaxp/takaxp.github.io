@@ -8,11 +8,7 @@
   (find-file (concat (file-name-directory (buffer-file-name))
                      (file-name-base (buffer-name)) ".html"))
   (my-convert-md-link-to-html)
-  (save-buffer "qiita-helm2ivy.html")
-  ;; (shell-command-to-string
-  ;;  (concat "scp -o ConnectTimeout=5 " "./qiita-helm2ivy.html "
-  ;;          "orz:/srv/www/pxaka.tokyo/htsdocs/articles"))
-  )
+  (save-buffer "qiita-helm2ivy.html"))
 ;;(org-open-link-from-string "https://pxaka.tokyo/articles")
 #+end_src
 
