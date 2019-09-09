@@ -4,11 +4,16 @@
 #+startup: content
 
 #+begin_src emacs-lisp :exports none :results none
-;; (when (org-html-export-to-html)
-;;   (shell-command-to-string
-;;    (concat "scp -o ConnectTimeout=5 " "./qiita-helm2ivy.html "
-;;            "orz:/srv/www/pxaka.tokyo/htsdocs/articles")))
-;; (org-open-link-from-string "https://pxaka.tokyo/articles")
+(when (org-html-export-to-html)
+  (find-file (concat (file-name-directory (buffer-file-name))
+                     (file-name-base (buffer-name)) ".html"))
+  (my-convert-md-link-to-html)
+  (save-buffer "qiita-helm2ivy.html")
+  ;; (shell-command-to-string
+  ;;  (concat "scp -o ConnectTimeout=5 " "./qiita-helm2ivy.html "
+  ;;          "orz:/srv/www/pxaka.tokyo/htsdocs/articles"))
+  )
+;;(org-open-link-from-string "https://pxaka.tokyo/articles")
 #+end_src
 
 * COMMENT 確認事項
@@ -32,14 +37,14 @@
 よければEmacs勉強会の[[https://speakerdeck.com/takaxp/counsel][講演資料]]と[[https://gist.github.com/takaxp/86158fe74b8268843571c42b48a4336c][設定集]]もご参照ください．また， ~ivy~ 以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．この記事の[[https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-helm2ivy.org][ソースも公開]]しています．
 
 #+begin_export html
-![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif)
-↑GUI
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif" alt="Untitled.gif" /></p>
 #+end_export
+↑GUI
 
 #+begin_export html
-![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif)
-↑ターミナル
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif" alt="Untitled.gif" /></p>
 #+end_export
+↑ターミナル
 
 * インストール
 
@@ -121,7 +126,7 @@
 ~swiper~ は， =helm-swoop= のような文字列探索機能を提供します．カーソル位置の単語をキーに，バッファ内を探索．絞り込まれた選択候補を =C-n/C-p= で変えると，それに合わせてバッファの表示も変わり，連続してプレビューできます．なお， =swiper-all-thing-at-point= も実装されていて，これは開いているすべてのバッファを探索します．
 
 #+begin_export html
-![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/33506056-af67-6a9f-b1b7-6e61a04a82a2.gif)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/33506056-af67-6a9f-b1b7-6e61a04a82a2.gif" alt="Untitled.gif" /></p>
 #+end_export
 
 #+begin_src emacs-lisp
@@ -136,7 +141,7 @@
 デフォルトの配色は，なかなかに個性的なので自分の好みに書き換えましょう．中途半端に書き換えると，デフォルトの配色が表に出てくるので，次にリストしたフェイスはすべて書き換える方が安全です．なお， =(setq ivy-display-style t)= とすると，配色を無効にできます．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 13.07.34.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/744505f0-f2c2-d7aa-a5cf-4aea008f6d2d.png)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/744505f0-f2c2-d7aa-a5cf-4aea008f6d2d.png" alt="Screen Shot 2019-08-03 at 13.07.34.png" /></p>
 #+end_export
 
  - ivy-current-match
@@ -496,7 +501,7 @@ see https://github.com/abo-abo/swiper/issues/1294
 また，選択候補が無いと確定してから =my-nocand-then-fzf-idle-time= 秒後に ~[y/n]~ を問うようにカスタマイズできます．
 
 #+begin_export html
-![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/b9f71785-9ba6-d146-681b-7c275bf03a46.gif)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/b9f71785-9ba6-d146-681b-7c275bf03a46.gif" alt="Untitled.gif" /></p>
 #+end_export
 
 このデモでは，次のフローで所望のファイルを見つけています．
@@ -679,7 +684,7 @@ https://github.com/nathankot/dotemacs/blob/master/init.el#L709 にあります�
 https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ に公開されているコードをアレンジしました． ~ivy~ とは無関係ですが， ~<f10>~ で ~bm.el~ の =bm-toggle= を呼び出し， ~C-<f10>~ で次のブックマークに移動するように設定しています．詳細は， [[https://takaxp.github.io/init.html#orgd5942d14][Configurations for GNU Emacs::4.9 [bm.el] カーソル位置をブックマークして追う]] を参照ください．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 14.54.29.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/0c1bb5f2-def7-c0f8-71d7-506adf648815.png)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/0c1bb5f2-def7-c0f8-71d7-506adf648815.png" alt="Screen Shot 2019-08-03 at 14.54.29.png" /></p>
 #+end_export
 
 #+begin_src emacs-lisp
@@ -727,7 +732,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 デフォルトではソートされないので，[[https://github.com/raxod502/prescient.el][prescient.el]] を導入して，直近の選択を上位に移すソーティングと履歴保存を有効にしましょう．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 14.49.12.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/67564635-e10d-4595-35a7-3080473fef6e.png)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/67564635-e10d-4595-35a7-3080473fef6e.png" alt="Screen Shot 2019-08-03 at 14.49.12.png" /></p>
 #+end_export
 
 #+begin_src emacs-lisp
@@ -750,7 +755,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 ~counse.el~ には Linuxのアプリケーションを呼び出すためのインターフェイスである =counsel-linux-app= が実装されています． macOS用のコマンドは [[https://github.com/d12frosted/counsel-osx-app][counsel-osx-app]] に公開されています．以前はOS側のランチャーを呼び出して使っていましたが，このコマンドのおかげで，Emacs から直接アプリケーションを呼び出せるので，かなり重宝しています．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 14.56.28.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/9d840790-b665-fddc-23d2-b4b6d7ecee18.png)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/9d840790-b665-fddc-23d2-b4b6d7ecee18.png" alt="Screen Shot 2019-08-03 at 14.56.28.png" /></p>
 #+end_export
 
 =counsel-osx-app-location= を正しく設定すれば，サブディレクトリに含まれるアプリケーションもリストに入れてくれます．
@@ -867,7 +872,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 もう一つの機能として，イニシャル入力が可能になります．例えば ~counsel-M-x~ で ~M-x fap~ と入力すると， =find-file-at-point= が最上位で表示されます． =counsel-recentf= などでは，サブディレクトリの先頭の頭文字を入力すると，当該の情報が上位にきます．慣れれば極めて高速に絞り込みできるようになります．ただ，すべてのコマンドについてイニシャル入力を有効にすると，現状では ~face~ を思うように制御できないので， =ivy-re-builders-alist= を設定して，イニシャル入力を有効化するコマンドを限定することをオススメします．
 
 #+begin_export html
-![Untitled.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/ecd14135-2bf9-12bb-b7ab-273444f27a8b.gif)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/ecd14135-2bf9-12bb-b7ab-273444f27a8b.gif" alt="Untitled.gif" /></p>
 #+end_export
 
 イニシャル入力の設定周りがややこしいと感じる場合は，下記設定の2箇所の =ivy-re-builders-alist= に関わる設定を使わず，代わりに =(setq ivy-prescient-enable-filtering nil)= を設定すればうまく行きます．このように設定しても，使用履歴の保存には影響がありません．
@@ -920,7 +925,7 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.05.44.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1c131697-3b3f-b2c4-829c-c9d34addff72.png)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1c131697-3b3f-b2c4-829c-c9d34addff72.png" alt="Screen Shot 2019-08-03 at 15.05.44.png" /></p>
 #+end_export
 
 さらに，以下のようなハックを施すと，プロンプトの前に任意の情報を書き込む事ができます．例えば，プロンプトの上部に一行空行を入れて，さらに，プロンプトの直前にアイコンを入れることも可能です．モードラインを使わない派にオススメの設定です．
@@ -930,14 +935,14 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 無事にマージされました． =ivy-pre-prompt-function= に任意の関数を設定するだけになりました．(update: 2019-08-08)
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.07.07.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea2ce23-c433-7c5a-27da-dd7981934f98.png)
-↑適用前
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea2ce23-c433-7c5a-27da-dd7981934f98.png" alt="Screen Shot 2019-08-03 at 15.07.07.png" /></p>
 #+end_export
+↑適用前
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.07.43.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/8f54e3d0-7fe4-7b4b-d171-70994d921793.png)
-↑適用後
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/8f54e3d0-7fe4-7b4b-d171-70994d921793.png" alt="Screen Shot 2019-08-03 at 15.07.43.png" /></p>
 #+end_export
+↑適用後
 
 #+begin_src emacs-lisp
 (with-eval-after-load "ivy"
@@ -955,14 +960,14 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 =ivy-format-functions-alist= にカスタマイズした関数を追加すれば，プロンプトの下部に位置するカーソル行の表示を変更できます． ~all-the-icons~ を導入して，好みのアイコンでカーソル行のある選択候補を目立たせましょう．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.10.49.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea701d0-7d19-ccd0-e98b-808e1928ac3c.png)
-↑適用前（ivy-format-function-arrow利用）
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea701d0-7d19-ccd0-e98b-808e1928ac3c.png" alt="Screen Shot 2019-08-03 at 15.10.49.png" /></p>
 #+end_export
+↑適用前（ivy-format-function-arrow利用）
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.11.10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/65cc0caf-5dae-1962-f6ee-eaed3e4e6609.png)
-↑適用後（my-ivy-format-function-arrow利用）
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/65cc0caf-5dae-1962-f6ee-eaed3e4e6609.png" alt="Screen Shot 2019-08-03 at 15.11.10.png" /></p>
 #+end_export
+↑適用後（my-ivy-format-function-arrow利用）
 
 #+begin_src emacs-lisp
 (defface my-ivy-arrow-visible
@@ -1000,9 +1005,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 [[https://github.com/asok/all-the-icons-ivy][all-the-icons-ivy.el]]は， ~ivy~ インターフェイスにアイコンを追加するパッケージです． ~all-the-icons.el~ が少々導入の難しいパッケージなのですが，一度設定がうまくいけば，殺伐とした Emacs バッファに安らぎがもたらされます．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.30.28.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/c1b4ad28-aff6-6e56-9e09-8fa5a7c4cf66.png)
-↑neotree, dired, ivy のすべてで all-the-icons を使う場合の表示例
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/c1b4ad28-aff6-6e56-9e09-8fa5a7c4cf66.png" alt="Screen Shot 2019-08-03 at 15.30.28.png" /></p>
 #+end_export
+↑neotree, dired, ivy のすべてで all-the-icons を使う場合の表示例
 
 いくつかのコマンドは，すでにアイコンを出すように設定されています．アイコンが表示されないコマンドを見つけたら， =all-the-icons-ivy-buffer-commands= と =all-the-icons-ivy-file-commands= にコマンドを追加すれば，アイコンが表示されるようになります．
 
@@ -1092,16 +1097,16 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 ミニバッファに候補リストを表示する ~ivy~ は，大きな画面で横方向に複数のウィンドウを表示する状況で，画面上に無駄なスペースが多く生じます．[[https://github.com/Yevgnen/ivy-rich][ivy-rich.el]]を導入すると，アイコンが追加され，さらに追加の情報が空きスペースに記述されるようになります．[[https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf#%E6%A4%9C%E7%B4%A2%E3%81%AA%E3%81%A9%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9----swipercounsel-ivy-rich][Emacsモダン化計画 -かわEmacs編-]] (by [[https://qiita.com/Ladicle][@Ladicle]]) が詳しいです．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.20.31.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/f3f30fa9-f603-ccb6-dd6c-108bb1c491c1.png)
-![Screen Shot 2019-08-03 at 15.20.09.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/4d8958f2-173b-4fb3-cba2-cb5587a0aaa8.png)
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/f3f30fa9-f603-ccb6-dd6c-108bb1c491c1.png" alt="Screen Shot 2019-08-03 at 15.20.31.png" /></p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/4d8958f2-173b-4fb3-cba2-cb5587a0aaa8.png" alt="Screen Shot 2019-08-03 at 15.20.09.png" /></p>
 #+end_export
 
 ただし，私のように普段は80桁縛りで Emacs を使う人には相性が悪いかもしれません．
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.19.54.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/5d382033-bd2f-16a2-7db1-06ef55248eb3.png)
-↑見切れてしまう...
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/5d382033-bd2f-16a2-7db1-06ef55248eb3.png" alt="Screen Shot 2019-08-03 at 15.19.54.png" /></p>
 #+end_export
+↑見切れてしまう...
 
 #+begin_src emacs-lisp
 (when (require 'ivy-rich nil t)
@@ -1113,9 +1118,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 ~ivy-posframe~ を使うと，通常はミニバッファに表示されるリストを任意の位置に出すことができます．私自身，まだ使いこなせていないので今後の課題です．以下は， =counsel-M-x= でコマンドリストを表示するときだけカーソル位置にフレームを出す設定です．なお，当初 =ivy-posframe= はマイナーモード化されておらず不便でしたが，[[https://qiita.com/conao3][@conao3]] 氏の[[https://github.com/tumashu/ivy-posframe/pull/43][尽力]]により，現在は =(ivy-posframe-mode 1)=, =(ivy-posframe-mode -1)= で ON/OFFできます．Thanks!
 
 #+begin_export html
-![Screen Shot 2019-08-03 at 15.26.44.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1016e998-c672-8d7e-6c2b-9883eb19310c.png)
-↑未調整なため，かなり変
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1016e998-c672-8d7e-6c2b-9883eb19310c.png" alt="Screen Shot 2019-08-03 at 15.26.44.png" /></p>
 #+end_export
+↑未調整なため，かなり変
 
 #+begin_src emacs-lisp
 (with-eval-after-load "ivy-posframe"
