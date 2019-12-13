@@ -1,0 +1,317 @@
+#+title: 簡略フローで doing 再び
+#+setupfile: theme-readtheorg.setup
+#+html_head: <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+#+startup: content
+
+#+begin_src emacs-lisp :exports none :results none
+(when (org-html-export-to-html)
+  (let ((html-file (concat (file-name-base (buffer-file-name)) ".html")))
+    (find-file (concat (file-name-directory (buffer-file-name)) html-file))
+    (my-convert-md-link-to-html)
+    (save-buffer html-file)))
+#+end_src
+
+* COMMENT タスクリスト
+  :PROPERTIES:
+  :CREATED:  [2019-07-29 Mon 17:19]
+  :ID:       D98D9E1B-20AC-4D50-AC43-42E4F2F9F1F2
+  :END:
+** DONE ドラフティング
+    CLOSED: [2019-08-30 Fri 04:06]
+    :PROPERTIES:
+    :ID:       1AFE84D8-7023-4CBC-A131-BA7CC4B214F7
+    :CREATED:  [2019-08-29 Thu 21:32]
+    :END:
+ - [X] 構成を変更
+ - [X] 追加タスクの確認
+** DONE 推敲
+    CLOSED: [2019-08-30 Fri 04:06]
+    :PROPERTIES:
+    :ID:       451927E4-40B5-42D3-8525-BFDFDAF54084
+    :END:
+    :LOGBOOK:
+    CLOCK: [2019-08-30 Fri 05:54]--[2019-08-30 Fri 07:15] =>  1:21
+    CLOCK: [2019-08-30 Fri 04:34]--[2019-08-30 Fri 06:25] =>  1:51
+    CLOCK: [2019-08-29 Thu 21:31]--[2019-08-29 Thu 21:32] =>  0:01
+    :END:
+* はじめに
+
+~Emacs Org mode~ には，工数を計測するための機能が標準で備わっています．基本的な使い方は，時間を計測したいタスクで =M-x org-clock-in= して，作業を終えたら =M-x org-clock-out= する操作です．そうして記録した各タスクの計測時間は，後から簡単に集計でき，表として出力できるため，工数記録とレポート作成に重宝しているユーザも多いようです．
+
+そんな便利な計測機能ですが，避けられない欠点があります．それは *org-clock-in し忘れる* ことです．記録を開始しなければ，記録されることはない...
+
+そこで本記事は， ~org-clock-in~ と ~org-clock-out~ を可能な限り自動化するためのパッケージと設定を紹介します．ポイントは， *Doingタグの付いたタスクを，Emacs全体で1つに維持* して，「Doingタグが付いたタスク」= 「計測中のタスク」にすることです．
+
+なおこの記事は [[https://orgmode.org/][Org mode]] で書かれており，ソースも[[https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-org-doing.org][公開]]しています．また本記事以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．
+
+* 計測開始を自動化・半自動化する
+
+「 *org-clock-in* し忘れる？なら常に記録すれば良いじゃんか」と，結論を安直に導くことも可能ですが，実際の運用はそう簡単ではありません．なぜなら，Org modeの各 heading は，常に計測を目的としている heading とは限らないためです．計測対象ではない単なるメモも同じバッファに存在しえます．そしてやはり理想的なのは，「自分は今からこのタスクに集中する」と確定したものだけを計測・記録することです．
+
+そう考えると，本当に必要なのは「空気を読んで *org-clock-in* を実行してくれるツール」になります．そんなのあるの？ないの？ということで，作りました．なお，[[https://qiita.com/takaxp/items/a5a3383d7358c58240d0][スピードコマンド]]を有効にしている場合は， =I= (org-clock-in) と =O= (org-clock-out) の押下で済ませることができます．ただし「忘れる問題」は解決しません．
+
+> [[https://github.com/takaxp/org-onit][takaxp/org-onit: Recording your task all the time]]
+
+このツールを使えば，
+- シングルアクションで *org-clock-in* と *org-clock-out* を実行
+  - トグルコマンド(=org-onit-toggle-doing=)の提供
+  - Unfold（ heading のコンテンツを =<tab>= で開く）したら *org-clock-in* の発行
+- 所定の条件を満たす heading に移動したら，自動的に *org-clock-in* を発行
+を実現できます．これで =org-clock-in= のし忘れは大幅に減るでしょう．
+
+#+begin_export html
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/a703b7e3-1f6d-4054-1329-a03a16c967a4.png" /></p>
+#+end_export
+
+さらに，最も可能性の高い使い方として「ある heading で工数計測をしながら，他の heading の内容を編集する」という作業スタイルが考えられます．この場合は，計測中の heading と編集中の heading を簡単に往復できると幸せになれるので， =org-onit.el= は， ~org-clock-goto~ を発行した場所にすぐ戻るためのコマンド(~org-onit-goto-anchor~)も実装しています．
+
+#+begin_export html
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/607adbfb-2902-712c-b87b-479d79aad9e6.png" /></p>
+#+end_export
+
+* インストールと設定
+** インストール
+いつものようにダウンロードして =load-path= に配置してください．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "org"
+  (require 'org-onit nil t))
+#+end_src
+
+としておけば，確実に読み込まれるでしょう．
+
+=package.el= などのパッケージ管理ツールを使用している場合は，特に =require= せずとも大丈夫です．
+
+** 推奨追加パッケージ
+*** org-bookmark-heading.el
+
+ビルトインではないパッケージへの依存として[[https://github.com/alphapapa/org-bookmark-heading][org-bookmark-heading.el]]を想定してます．インストールしなくても動作します．ただ，ブックマークの精度を向上させる効果があるため，導入をおすすめします．
+
+*** org-clock-today.el
+
+標準の工数計測では，あるタスクについての「過去費やした累計時間」を簡単にタイトルバーに表示できますが， ~org-clock-today.el~ を使うと，さらに2種類の *本日費やした合計時間* を集計してタイトルバー（或いはモードライン）に出すことができます．こちらのパッケージも必須ではないです
+
+  - https://github.com/takaxp/org-clock-today-mode (機能強化版・PR中)
+    - PR回収(2019-09-10)されましたので，本家をインストールしてください．
+    - https://github.com/mallt/org-clock-today-mode (本家)
+
+** 基本設定
+
+=org-onit.el= についてはほぼ設定無しで使えると思います．
+
+むしろ，工数計測の機能を提供する =org-clock.el= の設定が必要になります．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "org-clock"
+  ;; 1分未満は記録しない
+  (setq org-clock-out-remove-zero-time-clocks t)
+
+  ;; org-clock の計測時間をモードラインではなくタイトルに表示する
+  ;; 'both にすると，モードラインとタトルバーの両方に表示される
+  (setq org-clock-clocked-in-display 'frame-title)
+
+  ;; "Doing" タグの色を見やすい変える
+  (add-to-list 'org-tag-faces '("Doing" :foreground "#FF0000"))
+
+  ;; タイトルに表示する文字列のフォーマット（例）
+  (setq org-clock-frame-title-format
+        '((:eval (format "%s|%s| %s"
+                         (if org-onit--auto-clocking "Auto " "")
+                         (org-onit-get-sign)
+                         org-mode-line-string)))))
+#+end_src
+
+加えて heading の =<tab>= 押下で =clock-in= できるようにします．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "org"
+  (add-hook 'org-cycle-hook #'org-onit-clock-in-when-unfold))
+#+end_src
+
+また，計測中のタスクに集中したいという目的から ~narrowing~ を使いたい場合がありますので，[[https://qiita.com/takaxp/items/a5a3383d7358c58240d0][スピードコマンド]]を有効にしておきましょう．heading で =s= 押下すると， ~narrowing~ と ~widen~ をトグルできます．また， ~d~ 押下で ~DONE~ にする設定も加えるとよいでしょう．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "org"
+  (setq org-use-speed-commands t)
+  (add-to-list 'org-speed-commands-user '("d" org-todo "DONE")))
+#+end_src
+
+** キーバインド
+
+デフォルトの設定は定められていませんが，次を推奨しています．自由に変更してください．
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-<f11>") 'org-clock-goto)
+(with-eval-after-load "org"
+  (define-key org-mode-map (kbd "<f11>") 'org-onit-toggle-doing)
+  (define-key org-mode-map (kbd "M-<f11>") 'org-onit-toggle-auto)
+  (define-key org-mode-map (kbd "S-<f11>") 'org-onit-goto-anchor))
+#+end_src
+
+* 基本的な使い方
+
+使い方は，半自動で ~org-clock-in~ するか？と，全自動で ~org-clock-in~ するか？で分かれます．以下の説明は，上記の推奨キーバインドを適用していることを前提として書かれています．
+
+** 半自動で計測開始する
+
+計測を開始したい heading で =<f11>= を押下（或いは =M-x org-onit-toggle-doing= ）します．見出し行にカーソルが無くても大丈夫です．
+
+デフォルトでは，すでに ~DONE~ の heading では計測開始しませんが， =org-onit-basic-options= で ='(:wakeup both)= または ='(:wakeup doing)= に設定している場合には計測開始します．
+
+さらに， ='(:unfold t)= を設定している場合に限り， =<tab>= 押下で heading を unfold することで計測を開始します．ただし， =:wakeup= と =:nostate= の値が優先されます．
+
+** 全自動で計測開始する
+
+=S-<f11>= 押下（或いは， =M-x org-onit-toggle-auto= ）します．それ以降，新たな heading を訪問すると，自動的に計測が開始されます．
+
+=org-onit-basic-options= で ='(:wakeup nil)= または ='(:wakeup doing)= を設定していると， heading が ~DONE~ である場合には発動しません．また， ='(:nostate nil)= または ='(:nostate doing)= の場合， ~TODO~ 等の todo state が設定されていない heading では発動しません．
+
+なお全自動モードでは，内部的にすべての操作について「計測開始するか？」を判定しているので，環境によっては重く感じるかもしれません．その場合は，半自動のアプローチを採用してください．
+
+** 計測中の heading と編集中のバッファを往復する
+
+Org mode に慣れてくると，タスクリストを特定のタスクに集約し，編集作業そのものは他のバッファやファイルで実施するパターンが増えると思います．
+
+その場合は，作業時間を計測している heading と，実際に編集作業しているバッファを簡単に往復できると便利です．
+
+フローの一例として，
+1. ある heading で =<f11>= 押下
+2. 任意のバッファに移動して作業
+3. 計測している heading にメモを残したい（ =C-<f11>= (or =M-x org-clock-goto=) で移動）
+4. メモを取り終えたので，元のバッファに戻りたい（ =S-<f11>= (or =M-x org-onit-goto-anchor=) で移動）
+が考えられます．
+
+この間，継続して作業時間が計測されます．
+
+* ビジュアルフィードバック
+
+計測後に表に計測結果をまとめるのとは別に，計測状況をリアルタイムに表示して確認できます．特に，一日に積み重ねた作業時間を確認できれば，計測時間が =08:00= を超える辺りで，おもむろにビールを飲み始めてもいいかもしれません．
+
+** 集計時間の表示
+
+モードラインやタイトルバーに，あるタスクについて「過去費やした累計時間」や，バッファ内の全タスクから集計した，或いは，あるタスクのサブ heading から集計した「本日費やした合計時間」を表示できます．
+
+次の「本日費やした時間」は， =org-clock-today.el= を導入することで集計できます．
+ - （バッファ内の全タスクから集計した）「本日費やした時間」
+ - （あるタスクのサブ heading から集計した）「本日費やした時間」
+
+あるタスクの「過去費やした累計時間」はデフォルトで集計されています．
+
+| 集計項目                              | 変数名                       |
+|---------------------------------------+------------------------------|
+| 過去費やした累計時間                  | org-mode-line-string         |
+| 本日費やした時間（バッファ内全て）    | org-clock-today-subtree-time |
+| 本日費やした時間（サブ heading 限定） | org-clock-today-buffer-time  |
+
+これらの変数を使って =org-clock-frame-title-format= をカスタマイズすると，タイトルバーの表示を変えられます．
+
+例えば，こうです．
+
+#+begin_export html
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/051d8175-5781-3ab2-103c-0f1d09f82637.png" alt="Screen_Shot_2019-08-30_at_3_39_02.png" /></p>
+#+end_export
+
+#+begin_src emacs-lisp
+(setq org-clock-frame-title-format
+          '((:eval (format "%s%s %s"
+                           (if (and (require 'org-clock-today nil t)
+                                    org-clock-today-mode)
+                               (if org-clock-today-count-subtree
+                                   (format "%s / %s"
+                                           org-clock-today-subtree-time
+                                           org-clock-today-buffer-time)
+                                 (format "%s" org-clock-today-buffer-time))
+                             "")
+                           (if org-onit--auto-clocking " Auto " "")
+                           org-mode-line-string))))
+#+end_src
+
+** 表示に動きをつける
+
+タイトルバーの表示に少し動きをつけたい場合は， =(org-onit-get-sign)= の戻り値を使ってください．アニメーション表示になります．表示要素は， =org-onit-clocking-sign-alist= を設定すれば自由に変えられます．
+
+#+begin_export html
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/7861d43f-ea78-95f9-40c1-bb0f4c5dcc71.gif" alt="Untitled1.gif" /></p>
+#+end_export
+
+#+begin_src emacs-lisp
+(setq org-clock-frame-title-format
+          '((:eval (format "%s%s |%s|%s"
+                           (if (and (require 'org-clock-today nil t)
+                                    org-clock-today-mode)
+                               (if org-clock-today-count-subtree
+                                   (format "%s / %s"
+                                           org-clock-today-subtree-time
+                                           org-clock-today-buffer-time)
+                                 (format "%s" org-clock-today-buffer-time))
+                             "")
+                           (if org-onit--auto-clocking " Auto " "")
+                           (org-onit-get-sign)
+                           org-mode-line-string))))
+#+end_src
+
+* その他のオプション
+
+いくつかのユーザ設定変数があります．基本的な挙動は， =org-onit-basic-options= にて変更できます．必要に応じて変更してください．
+
+** Variables
+
+| 変数名                              | デフォルト値                            |
+|-------------------------------------+-----------------------------------------|
+| org-onit-todo-state                 | org-clock-in-switch-to-state or "TODO"  |
+| org-onit-doing-tag                  | "Doing"                                 |
+| org-onit-basic-options              | '(:wakeup nil :nostate nil :unfold nil) |
+| org-onit-keep-no-state              | t                                       |
+| org-onit-encure-clock-out-when-exit | t                                       |
+| org-onit-bookmark                   | org-onit-last-clock-in                  |
+| org-onit-bookmark-anchor            | org-onit-anchor                         |
+| org-onit-clocking-sign-alist        | '("▁" "▂" "▃" "▄" "▅" "▆" "▇" ... "▁")  |
+
+ブックマーク関連は，万が一他のパッケージと衝突した場合に変えてください．
+
+=org-onit-basic-options= で制御できるオプションは，次の3つです．
+ - ~:wakeup~ TODO state が =DONE= の時に， =TODO= に変えて計測を開始します
+ - ~:nostate~ TODO state が付いていない heading でも計測を開始します
+ - ~:unfold~ heading を unfold した時に，計測を開始します
+
+=org-onit-basic-options= はバッファローカル変数なので，グローバルに設定を変えたい場合は， ~setq-default~ を用いてください．
+
+なお， =org-onit-keep-no-state= は， =org-onit-basic-options= の ~:nostate~ よりも優先され，Non-nil の場合に TODO state が付いていない heading の TODO state の変更を防止します．
+
+** Hooks
+
+いくつかの hook を準備してあります．特に =org-onit-after-jump-hook= を設定すると，計測中の heading にジャンプした後の挙動を変更できます．
+
+ - =org-onit-switch-task-hook= 全自動モード時に，計測対象の heading が切り替わるタイミングで呼ばれます．
+ - =org-onit-start-autoclock-hook= 全自動モードの開始時に呼ばれます．
+ - =org-onit-stop-autoclock-hook= 全自動モードの終了時に呼ばれます．
+ - =org-onit-after-jump-hook= ブックマークでジャンプした後で呼ばれます．
+
+#+begin_src emacs-lisp
+;; org-onit-after-jump-hook にぶら下げる拡張関数の例
+(defun my-onit-reveal ()
+  (org-reveal)
+  (org-cycle-hide-drawers 'all)
+  (org-show-entry)
+  (show-children)
+  (org-show-siblings))
+(add-hook 'org-onit-after-jump-hook #'my-onit-reveal)
+#+end_src
+
+* まとめ
+
+本記事では，拙作の [[https://github.com/takaxp/org-onit][org-onit.el]] を導入して， =Org mode= の工数計測を半自動化する方法についてまとめました．
+
+Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウトライン編集」と「作業中のタスク・工数管理」の双方を同時に実行し，かつ，それらを Emacs Org mode だけで完結させることが可能です．ぜひお試しください．
+
+* References
+
+ - [[https://github.com/alphapapa/org-bookmark-heading][alphapapa/org-bookmark-heading: Emacs bookmark support for Org-mode]]
+ - [[https://github.com/mallt/org-clock-today-mode][mallt/org-clock-today-mode: Emacs minor mode to show the total clocked time of the current day in the mode line]]
+ - [[https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d][org-clock-in を意識しないで作業時間を記録する - Qiita]]
+ - [[https://qiita.com/takaxp/items/4dfa11a81e18b29143ec][「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita]]
+
+* おまけ
+
+本記事の課題に対して以前に，[[https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d][org-clock-in を意識しないで作業時間を記録する - Qiita]]にて， =org-clock-in= の自動化を試しました．この時は [[https://github.com/takaxp/org-tree-slide][org-tree-slide.el]] を用いて narrowing をトリガーに計測を自動化しましたが，設定が少々複雑でした．また，[[https://qiita.com/takaxp/items/4dfa11a81e18b29143ec][「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita]] も書きましたが，この記事では短期集中したいタスク群を Doingタグで串刺しにしておくのが目的でした．今回はごく単純に， ~Doing~ が付いているタスクが今集中したいタスクということで，以前よりも運用しやすくなった気がします．
+
