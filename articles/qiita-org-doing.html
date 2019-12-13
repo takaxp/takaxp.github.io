@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-12-14 Sat 08:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>簡略フローで doing 再び</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Takaaki ISHIKAWA" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">簡略フローで doing 再び</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7c1ed4d">1. はじめに</a></li>
+<li><a href="#orgb57116a">2. 計測開始を自動化・半自動化する</a></li>
+<li><a href="#org0dc1d0c">3. インストールと設定</a>
+<ul>
+<li><a href="#org82e13f2">3.1. インストール</a></li>
+<li><a href="#orgda635a2">3.2. 推奨追加パッケージ</a>
+<ul>
+<li><a href="#orgcd14747">3.2.1. org-bookmark-heading.el</a></li>
+<li><a href="#orgcd032f3">3.2.2. org-clock-today.el</a></li>
+</ul>
+</li>
+<li><a href="#orge261376">3.3. 基本設定</a></li>
+<li><a href="#org1b1cd98">3.4. キーバインド</a></li>
+</ul>
+</li>
+<li><a href="#org227f74f">4. 基本的な使い方</a>
+<ul>
+<li><a href="#org429aa6d">4.1. 半自動で計測開始する</a></li>
+<li><a href="#orgb484cbd">4.2. 全自動で計測開始する</a></li>
+<li><a href="#org0e20cec">4.3. 計測中の heading と編集中のバッファを往復する</a></li>
+</ul>
+</li>
+<li><a href="#orgb076658">5. ビジュアルフィードバック</a>
+<ul>
+<li><a href="#orgcb97f28">5.1. 集計時間の表示</a></li>
+<li><a href="#org3c672e4">5.2. 表示に動きをつける</a></li>
+</ul>
+</li>
+<li><a href="#orga4c60e1">6. その他のオプション</a>
+<ul>
+<li><a href="#org4a3c3be">6.1. Variables</a></li>
+<li><a href="#orgd622f48">6.2. Hooks</a></li>
+</ul>
+</li>
+<li><a href="#orgcb5bf3a">7. まとめ</a></li>
+<li><a href="#org2b8f4cb">8. References</a></li>
+<li><a href="#orgc0bc1f7">9. おまけ</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7c1ed4d" class="outline-2">
+<h2 id="org7c1ed4d"><span class="section-number-2">1</span> はじめに</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>Emacs Org mode</code> には，工数を計測するための機能が標準で備わっています．基本的な使い方は，時間を計測したいタスクで <code>M-x org-clock-in</code> して，作業を終えたら <code>M-x org-clock-out</code> する操作です．そうして記録した各タスクの計測時間は，後から簡単に集計でき，表として出力できるため，工数記録とレポート作成に重宝しているユーザも多いようです．<br />
+</p>
+
+<p>
+そんな便利な計測機能ですが，避けられない欠点があります．それは <b>org-clock-in し忘れる</b> ことです．記録を開始しなければ，記録されることはない&#x2026;<br />
+</p>
+
+<p>
+そこで本記事は， <code>org-clock-in</code> と <code>org-clock-out</code> を可能な限り自動化するためのパッケージと設定を紹介します．ポイントは， <b>Doingタグの付いたタスクを，Emacs全体で1つに維持</b> して，「Doingタグが付いたタスク」= 「計測中のタスク」にすることです．<br />
+</p>
+
+<p>
+なおこの記事は <a href="https://orgmode.org/">Org mode</a> で書かれており，ソースも<a href="https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-org-doing.org">公開</a>しています．また本記事以外の<a href="https://takaxp.github.io/init.html">設定集</a>も公開しています．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb57116a" class="outline-2">
+<h2 id="orgb57116a"><span class="section-number-2">2</span> 計測開始を自動化・半自動化する</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+「 <b>org-clock-in</b> し忘れる？なら常に記録すれば良いじゃんか」と，結論を安直に導くことも可能ですが，実際の運用はそう簡単ではありません．なぜなら，Org modeの各 heading は，常に計測を目的としている heading とは限らないためです．計測対象ではない単なるメモも同じバッファに存在しえます．そしてやはり理想的なのは，「自分は今からこのタスクに集中する」と確定したものだけを計測・記録することです．<br />
+</p>
+
+<p>
+そう考えると，本当に必要なのは「空気を読んで <b>org-clock-in</b> を実行してくれるツール」になります．そんなのあるの？ないの？ということで，作りました．なお，<a href="https://qiita.com/takaxp/items/a5a3383d7358c58240d0">スピードコマンド</a>を有効にしている場合は， <code>I</code> (org-clock-in) と <code>O</code> (org-clock-out) の押下で済ませることができます．ただし「忘れる問題」は解決しません．<br />
+</p>
+
+<p>
+&gt; <a href="https://github.com/takaxp/org-onit">takaxp/org-onit: Recording your task all the time</a><br />
+</p>
+
+<p>
+このツールを使えば，<br />
+</p>
+<ul class="org-ul">
+<li>シングルアクションで <b>org-clock-in</b> と <b>org-clock-out</b> を実行<br />
+<ul class="org-ul">
+<li>トグルコマンド(<code>org-onit-toggle-doing</code>)の提供<br /></li>
+<li>Unfold（ heading のコンテンツを <code>&lt;tab&gt;</code> で開く）したら <b>org-clock-in</b> の発行<br /></li>
+</ul></li>
+<li>所定の条件を満たす heading に移動したら，自動的に <b>org-clock-in</b> を発行<br /></li>
+</ul>
+<p>
+を実現できます．これで <code>org-clock-in</code> のし忘れは大幅に減るでしょう．<br />
+</p>
+
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/a703b7e3-1f6d-4054-1329-a03a16c967a4.png" /></p>
+
+<p>
+さらに，最も可能性の高い使い方として「ある heading で工数計測をしながら，他の heading の内容を編集する」という作業スタイルが考えられます．この場合は，計測中の heading と編集中の heading を簡単に往復できると幸せになれるので， <code>org-onit.el</code> は， <code>org-clock-goto</code> を発行した場所にすぐ戻るためのコマンド(<code>org-onit-goto-anchor</code>)も実装しています．<br />
+</p>
+
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/607adbfb-2902-712c-b87b-479d79aad9e6.png" /></p>
+</div>
+</div>
+
+<div id="outline-container-org0dc1d0c" class="outline-2">
+<h2 id="org0dc1d0c"><span class="section-number-2">3</span> インストールと設定</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org82e13f2" class="outline-3">
+<h3 id="org82e13f2"><span class="section-number-3">3.1</span> インストール</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+いつものようにダウンロードして <code>load-path</code> に配置してください．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org"</span>
+  (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-onit</span> nil t))
+</pre>
+</div>
+
+<p>
+としておけば，確実に読み込まれるでしょう．<br />
+</p>
+
+<p>
+<code>package.el</code> などのパッケージ管理ツールを使用している場合は，特に <code>require</code> せずとも大丈夫です．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgda635a2" class="outline-3">
+<h3 id="orgda635a2"><span class="section-number-3">3.2</span> 推奨追加パッケージ</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-orgcd14747" class="outline-4">
+<h4 id="orgcd14747"><span class="section-number-4">3.2.1</span> org-bookmark-heading.el</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+ビルトインではないパッケージへの依存として<a href="https://github.com/alphapapa/org-bookmark-heading">org-bookmark-heading.el</a>を想定してます．インストールしなくても動作します．ただ，ブックマークの精度を向上させる効果があるため，導入をおすすめします．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcd032f3" class="outline-4">
+<h4 id="orgcd032f3"><span class="section-number-4">3.2.2</span> org-clock-today.el</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+標準の工数計測では，あるタスクについての「過去費やした累計時間」を簡単にタイトルバーに表示できますが， <code>org-clock-today.el</code> を使うと，さらに2種類の <b>本日費やした合計時間</b> を集計してタイトルバー（或いはモードライン）に出すことができます．こちらのパッケージも必須ではないです<br />
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/takaxp/org-clock-today-mode">https://github.com/takaxp/org-clock-today-mode</a> (機能強化版・PR中)<br />
+<ul class="org-ul">
+<li>PR回収(2019-09-10)されましたので，本家をインストールしてください．<br /></li>
+<li><a href="https://github.com/mallt/org-clock-today-mode">https://github.com/mallt/org-clock-today-mode</a> (本家)<br /></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge261376" class="outline-3">
+<h3 id="orge261376"><span class="section-number-3">3.3</span> 基本設定</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+<code>org-onit.el</code> についてはほぼ設定無しで使えると思います．<br />
+</p>
+
+<p>
+むしろ，工数計測の機能を提供する <code>org-clock.el</code> の設定が必要になります．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org-clock"</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">1&#20998;&#26410;&#28288;&#12399;&#35352;&#37682;&#12375;&#12394;&#12356;</span>
+  (<span style="color: #a020f0;">setq</span> org-clock-out-remove-zero-time-clocks t)
+
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">org-clock &#12398;&#35336;&#28204;&#26178;&#38291;&#12434;&#12514;&#12540;&#12489;&#12521;&#12452;&#12531;&#12391;&#12399;&#12394;&#12367;&#12479;&#12452;&#12488;&#12523;&#12395;&#34920;&#31034;&#12377;&#12427;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">'both &#12395;&#12377;&#12427;&#12392;&#65292;&#12514;&#12540;&#12489;&#12521;&#12452;&#12531;&#12392;&#12479;&#12488;&#12523;&#12496;&#12540;&#12398;&#20001;&#26041;&#12395;&#34920;&#31034;&#12373;&#12428;&#12427;</span>
+  (<span style="color: #a020f0;">setq</span> org-clock-clocked-in-display 'frame-title)
+
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">"Doing" &#12479;&#12464;&#12398;&#33394;&#12434;&#35211;&#12420;&#12377;&#12356;&#22793;&#12360;&#12427;</span>
+  (add-to-list 'org-tag-faces '(<span style="color: #8b2252;">"Doing"</span> <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #FF0000;">#FF0000</span><span style="color: #8b2252;">"</span>))
+
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12479;&#12452;&#12488;&#12523;&#12395;&#34920;&#31034;&#12377;&#12427;&#25991;&#23383;&#21015;&#12398;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;&#65288;&#20363;&#65289;</span>
+  (<span style="color: #a020f0;">setq</span> org-clock-frame-title-format
+        '((<span style="color: #483d8b;">:eval</span> (format <span style="color: #8b2252;">"%s|%s| %s"</span>
+                         (<span style="color: #a020f0;">if</span> org-onit--auto-clocking <span style="color: #8b2252;">"Auto "</span> <span style="color: #8b2252;">""</span>)
+                         (org-onit-get-sign)
+                         org-mode-line-string)))))
+</pre>
+</div>
+
+<p>
+加えて heading の <code>&lt;tab&gt;</code> 押下で <code>clock-in</code> できるようにします．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org"</span>
+  (add-hook 'org-cycle-hook #'org-onit-clock-in-when-unfold))
+</pre>
+</div>
+
+<p>
+また，計測中のタスクに集中したいという目的から <code>narrowing</code> を使いたい場合がありますので，<a href="https://qiita.com/takaxp/items/a5a3383d7358c58240d0">スピードコマンド</a>を有効にしておきましょう．heading で <code>s</code> 押下すると， <code>narrowing</code> と <code>widen</code> をトグルできます．また， <code>d</code> 押下で <code>DONE</code> にする設定も加えるとよいでしょう．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org"</span>
+  (<span style="color: #a020f0;">setq</span> org-use-speed-commands t)
+  (add-to-list 'org-speed-commands-user '(<span style="color: #8b2252;">"d"</span> org-todo <span style="color: #8b2252;">"</span><span style="color: #2e8b57;">DONE</span><span style="color: #8b2252;">"</span>)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1b1cd98" class="outline-3">
+<h3 id="org1b1cd98"><span class="section-number-3">3.4</span> キーバインド</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+デフォルトの設定は定められていませんが，次を推奨しています．自由に変更してください．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-&lt;f11&gt;"</span>) 'org-clock-goto)
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org"</span>
+  (define-key org-mode-map (kbd <span style="color: #8b2252;">"&lt;f11&gt;"</span>) 'org-onit-toggle-doing)
+  (define-key org-mode-map (kbd <span style="color: #8b2252;">"M-&lt;f11&gt;"</span>) 'org-onit-toggle-auto)
+  (define-key org-mode-map (kbd <span style="color: #8b2252;">"S-&lt;f11&gt;"</span>) 'org-onit-goto-anchor))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org227f74f" class="outline-2">
+<h2 id="org227f74f"><span class="section-number-2">4</span> 基本的な使い方</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+使い方は，半自動で <code>org-clock-in</code> するか？と，全自動で <code>org-clock-in</code> するか？で分かれます．以下の説明は，上記の推奨キーバインドを適用していることを前提として書かれています．<br />
+</p>
+</div>
+
+<div id="outline-container-org429aa6d" class="outline-3">
+<h3 id="org429aa6d"><span class="section-number-3">4.1</span> 半自動で計測開始する</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+計測を開始したい heading で <code>&lt;f11&gt;</code> を押下（或いは <code>M-x org-onit-toggle-doing</code> ）します．見出し行にカーソルが無くても大丈夫です．<br />
+</p>
+
+<p>
+デフォルトでは，すでに <code>DONE</code> の heading では計測開始しませんが， <code>org-onit-basic-options</code> で <code>'(:wakeup both)</code> または <code>'(:wakeup doing)</code> に設定している場合には計測開始します．<br />
+</p>
+
+<p>
+さらに， <code>'(:unfold t)</code> を設定している場合に限り， <code>&lt;tab&gt;</code> 押下で heading を unfold することで計測を開始します．ただし， <code>:wakeup</code> と <code>:nostate</code> の値が優先されます．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb484cbd" class="outline-3">
+<h3 id="orgb484cbd"><span class="section-number-3">4.2</span> 全自動で計測開始する</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+<code>S-&lt;f11&gt;</code> 押下（或いは， <code>M-x org-onit-toggle-auto</code> ）します．それ以降，heading を訪問だけで，自動的に計測が開始されます．<br />
+</p>
+
+<p>
+<code>org-onit-basic-options</code> で <code>'(:wakeup nil)</code> または <code>'(:wakeup doing)</code> を設定していると， heading が <code>DONE</code> である場合には発動しません．また， <code>'(:nostate nil)</code> または <code>'(:nostate doing)</code> の場合， <code>TODO</code> 等の todo state が設定されていない heading では発動しません．<br />
+</p>
+
+<p>
+なお全自動モードでは，内部的にすべての操作について「計測開始するか？」を判定しているので，環境によっては重く感じるかもしれません．その場合は，半自動のアプローチを利用してください．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0e20cec" class="outline-3">
+<h3 id="org0e20cec"><span class="section-number-3">4.3</span> 計測中の heading と編集中のバッファを往復する</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Org mode に慣れてくると，タスクリストを特定の heading に集約し，編集作業そのものは他のバッファやファイルで実施するパターンが増えると思います．<br />
+</p>
+
+<p>
+その場合は，作業時間を計測している heading と，実際に編集作業しているバッファを簡単に往復できると便利です．<br />
+</p>
+
+<p>
+フローの一例として，<br />
+</p>
+<ol class="org-ol">
+<li>ある heading で <code>&lt;f11&gt;</code> 押下，計測開始<br /></li>
+<li>任意のバッファに移動して作業<br /></li>
+<li>計測している heading にメモを残したい（ <code>C-&lt;f11&gt;</code> (or <code>M-x org-clock-goto</code>) で計測中の heading に移動）<br /></li>
+<li>メモを取り終えたので，元のバッファに戻りたい（ <code>S-&lt;f11&gt;</code> (or <code>M-x org-onit-goto-anchor</code>) で作業中の heading に移動）<br /></li>
+</ol>
+<p>
+が考えられます．<br />
+</p>
+
+<p>
+この間，継続して作業時間が計測されます．<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb076658" class="outline-2">
+<h2 id="orgb076658"><span class="section-number-2">5</span> ビジュアルフィードバック</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+計測後に表に計測結果をまとめるのとは別に，計測状況をリアルタイムに表示して確認できます．特に，一日に積み重ねた作業時間を確認できれば，計測時間が <code>08:00</code> を超える辺りで，おもむろにビールを飲み始めてもいいかもしれません．<br />
+</p>
+</div>
+
+<div id="outline-container-orgcb97f28" class="outline-3">
+<h3 id="orgcb97f28"><span class="section-number-3">5.1</span> 集計時間の表示</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+モードラインやタイトルバーに，あるタスクについて「過去費やした累計時間」や，バッファ内の全タスクから集計した，或いは，あるタスクのサブ heading から集計した「本日費やした合計時間」を表示できます．<br />
+</p>
+
+<p>
+次の「本日費やした時間」は， <code>org-clock-today.el</code> を導入することで集計できます．<br />
+</p>
+<ul class="org-ul">
+<li>（バッファ内の全タスクから集計した）「本日費やした時間」<br /></li>
+<li>（あるタスクのサブ heading から集計した）「本日費やした時間」<br /></li>
+</ul>
+
+<p>
+あるタスクの「過去費やした累計時間」はデフォルトで集計されています．<br />
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">集計項目</th>
+<th scope="col" class="org-left">変数名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">過去費やした累計時間</td>
+<td class="org-left">org-mode-line-string</td>
+</tr>
+
+<tr>
+<td class="org-left">本日費やした時間（バッファ内全て）</td>
+<td class="org-left">org-clock-today-subtree-time</td>
+</tr>
+
+<tr>
+<td class="org-left">本日費やした時間（サブ heading 限定）</td>
+<td class="org-left">org-clock-today-buffer-time</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+これらの変数を使って <code>org-clock-frame-title-format</code> をカスタマイズすると，タイトルバーの表示を変えられます．<br />
+</p>
+
+<p>
+例えば，こうです．<br />
+</p>
+
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/051d8175-5781-3ab2-103c-0f1d09f82637.png" alt="Screen_Shot_2019-08-30_at_3_39_02.png" /></p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-clock-frame-title-format
+          '((<span style="color: #483d8b;">:eval</span> (format <span style="color: #8b2252;">"%s%s %s"</span>
+                           (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">and</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-clock-today</span> nil t)
+                                    org-clock-today-mode)
+                               (<span style="color: #a020f0;">if</span> org-clock-today-count-subtree
+                                   (format <span style="color: #8b2252;">"%s / %s"</span>
+                                           org-clock-today-subtree-time
+                                           org-clock-today-buffer-time)
+                                 (format <span style="color: #8b2252;">"%s"</span> org-clock-today-buffer-time))
+                             <span style="color: #8b2252;">""</span>)
+                           (<span style="color: #a020f0;">if</span> org-onit--auto-clocking <span style="color: #8b2252;">" Auto "</span> <span style="color: #8b2252;">""</span>)
+                           org-mode-line-string))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3c672e4" class="outline-3">
+<h3 id="org3c672e4"><span class="section-number-3">5.2</span> 表示に動きをつける</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+タイトルバーの表示に少し動きをつけたい場合は， <code>(org-onit-get-sign)</code> の戻り値を使ってください．アニメーション表示になります．表示要素は， <code>org-onit-clocking-sign-alist</code> を設定すれば自由に変えられます．<br />
+</p>
+
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/7861d43f-ea78-95f9-40c1-bb0f4c5dcc71.gif" alt="Untitled1.gif" /></p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-clock-frame-title-format
+          '((<span style="color: #483d8b;">:eval</span> (format <span style="color: #8b2252;">"%s%s |%s|%s"</span>
+                           (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">and</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-clock-today</span> nil t)
+                                    org-clock-today-mode)
+                               (<span style="color: #a020f0;">if</span> org-clock-today-count-subtree
+                                   (format <span style="color: #8b2252;">"%s / %s"</span>
+                                           org-clock-today-subtree-time
+                                           org-clock-today-buffer-time)
+                                 (format <span style="color: #8b2252;">"%s"</span> org-clock-today-buffer-time))
+                             <span style="color: #8b2252;">""</span>)
+                           (<span style="color: #a020f0;">if</span> org-onit--auto-clocking <span style="color: #8b2252;">" Auto "</span> <span style="color: #8b2252;">""</span>)
+                           (org-onit-get-sign)
+                           org-mode-line-string))))
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga4c60e1" class="outline-2">
+<h2 id="orga4c60e1"><span class="section-number-2">6</span> その他のオプション</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+いくつかのユーザ設定変数があります．基本的な挙動は， <code>org-onit-basic-options</code> にて変更できます．必要に応じて変更してください．<br />
+</p>
+</div>
+
+<div id="outline-container-org4a3c3be" class="outline-3">
+<h3 id="org4a3c3be"><span class="section-number-3">6.1</span> Variables</h3>
+<div class="outline-text-3" id="text-6-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">変数名</th>
+<th scope="col" class="org-left">デフォルト値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">org-onit-todo-state</td>
+<td class="org-left">org-clock-in-switch-to-state or "TODO"</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-doing-tag</td>
+<td class="org-left">"Doing"</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-basic-options</td>
+<td class="org-left">'(:wakeup nil :nostate nil :unfold nil)</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-keep-no-state</td>
+<td class="org-left">t</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-encure-clock-out-when-exit</td>
+<td class="org-left">t</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-bookmark</td>
+<td class="org-left">org-onit-last-clock-in</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-bookmark-anchor</td>
+<td class="org-left">org-onit-anchor</td>
+</tr>
+
+<tr>
+<td class="org-left">org-onit-clocking-sign-alist</td>
+<td class="org-left">'("▁" "▂" "▃" "▄" "▅" "▆" "▇" &#x2026; "▁")</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+ブックマーク関連は，万が一他のパッケージと衝突した場合に変えてください．<br />
+</p>
+
+<p>
+<code>org-onit-basic-options</code> で制御できるオプションは，次の3つです．<br />
+</p>
+<ul class="org-ul">
+<li><code>:wakeup</code> TODO state が <code>DONE</code> の時に， <code>TODO</code> に変えて計測を開始します<br /></li>
+<li><code>:nostate</code> TODO state が付いていない heading でも計測を開始します<br /></li>
+<li><code>:unfold</code> heading を unfold した時に，計測を開始します<br /></li>
+</ul>
+
+<p>
+<code>org-onit-basic-options</code> はバッファローカル変数なので，グローバルに設定を変えたい場合は， <code>setq-default</code> を用いてください．<br />
+</p>
+
+<p>
+なお， <code>org-onit-keep-no-state</code> は， <code>org-onit-basic-options</code> の <code>:nostate</code> よりも優先され，Non-nil の場合に TODO state が付いていない heading の TODO state の変更を防止します．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd622f48" class="outline-3">
+<h3 id="orgd622f48"><span class="section-number-3">6.2</span> Hooks</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+いくつかの hook を準備してあります．特に <code>org-onit-after-jump-hook</code> を設定すると，計測中の heading にジャンプした後の挙動を変更できます．<br />
+</p>
+
+<ul class="org-ul">
+<li><code>org-onit-switch-task-hook</code> 全自動モード時に，計測対象の heading が切り替わるタイミングで呼ばれます．<br /></li>
+<li><code>org-onit-start-autoclock-hook</code> 全自動モードの開始時に呼ばれます．<br /></li>
+<li><code>org-onit-stop-autoclock-hook</code> 全自動モードの終了時に呼ばれます．<br /></li>
+<li><code>org-onit-after-jump-hook</code> ブックマークでジャンプした後で呼ばれます．<br /></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">org-onit-after-jump-hook &#12395;&#12406;&#12425;&#19979;&#12370;&#12427;&#25313;&#24373;&#38306;&#25968;&#12398;&#20363;</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-onit-reveal</span> ()
+  (org-reveal)
+  (org-cycle-hide-drawers 'all)
+  (org-show-entry)
+  (show-children)
+  (org-show-siblings))
+(add-hook 'org-onit-after-jump-hook #'my-onit-reveal)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcb5bf3a" class="outline-2">
+<h2 id="orgcb5bf3a"><span class="section-number-2">7</span> まとめ</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+本記事では，拙作の <a href="https://github.com/takaxp/org-onit">org-onit.el</a> を導入して， <code>Org mode</code> の工数計測を半自動化する方法についてまとめました．<br />
+</p>
+
+<p>
+Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウトライン編集」と「作業中のタスク・工数管理」の双方を同時に実行し，かつ，それらを Emacs Org mode だけで完結させることが可能です．ぜひお試しください．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2b8f4cb" class="outline-2">
+<h2 id="org2b8f4cb"><span class="section-number-2">8</span> References</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li><a href="https://github.com/alphapapa/org-bookmark-heading">alphapapa/org-bookmark-heading: Emacs bookmark support for Org-mode</a><br /></li>
+<li><a href="https://github.com/mallt/org-clock-today-mode">mallt/org-clock-today-mode: Emacs minor mode to show the total clocked time of the current day in the mode line</a><br /></li>
+<li><a href="https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d">org-clock-in を意識しないで作業時間を記録する - Qiita</a><br /></li>
+<li><a href="https://qiita.com/takaxp/items/4dfa11a81e18b29143ec">「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita</a><br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc0bc1f7" class="outline-2">
+<h2 id="orgc0bc1f7"><span class="section-number-2">9</span> おまけ</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+本記事の課題に対して以前に，<a href="https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d">org-clock-in を意識しないで作業時間を記録する - Qiita</a>にて， <code>org-clock-in</code> の自動化を試しました．この時は <a href="https://github.com/takaxp/org-tree-slide">org-tree-slide.el</a> を用いて narrowing をトリガーに計測を自動化しましたが，設定が少々複雑でした．また，<a href="https://qiita.com/takaxp/items/4dfa11a81e18b29143ec">「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita</a> も書きましたが，この記事では短期集中したいタスク群を Doingタグで串刺しにしておくのが目的でした．今回はごく単純に， <code>Doing</code> が付いているタスクが今集中したいタスクということで，以前よりも運用しやすくなった気がします．<br />
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Takaaki ISHIKAWA</p>
+<p class="date">Created: 2019-12-14 Sat 08:08</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
