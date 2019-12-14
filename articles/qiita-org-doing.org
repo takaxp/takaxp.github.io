@@ -1,4 +1,5 @@
 #+title: 簡略フローで doing 再び
+#+options: auto-id:t
 #+setupfile: theme-readtheorg.setup
 #+html_head: <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 #+startup: content
@@ -15,12 +16,14 @@
   :PROPERTIES:
   :CREATED:  [2019-07-29 Mon 17:19]
   :ID:       D98D9E1B-20AC-4D50-AC43-42E4F2F9F1F2
+  :CUSTOM_ID: org83b27419
   :END:
 ** DONE ドラフティング
     CLOSED: [2019-08-30 Fri 04:06]
     :PROPERTIES:
     :ID:       1AFE84D8-7023-4CBC-A131-BA7CC4B214F7
     :CREATED:  [2019-08-29 Thu 21:32]
+    :CUSTOM_ID: org827973ac
     :END:
  - [X] 構成を変更
  - [X] 追加タスクの確認
@@ -28,6 +31,7 @@
     CLOSED: [2019-08-30 Fri 04:06]
     :PROPERTIES:
     :ID:       451927E4-40B5-42D3-8525-BFDFDAF54084
+    :CUSTOM_ID: orgeeb260c0
     :END:
     :LOGBOOK:
     CLOCK: [2019-08-30 Fri 05:54]--[2019-08-30 Fri 07:15] =>  1:21
@@ -35,6 +39,9 @@
     CLOCK: [2019-08-29 Thu 21:31]--[2019-08-29 Thu 21:32] =>  0:01
     :END:
 * はじめに
+  :PROPERTIES:
+  :CUSTOM_ID: org51e7c4b3
+  :END:
 
 ~Emacs Org mode~ には，工数を計測するための機能が標準で備わっています．基本的な使い方は，時間を計測したいタスクで =M-x org-clock-in= して，作業を終えたら =M-x org-clock-out= する操作です．そうして記録した各タスクの計測時間は，後から簡単に集計でき，表として出力できるため，工数記録とレポート作成に重宝しているユーザも多いようです．
 
@@ -45,6 +52,9 @@
 なおこの記事は [[https://orgmode.org/][Org mode]] で書かれており，ソースも[[https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-org-doing.org][公開]]しています．また本記事以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．
 
 * 計測開始を自動化・半自動化する
+  :PROPERTIES:
+  :CUSTOM_ID: org026ac0fb
+  :END:
 
 「 *org-clock-in* し忘れる？なら常に記録すれば良いじゃんか」と，結論を安直に導くことも可能ですが，実際の運用はそう簡単ではありません．なぜなら，Org modeの各 heading は，常に計測を目的としている heading とは限らないためです．計測対象ではない単なるメモも同じバッファに存在しえます．そしてやはり理想的なのは，「自分は今からこのタスクに集中する」と確定したものだけを計測・記録することです．
 
@@ -70,7 +80,13 @@
 #+end_export
 
 * インストールと設定
+  :PROPERTIES:
+  :CUSTOM_ID: org7a8872db
+  :END:
 ** インストール
+   :PROPERTIES:
+   :CUSTOM_ID: org70d214f4
+   :END:
 いつものようにダウンロードして =load-path= に配置してください．
 
 #+begin_src emacs-lisp
@@ -83,11 +99,20 @@
 =package.el= などのパッケージ管理ツールを使用している場合は，特に =require= せずとも大丈夫です．
 
 ** 推奨追加パッケージ
+   :PROPERTIES:
+   :CUSTOM_ID: org73cbe8dc
+   :END:
 *** org-bookmark-heading.el
+    :PROPERTIES:
+    :CUSTOM_ID: org81ea9bbf
+    :END:
 
 ビルトインではないパッケージへの依存として[[https://github.com/alphapapa/org-bookmark-heading][org-bookmark-heading.el]]を想定してます．インストールしなくても動作します．ただ，ブックマークの精度を向上させる効果があるため，導入をおすすめします．
 
 *** org-clock-today.el
+    :PROPERTIES:
+    :CUSTOM_ID: org6a533b11
+    :END:
 
 標準の工数計測では，あるタスクについての「過去費やした累計時間」を簡単にタイトルバーに表示できますが， ~org-clock-today.el~ を使うと，さらに2種類の *本日費やした合計時間* を集計してタイトルバー（或いはモードライン）に出すことができます．こちらのパッケージも必須ではないです
 
@@ -96,6 +121,9 @@
     - https://github.com/mallt/org-clock-today-mode (本家)
 
 ** 基本設定
+   :PROPERTIES:
+   :CUSTOM_ID: orga5dfcca5
+   :END:
 
 =org-onit.el= についてはほぼ設定無しで使えると思います．
 
@@ -137,6 +165,9 @@
 #+end_src
 
 ** キーバインド
+   :PROPERTIES:
+   :CUSTOM_ID: org0136d707
+   :END:
 
 デフォルトの設定は定められていませんが，次を推奨しています．自由に変更してください．
 
@@ -149,10 +180,16 @@
 #+end_src
 
 * 基本的な使い方
+  :PROPERTIES:
+  :CUSTOM_ID: org854482f7
+  :END:
 
 使い方は，半自動で ~org-clock-in~ するか？と，全自動で ~org-clock-in~ するか？で分かれます．以下の説明は，上記の推奨キーバインドを適用していることを前提として書かれています．
 
 ** 半自動で計測開始する
+   :PROPERTIES:
+   :CUSTOM_ID: org28976be5
+   :END:
 
 計測を開始したい heading で =<f11>= を押下（或いは =M-x org-onit-toggle-doing= ）します．見出し行にカーソルが無くても大丈夫です．
 
@@ -161,6 +198,9 @@
 さらに， ='(:unfold t)= を設定している場合に限り， =<tab>= 押下で heading を unfold することで計測を開始します．ただし， =:wakeup= と =:nostate= の値が優先されます．
 
 ** 全自動で計測開始する
+   :PROPERTIES:
+   :CUSTOM_ID: orga500e539
+   :END:
 
 =S-<f11>= 押下（或いは， =M-x org-onit-toggle-auto= ）します．それ以降，heading を訪問だけで，自動的に計測が開始されます．
 
@@ -169,6 +209,9 @@
 なお全自動モードでは，内部的にすべての操作について「計測開始するか？」を判定しているので，環境によっては重く感じるかもしれません．その場合は，半自動のアプローチを利用してください．
 
 ** 計測中の heading と編集中のバッファを往復する
+   :PROPERTIES:
+   :CUSTOM_ID: org249dfcfa
+   :END:
 
 Org mode に慣れてくると，タスクリストを特定の heading に集約し，編集作業そのものは他のバッファやファイルで実施するパターンが増えると思います．
 
@@ -184,10 +227,16 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 この間，継続して作業時間が計測されます．
 
 * ビジュアルフィードバック
+  :PROPERTIES:
+  :CUSTOM_ID: orge7baeca2
+  :END:
 
 計測後に表に計測結果をまとめるのとは別に，計測状況をリアルタイムに表示して確認できます．特に，一日に積み重ねた作業時間を確認できれば，計測時間が =08:00= を超える辺りで，おもむろにビールを飲み始めてもいいかもしれません．
 
 ** 集計時間の表示
+   :PROPERTIES:
+   :CUSTOM_ID: orgab011531
+   :END:
 
 モードラインやタイトルバーに，あるタスクについて「過去費やした累計時間」や，バッファ内の全タスクから集計した，或いは，あるタスクのサブ heading から集計した「本日費やした合計時間」を表示できます．
 
@@ -227,6 +276,9 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 #+end_src
 
 ** 表示に動きをつける
+   :PROPERTIES:
+   :CUSTOM_ID: org6952b254
+   :END:
 
 タイトルバーの表示に少し動きをつけたい場合は， =(org-onit-get-sign)= の戻り値を使ってください．アニメーション表示になります．表示要素は， =org-onit-clocking-sign-alist= を設定すれば自由に変えられます．
 
@@ -251,10 +303,16 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 #+end_src
 
 * その他のオプション
+  :PROPERTIES:
+  :CUSTOM_ID: orgaafdda15
+  :END:
 
 いくつかのユーザ設定変数があります．基本的な挙動は， =org-onit-basic-options= にて変更できます．必要に応じて変更してください．
 
 ** Variables
+   :PROPERTIES:
+   :CUSTOM_ID: org3de91e74
+   :END:
 
 | 変数名                              | デフォルト値                            |
 |-------------------------------------+-----------------------------------------|
@@ -279,6 +337,9 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 なお， =org-onit-keep-no-state= は， =org-onit-basic-options= の ~:nostate~ よりも優先され，Non-nil の場合に TODO state が付いていない heading の TODO state の変更を防止します．
 
 ** Hooks
+   :PROPERTIES:
+   :CUSTOM_ID: org9d8899be
+   :END:
 
 いくつかの hook を準備してあります．特に =org-onit-after-jump-hook= を設定すると，計測中の heading にジャンプした後の挙動を変更できます．
 
@@ -299,12 +360,18 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 #+end_src
 
 * まとめ
+  :PROPERTIES:
+  :CUSTOM_ID: org7b23a707
+  :END:
 
 本記事では，拙作の [[https://github.com/takaxp/org-onit][org-onit.el]] を導入して， =Org mode= の工数計測を半自動化する方法についてまとめました．
 
 Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウトライン編集」と「作業中のタスク・工数管理」の双方を同時に実行し，かつ，それらを Emacs Org mode だけで完結させることが可能です．ぜひお試しください．
 
 * References
+  :PROPERTIES:
+  :CUSTOM_ID: orgc17811ba
+  :END:
 
  - [[https://github.com/alphapapa/org-bookmark-heading][alphapapa/org-bookmark-heading: Emacs bookmark support for Org-mode]]
  - [[https://github.com/mallt/org-clock-today-mode][mallt/org-clock-today-mode: Emacs minor mode to show the total clocked time of the current day in the mode line]]
@@ -312,6 +379,9 @@ Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウ
  - [[https://qiita.com/takaxp/items/4dfa11a81e18b29143ec][「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita]]
 
 * おまけ
+  :PROPERTIES:
+  :CUSTOM_ID: orgbf06aa51
+  :END:
 
 本記事の課題に対して以前に，[[https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d][org-clock-in を意識しないで作業時間を記録する - Qiita]]にて， =org-clock-in= の自動化を試しました．この時は [[https://github.com/takaxp/org-tree-slide][org-tree-slide.el]] を用いて narrowing をトリガーに計測を自動化しましたが，設定が少々複雑でした．また，[[https://qiita.com/takaxp/items/4dfa11a81e18b29143ec][「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita]] も書きましたが，この記事では短期集中したいタスク群を Doingタグで串刺しにしておくのが目的でした．今回はごく単純に， ~Doing~ が付いているタスクが今集中したいタスクということで，以前よりも運用しやすくなった気がします．
 

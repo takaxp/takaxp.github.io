@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-14 Sat 11:00 -->
+<!-- 2019-12-14 Sat 11:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>helm を背に ivy の門を叩く</title>
@@ -254,90 +254,90 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf513694">1. はじめに</a></li>
-<li><a href="#org60a7afb">2. インストール</a>
+<li><a href="#orge9d4c263">1. はじめに</a></li>
+<li><a href="#org167e9720">2. インストール</a>
 <ul>
-<li><a href="#org0ad8f25">2.1. MELPA</a></li>
-<li><a href="#org5590219">2.2. el-get</a></li>
+<li><a href="#orgd13e9732">2.1. MELPA</a></li>
+<li><a href="#org4c857a1f">2.2. el-get</a></li>
 </ul>
 </li>
-<li><a href="#org83d379d">3. 基本設定</a>
+<li><a href="#org3f430ac1">3. 基本設定</a>
 <ul>
-<li><a href="#org8ca1363">3.1. 設定例</a>
+<li><a href="#org274217e9">3.1. 設定例</a>
 <ul>
-<li><a href="#orgf3557c6">3.1.1. ivy.el</a></li>
-<li><a href="#org89af49c">3.1.2. counsel.el</a></li>
-<li><a href="#org963b1bf">3.1.3. swiper</a></li>
+<li><a href="#orgf51368a4">3.1.1. ivy.el</a></li>
+<li><a href="#org08aa4ebe">3.1.2. counsel.el</a></li>
+<li><a href="#org1c87aa63">3.1.3. swiper</a></li>
 </ul>
 </li>
-<li><a href="#orgf2c41fa">3.2. 検索語のハイライト</a></li>
-<li><a href="#orgd96e92f">3.3. まず始めに知っておくべき機能</a></li>
-<li><a href="#org04f7743">3.4. ソーティングとフィルタ設定</a></li>
+<li><a href="#org4bf2eeb9">3.2. 検索語のハイライト</a></li>
+<li><a href="#org2b3e5a15">3.3. まず始めに知っておくべき機能</a></li>
+<li><a href="#orgf1acb8b7">3.4. ソーティングとフィルタ設定</a></li>
 </ul>
 </li>
-<li><a href="#orgb7a731f">4. デフォルト機能を便利に使う</a>
+<li><a href="#org71ddcbba">4. デフォルト機能を便利に使う</a>
 <ul>
-<li><a href="#org874706b">4.1. counsel.el にプリセットされているコマンド</a></li>
-<li><a href="#orgc3e69da">4.2. org.el と共に使う</a></li>
-<li><a href="#orge271a4a">4.3. dired.el と共に使う</a></li>
-<li><a href="#orgc9fea55">4.4. magit.el と共に使う</a></li>
-<li><a href="#orgae48029">4.5. eldoc.el と共に使う</a></li>
-<li><a href="#org5d07194">4.6. mic-paren.el と共に使う</a></li>
-<li><a href="#orgfb10ffc">4.7. counsel-find-file を使わない</a></li>
-<li><a href="#org3d2e793">4.8. find-library のバグを回避</a></li>
-<li><a href="#org25108ae">4.9. counsel-M-x</a></li>
-<li><a href="#org74854f0">4.10. counsel-ag</a></li>
-<li><a href="#org15cda16">4.11. counsel-fzf</a>
+<li><a href="#orge203be3c">4.1. counsel.el にプリセットされているコマンド</a></li>
+<li><a href="#org44cd0144">4.2. org.el と共に使う</a></li>
+<li><a href="#org568fe5e5">4.3. dired.el と共に使う</a></li>
+<li><a href="#org3bd7a24d">4.4. magit.el と共に使う</a></li>
+<li><a href="#orga507874d">4.5. eldoc.el と共に使う</a></li>
+<li><a href="#orgc151f9eb">4.6. mic-paren.el と共に使う</a></li>
+<li><a href="#org3c7fd0b2">4.7. counsel-find-file を使わない</a></li>
+<li><a href="#orgcdbabc35">4.8. find-library のバグを回避</a></li>
+<li><a href="#org3af34267">4.9. counsel-M-x</a></li>
+<li><a href="#org8d690a73">4.10. counsel-ag</a></li>
+<li><a href="#org2a6189cb">4.11. counsel-fzf</a>
 <ul>
-<li><a href="#org76d362a">4.11.1. 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）</a></li>
+<li><a href="#org1735b8ea">4.11.1. 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）</a></li>
 </ul>
 </li>
-<li><a href="#org2b3cb3a">4.12. counsel-recentf</a></li>
+<li><a href="#org87d665a3">4.12. counsel-recentf</a></li>
 </ul>
 </li>
-<li><a href="#orgebc4c0d">5. パッケージの移行</a>
+<li><a href="#orga31c060c">5. パッケージの移行</a>
 <ul>
-<li><a href="#org6707b9f">5.1. helm と ivy-counsel のコマンド対応表</a></li>
-<li><a href="#org7979b99">5.2. counsel-flycheck (fragment)</a></li>
-<li><a href="#org1dc8701">5.3. counsel-bm (fragment)</a></li>
-<li><a href="#org95a52dc">5.4. counsel-world-clock.el</a></li>
-<li><a href="#orgc1aecf1">5.5. counsel-selected.el</a></li>
-<li><a href="#orge406b7a">5.6. counsel-osx-app.el</a></li>
-<li><a href="#org0f6a017">5.7. counsel-projectile.el</a></li>
-<li><a href="#orgc88333b">5.8. counsel-gtags.el</a></li>
-<li><a href="#org36925ab">5.9. flyspell-correct-ivy.el</a></li>
-<li><a href="#org4488184">5.10. ivy-pass.el</a></li>
-<li><a href="#org9acafb6">5.11. org-recent-headings.el</a></li>
+<li><a href="#org734d8fd7">5.1. helm と ivy-counsel のコマンド対応表</a></li>
+<li><a href="#org6b050be4">5.2. counsel-flycheck (fragment)</a></li>
+<li><a href="#org3d746f6e">5.3. counsel-bm (fragment)</a></li>
+<li><a href="#orge691cf84">5.4. counsel-world-clock.el</a></li>
+<li><a href="#org544cbfff">5.5. counsel-selected.el</a></li>
+<li><a href="#org0c6e754b">5.6. counsel-osx-app.el</a></li>
+<li><a href="#org343549ff">5.7. counsel-projectile.el</a></li>
+<li><a href="#org85e54c66">5.8. counsel-gtags.el</a></li>
+<li><a href="#org36eb5423">5.9. flyspell-correct-ivy.el</a></li>
+<li><a href="#org23357a4c">5.10. ivy-pass.el</a></li>
+<li><a href="#org032ae679">5.11. org-recent-headings.el</a></li>
 </ul>
 </li>
-<li><a href="#org9961bc9">6. prescient.el</a></li>
-<li><a href="#orgc7f8182">7. 視覚化</a>
+<li><a href="#org4d46e531">6. prescient.el</a></li>
+<li><a href="#orgcc69d139">7. 視覚化</a>
 <ul>
-<li><a href="#orgc667368">7.1. プロンプトを改良</a></li>
-<li><a href="#org2d94b0e">7.2. 現在の選択候補をわかりやすくする</a></li>
-<li><a href="#orgf707429">7.3. all-the-icons-ivy.el</a></li>
-<li><a href="#orgb4fa532">7.4. ivy-rich.el</a></li>
-<li><a href="#orga4c86fc">7.5. ivy-posframe.el</a></li>
+<li><a href="#orgcb168e7e">7.1. プロンプトを改良</a></li>
+<li><a href="#org36c91268">7.2. 現在の選択候補をわかりやすくする</a></li>
+<li><a href="#orgba4997bf">7.3. all-the-icons-ivy.el</a></li>
+<li><a href="#orga174352e">7.4. ivy-rich.el</a></li>
+<li><a href="#org2560e400">7.5. ivy-posframe.el</a></li>
 </ul>
 </li>
-<li><a href="#orgfdd1015">8. 分析</a>
+<li><a href="#orgd2891ac2">8. 分析</a>
 <ul>
-<li><a href="#org149b71d">8.1. 読み込みコスト</a></li>
-<li><a href="#org533cac1">8.2. パッケージサイズ</a></li>
-<li><a href="#org32e6948">8.3. helm と共存の可能性</a></li>
-<li><a href="#orgb1ff5cd">8.4. counsel.el にプリセットされている ivy-read 一覧</a></li>
+<li><a href="#orgc6d6e652">8.1. 読み込みコスト</a></li>
+<li><a href="#orgd0debb44">8.2. パッケージサイズ</a></li>
+<li><a href="#org1164ffc7">8.3. helm と共存の可能性</a></li>
+<li><a href="#orgba310b20">8.4. counsel.el にプリセットされている ivy-read 一覧</a></li>
 </ul>
 </li>
-<li><a href="#orga81b00c">9. まとめ</a></li>
-<li><a href="#org91aae21">10. 謝辞</a></li>
-<li><a href="#orgabcebfd">11. References</a></li>
+<li><a href="#org7633081f">9. まとめ</a></li>
+<li><a href="#orgc046d2bb">10. 謝辞</a></li>
+<li><a href="#org2a731b5d">11. References</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf513694" class="outline-2">
-<h2 id="orgf513694"><span class="section-number-2">1</span> はじめに</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orge9d4c263" class="outline-2">
+<h2 id="orge9d4c263"><span class="section-number-2">1</span> はじめに</h2>
+<div class="outline-text-2" id="text-orge9d4c263">
 <p>
 <code>ivy</code> は， <code>helm</code> と双璧を成す Emacs の補完システムです．リスト表示された多くの選択肢から，自分が使いたいものを高速に絞り込んで，効率良く選び出す．このシンプル，かつ極めて重要なタスクを， <code>ivy</code> や <code>helm</code> が手助けしてくれます．<br />
 </p>
@@ -366,9 +366,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org60a7afb" class="outline-2">
-<h2 id="org60a7afb"><span class="section-number-2">2</span> インストール</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org167e9720" class="outline-2">
+<h2 id="org167e9720"><span class="section-number-2">2</span> インストール</h2>
+<div class="outline-text-2" id="text-org167e9720">
 <p>
 いくつかのインストール方法がありますが，パッケージ管理ツールを使うのが楽です． <code>ivy.el</code> をインストールする時は，プリセット関数を集めている <code>counsel.el</code> と， <code>helm-swoop</code> 相当の機能を提供する <code>swiper.el</code> も同時に入れるのが一般的です．<br />
 </p>
@@ -386,9 +386,9 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 
-<div id="outline-container-org0ad8f25" class="outline-3">
-<h3 id="org0ad8f25"><span class="section-number-3">2.1</span> MELPA</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-orgd13e9732" class="outline-3">
+<h3 id="orgd13e9732"><span class="section-number-3">2.1</span> MELPA</h3>
+<div class="outline-text-3" id="text-orgd13e9732">
 <p>
 <code>counsel</code> をインストールします．Cask使いの場合は，一行追加で．<br />
 </p>
@@ -400,9 +400,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org5590219" class="outline-3">
-<h3 id="org5590219"><span class="section-number-3">2.2</span> el-get</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-org4c857a1f" class="outline-3">
+<h3 id="org4c857a1f"><span class="section-number-3">2.2</span> el-get</h3>
+<div class="outline-text-3" id="text-org4c857a1f">
 <p>
 <code>swiper</code> のリポジトリを指定します．<br />
 </p>
@@ -415,24 +415,24 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org83d379d" class="outline-2">
-<h2 id="org83d379d"><span class="section-number-2">3</span> 基本設定</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org3f430ac1" class="outline-2">
+<h2 id="org3f430ac1"><span class="section-number-2">3</span> 基本設定</h2>
+<div class="outline-text-2" id="text-org3f430ac1">
 <p>
 ここでは基本的な設定と配色， <code>ivy</code> の流儀と選択候補のソーティング変数を紹介します．<br />
 </p>
 </div>
-<div id="outline-container-org8ca1363" class="outline-3">
-<h3 id="org8ca1363"><span class="section-number-3">3.1</span> 設定例</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org274217e9" class="outline-3">
+<h3 id="org274217e9"><span class="section-number-3">3.1</span> 設定例</h3>
+<div class="outline-text-3" id="text-org274217e9">
 <p>
 個別の設定や細かなハックに移る前に，まずは，これさえあればとりあえず動くという設定を施します．<br />
 </p>
 </div>
 
-<div id="outline-container-orgf3557c6" class="outline-4">
-<h4 id="orgf3557c6"><span class="section-number-4">3.1.1</span> ivy.el</h4>
-<div class="outline-text-4" id="text-3-1-1">
+<div id="outline-container-orgf51368a4" class="outline-4">
+<h4 id="orgf51368a4"><span class="section-number-4">3.1.1</span> ivy.el</h4>
+<div class="outline-text-4" id="text-orgf51368a4">
 <p>
 まずは <code>ivy</code> を使えるようにします．ほぼ素のままで良いです．<br />
 </p>
@@ -468,9 +468,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 </div>
 
-<div id="outline-container-org89af49c" class="outline-4">
-<h4 id="org89af49c"><span class="section-number-4">3.1.2</span> counsel.el</h4>
-<div class="outline-text-4" id="text-3-1-2">
+<div id="outline-container-org08aa4ebe" class="outline-4">
+<h4 id="org08aa4ebe"><span class="section-number-4">3.1.2</span> counsel.el</h4>
+<div class="outline-text-4" id="text-org08aa4ebe">
 <p>
 <code>counsel.el</code> は， <code>ivy</code> の骨格関数である <code>ivy-read</code> を様々なコマンドに拡張し，それらをプリセットとして収録しています．全文探索の <code>counsel-ag</code> など，よく使うコマンドを別途インストールする必要がありません．<br />
 </p>
@@ -493,9 +493,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 </div>
 
-<div id="outline-container-org963b1bf" class="outline-4">
-<h4 id="org963b1bf"><span class="section-number-4">3.1.3</span> swiper</h4>
-<div class="outline-text-4" id="text-3-1-3">
+<div id="outline-container-org1c87aa63" class="outline-4">
+<h4 id="org1c87aa63"><span class="section-number-4">3.1.3</span> swiper</h4>
+<div class="outline-text-4" id="text-org1c87aa63">
 <p>
 <code>swiper</code> は， <code>helm-swoop</code> のような文字列探索機能を提供します．カーソル位置の単語をキーに，バッファ内を探索．絞り込まれた選択候補を <code>C-n/C-p</code> で変えると，それに合わせてバッファの表示も変わり，連続してプレビューできます．なお， <code>swiper-all-thing-at-point</code> も実装されていて，これは開いているすべてのバッファを探索します．<br />
 </p>
@@ -513,9 +513,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 </div>
 
-<div id="outline-container-orgf2c41fa" class="outline-3">
-<h3 id="orgf2c41fa"><span class="section-number-3">3.2</span> 検索語のハイライト</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org4bf2eeb9" class="outline-3">
+<h3 id="org4bf2eeb9"><span class="section-number-3">3.2</span> 検索語のハイライト</h3>
+<div class="outline-text-3" id="text-org4bf2eeb9">
 <p>
 デフォルトの配色は，なかなかに個性的なので自分の好みに書き換えましょう．中途半端に書き換えると，デフォルトの配色が表に出てくるので，次にリストしたフェイスはすべて書き換える方が安全です．なお， <code>(setq ivy-display-style t)</code> とすると，配色を無効にできます．<br />
 </p>
@@ -571,9 +571,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 </div>
 
-<div id="outline-container-orgd96e92f" class="outline-3">
-<h3 id="orgd96e92f"><span class="section-number-3">3.3</span> まず始めに知っておくべき機能</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org2b3e5a15" class="outline-3">
+<h3 id="org2b3e5a15"><span class="section-number-3">3.3</span> まず始めに知っておくべき機能</h3>
+<div class="outline-text-3" id="text-org2b3e5a15">
 <p>
 <code>ivy</code> への移行に際して，知っておくべきデフォルト機能・コマンドがあります．それらは <code>helm</code> とは流儀が異なるので，少々戸惑うかもしれませんが，すぐ慣れます．<br />
 </p>
@@ -643,9 +643,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 </div>
 
-<div id="outline-container-org04f7743" class="outline-3">
-<h3 id="org04f7743"><span class="section-number-3">3.4</span> ソーティングとフィルタ設定</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-orgf1acb8b7" class="outline-3">
+<h3 id="orgf1acb8b7"><span class="section-number-3">3.4</span> ソーティングとフィルタ設定</h3>
+<div class="outline-text-3" id="text-orgf1acb8b7">
 <p>
 少し細かい話になりますが， <code>ivy</code> には絞り込み時の振る舞いに影響する重要な変数がいくつか定義されています．基本的に「すべてのコマンドに対する設定（全体設定）」と「個別のコマンドに対する設定」の双方を定義できます．<br />
 </p>
@@ -716,17 +716,17 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 </div>
 
-<div id="outline-container-orgb7a731f" class="outline-2">
-<h2 id="orgb7a731f"><span class="section-number-2">4</span> デフォルト機能を便利に使う</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org71ddcbba" class="outline-2">
+<h2 id="org71ddcbba"><span class="section-number-2">4</span> デフォルト機能を便利に使う</h2>
+<div class="outline-text-2" id="text-org71ddcbba">
 <p>
 <code>ivy-mode</code> を使えるようになったら，まず <code>counsel.el</code> にプリセットされているデフォルト機能から使い始めましょう．いくつかをピックアップして紹介します．必要に応じてカスタマイズすれば，さらに便利に使えるようになります．<br />
 </p>
 </div>
 
-<div id="outline-container-org874706b" class="outline-3">
-<h3 id="org874706b"><span class="section-number-3">4.1</span> counsel.el にプリセットされているコマンド</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-orge203be3c" class="outline-3">
+<h3 id="orge203be3c"><span class="section-number-3">4.1</span> counsel.el にプリセットされているコマンド</h3>
+<div class="outline-text-3" id="text-orge203be3c">
 <p>
 counsel.el (0.12.0) には，82個のコマンドが実装されています．頻繁に使うであろうコマンドと，注目のコマンドを抜粋します．完全なリストは，記事の下に示します．<br />
 </p>
@@ -839,9 +839,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-orgc3e69da" class="outline-3">
-<h3 id="orgc3e69da"><span class="section-number-3">4.2</span> org.el と共に使う</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org44cd0144" class="outline-3">
+<h3 id="org44cd0144"><span class="section-number-3">4.2</span> org.el と共に使う</h3>
+<div class="outline-text-3" id="text-org44cd0144">
 <p>
 <code>counsel.el</code> には，<a href="https://orgmode.org/">org mode</a> ユーザ向けのコマンドとして， <code>counsel-org-tag</code>, <code>counsel-org-tag-agenda</code>, <code>counsel-org-goto</code>, <code>counsel-org-goto-all</code>, <code>counsel-org-file</code>, <code>counsel-org-entity</code>, <code>counsel-org-capture</code>, <code>counsel-org-agenda-headlines</code> が実装されています．<br />
 </p>
@@ -881,9 +881,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-orge271a4a" class="outline-3">
-<h3 id="orge271a4a"><span class="section-number-3">4.3</span> dired.el と共に使う</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org568fe5e5" class="outline-3">
+<h3 id="org568fe5e5"><span class="section-number-3">4.3</span> dired.el と共に使う</h3>
+<div class="outline-text-3" id="text-org568fe5e5">
 <p>
 <code>ivy-dired-history</code> を導入すると， dired (<code>C-x d</code>) で訪問した場所を記録してソート表示してくれます．さらに，diredにコピー(<code>C</code>)と移動(<code>R</code>)機能を与えてくれます．ただし，コピーや移動先の表示順位を上げる機能ではないので要注意です．履歴の保存は， <code>session.el</code> で明示的に管理しています．一般には <code>savehist</code> を使うことが推奨されているようです．<br />
 </p>
@@ -902,9 +902,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-orgc9fea55" class="outline-3">
-<h3 id="orgc9fea55"><span class="section-number-3">4.4</span> magit.el と共に使う</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-org3bd7a24d" class="outline-3">
+<h3 id="org3bd7a24d"><span class="section-number-3">4.4</span> magit.el と共に使う</h3>
+<div class="outline-text-3" id="text-org3bd7a24d">
 <p>
 <code>magit</code> の branch の選択などが <code>ivy</code> インターフェイスになります．後述の <code>prescient.el</code> を導入すれば，選択項目を上に上げたり，履歴を保存できます．<br />
 </p>
@@ -917,9 +917,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-orgae48029" class="outline-3">
-<h3 id="orgae48029"><span class="section-number-3">4.5</span> eldoc.el と共に使う</h3>
-<div class="outline-text-3" id="text-4-5">
+<div id="outline-container-orga507874d" class="outline-3">
+<h3 id="orga507874d"><span class="section-number-3">4.5</span> eldoc.el と共に使う</h3>
+<div class="outline-text-3" id="text-orga507874d">
 <p>
 <code>eldoc</code> は <code>eldoc-idle-delay</code> の値を用いて一定時間が経過したらミニバッファに情報を出します． <code>helm</code> は別ウィンドウに情報を出すため衝突しませんが， <code>ivy</code> はミニバッファを使うため，高頻度で衝突します． <code>eldoc-message</code> をハックします．<br />
 </p>
@@ -939,9 +939,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-org5d07194" class="outline-3">
-<h3 id="org5d07194"><span class="section-number-3">4.6</span> mic-paren.el と共に使う</h3>
-<div class="outline-text-3" id="text-4-6">
+<div id="outline-container-orgc151f9eb" class="outline-3">
+<h3 id="orgc151f9eb"><span class="section-number-3">4.6</span> mic-paren.el と共に使う</h3>
+<div class="outline-text-3" id="text-orgc151f9eb">
 <p>
 <code>eldoc</code> と同様に，ミニバッファで衝突します．以下のコードで回避できます．<br />
 </p>
@@ -959,9 +959,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-orgfb10ffc" class="outline-3">
-<h3 id="orgfb10ffc"><span class="section-number-3">4.7</span> counsel-find-file を使わない</h3>
-<div class="outline-text-3" id="text-4-7">
+<div id="outline-container-org3c7fd0b2" class="outline-3">
+<h3 id="org3c7fd0b2"><span class="section-number-3">4.7</span> counsel-find-file を使わない</h3>
+<div class="outline-text-3" id="text-org3c7fd0b2">
 <p>
 <code>counsel-find-file</code> が <code>find-file</code> を置き換えますが，私は素の <code>find-file</code> を気に入っているので， <code>counsel-find-file</code> を無効化します．<br />
 </p>
@@ -995,9 +995,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-org3d2e793" class="outline-3">
-<h3 id="org3d2e793"><span class="section-number-3">4.8</span> find-library のバグを回避</h3>
-<div class="outline-text-3" id="text-4-8">
+<div id="outline-container-orgcdbabc35" class="outline-3">
+<h3 id="orgcdbabc35"><span class="section-number-3">4.8</span> find-library のバグを回避</h3>
+<div class="outline-text-3" id="text-orgcdbabc35">
 <p>
 厳密に言えばバグではないのですが，最初に <code>find-library</code> を使うと，大量の <code>./</code> を表示する問題があります．これは <code>find-library</code> ではなく <code>counsel-find-library</code> を直接呼べば回避できます．しかし， <code>M-x</code> した時のコマンド候補には依然として <code>find-library</code> が出てきますので，誤選択の原因になります．<br />
 </p>
@@ -1018,9 +1018,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 </div>
 
-<div id="outline-container-org25108ae" class="outline-3">
-<h3 id="org25108ae"><span class="section-number-3">4.9</span> counsel-M-x</h3>
-<div class="outline-text-3" id="text-4-9">
+<div id="outline-container-org3af34267" class="outline-3">
+<h3 id="org3af34267"><span class="section-number-3">4.9</span> counsel-M-x</h3>
+<div class="outline-text-3" id="text-org3af34267">
 <p>
 <code>helm</code> や <code>ivy</code> を使う大きな目的として，コマンドの絞り込みがあります． <code>helm</code> から <code>ivy</code> に移行すると， <code>M-x</code> の印象がかなり違うので，必要に応じて <code>helm</code> 流になるように設定して使います．4点ほど設定・カスタマイズします．<br />
 </p>
@@ -1106,9 +1106,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org74854f0" class="outline-3">
-<h3 id="org74854f0"><span class="section-number-3">4.10</span> counsel-ag</h3>
-<div class="outline-text-3" id="text-4-10">
+<div id="outline-container-org8d690a73" class="outline-3">
+<h3 id="org8d690a73"><span class="section-number-3">4.10</span> counsel-ag</h3>
+<div class="outline-text-3" id="text-org8d690a73">
 <p>
 <code>counsel-ag</code> は， <code>grep</code> と同様に全文検索する <code>ag</code> コマンドのインターフェイスを提供します．私はカーソル位置の単語を使って全文検索する頻度が高いので，そのようにハックします．<br />
 </p>
@@ -1156,9 +1156,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org15cda16" class="outline-3">
-<h3 id="org15cda16"><span class="section-number-3">4.11</span> counsel-fzf</h3>
-<div class="outline-text-3" id="text-4-11">
+<div id="outline-container-org2a6189cb" class="outline-3">
+<h3 id="org2a6189cb"><span class="section-number-3">4.11</span> counsel-fzf</h3>
+<div class="outline-text-3" id="text-org2a6189cb">
 <p>
 <code>counsel-ag</code> の場合と同様に，カーソル位置の単語を使って <code>counsel-fzf</code> を起動するようにハックします．<br />
 </p>
@@ -1193,9 +1193,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org76d362a" class="outline-4">
-<h4 id="org76d362a"><span class="section-number-4">4.11.1</span> 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）</h4>
-<div class="outline-text-4" id="text-4-11-1">
+<div id="outline-container-org1735b8ea" class="outline-4">
+<h4 id="org1735b8ea"><span class="section-number-4">4.11.1</span> 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）</h4>
+<div class="outline-text-4" id="text-org1735b8ea">
 <p>
 <code>ivy</code> で検索語を入力しても，ヒットしないことがよくあります．入力ミス等なら再入力で済みますが，実は <code>recentf</code> に記録されていないだけ，とか，探索範囲が狭すぎるだけなこともあります．そんな時は，検索語を再入力せずに探索範囲だけを広げたいと思うでしょう．<br />
 </p>
@@ -1277,9 +1277,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org2b3cb3a" class="outline-3">
-<h3 id="org2b3cb3a"><span class="section-number-3">4.12</span> counsel-recentf</h3>
-<div class="outline-text-3" id="text-4-12">
+<div id="outline-container-org87d665a3" class="outline-3">
+<h3 id="org87d665a3"><span class="section-number-3">4.12</span> counsel-recentf</h3>
+<div class="outline-text-3" id="text-org87d665a3">
 <p>
 デフォルトでは <code>/</code> からファイルの表示が始まりますが， <code>~</code> から始める方が好みなので <code>counsel-recentf</code> を再設定します．<br />
 </p>
@@ -1335,17 +1335,17 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-orgebc4c0d" class="outline-2">
-<h2 id="orgebc4c0d"><span class="section-number-2">5</span> パッケージの移行</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga31c060c" class="outline-2">
+<h2 id="orga31c060c"><span class="section-number-2">5</span> パッケージの移行</h2>
+<div class="outline-text-2" id="text-orga31c060c">
 <p>
 <code>helm</code> で便利に使っていた外部パッケージは，同等の機能を <code>ivy</code> 向けに提供するパッケージが公開されています．一部は，フラグメントとして公開されているものです．幸いながら，私はほぼすべてのパッケージを無事に移行できました．<br />
 </p>
 </div>
 
-<div id="outline-container-org6707b9f" class="outline-3">
-<h3 id="org6707b9f"><span class="section-number-3">5.1</span> helm と ivy-counsel のコマンド対応表</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org734d8fd7" class="outline-3">
+<h3 id="org734d8fd7"><span class="section-number-3">5.1</span> helm と ivy-counsel のコマンド対応表</h3>
+<div class="outline-text-3" id="text-org734d8fd7">
 <p>
 個人的に <code>helm</code> で依存していたコマンドの対応表です．現在メインで使用しているコマンドは概ねカバーしています．表中の「X」は，デフォルト実装されているコマンドを表します．<br />
 </p>
@@ -1543,9 +1543,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org7979b99" class="outline-3">
-<h3 id="org7979b99"><span class="section-number-3">5.2</span> counsel-flycheck (fragment)</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-org6b050be4" class="outline-3">
+<h3 id="org6b050be4"><span class="section-number-3">5.2</span> counsel-flycheck (fragment)</h3>
+<div class="outline-text-3" id="text-org6b050be4">
 <p>
 <a href="https://github.com/nathankot/dotemacs/blob/master/init.el#L709">https://github.com/nathankot/dotemacs/blob/master/init.el#L709</a> にありますので．拝借しました．関数名を変更して， <code>caller</code> を追加しています．<br />
 </p>
@@ -1582,9 +1582,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org1dc8701" class="outline-3">
-<h3 id="org1dc8701"><span class="section-number-3">5.3</span> counsel-bm (fragment)</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-org3d746f6e" class="outline-3">
+<h3 id="org3d746f6e"><span class="section-number-3">5.3</span> counsel-bm (fragment)</h3>
+<div class="outline-text-3" id="text-org3d746f6e">
 <p>
 <a href="https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/">https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/</a> に公開されているコードをアレンジしました． <code>ivy</code> とは無関係ですが， <code>&lt;f10&gt;</code> で <code>bm.el</code> の <code>bm-toggle</code> を呼び出し， <code>C-&lt;f10&gt;</code> で次のブックマークに移動するように設定しています．詳細は， <a href="https://takaxp.github.io/init.html#orgd5942d14">Configurations for GNU Emacs::4.9 [bm.el] カーソル位置をブックマークして追う</a> を参照ください．<br />
 </p>
@@ -1632,9 +1632,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-org95a52dc" class="outline-3">
-<h3 id="org95a52dc"><span class="section-number-3">5.4</span> counsel-world-clock.el</h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-orge691cf84" class="outline-3">
+<h3 id="orge691cf84"><span class="section-number-3">5.4</span> counsel-world-clock.el</h3>
+<div class="outline-text-3" id="text-orge691cf84">
 <p>
 <a href="https://github.com/kchenphy/counsel-world-clock">counsel-world-clock</a> は，タイムゾーンから時刻と時差を調べるツールです．ビルトインの <code>display-time-world</code> でも似たことができますが， <code>ivy</code> でタイムゾーンを絞り込めるので圧倒的に便利です．<br />
 </p>
@@ -1654,9 +1654,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-orgc1aecf1" class="outline-3">
-<h3 id="orgc1aecf1"><span class="section-number-3">5.5</span> counsel-selected.el</h3>
-<div class="outline-text-3" id="text-5-5">
+<div id="outline-container-org544cbfff" class="outline-3">
+<h3 id="org544cbfff"><span class="section-number-3">5.5</span> counsel-selected.el</h3>
+<div class="outline-text-3" id="text-org544cbfff">
 <p>
 拙作の <a href="https://github.com/takaxp/helm-selected">helm-selected</a> を <code>ivy</code> に移植しました．どちらかといえば，絞り込みしたいと言うより，領域選択から <code>l</code> 押下で，メニューを表示し，設定項目を思い出すために使います．<br />
 </p>
@@ -1669,9 +1669,9 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 </div>
 
-<div id="outline-container-orge406b7a" class="outline-3">
-<h3 id="orge406b7a"><span class="section-number-3">5.6</span> counsel-osx-app.el</h3>
-<div class="outline-text-3" id="text-5-6">
+<div id="outline-container-org0c6e754b" class="outline-3">
+<h3 id="org0c6e754b"><span class="section-number-3">5.6</span> counsel-osx-app.el</h3>
+<div class="outline-text-3" id="text-org0c6e754b">
 <p>
 <code>counse.el</code> には Linuxのアプリケーションを呼び出すためのインターフェイスである <code>counsel-linux-app</code> が実装されています． macOS用のコマンドは <a href="https://github.com/d12frosted/counsel-osx-app">counsel-osx-app</a> に公開されています．以前はOS側のランチャーを呼び出して使っていましたが，このコマンドのおかげで，Emacs から直接アプリケーションを呼び出せるので，かなり重宝しています．<br />
 </p>
@@ -1699,9 +1699,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org0f6a017" class="outline-3">
-<h3 id="org0f6a017"><span class="section-number-3">5.7</span> counsel-projectile.el</h3>
-<div class="outline-text-3" id="text-5-7">
+<div id="outline-container-org343549ff" class="outline-3">
+<h3 id="org343549ff"><span class="section-number-3">5.7</span> counsel-projectile.el</h3>
+<div class="outline-text-3" id="text-org343549ff">
 <p>
 <a href="https://github.com/ericdanan/counsel-projectile">counsel-projectile.el</a>は， <code>projectile.el</code> に <code>ivy</code> インターフェイスを提供するパッケージです． <code>projectile-find-file</code> は <code>counsel-git</code> に近い気もします．下記の <code>my-counsel-fzf-in-default-dir</code> は， <code>counsel-recentf</code> に紐付けたアクションと同じです．<br />
 </p>
@@ -1735,9 +1735,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgc88333b" class="outline-3">
-<h3 id="orgc88333b"><span class="section-number-3">5.8</span> counsel-gtags.el</h3>
-<div class="outline-text-3" id="text-5-8">
+<div id="outline-container-org85e54c66" class="outline-3">
+<h3 id="org85e54c66"><span class="section-number-3">5.8</span> counsel-gtags.el</h3>
+<div class="outline-text-3" id="text-org85e54c66">
 <p>
 安全安心の @syohex製 <a href="https://github.com/syohex/emacs-counsel-gtags">https://github.com/syohex/emacs-counsel-gtags</a><br />
 </p>
@@ -1752,9 +1752,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org36925ab" class="outline-3">
-<h3 id="org36925ab"><span class="section-number-3">5.9</span> flyspell-correct-ivy.el</h3>
-<div class="outline-text-3" id="text-5-9">
+<div id="outline-container-org36eb5423" class="outline-3">
+<h3 id="org36eb5423"><span class="section-number-3">5.9</span> flyspell-correct-ivy.el</h3>
+<div class="outline-text-3" id="text-org36eb5423">
 <p>
 <a href="https://github.com/d12frosted/flyspell-correct">flyspell-correct.el</a> は， <code>flyspell</code> の <code>ivy</code> インターフェイスです．私は使用頻度が高いので，このパッケージが使えるのは必須要件です．当初，新しい単語を追加する <code>save</code> を helm のように，<a href="https://github.com/d12frosted/flyspell-correct/issues/10">選択リストに含める方法</a>を選択しましたが， <code>ivy</code> を使い込んでいくうちに， <code>M-o</code> で追加メニューを表示する <code>ivy</code> のお作法になれる方が生産的と気づきました．<br />
 </p>
@@ -1768,9 +1768,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org4488184" class="outline-3">
-<h3 id="org4488184"><span class="section-number-3">5.10</span> ivy-pass.el</h3>
-<div class="outline-text-3" id="text-5-10">
+<div id="outline-container-org23357a4c" class="outline-3">
+<h3 id="org23357a4c"><span class="section-number-3">5.10</span> ivy-pass.el</h3>
+<div class="outline-text-3" id="text-org23357a4c">
 <p>
 特に設定はしていませんが，基本的にバグっている気がします．私の環境だけかもしれません&#x2026;<br />
 </p>
@@ -1781,9 +1781,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org9acafb6" class="outline-3">
-<h3 id="org9acafb6"><span class="section-number-3">5.11</span> org-recent-headings.el</h3>
-<div class="outline-text-3" id="text-5-11">
+<div id="outline-container-org032ae679" class="outline-3">
+<h3 id="org032ae679"><span class="section-number-3">5.11</span> org-recent-headings.el</h3>
+<div class="outline-text-3" id="text-org032ae679">
 <p>
 最近使用した <code>org mode</code> の見出しを <b>高精度に</b> 記録してくれる <a href="https://github.com/alphapapa/org-recent-headings">org-recent-headings.el</a> の <code>ivy</code> インターフェイスです．とても便利でオススメなのです． <del>が，残念ながら，org の HEAD では壊れて使えないため，少し前の version で使ってください．動作確認ができたら，記事を後日更新します．</del><br />
 </p>
@@ -1831,9 +1831,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org9961bc9" class="outline-2">
-<h2 id="org9961bc9"><span class="section-number-2">6</span> prescient.el</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org4d46e531" class="outline-2">
+<h2 id="org4d46e531"><span class="section-number-2">6</span> prescient.el</h2>
+<div class="outline-text-2" id="text-org4d46e531">
 <p>
 <a href="https://github.com/raxod502/prescient.el">ivy-prescient.el</a> を導入すると，各 <code>ivy</code> インターフェイスの使用履歴が記録され，最近選択した項目を上位に出してくれるようになります．ただし，すべてのコマンドが影響下に入るわけではなく， <code>ivy-read</code> に正しく <code>:caller</code> が設定されている場合に限られます．また， <code>:sort nil</code> または <code>:sort</code> 設定が存在しない <code>ivy-read</code> の場合は， <code>ivy-prescient-sort-commands</code> に対象コマンドを追加することで， <code>ivy-prescient.el</code> の影響下に置くことができます．<br />
 </p>
@@ -1888,17 +1888,17 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgc7f8182" class="outline-2">
-<h2 id="orgc7f8182"><span class="section-number-2">7</span> 視覚化</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orgcc69d139" class="outline-2">
+<h2 id="orgcc69d139"><span class="section-number-2">7</span> 視覚化</h2>
+<div class="outline-text-2" id="text-orgcc69d139">
 <p>
 <code>ivy</code> の良いところは，アイコンを導入して視覚的な見やすさを簡単に向上できるところです．プロンプト，候補リストにアイコンを導入すると，選択対象がどのカテゴリのファイルなのかをファイル名や拡張子ではなく，アイコンで視覚的に把握できるようになります．<br />
 </p>
 </div>
 
-<div id="outline-container-orgc667368" class="outline-3">
-<h3 id="orgc667368"><span class="section-number-3">7.1</span> プロンプトを改良</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-orgcb168e7e" class="outline-3">
+<h3 id="orgcb168e7e"><span class="section-number-3">7.1</span> プロンプトを改良</h3>
+<div class="outline-text-3" id="text-orgcb168e7e">
 <p>
 プロンプトは，選択候補の数とコマンド名の組み合わせで構成されます． <code>ivy-count-format</code> をカスタマイズすれば，現在のカーソル位置が，候補リストの何番目に位置するかも表示できます．<br />
 </p>
@@ -1946,9 +1946,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org2d94b0e" class="outline-3">
-<h3 id="org2d94b0e"><span class="section-number-3">7.2</span> 現在の選択候補をわかりやすくする</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org36c91268" class="outline-3">
+<h3 id="org36c91268"><span class="section-number-3">7.2</span> 現在の選択候補をわかりやすくする</h3>
+<div class="outline-text-3" id="text-org36c91268">
 <p>
 <code>ivy-format-functions-alist</code> にカスタマイズした関数を追加すれば，プロンプトの下部に位置するカーソル行の表示を変更できます． <code>all-the-icons</code> を導入して，好みのアイコンでカーソル行のある選択候補を目立たせましょう．<br />
 </p>
@@ -1997,9 +1997,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgf707429" class="outline-3">
-<h3 id="orgf707429"><span class="section-number-3">7.3</span> all-the-icons-ivy.el</h3>
-<div class="outline-text-3" id="text-7-3">
+<div id="outline-container-orgba4997bf" class="outline-3">
+<h3 id="orgba4997bf"><span class="section-number-3">7.3</span> all-the-icons-ivy.el</h3>
+<div class="outline-text-3" id="text-orgba4997bf">
 <p>
 <a href="https://github.com/asok/all-the-icons-ivy">all-the-icons-ivy.el</a>は， <code>ivy</code> インターフェイスにアイコンを追加するパッケージです． <code>all-the-icons.el</code> が少々導入の難しいパッケージなのですが，一度設定がうまくいけば，殺伐とした Emacs バッファに安らぎがもたらされます．<br />
 </p>
@@ -2045,9 +2045,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgb4fa532" class="outline-3">
-<h3 id="orgb4fa532"><span class="section-number-3">7.4</span> ivy-rich.el</h3>
-<div class="outline-text-3" id="text-7-4">
+<div id="outline-container-orga174352e" class="outline-3">
+<h3 id="orga174352e"><span class="section-number-3">7.4</span> ivy-rich.el</h3>
+<div class="outline-text-3" id="text-orga174352e">
 <p>
 ミニバッファに候補リストを表示する <code>ivy</code> は，大きな画面で横方向に複数のウィンドウを表示する状況で，画面上に無駄なスペースが多く生じます．<a href="https://github.com/Yevgnen/ivy-rich">ivy-rich.el</a>を導入すると，アイコンが追加され，さらに追加の情報が空きスペースに記述されるようになります．<a href="https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf#%E6%A4%9C%E7%B4%A2%E3%81%AA%E3%81%A9%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9----swipercounsel-ivy-rich">Emacsモダン化計画 -かわEmacs編-</a> (by <a href="https://qiita.com/Ladicle">@Ladicle</a>) が詳しいです．<br />
 </p>
@@ -2072,9 +2072,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orga4c86fc" class="outline-3">
-<h3 id="orga4c86fc"><span class="section-number-3">7.5</span> ivy-posframe.el</h3>
-<div class="outline-text-3" id="text-7-5">
+<div id="outline-container-org2560e400" class="outline-3">
+<h3 id="org2560e400"><span class="section-number-3">7.5</span> ivy-posframe.el</h3>
+<div class="outline-text-3" id="text-org2560e400">
 <p>
 <code>ivy-posframe</code> を使うと，通常はミニバッファに表示されるリストを任意の位置に出すことができます．私自身，まだ使いこなせていないので今後の課題です．以下は， <code>counsel-M-x</code> でコマンドリストを表示するときだけカーソル位置にフレームを出す設定です．なお，当初 <code>ivy-posframe</code> はマイナーモード化されておらず不便でしたが，<a href="https://qiita.com/conao3">@conao3</a> 氏の<a href="https://github.com/tumashu/ivy-posframe/pull/43">尽力</a>により，現在は <code>(ivy-posframe-mode 1)</code>, <code>(ivy-posframe-mode -1)</code> で ON/OFFできます．Thanks!<br />
 </p>
@@ -2096,13 +2096,13 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgfdd1015" class="outline-2">
-<h2 id="orgfdd1015"><span class="section-number-2">8</span> 分析</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgd2891ac2" class="outline-2">
+<h2 id="orgd2891ac2"><span class="section-number-2">8</span> 分析</h2>
+<div class="outline-text-2" id="text-orgd2891ac2">
 </div>
-<div id="outline-container-org149b71d" class="outline-3">
-<h3 id="org149b71d"><span class="section-number-3">8.1</span> 読み込みコスト</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-orgc6d6e652" class="outline-3">
+<h3 id="orgc6d6e652"><span class="section-number-3">8.1</span> 読み込みコスト</h3>
+<div class="outline-text-3" id="text-orgc6d6e652">
 <p>
 <code>ivy.el</code> と <code>helm.el</code> の読み込み時間の計測を比較しました．それぞれ依存関係のパッケージの読み込みを含みます．計測は私の貧弱環境です．3回平均の単位は[ms]です．<br />
 </p>
@@ -2171,9 +2171,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org533cac1" class="outline-3">
-<h3 id="org533cac1"><span class="section-number-3">8.2</span> パッケージサイズ</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-orgd0debb44" class="outline-3">
+<h3 id="orgd0debb44"><span class="section-number-3">8.2</span> パッケージサイズ</h3>
+<div class="outline-text-3" id="text-orgd0debb44">
 <p>
 <code>ivy</code> と <code>helm</code> でMALPA経由でインストールする場合のパッケージサイズを比較します．バイトコンパイル済みです．単位は[MB]です．<br />
 </p>
@@ -2338,9 +2338,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org32e6948" class="outline-3">
-<h3 id="org32e6948"><span class="section-number-3">8.3</span> helm と共存の可能性</h3>
-<div class="outline-text-3" id="text-8-3">
+<div id="outline-container-org1164ffc7" class="outline-3">
+<h3 id="org1164ffc7"><span class="section-number-3">8.3</span> helm と共存の可能性</h3>
+<div class="outline-text-3" id="text-org1164ffc7">
 <p>
 いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， <code>org-trello</code> が <code>helm</code> に依存しているので，私はしばらく <code>helm</code> 環境を残すことになりそうです．<br />
 </p>
@@ -2351,9 +2351,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgb1ff5cd" class="outline-3">
-<h3 id="orgb1ff5cd"><span class="section-number-3">8.4</span> counsel.el にプリセットされている ivy-read 一覧</h3>
-<div class="outline-text-3" id="text-8-4">
+<div id="outline-container-orgba310b20" class="outline-3">
+<h3 id="orgba310b20"><span class="section-number-3">8.4</span> counsel.el にプリセットされている ivy-read 一覧</h3>
+<div class="outline-text-3" id="text-orgba310b20">
 <p>
 実装されているコマンド一覧です． <code>autoload</code> 指定された関数は85個ありますが，エイリアスだったりするので，有効なのは82個です．意外なコマンドがすでに実装されているかもしれないので，一度，ざっと目を通してみてはいかがでしょう．<br />
 </p>
@@ -2797,9 +2797,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orga81b00c" class="outline-2">
-<h2 id="orga81b00c"><span class="section-number-2">9</span> まとめ</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-org7633081f" class="outline-2">
+<h2 id="org7633081f"><span class="section-number-2">9</span> まとめ</h2>
+<div class="outline-text-2" id="text-org7633081f">
 <p>
 この記事では（長々と） <code>helm</code> から <code>ivy</code> に移行した時に得られた知見と設定について解説しました．幸いながら，私の <code>helm</code> の利用レベルはそれほど高くなく，移行しても全く後悔はないですが， <code>helm</code> への依存度がより高い人の場合は，色々と気に入らない点があるかもしれません．また， <code>org-trello.el</code> 等， <code>helm</code> 依存で <code>ivy</code> が使えないパッケージもまだあるので，移行に慎重な人は，依存しているパッケージの <code>ivy</code> インターフェイスが存在するかを一度確認してみることをオススメします．それ以外の人は，もう「えいや！」で移行しても後悔しないと思います．<br />
 </p>
@@ -2820,9 +2820,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-org91aae21" class="outline-2">
-<h2 id="org91aae21"><span class="section-number-2">10</span> 謝辞</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orgc046d2bb" class="outline-2">
+<h2 id="orgc046d2bb"><span class="section-number-2">10</span> 謝辞</h2>
+<div class="outline-text-2" id="text-orgc046d2bb">
 <ul class="org-ul">
 <li>数ヶ月に渡り，私の <code>helm2ivy</code> を Twitter 上で見守ってくださった心優しい Emacs ユーザの方々に感謝いたします．励ましの声が無ければ，この記事は生まれませんでした．<br /></li>
 <li>この記事を執筆するためのすべての機能を提供してくれた <a href="https://www.gnu.org/software/emacs/">Emacs</a> と <a href="https://orgmode.org">Org mode</a>，そして，Qiita exporter である <a href="https://github.com/0x60df/ox-qmd">ox-qmd</a> に心から感謝致します．こんな便利なツールは外にありません．Vim ユーザはすぐに Emacs に乗り換えてください．或いは，<a href="https://github.com/jceb/vim-orgmode">vim-orgmode</a>を導入しましょう．<br /></li>
@@ -2830,9 +2830,9 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 </div>
 
-<div id="outline-container-orgabcebfd" class="outline-2">
-<h2 id="orgabcebfd"><span class="section-number-2">11</span> References</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org2a731b5d" class="outline-2">
+<h2 id="org2a731b5d"><span class="section-number-2">11</span> References</h2>
+<div class="outline-text-2" id="text-org2a731b5d">
 <ul class="org-ul">
 <li><a href="https://oremacs.com/swiper/">Ivy User Manual</a><br /></li>
 <li><a href="https://speakerdeck.com/takaxp/counsel">さよならhelm、ようこそivy/counsel - Speaker Deck</a><br /></li>
@@ -2852,7 +2852,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2019-12-14 Sat 11:00</p>
+<p class="date">Created: 2019-12-14 Sat 11:25</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

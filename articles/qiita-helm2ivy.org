@@ -1,4 +1,5 @@
 #+title: helm を背に ivy の門を叩く
+#+options: auto-id:t
 #+setupfile: theme-readtheorg.setup
 #+html_head: <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 #+startup: content
@@ -14,6 +15,7 @@
 * COMMENT 確認事項
   :PROPERTIES:
   :CREATED:  [2019-07-29 Mon 17:19]
+  :CUSTOM_ID: orgf53243b5
   :END:
  - [X] 用語にブレがある．選択対象，候補リスト，補完システム
    - [X] ivy/counsel, ivy, ivy-mode
@@ -22,6 +24,9 @@
  - [X] リンクを増やす．
 
 * はじめに
+  :PROPERTIES:
+  :CUSTOM_ID: orge9d4c263
+  :END:
 
 ~ivy~ は， ~helm~ と双璧を成す Emacs の補完システムです．リスト表示された多くの選択肢から，自分が使いたいものを高速に絞り込んで，効率良く選び出す．このシンプル，かつ極めて重要なタスクを， ~ivy~ や ~helm~ が手助けしてくれます．
 
@@ -42,6 +47,9 @@
 ↑ターミナル
 
 * インストール
+  :PROPERTIES:
+  :CUSTOM_ID: org167e9720
+  :END:
 
 いくつかのインストール方法がありますが，パッケージ管理ツールを使うのが楽です． ~ivy.el~ をインストールする時は，プリセット関数を集めている ~counsel.el~ と， =helm-swoop= 相当の機能を提供する ~swiper.el~ も同時に入れるのが一般的です．
 
@@ -52,6 +60,9 @@
  - [[https://github.com/abo-abo/swiper][abo-abo/swiper: Ivy - a generic completion frontend for Emacs, Swiper - isearch with an overview, and more. Oh, man!]]
 
 ** MELPA
+   :PROPERTIES:
+   :CUSTOM_ID: orgd13e9732
+   :END:
 
 ~counsel~ をインストールします．Cask使いの場合は，一行追加で．
 
@@ -60,6 +71,9 @@
 #+end_src
 
 ** el-get
+   :PROPERTIES:
+   :CUSTOM_ID: org4c857a1f
+   :END:
 
 ~swiper~ のリポジトリを指定します．
 
@@ -68,14 +82,21 @@
 #+end_src
 
 * 基本設定
+  :PROPERTIES:
+  :CUSTOM_ID: org3f430ac1
+  :END:
 ここでは基本的な設定と配色， ~ivy~ の流儀と選択候補のソーティング変数を紹介します．
 ** 設定例
+   :PROPERTIES:
+   :CUSTOM_ID: org274217e9
+   :END:
 
 個別の設定や細かなハックに移る前に，まずは，これさえあればとりあえず動くという設定を施します．
 
 *** ivy.el
     :PROPERTIES:
     :ID:       9A2A5219-1DC6-4F9D-82E5-672C6A4326D3
+    :CUSTOM_ID: orgf51368a4
     :END:
 
 まずは ~ivy~ を使えるようにします．ほぼ素のままで良いです．
@@ -97,6 +118,9 @@
   ;; ESC連打でミニバッファを閉じる
   (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)
 
+  ;; リスト先頭で `C-p' するとき，リストの最後に移動する
+  (setq ivy-wrap t)
+
   ;; アクティベート
   (ivy-mode 1))
 #+end_src
@@ -104,6 +128,9 @@
 NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c431783d2efb866ef51b8c14e7c82][ivy.el (ivy-read-action-function): Fix type · abo-abo/swiper@1ad457d]] にて =ivy-dispatching-done-hydra= が無くなり， =ivy-hydra= を読み込むだけでは， =M-o= がリッチな表示になりません．追加で， =ivy-read-action-function= の設定が必要です．
 
 *** counsel.el
+    :PROPERTIES:
+    :CUSTOM_ID: org08aa4ebe
+    :END:
 
 ~counsel.el~ は， ~ivy~ の骨格関数である =ivy-read= を様々なコマンドに拡張し，それらをプリセットとして収録しています．全文探索の =counsel-ag= など，よく使うコマンドを別途インストールする必要がありません．
 
@@ -123,6 +150,9 @@ NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c43
 #+end_src
 
 *** swiper
+    :PROPERTIES:
+    :CUSTOM_ID: org1c87aa63
+    :END:
 
 ~swiper~ は， =helm-swoop= のような文字列探索機能を提供します．カーソル位置の単語をキーに，バッファ内を探索．絞り込まれた選択候補を =C-n/C-p= で変えると，それに合わせてバッファの表示も変わり，連続してプレビューできます．なお， =swiper-all-thing-at-point= も実装されていて，これは開いているすべてのバッファを探索します．
 
@@ -138,6 +168,9 @@ NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c43
 #+end_src
 
 ** 検索語のハイライト
+   :PROPERTIES:
+   :CUSTOM_ID: org4bf2eeb9
+   :END:
 
 デフォルトの配色は，なかなかに個性的なので自分の好みに書き換えましょう．中途半端に書き換えると，デフォルトの配色が表に出てくるので，次にリストしたフェイスはすべて書き換える方が安全です．なお， =(setq ivy-display-style t)= とすると，配色を無効にできます．
 
@@ -182,6 +215,9 @@ NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c43
 #+end_src
 
 ** まず始めに知っておくべき機能
+   :PROPERTIES:
+   :CUSTOM_ID: org2b3e5a15
+   :END:
 
 ~ivy~ への移行に際して，知っておくべきデフォルト機能・コマンドがあります．それらは ~helm~ とは流儀が異なるので，少々戸惑うかもしれませんが，すぐ慣れます．
 
@@ -203,6 +239,9 @@ NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c43
 プロンプトでユーザが入力する検索語は，一部の正規表現に対応しているので， ~^~ を付ければ先頭マッチ， ~$~ 末尾マッチというように制御できます．
 
 ** ソーティングとフィルタ設定
+   :PROPERTIES:
+   :CUSTOM_ID: orgf1acb8b7
+   :END:
 
 少し細かい話になりますが， ~ivy~ には絞り込み時の振る舞いに影響する重要な変数がいくつか定義されています．基本的に「すべてのコマンドに対する設定（全体設定）」と「個別のコマンドに対する設定」の双方を定義できます．
 
@@ -230,10 +269,16 @@ NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c43
      - =ivy--regex-plus= は，enc org と org enc で結果が異なる． =ivy-minibuffer-match-face-1= 使用．
 
 * デフォルト機能を便利に使う
+  :PROPERTIES:
+  :CUSTOM_ID: org71ddcbba
+  :END:
 
 ~ivy-mode~ を使えるようになったら，まず ~counsel.el~ にプリセットされているデフォルト機能から使い始めましょう．いくつかをピックアップして紹介します．必要に応じてカスタマイズすれば，さらに便利に使えるようになります．
 
 ** counsel.el にプリセットされているコマンド
+   :PROPERTIES:
+   :CUSTOM_ID: orge203be3c
+   :END:
 
 counsel.el (0.12.0) には，82個のコマンドが実装されています．頻繁に使うであろうコマンドと，注目のコマンドを抜粋します．完全なリストは，記事の下に示します．
 
@@ -260,6 +305,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 =counsel-minor= はマイナーモードを表示して有効・無効化ができるので地味に便利です．ただ見やすさの点では，[[https://github.com/ShingoFukuyama/manage-minor-mode][manage-minor-mode.el]]がオススメです．
 
 ** org.el と共に使う
+   :PROPERTIES:
+   :CUSTOM_ID: org44cd0144
+   :END:
 
 ~counsel.el~ には，[[https://orgmode.org/][org mode]] ユーザ向けのコマンドとして， =counsel-org-tag=, =counsel-org-tag-agenda=, =counsel-org-goto=, =counsel-org-goto-all=, =counsel-org-file=, =counsel-org-entity=, =counsel-org-capture=, =counsel-org-agenda-headlines= が実装されています．
 
@@ -289,6 +337,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
 ** dired.el と共に使う
+   :PROPERTIES:
+   :CUSTOM_ID: org568fe5e5
+   :END:
 
 =ivy-dired-history= を導入すると， dired (=C-x d=) で訪問した場所を記録してソート表示してくれます．さらに，diredにコピー(=C=)と移動(=R=)機能を与えてくれます．ただし，コピーや移動先の表示順位を上げる機能ではないので要注意です．履歴の保存は， ~session.el~ で明示的に管理しています．一般には =savehist= を使うことが推奨されているようです．
 
@@ -302,6 +353,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 なお，最近 ~dired~ で開いたディレクトリを =M-x dired-recent-open= で一覧できる [[https://github.com/Vifon/dired-recent.el][dired-recent]] も ~ivy~ に対応しています．こちらは規定の =dired-recent-directories-file= に履歴が記録されます．
 
 ** magit.el と共に使う
+   :PROPERTIES:
+   :CUSTOM_ID: org3bd7a24d
+   :END:
 
 ~magit~ の branch の選択などが ~ivy~ インターフェイスになります．後述の ~prescient.el~ を導入すれば，選択項目を上に上げたり，履歴を保存できます．
 
@@ -311,6 +365,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
 ** eldoc.el と共に使う
+   :PROPERTIES:
+   :CUSTOM_ID: orga507874d
+   :END:
 
 ~eldoc~ は =eldoc-idle-delay= の値を用いて一定時間が経過したらミニバッファに情報を出します． ~helm~ は別ウィンドウに情報を出すため衝突しませんが， ~ivy~ はミニバッファを使うため，高頻度で衝突します． =eldoc-message= をハックします．
 
@@ -325,6 +382,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
 ** mic-paren.el と共に使う
+   :PROPERTIES:
+   :CUSTOM_ID: orgc151f9eb
+   :END:
 
 ~eldoc~ と同様に，ミニバッファで衝突します．以下のコードで回避できます．
 
@@ -341,6 +401,7 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 ** counsel-find-file を使わない
    :PROPERTIES:
    :ID:       9EBE78D7-2814-44E7-A218-57069657EA86
+   :CUSTOM_ID: org3c7fd0b2
    :END:
 
 =counsel-find-file= が =find-file= を置き換えますが，私は素の =find-file= を気に入っているので， =counsel-find-file= を無効化します．
@@ -367,6 +428,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
 ** find-library のバグを回避
+   :PROPERTIES:
+   :CUSTOM_ID: orgcdbabc35
+   :END:
 
 厳密に言えばバグではないのですが，最初に =find-library= を使うと，大量の ~./~ を表示する問題があります．これは =find-library= ではなく =counsel-find-library= を直接呼べば回避できます．しかし， ~M-x~ した時のコマンド候補には依然として =find-library= が出てきますので，誤選択の原因になります．
 
@@ -382,11 +446,15 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
 *** COMMENT ノート
+    :PROPERTIES:
+    :CUSTOM_ID: orgb9e73704
+    :END:
 ;; a. (make-obsolete 'find-library 'counsel-find-library)
 ;; b. (put 'find-library 'disabled t)
 ** counsel-M-x
    :PROPERTIES:
    :ID:       2999BC1A-EC4D-4049-AB5C-9E104449CE62
+   :CUSTOM_ID: org3af34267
    :END:
 
 ~helm~ や ~ivy~ を使う大きな目的として，コマンドの絞り込みがあります． ~helm~ から ~ivy~ に移行すると， ~M-x~ の印象がかなり違うので，必要に応じて ~helm~ 流になるように設定して使います．4点ほど設定・カスタマイズします．
@@ -438,7 +506,25 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 see https://github.com/abo-abo/swiper/issues/1294
 
+~emacs25~ を使っている場合は， =seq-sort-by= が無いと怒られるかもしれません．その場合は，次のコードをどこかに置いてください． ~emacs26.3~ から抽出した関数です． =(unless (fboundp 'seq-sort-by))= で括っておきました．
+
+#+begin_src emacs-lisp
+(unless (fboundp 'seq-sort-by)
+  (defun seq-sort-by (function pred sequence)
+    "Sort SEQUENCE using PRED as a comparison function.
+Elements of SEQUENCE are transformed by FUNCTION before being
+sorted.  FUNCTION must be a function of one argument."
+    (seq-sort (lambda (a b)
+                (funcall pred
+                         (funcall function a)
+                         (funcall function b)))
+              sequence)))
+#+end_src
+
 ** counsel-ag
+   :PROPERTIES:
+   :CUSTOM_ID: org8d690a73
+   :END:
 
 =counsel-ag= は， ~grep~ と同様に全文検索する ~ag~ コマンドのインターフェイスを提供します．私はカーソル位置の単語を使って全文検索する頻度が高いので，そのようにハックします．
 
@@ -475,6 +561,9 @@ see https://github.com/abo-abo/swiper/issues/1294
 と設定しておけば， =counsel-ag= 使用中に =M-o= せず直接 =C-x C-d= すれば =counsel-cd= を呼べます．
 
 ** counsel-fzf
+   :PROPERTIES:
+   :CUSTOM_ID: org2a6189cb
+   :END:
 
 =counsel-ag= の場合と同様に，カーソル位置の単語を使って =counsel-fzf= を起動するようにハックします．
 
@@ -504,6 +593,9 @@ see https://github.com/abo-abo/swiper/issues/1294
 #+end_src
 
 *** 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）
+    :PROPERTIES:
+    :CUSTOM_ID: org1735b8ea
+    :END:
 
 ~ivy~ で検索語を入力しても，ヒットしないことがよくあります．入力ミス等なら再入力で済みますが，実は =recentf= に記録されていないだけ，とか，探索範囲が狭すぎるだけなこともあります．そんな時は，検索語を再入力せずに探索範囲だけを広げたいと思うでしょう．
 
@@ -573,6 +665,9 @@ see https://github.com/abo-abo/swiper/issues/1294
 #+end_src
 
 ** counsel-recentf
+   :PROPERTIES:
+   :CUSTOM_ID: org87d665a3
+   :END:
 
 デフォルトでは ~/~ からファイルの表示が始まりますが， ~~~ から始める方が好みなので =counsel-recentf= を再設定します．
 
@@ -618,10 +713,16 @@ see https://github.com/abo-abo/swiper/issues/1294
 #+end_src
 
 * パッケージの移行
+  :PROPERTIES:
+  :CUSTOM_ID: orga31c060c
+  :END:
 
 ~helm~ で便利に使っていた外部パッケージは，同等の機能を ~ivy~ 向けに提供するパッケージが公開されています．一部は，フラグメントとして公開されているものです．幸いながら，私はほぼすべてのパッケージを無事に移行できました．
 
 ** helm と ivy-counsel のコマンド対応表
+   :PROPERTIES:
+   :CUSTOM_ID: org734d8fd7
+   :END:
 
 個人的に ~helm~ で依存していたコマンドの対応表です．現在メインで使用しているコマンドは概ねカバーしています．表中の「X」は，デフォルト実装されているコマンドを表します．
 
@@ -660,6 +761,9 @@ see https://github.com/abo-abo/swiper/issues/1294
 (10) [[https://github.com/ecraven/ivy-pass][ivy-pass]]
 
 ** counsel-flycheck (fragment)
+   :PROPERTIES:
+   :CUSTOM_ID: org6b050be4
+   :END:
 
 https://github.com/nathankot/dotemacs/blob/master/init.el#L709 にありますので．拝借しました．関数名を変更して， ~caller~ を追加しています．
 
@@ -693,6 +797,9 @@ https://github.com/nathankot/dotemacs/blob/master/init.el#L709 にあります�
 #+end_src
 
 ** counsel-bm (fragment)
+   :PROPERTIES:
+   :CUSTOM_ID: org3d746f6e
+   :END:
 
 https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ に公開されているコードをアレンジしました． ~ivy~ とは無関係ですが， ~<f10>~ で ~bm.el~ の =bm-toggle= を呼び出し， ~C-<f10>~ で次のブックマークに移動するように設定しています．詳細は， [[https://takaxp.github.io/init.html#orgd5942d14][Configurations for GNU Emacs::4.9 [bm.el] カーソル位置をブックマークして追う]] を参照ください．
 
@@ -739,6 +846,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** counsel-world-clock.el
+   :PROPERTIES:
+   :CUSTOM_ID: orge691cf84
+   :END:
 
 [[https://github.com/kchenphy/counsel-world-clock][counsel-world-clock]] は，タイムゾーンから時刻と時差を調べるツールです．ビルトインの =display-time-world= でも似たことができますが， ~ivy~ でタイムゾーンを絞り込めるので圧倒的に便利です．
 
@@ -755,6 +865,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** counsel-selected.el
+   :PROPERTIES:
+   :CUSTOM_ID: org544cbfff
+   :END:
 
 拙作の [[https://github.com/takaxp/helm-selected][helm-selected]] を ~ivy~ に移植しました．どちらかといえば，絞り込みしたいと言うより，領域選択から ~l~ 押下で，メニューを表示し，設定項目を思い出すために使います．
 
@@ -764,6 +877,10 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** counsel-osx-app.el
+   :PROPERTIES:
+   :ID:       70054C4F-A367-4B9D-BE5F-A8BAC3D116DE
+   :CUSTOM_ID: org0c6e754b
+   :END:
 
 ~counse.el~ には Linuxのアプリケーションを呼び出すためのインターフェイスである =counsel-linux-app= が実装されています． macOS用のコマンドは [[https://github.com/d12frosted/counsel-osx-app][counsel-osx-app]] に公開されています．以前はOS側のランチャーを呼び出して使っていましたが，このコマンドのおかげで，Emacs から直接アプリケーションを呼び出せるので，かなり重宝しています．
 
@@ -773,16 +890,22 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 
 =counsel-osx-app-location= を正しく設定すれば，サブディレクトリに含まれるアプリケーションもリストに入れてくれます．
 
+NOTE [2019-11-05 Tue]: macOS Catalina では ="/System/Applications"= も追加します．
+
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-M-1") 'counsel-osx-app)
 (with-eval-after-load "counsel-osx-app"
   (custom-set-variables
    '(counsel-osx-app-location
      '("/Applications" "/Applications/Utilities"
+       "/System/Applications"
        "/Applications/Microsoft Remote Desktop.localized"))))
 #+end_src
 
 ** counsel-projectile.el
+   :PROPERTIES:
+   :CUSTOM_ID: org343549ff
+   :END:
 
 [[https://github.com/ericdanan/counsel-projectile][counsel-projectile.el]]は， ~projectile.el~ に ~ivy~ インターフェイスを提供するパッケージです． =projectile-find-file= は =counsel-git= に近い気もします．下記の =my-counsel-fzf-in-default-dir= は， =counsel-recentf= に紐付けたアクションと同じです．
 
@@ -813,6 +936,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** counsel-gtags.el
+   :PROPERTIES:
+   :CUSTOM_ID: org85e54c66
+   :END:
 
 安全安心の @syohex製 https://github.com/syohex/emacs-counsel-gtags
 
@@ -824,6 +950,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** flyspell-correct-ivy.el
+   :PROPERTIES:
+   :CUSTOM_ID: org36eb5423
+   :END:
 
 [[https://github.com/d12frosted/flyspell-correct][flyspell-correct.el]] は， ~flyspell~ の ~ivy~ インターフェイスです．私は使用頻度が高いので，このパッケージが使えるのは必須要件です．当初，新しい単語を追加する ~save~ を helm のように，[[https://github.com/d12frosted/flyspell-correct/issues/10][選択リストに含める方法]]を選択しましたが， ~ivy~ を使い込んでいくうちに， ~M-o~ で追加メニューを表示する ~ivy~ のお作法になれる方が生産的と気づきました．
 
@@ -834,12 +963,18 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** ivy-pass.el
+   :PROPERTIES:
+   :CUSTOM_ID: org23357a4c
+   :END:
 
 特に設定はしていませんが，基本的にバグっている気がします．私の環境だけかもしれません...
 
  - see https://github.com/ecraven/ivy-pass
 
 ** org-recent-headings.el
+   :PROPERTIES:
+   :CUSTOM_ID: org032ae679
+   :END:
 
 最近使用した ~org mode~ の見出しを *高精度に* 記録してくれる [[https://github.com/alphapapa/org-recent-headings][org-recent-headings.el]] の ~ivy~ インターフェイスです．とても便利でオススメなのです． +が，残念ながら，org の HEAD では壊れて使えないため，少し前の version で使ってください．動作確認ができたら，記事を後日更新します．+
 
@@ -879,6 +1014,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 * prescient.el
+  :PROPERTIES:
+  :CUSTOM_ID: org4d46e531
+  :END:
 
 [[https://github.com/raxod502/prescient.el][ivy-prescient.el]] を導入すると，各 ~ivy~ インターフェイスの使用履歴が記録され，最近選択した項目を上位に出してくれるようになります．ただし，すべてのコマンドが影響下に入るわけではなく， =ivy-read= に正しく ~:caller~ が設定されている場合に限られます．また， ~:sort nil~ または ~:sort~ 設定が存在しない =ivy-read= の場合は， =ivy-prescient-sort-commands= に対象コマンドを追加することで， ~ivy-prescient.el~ の影響下に置くことができます．
 
@@ -926,10 +1064,16 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 * 視覚化
+  :PROPERTIES:
+  :CUSTOM_ID: orgcc69d139
+  :END:
 
 ~ivy~ の良いところは，アイコンを導入して視覚的な見やすさを簡単に向上できるところです．プロンプト，候補リストにアイコンを導入すると，選択対象がどのカテゴリのファイルなのかをファイル名や拡張子ではなく，アイコンで視覚的に把握できるようになります．
 
 ** プロンプトを改良
+   :PROPERTIES:
+   :CUSTOM_ID: orgcb168e7e
+   :END:
 
 プロンプトは，選択候補の数とコマンド名の組み合わせで構成されます． =ivy-count-format= をカスタマイズすれば，現在のカーソル位置が，候補リストの何番目に位置するかも表示できます．
 
@@ -969,6 +1113,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** 現在の選択候補をわかりやすくする
+   :PROPERTIES:
+   :CUSTOM_ID: org36c91268
+   :END:
 
 =ivy-format-functions-alist= にカスタマイズした関数を追加すれば，プロンプトの下部に位置するカーソル行の表示を変更できます． ~all-the-icons~ を導入して，好みのアイコンでカーソル行のある選択候補を目立たせましょう．
 
@@ -1014,6 +1161,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** all-the-icons-ivy.el
+   :PROPERTIES:
+   :CUSTOM_ID: orgba4997bf
+   :END:
 
 [[https://github.com/asok/all-the-icons-ivy][all-the-icons-ivy.el]]は， ~ivy~ インターフェイスにアイコンを追加するパッケージです． ~all-the-icons.el~ が少々導入の難しいパッケージなのですが，一度設定がうまくいけば，殺伐とした Emacs バッファに安らぎがもたらされます．
 
@@ -1049,6 +1199,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 *** COMMENT all-the-icons は鬼門
+    :PROPERTIES:
+    :CUSTOM_ID: org31001ad0
+    :END:
  - all-the-icons-dired--display, neo-buffer--insert-fold-symbol, Google Drive が壊れるやつ．これは，'all-the-icons-dir-icon-alist の設定を最適化すると回避できる．モードライン使わない派には特におすすめ．とてもスッキリする．
 
   ;; ivy-read で呼び出す関数ごとに，ソートのアイコンを切り替えたいね．
@@ -1106,6 +1259,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 ;; (add-hook 'minibuffer-setup-hook #'my-ivy-font-lock-activate)
 
 ** ivy-rich.el
+   :PROPERTIES:
+   :CUSTOM_ID: orga174352e
+   :END:
 
 ミニバッファに候補リストを表示する ~ivy~ は，大きな画面で横方向に複数のウィンドウを表示する状況で，画面上に無駄なスペースが多く生じます．[[https://github.com/Yevgnen/ivy-rich][ivy-rich.el]]を導入すると，アイコンが追加され，さらに追加の情報が空きスペースに記述されるようになります．[[https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf#%E6%A4%9C%E7%B4%A2%E3%81%AA%E3%81%A9%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9----swipercounsel-ivy-rich][Emacsモダン化計画 -かわEmacs編-]] (by [[https://qiita.com/Ladicle][@Ladicle]]) が詳しいです．
 
@@ -1127,6 +1283,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 ** ivy-posframe.el
+   :PROPERTIES:
+   :CUSTOM_ID: org2560e400
+   :END:
 
 ~ivy-posframe~ を使うと，通常はミニバッファに表示されるリストを任意の位置に出すことができます．私自身，まだ使いこなせていないので今後の課題です．以下は， =counsel-M-x= でコマンドリストを表示するときだけカーソル位置にフレームを出す設定です．なお，当初 =ivy-posframe= はマイナーモード化されておらず不便でしたが，[[https://qiita.com/conao3][@conao3]] 氏の[[https://github.com/tumashu/ivy-posframe/pull/43][尽力]]により，現在は =(ivy-posframe-mode 1)=, =(ivy-posframe-mode -1)= で ON/OFFできます．Thanks!
 
@@ -1144,7 +1303,13 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 #+end_src
 
 * 分析
+  :PROPERTIES:
+  :CUSTOM_ID: orgd2891ac2
+  :END:
 ** 読み込みコスト
+   :PROPERTIES:
+   :CUSTOM_ID: orgc6d6e652
+   :END:
 
 ~ivy.el~ と ~helm.el~ の読み込み時間の計測を比較しました．それぞれ依存関係のパッケージの読み込みを含みます．計測は私の貧弱環境です．3回平均の単位は[ms]です．
 
@@ -1158,6 +1323,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 | ivy+counsel | 531 | 514 | 524 |  523 |
 
 ** パッケージサイズ
+   :PROPERTIES:
+   :CUSTOM_ID: orgd0debb44
+   :END:
 
 ~ivy~ と ~helm~ でMALPA経由でインストールする場合のパッケージサイズを比較します．バイトコンパイル済みです．単位は[MB]です．
 
@@ -1194,12 +1362,18 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 | SUM                                |  1.36 |
 
 ** helm と共存の可能性
+   :PROPERTIES:
+   :CUSTOM_ID: org1164ffc7
+   :END:
 
 いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， ~org-trello~ が ~helm~ に依存しているので，私はしばらく ~helm~ 環境を残すことになりそうです．
 
 +なお， ~org-recent-headings~ をインストールしていると共存が厳しくなります．これはバイトコンパイルせずに使うことで回避できます．+ (updated: 2019-08-06)
 
 ** counsel.el にプリセットされている ivy-read 一覧
+   :PROPERTIES:
+   :CUSTOM_ID: orgba310b20
+   :END:
 
 実装されているコマンド一覧です． ~autoload~ 指定された関数は85個ありますが，エイリアスだったりするので，有効なのは82個です．意外なコマンドがすでに実装されているかもしれないので，一度，ざっと目を通してみてはいかがでしょう．
 
@@ -1294,6 +1468,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
  | counsel-minor                      | Enable or disable minor mode.                                |
 
 * まとめ
+  :PROPERTIES:
+  :CUSTOM_ID: org7633081f
+  :END:
 
 この記事では（長々と） ~helm~ から ~ivy~ に移行した時に得られた知見と設定について解説しました．幸いながら，私の ~helm~ の利用レベルはそれほど高くなく，移行しても全く後悔はないですが， ~helm~ への依存度がより高い人の場合は，色々と気に入らない点があるかもしれません．また， ~org-trello.el~ 等， ~helm~ 依存で ~ivy~ が使えないパッケージもまだあるので，移行に慎重な人は，依存しているパッケージの ~ivy~ インターフェイスが存在するかを一度確認してみることをオススメします．それ以外の人は，もう「えいや！」で移行しても後悔しないと思います．
 
@@ -1306,11 +1483,17 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
 4. [[https://github.com/momomo5717/avy-migemo][momomo5717/avy-migemo: avy with migemo]]
 
 * 謝辞
+  :PROPERTIES:
+  :CUSTOM_ID: orgc046d2bb
+  :END:
 
  - 数ヶ月に渡り，私の ~helm2ivy~ を Twitter 上で見守ってくださった心優しい Emacs ユーザの方々に感謝いたします．励ましの声が無ければ，この記事は生まれませんでした．
  - この記事を執筆するためのすべての機能を提供してくれた [[https://www.gnu.org/software/emacs/][Emacs]] と [[https://orgmode.org][Org mode]]，そして，Qiita exporter である [[https://github.com/0x60df/ox-qmd][ox-qmd]] に心から感謝致します．こんな便利なツールは外にありません．Vim ユーザはすぐに Emacs に乗り換えてください．或いは，[[https://github.com/jceb/vim-orgmode][vim-orgmode]]を導入しましょう．
 
 * References
+  :PROPERTIES:
+  :CUSTOM_ID: org2a731b5d
+  :END:
  - [[https://oremacs.com/swiper/][Ivy User Manual]]
  - [[https://speakerdeck.com/takaxp/counsel][さよならhelm、ようこそivy/counsel - Speaker Deck]]
  - [[https://oremacs.com/2015/04/16/ivy-mode/][Introducing ivy-mode · (or emacs]]
@@ -1325,6 +1508,9 @@ https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/ �
  - [[http://kitchingroup.cheme.cmu.edu/blog/2016/06/13/Dynamic-sorting-with-ivy/][Dynamic sorting with ivy]]
 
 * COMMENT drafting
+  :PROPERTIES:
+  :CUSTOM_ID: orgdc061cea
+  :END:
   ;; (define-key counsel-ag-map (kbd "C-x C-d") 'counsel-cd) ;; 必要．
   ;; これは (setq enable-recursive-minibuffers t) で発動
   ;; M-o 経由なら (setq enable-recursive-minibuffers nil) でも大丈夫．

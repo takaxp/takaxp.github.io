@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-14 Sat 11:01 -->
+<!-- 2019-12-14 Sat 11:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>簡略フローで doing 再び</title>
@@ -254,50 +254,50 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga5a2322">1. はじめに</a></li>
-<li><a href="#orgef59579">2. 計測開始を自動化・半自動化する</a></li>
-<li><a href="#org3d174d4">3. インストールと設定</a>
+<li><a href="#org51e7c4b3">1. はじめに</a></li>
+<li><a href="#org026ac0fb">2. 計測開始を自動化・半自動化する</a></li>
+<li><a href="#org7a8872db">3. インストールと設定</a>
 <ul>
-<li><a href="#org4b779b4">3.1. インストール</a></li>
-<li><a href="#orgaa19622">3.2. 推奨追加パッケージ</a>
+<li><a href="#org70d214f4">3.1. インストール</a></li>
+<li><a href="#org73cbe8dc">3.2. 推奨追加パッケージ</a>
 <ul>
-<li><a href="#orga351374">3.2.1. org-bookmark-heading.el</a></li>
-<li><a href="#orgb8372b8">3.2.2. org-clock-today.el</a></li>
+<li><a href="#org81ea9bbf">3.2.1. org-bookmark-heading.el</a></li>
+<li><a href="#org6a533b11">3.2.2. org-clock-today.el</a></li>
 </ul>
 </li>
-<li><a href="#org0d0193d">3.3. 基本設定</a></li>
-<li><a href="#org7a91f38">3.4. キーバインド</a></li>
+<li><a href="#orga5dfcca5">3.3. 基本設定</a></li>
+<li><a href="#org0136d707">3.4. キーバインド</a></li>
 </ul>
 </li>
-<li><a href="#orgdf6e91c">4. 基本的な使い方</a>
+<li><a href="#org854482f7">4. 基本的な使い方</a>
 <ul>
-<li><a href="#orgdc661d4">4.1. 半自動で計測開始する</a></li>
-<li><a href="#org8ae02fd">4.2. 全自動で計測開始する</a></li>
-<li><a href="#orgf47f2db">4.3. 計測中の heading と編集中のバッファを往復する</a></li>
+<li><a href="#org28976be5">4.1. 半自動で計測開始する</a></li>
+<li><a href="#orga500e539">4.2. 全自動で計測開始する</a></li>
+<li><a href="#org249dfcfa">4.3. 計測中の heading と編集中のバッファを往復する</a></li>
 </ul>
 </li>
-<li><a href="#org1db4942">5. ビジュアルフィードバック</a>
+<li><a href="#orge7baeca2">5. ビジュアルフィードバック</a>
 <ul>
-<li><a href="#orgbcbdb80">5.1. 集計時間の表示</a></li>
-<li><a href="#orga992694">5.2. 表示に動きをつける</a></li>
+<li><a href="#orgab011531">5.1. 集計時間の表示</a></li>
+<li><a href="#org6952b254">5.2. 表示に動きをつける</a></li>
 </ul>
 </li>
-<li><a href="#orgd565019">6. その他のオプション</a>
+<li><a href="#orgaafdda15">6. その他のオプション</a>
 <ul>
-<li><a href="#orgaff522c">6.1. Variables</a></li>
-<li><a href="#org64ca7d9">6.2. Hooks</a></li>
+<li><a href="#org3de91e74">6.1. Variables</a></li>
+<li><a href="#org9d8899be">6.2. Hooks</a></li>
 </ul>
 </li>
-<li><a href="#org4238b0a">7. まとめ</a></li>
-<li><a href="#org5cfef6b">8. References</a></li>
-<li><a href="#orgf5ea1f7">9. おまけ</a></li>
+<li><a href="#org7b23a707">7. まとめ</a></li>
+<li><a href="#orgc17811ba">8. References</a></li>
+<li><a href="#orgbf06aa51">9. おまけ</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orga5a2322" class="outline-2">
-<h2 id="orga5a2322"><span class="section-number-2">1</span> はじめに</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org51e7c4b3" class="outline-2">
+<h2 id="org51e7c4b3"><span class="section-number-2">1</span> はじめに</h2>
+<div class="outline-text-2" id="text-org51e7c4b3">
 <p>
 <code>Emacs Org mode</code> には，工数を計測するための機能が標準で備わっています．基本的な使い方は，時間を計測したいタスクで <code>M-x org-clock-in</code> して，作業を終えたら <code>M-x org-clock-out</code> する操作です．そうして記録した各タスクの計測時間は，後から簡単に集計でき，表として出力できるため，工数記録とレポート作成に重宝しているユーザも多いようです．<br />
 </p>
@@ -316,9 +316,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgef59579" class="outline-2">
-<h2 id="orgef59579"><span class="section-number-2">2</span> 計測開始を自動化・半自動化する</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org026ac0fb" class="outline-2">
+<h2 id="org026ac0fb"><span class="section-number-2">2</span> 計測開始を自動化・半自動化する</h2>
+<div class="outline-text-2" id="text-org026ac0fb">
 <p>
 「 <b>org-clock-in</b> し忘れる？なら常に記録すれば良いじゃんか」と，結論を安直に導くことも可能ですが，実際の運用はそう簡単ではありません．なぜなら，Org modeの各 heading は，常に計測を目的としている heading とは限らないためです．計測対象ではない単なるメモも同じバッファに存在しえます．そしてやはり理想的なのは，「自分は今からこのタスクに集中する」と確定したものだけを計測・記録することです．<br />
 </p>
@@ -356,13 +356,13 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org3d174d4" class="outline-2">
-<h2 id="org3d174d4"><span class="section-number-2">3</span> インストールと設定</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org7a8872db" class="outline-2">
+<h2 id="org7a8872db"><span class="section-number-2">3</span> インストールと設定</h2>
+<div class="outline-text-2" id="text-org7a8872db">
 </div>
-<div id="outline-container-org4b779b4" class="outline-3">
-<h3 id="org4b779b4"><span class="section-number-3">3.1</span> インストール</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org70d214f4" class="outline-3">
+<h3 id="org70d214f4"><span class="section-number-3">3.1</span> インストール</h3>
+<div class="outline-text-3" id="text-org70d214f4">
 <p>
 いつものようにダウンロードして <code>load-path</code> に配置してください．<br />
 </p>
@@ -383,22 +383,22 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgaa19622" class="outline-3">
-<h3 id="orgaa19622"><span class="section-number-3">3.2</span> 推奨追加パッケージ</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org73cbe8dc" class="outline-3">
+<h3 id="org73cbe8dc"><span class="section-number-3">3.2</span> 推奨追加パッケージ</h3>
+<div class="outline-text-3" id="text-org73cbe8dc">
 </div>
-<div id="outline-container-orga351374" class="outline-4">
-<h4 id="orga351374"><span class="section-number-4">3.2.1</span> org-bookmark-heading.el</h4>
-<div class="outline-text-4" id="text-3-2-1">
+<div id="outline-container-org81ea9bbf" class="outline-4">
+<h4 id="org81ea9bbf"><span class="section-number-4">3.2.1</span> org-bookmark-heading.el</h4>
+<div class="outline-text-4" id="text-org81ea9bbf">
 <p>
 ビルトインではないパッケージへの依存として<a href="https://github.com/alphapapa/org-bookmark-heading">org-bookmark-heading.el</a>を想定してます．インストールしなくても動作します．ただ，ブックマークの精度を向上させる効果があるため，導入をおすすめします．<br />
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb8372b8" class="outline-4">
-<h4 id="orgb8372b8"><span class="section-number-4">3.2.2</span> org-clock-today.el</h4>
-<div class="outline-text-4" id="text-3-2-2">
+<div id="outline-container-org6a533b11" class="outline-4">
+<h4 id="org6a533b11"><span class="section-number-4">3.2.2</span> org-clock-today.el</h4>
+<div class="outline-text-4" id="text-org6a533b11">
 <p>
 標準の工数計測では，あるタスクについての「過去費やした累計時間」を簡単にタイトルバーに表示できますが， <code>org-clock-today.el</code> を使うと，さらに2種類の <b>本日費やした合計時間</b> を集計してタイトルバー（或いはモードライン）に出すことができます．こちらのパッケージも必須ではないです<br />
 </p>
@@ -414,9 +414,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org0d0193d" class="outline-3">
-<h3 id="org0d0193d"><span class="section-number-3">3.3</span> 基本設定</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-orga5dfcca5" class="outline-3">
+<h3 id="orga5dfcca5"><span class="section-number-3">3.3</span> 基本設定</h3>
+<div class="outline-text-3" id="text-orga5dfcca5">
 <p>
 <code>org-onit.el</code> についてはほぼ設定無しで使えると思います．<br />
 </p>
@@ -469,9 +469,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org7a91f38" class="outline-3">
-<h3 id="org7a91f38"><span class="section-number-3">3.4</span> キーバインド</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org0136d707" class="outline-3">
+<h3 id="org0136d707"><span class="section-number-3">3.4</span> キーバインド</h3>
+<div class="outline-text-3" id="text-org0136d707">
 <p>
 デフォルトの設定は定められていませんが，次を推奨しています．自由に変更してください．<br />
 </p>
@@ -488,17 +488,17 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgdf6e91c" class="outline-2">
-<h2 id="orgdf6e91c"><span class="section-number-2">4</span> 基本的な使い方</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org854482f7" class="outline-2">
+<h2 id="org854482f7"><span class="section-number-2">4</span> 基本的な使い方</h2>
+<div class="outline-text-2" id="text-org854482f7">
 <p>
 使い方は，半自動で <code>org-clock-in</code> するか？と，全自動で <code>org-clock-in</code> するか？で分かれます．以下の説明は，上記の推奨キーバインドを適用していることを前提として書かれています．<br />
 </p>
 </div>
 
-<div id="outline-container-orgdc661d4" class="outline-3">
-<h3 id="orgdc661d4"><span class="section-number-3">4.1</span> 半自動で計測開始する</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org28976be5" class="outline-3">
+<h3 id="org28976be5"><span class="section-number-3">4.1</span> 半自動で計測開始する</h3>
+<div class="outline-text-3" id="text-org28976be5">
 <p>
 計測を開始したい heading で <code>&lt;f11&gt;</code> を押下（或いは <code>M-x org-onit-toggle-doing</code> ）します．見出し行にカーソルが無くても大丈夫です．<br />
 </p>
@@ -513,9 +513,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org8ae02fd" class="outline-3">
-<h3 id="org8ae02fd"><span class="section-number-3">4.2</span> 全自動で計測開始する</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-orga500e539" class="outline-3">
+<h3 id="orga500e539"><span class="section-number-3">4.2</span> 全自動で計測開始する</h3>
+<div class="outline-text-3" id="text-orga500e539">
 <p>
 <code>S-&lt;f11&gt;</code> 押下（或いは， <code>M-x org-onit-toggle-auto</code> ）します．それ以降，heading を訪問だけで，自動的に計測が開始されます．<br />
 </p>
@@ -530,9 +530,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgf47f2db" class="outline-3">
-<h3 id="orgf47f2db"><span class="section-number-3">4.3</span> 計測中の heading と編集中のバッファを往復する</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org249dfcfa" class="outline-3">
+<h3 id="org249dfcfa"><span class="section-number-3">4.3</span> 計測中の heading と編集中のバッファを往復する</h3>
+<div class="outline-text-3" id="text-org249dfcfa">
 <p>
 Org mode に慣れてくると，タスクリストを特定の heading に集約し，編集作業そのものは他のバッファやファイルで実施するパターンが増えると思います．<br />
 </p>
@@ -561,17 +561,17 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 </div>
 </div>
 
-<div id="outline-container-org1db4942" class="outline-2">
-<h2 id="org1db4942"><span class="section-number-2">5</span> ビジュアルフィードバック</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orge7baeca2" class="outline-2">
+<h2 id="orge7baeca2"><span class="section-number-2">5</span> ビジュアルフィードバック</h2>
+<div class="outline-text-2" id="text-orge7baeca2">
 <p>
 計測後に表に計測結果をまとめるのとは別に，計測状況をリアルタイムに表示して確認できます．特に，一日に積み重ねた作業時間を確認できれば，計測時間が <code>08:00</code> を超える辺りで，おもむろにビールを飲み始めてもいいかもしれません．<br />
 </p>
 </div>
 
-<div id="outline-container-orgbcbdb80" class="outline-3">
-<h3 id="orgbcbdb80"><span class="section-number-3">5.1</span> 集計時間の表示</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-orgab011531" class="outline-3">
+<h3 id="orgab011531"><span class="section-number-3">5.1</span> 集計時間の表示</h3>
+<div class="outline-text-3" id="text-orgab011531">
 <p>
 モードラインやタイトルバーに，あるタスクについて「過去費やした累計時間」や，バッファ内の全タスクから集計した，或いは，あるタスクのサブ heading から集計した「本日費やした合計時間」を表示できます．<br />
 </p>
@@ -648,9 +648,9 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 </div>
 </div>
 
-<div id="outline-container-orga992694" class="outline-3">
-<h3 id="orga992694"><span class="section-number-3">5.2</span> 表示に動きをつける</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-org6952b254" class="outline-3">
+<h3 id="org6952b254"><span class="section-number-3">5.2</span> 表示に動きをつける</h3>
+<div class="outline-text-3" id="text-org6952b254">
 <p>
 タイトルバーの表示に少し動きをつけたい場合は， <code>(org-onit-get-sign)</code> の戻り値を使ってください．アニメーション表示になります．表示要素は， <code>org-onit-clocking-sign-alist</code> を設定すれば自由に変えられます．<br />
 </p>
@@ -677,17 +677,17 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 </div>
 </div>
 
-<div id="outline-container-orgd565019" class="outline-2">
-<h2 id="orgd565019"><span class="section-number-2">6</span> その他のオプション</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orgaafdda15" class="outline-2">
+<h2 id="orgaafdda15"><span class="section-number-2">6</span> その他のオプション</h2>
+<div class="outline-text-2" id="text-orgaafdda15">
 <p>
 いくつかのユーザ設定変数があります．基本的な挙動は， <code>org-onit-basic-options</code> にて変更できます．必要に応じて変更してください．<br />
 </p>
 </div>
 
-<div id="outline-container-orgaff522c" class="outline-3">
-<h3 id="orgaff522c"><span class="section-number-3">6.1</span> Variables</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-org3de91e74" class="outline-3">
+<h3 id="org3de91e74"><span class="section-number-3">6.1</span> Variables</h3>
+<div class="outline-text-3" id="text-org3de91e74">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -768,9 +768,9 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 </div>
 </div>
 
-<div id="outline-container-org64ca7d9" class="outline-3">
-<h3 id="org64ca7d9"><span class="section-number-3">6.2</span> Hooks</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org9d8899be" class="outline-3">
+<h3 id="org9d8899be"><span class="section-number-3">6.2</span> Hooks</h3>
+<div class="outline-text-3" id="text-org9d8899be">
 <p>
 いくつかの hook を準備してあります．特に <code>org-onit-after-jump-hook</code> を設定すると，計測中の heading にジャンプした後の挙動を変更できます．<br />
 </p>
@@ -797,9 +797,9 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 </div>
 </div>
 
-<div id="outline-container-org4238b0a" class="outline-2">
-<h2 id="org4238b0a"><span class="section-number-2">7</span> まとめ</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org7b23a707" class="outline-2">
+<h2 id="org7b23a707"><span class="section-number-2">7</span> まとめ</h2>
+<div class="outline-text-2" id="text-org7b23a707">
 <p>
 本記事では，拙作の <a href="https://github.com/takaxp/org-onit">org-onit.el</a> を導入して， <code>Org mode</code> の工数計測を半自動化する方法についてまとめました．<br />
 </p>
@@ -810,9 +810,9 @@ Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウ
 </div>
 </div>
 
-<div id="outline-container-org5cfef6b" class="outline-2">
-<h2 id="org5cfef6b"><span class="section-number-2">8</span> References</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgc17811ba" class="outline-2">
+<h2 id="orgc17811ba"><span class="section-number-2">8</span> References</h2>
+<div class="outline-text-2" id="text-orgc17811ba">
 <ul class="org-ul">
 <li><a href="https://github.com/alphapapa/org-bookmark-heading">alphapapa/org-bookmark-heading: Emacs bookmark support for Org-mode</a><br /></li>
 <li><a href="https://github.com/mallt/org-clock-today-mode">mallt/org-clock-today-mode: Emacs minor mode to show the total clocked time of the current day in the mode line</a><br /></li>
@@ -822,9 +822,9 @@ Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウ
 </div>
 </div>
 
-<div id="outline-container-orgf5ea1f7" class="outline-2">
-<h2 id="orgf5ea1f7"><span class="section-number-2">9</span> おまけ</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgbf06aa51" class="outline-2">
+<h2 id="orgbf06aa51"><span class="section-number-2">9</span> おまけ</h2>
+<div class="outline-text-2" id="text-orgbf06aa51">
 <p>
 本記事の課題に対して以前に，<a href="https://qiita.com/takaxp/items/6b2d1e05e7ce4517274d">org-clock-in を意識しないで作業時間を記録する - Qiita</a>にて， <code>org-clock-in</code> の自動化を試しました．この時は <a href="https://github.com/takaxp/org-tree-slide">org-tree-slide.el</a> を用いて narrowing をトリガーに計測を自動化しましたが，設定が少々複雑でした．また，<a href="https://qiita.com/takaxp/items/4dfa11a81e18b29143ec">「今，そこにあるタスク（危機）」をDoingリストで乗り切る - Qiita</a> も書きましたが，この記事では短期集中したいタスク群を Doingタグで串刺しにしておくのが目的でした．今回はごく単純に， <code>Doing</code> が付いているタスクが今集中したいタスクということで，以前よりも運用しやすくなった気がします．<br />
 </p>
@@ -833,7 +833,7 @@ Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウ
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2019-12-14 Sat 11:01</p>
+<p class="date">Created: 2019-12-14 Sat 11:26</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SRC=$HOME/Dropbox/emacs.d/config
-ART=$HOME/Dropbox/org/draft
+ART=$HOME/Dropbox/org/articles
 DST=$HOME/devel/git/takaxp.github.io
 
 if [ -d $SRC -a -d $DST ]; then
