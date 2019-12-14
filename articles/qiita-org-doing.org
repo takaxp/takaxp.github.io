@@ -191,7 +191,7 @@
    :CUSTOM_ID: org28976be5
    :END:
 
-計測を開始したい heading で =<f11>= を押下（或いは =M-x org-onit-toggle-doing= ）します．見出し行にカーソルが無くても大丈夫です．
+計測を開始したい heading で =<f11>= を押下（或いは =M-x org-onit-toggle-doing= ）します．見出し行にカーソルが無くても大丈夫です．モードラインに「Doing」と表示されます．
 
 デフォルトでは，すでに ~DONE~ の heading では計測開始しませんが， =org-onit-basic-options= で ='(:wakeup both)= または ='(:wakeup doing)= に設定している場合には計測開始します．
 
@@ -202,7 +202,7 @@
    :CUSTOM_ID: orga500e539
    :END:
 
-=M-<f11>= 押下（或いは， =M-x org-onit-toggle-auto= ）します．それ以降，heading を訪問だけで，自動的に計測が開始されます．
+=M-<f11>= 押下（或いは， =M-x org-onit-toggle-auto= ）します．それ以降，heading を訪問だけで，自動的に計測が開始されます．モードラインには「Doing:auto」と表示されます．
 
 =org-onit-basic-options= で ='(:wakeup nil)= または ='(:wakeup doing)= を設定していると， heading が ~DONE~ である場合には発動しません．また， ='(:nostate nil)= または ='(:nostate doing)= の場合， ~TODO~ 等の todo state が設定されていない heading では発動しません．
 
