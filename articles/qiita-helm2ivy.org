@@ -5,11 +5,10 @@
 
 #+begin_src emacs-lisp :exports none :results none
 (when (org-html-export-to-html)
-  (find-file (concat (file-name-directory (buffer-file-name))
-                     (file-name-base (buffer-name)) ".html"))
-  (my-convert-md-link-to-html)
-  (save-buffer "qiita-helm2ivy.html"))
-;;(org-open-link-from-string "https://pxaka.tokyo/articles")
+  (let ((html-file (concat (file-name-base (buffer-file-name)) ".html")))
+    (find-file (concat (file-name-directory (buffer-file-name)) html-file))
+    (my-convert-md-link-to-html)
+    (save-buffer html-file)))
 #+end_src
 
 * COMMENT 確認事項
@@ -75,14 +74,18 @@
 個別の設定や細かなハックに移る前に，まずは，これさえあればとりあえず動くという設定を施します．
 
 *** ivy.el
+    :PROPERTIES:
+    :ID:       9A2A5219-1DC6-4F9D-82E5-672C6A4326D3
+    :END:
 
 まずは ~ivy~ を使えるようにします．ほぼ素のままで良いです．
 
 #+begin_src emacs-lisp
 (when (require 'ivy nil t)
 
-  ;; M-o を ivy-dispatching-done-hydra に割り当てる．
-  (require 'ivy-hydra)
+  ;; M-o を ivy-hydra-read-action に割り当てる．
+  (when (require 'ivy-hydra nil t)
+    (setq ivy-read-action-function #'ivy-hydra-read-action))
 
   ;; `ivy-switch-buffer' (C-x b) のリストに recent files と bookmark を含める．
   (setq ivy-use-virtual-buffers t)
@@ -97,6 +100,8 @@
   ;; アクティベート
   (ivy-mode 1))
 #+end_src
+
+NOTE [2019-10-23 Wed]: [[https://github.com/abo-abo/swiper/commit/1ad457d8e76c431783d2efb866ef51b8c14e7c82][ivy.el (ivy-read-action-function): Fix type · abo-abo/swiper@1ad457d]] にて =ivy-dispatching-done-hydra= が無くなり， =ivy-hydra= を読み込むだけでは， =M-o= がリッチな表示になりません．追加で， =ivy-read-action-function= の設定が必要です．
 
 *** counsel.el
 
@@ -334,6 +339,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
 ** counsel-find-file を使わない
+   :PROPERTIES:
+   :ID:       9EBE78D7-2814-44E7-A218-57069657EA86
+   :END:
 
 =counsel-find-file= が =find-file= を置き換えますが，私は素の =find-file= を気に入っているので， =counsel-find-file= を無効化します．
 
@@ -351,6 +359,12 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 #+end_src
 
  - see https://emacs.stackexchange.com/questions/45929/disable-ivy-for-find-file
+
+=counsel-find-flie= を常用する場合には，リスト候補に不要なファイルを出さない方が見通しがよくなるので，次のように設定すると良さそうです． =macOS= であれば， =.DS_Store= をリスト一覧から除外できます．
+
+#+begin_src emacs-lisp
+(setq counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
+#+end_src
 
 ** find-library のバグを回避
 
@@ -371,6 +385,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 ;; a. (make-obsolete 'find-library 'counsel-find-library)
 ;; b. (put 'find-library 'disabled t)
 ** counsel-M-x
+   :PROPERTIES:
+   :ID:       2999BC1A-EC4D-4049-AB5C-9E104449CE62
+   :END:
 
 ~helm~ や ~ivy~ を使う大きな目的として，コマンドの絞り込みがあります． ~helm~ から ~ivy~ に移行すると， ~M-x~ の印象がかなり違うので，必要に応じて ~helm~ 流になるように設定して使います．4点ほど設定・カスタマイズします．
 

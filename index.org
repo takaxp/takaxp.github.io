@@ -1,6 +1,6 @@
 #+title:  My Online Documents
 #+author: Takaaki ISHIKAWA
-#+date:   [2019-03-22 Fri 16:23]
+#+date:   [2019-12-14 Sat 10:57]
 #+setupfile: theme-readtheorg.setup
 
 * Configurations for GNU Emacs
@@ -11,6 +11,11 @@
 * Org Mode Manual (Japanese translation)
 
  - [[./org-ja.html][org-ja.html (v7.5)]]
+
+* Articles
+
+ - [[./articles/qiita-helm2ivy.html][Switching from helm to ivy]]
+ - [[./articles/qiita-org-doing.html][Let's doing with org-onit]]
 
 * Talks
 
