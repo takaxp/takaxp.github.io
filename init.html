@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-12 Thu 11:42 -->
+<!-- 2019-12-16 Mon 19:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Configurations for GNU Emacs</title>
@@ -3499,20 +3499,20 @@ gzされた elisp ソースを見るときに， <code>view-mode</code> を使�
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">&#29305;&#23450;&#12398;&#25313;&#24373;&#23376;&#12539;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;</span>
-(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-auto-view-regexp</span> <span style="color: #8b2252;">"\\.el.gz$</span><span style="color: #66CC99;">\\</span><span style="color: #9966CC;">|</span><span style="color: #8b2252;">\\.emacs.d/[</span><span style="color: #8b2252;">^</span><span style="color: #8b2252;">/]+/el-get"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">"\\.el.gz$\\|\\.org$"</span>
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-auto-view-regexp</span> <span style="color: #8b2252;">"\\.el.gz$</span><span style="color: #66CC99;">\\</span><span style="color: #9966CC;">|</span><span style="color: #8b2252;">\\.emacs.d/[</span><span style="color: #8b2252;">^</span><span style="color: #8b2252;">/]+/el-get"</span>)
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#29305;&#23450;&#12398;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#65288;&#32118;&#23550;&#12497;&#12473;&#12539;&#12507;&#12540;&#12512;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#20197;&#19979;&#65289;</span>
 (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-auto-view-dirs</span> nil)
 (add-to-list 'my-auto-view-dirs <span style="color: #8b2252;">"~/devel/emacs-head/emacs/"</span>)
 
-(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-auto-view-mode</span> ()
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-auto-view</span> ()
   (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> my-auto-view-regexp
              (string-match my-auto-view-regexp buffer-file-name))
     (view-mode 1))
   (<span style="color: #a020f0;">dolist</span> (dir my-auto-view-dirs)
     (<span style="color: #a020f0;">when</span> (eq 0 (string-match (expand-file-name dir) buffer-file-name))
       (view-mode 1))))
-(add-hook 'find-file-hook #'my-auto-view-mode)
+(add-hook 'find-file-hook #'my-auto-view)
 </pre>
 </div>
 </div>
@@ -4916,13 +4916,15 @@ OS標準の辞書アプリ（dictionary.app）を経由して，バッファにC
   (<span style="color: #a020f0;">unless</span> (eq my-buffer-narrowed-last
               buffer-narrowed) <span style="color: #b22222;">;; </span><span style="color: #b22222;">block unnecessary request</span>
     (<span style="color: #a020f0;">setq</span> my-buffer-narrowed-last buffer-narrowed)
-    (<span style="color: #a020f0;">if</span> buffer-narrowed
-        (custom-set-faces
-         `(mode-line ((t (<span style="color: #483d8b;">:background</span>
-                          ,(nth 0 my-narrow-modeline)
-                          <span style="color: #483d8b;">:foreground</span>
-                          ,(nth 1 my-narrow-modeline))))))
-      (custom-set-faces '(mode-line ((t nil)))))))
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(message "--- %s %s %s" this-command last-command buffer-narrowed)</span>
+    (<span style="color: #a020f0;">when</span> (not (memq this-command '(save-buffer))) <span style="color: #b22222;">;; </span><span style="color: ##3030FF;">FIXME</span>
+      (<span style="color: #a020f0;">if</span> buffer-narrowed
+          (custom-set-faces
+           `(mode-line ((t (<span style="color: #483d8b;">:background</span>
+                            ,(nth 0 my-narrow-modeline)
+                            <span style="color: #483d8b;">:foreground</span>
+                            ,(nth 1 my-narrow-modeline))))))
+        (custom-set-faces '(mode-line ((t nil))))))))
 
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-update-modeline-color</span> ()
   <span style="color: #8b2252;">"Update modeline face of the current selected window.</span>
@@ -6533,10 +6535,10 @@ ivyに移行しました．<br />
     (<span style="color: #a020f0;">defhydra</span> hydra-timestamp (<span style="color: #483d8b;">:color</span> <span style="color: #ffffff; background-color: #0000ff;">blue</span> <span style="color: #483d8b;">:hint</span> none)
       <span style="color: #8b2252;">"</span>
 <span style="color: #8b2252;">   === Timestamp ===</span>
-<span style="color: #8b2252;">0. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?i? (_i_so 8601)   </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?n? (_n_ow)   </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?w? (_w_eek)   </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?a? (week-d_a_y)</span>
-<span style="color: #8b2252;">_1_. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?t? (ISO 8601 including _t_imezone)</span>
-<span style="color: #8b2252;">_2_. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?r?    (Org Mode: _r_ight now)</span>
-<span style="color: #8b2252;">_3_. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?s?          (Org Mode: by _s_elect)                             _q_uit</span>
+<span style="color: #8b2252;">0. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?i? (_i_so 8601)   </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?n? (_n_ow)   </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?w? (_w_eek)   </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?a? (week-d_a_y)</span>
+<span style="color: #8b2252;">_1_. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?t? (ISO 8601 including _t_imezone)</span>
+<span style="color: #8b2252;">_2_. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?r?    (Org Mode: _r_ight now)</span>
+<span style="color: #8b2252;">_3_. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?s?          (Org Mode: by _s_elect)                             _q_uit</span>
 <span style="color: #8b2252;">"</span>
       (<span style="color: #8b2252;">"q"</span> nil)
       (<span style="color: #8b2252;">"i"</span> help/insert-datestamp (format-time-string <span style="color: #8b2252;">"%F"</span>))
@@ -9483,7 +9485,7 @@ Org Mode は巨大なパッケージなので，設定項目が必然的に増�
       (<span style="color: #a020f0;">when</span> (org-clocking-p)
         (org-clock-out)
         (save-some-buffers t)))
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">implemented in `</span><span style="color: #008b8b;">org-onit.el</span><span style="color: #b22222;">'.</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">implemented in `</span><span style="color: #008b8b;">org-onit.el</span><span style="color: #b22222;">'. No need to hook this.</span>
     <span style="color: #b22222;">;; </span><span style="color: #b22222;">(add-hook 'kill-emacs-hook #'my-org-clock-out-and-save-when-exit)</span>
     ))
 </pre>
@@ -10421,6 +10423,7 @@ Emacs を起動している限り，いつでもどこでもメモを記録で�
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
        '(org-onit-toggle-doing
+         org-onit-mode
          org-onit-toggle-auto org-clock-goto my-sparse-doing-tree
          org-clock-goto org-onit-clock-in-when-unfold
          org-onit-update-options)
@@ -10444,11 +10447,7 @@ Emacs を起動している限り，いつでもどこでもメモを記録で�
     (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-plist</span> nil t)
       (add-to-list 'org-plist-dict '(<span style="color: #8b2252;">"OPTIONS_ONIT"</span> org-onit-basic-options)))
     (custom-set-variables
-     '(org-onit-toggle-options '(<span style="color: #483d8b;">:wakeup</span> nil <span style="color: #483d8b;">:nostate</span> doing <span style="color: #483d8b;">:unfold</span> nil))))
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">(with-eval-after-load "org-onit"</span>
-  <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(setq-default org-onit-toggle-options '(:wakeup nil :nostate doing :unfold nil)))</span>
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">(with-eval-after-load "org-onit"</span>
-  <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(setq org-onit-toggle-options '(:wakeup nil :nostate doing :unfold nil)))</span>
+     '(org-onit-basic-options '(<span style="color: #483d8b;">:wakeup</span> nil <span style="color: #483d8b;">:nostate</span> doing <span style="color: #483d8b;">:unfold</span> nil))))
 
   (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org-clock"</span>
     (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-onit-reveal</span> ()
@@ -11088,7 +11087,7 @@ org-mode の表のようにフェイスを統一しています． <code>calfw</
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-org" id="org7664779"><span style="color: #b22222;"># -*- mode: org; -*-</span>
+<pre class="src src-org" id="org8be2c3e"><span style="color: #b22222;"># -*- mode: org; -*-</span>
 
 <span style="color: #b22222;">#+html_head: &lt;link rel="stylesheet" type="text/css" href="<a href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css&quot;/">https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/</a>&gt;</span>
 <span style="color: #b22222;">#+html_head: &lt;link rel="stylesheet" type="text/css" href="<a href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css&quot;/">https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/</a>&gt;</span>
@@ -11581,6 +11580,7 @@ org-mode の表のようにフェイスを統一しています． <code>calfw</
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"ox"</span>
   (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-org-export-before-hook</span> nil)
   (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-org-export-after-hook</span> nil)
+  (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-org-export-last-buffer</span> nil)
 
   (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-org-export--post-processing</span> ()
     (<span style="color: #a020f0;">when</span> (eq this-command 'org-export-dispatch)
@@ -11615,7 +11615,24 @@ org-mode の表のようにフェイスを統一しています． <code>calfw</
     (<span style="color: #a020f0;">let</span> ((this-command nil))
       (apply f backend subtreep)))
   (advice-add 'org-export-insert-default-template <span style="color: #483d8b;">:around</span>
-              #'my-org-export-insert-default-template))
+              #'my-org-export-insert-default-template)
+
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-org-export-to-buffer</span> (_backend
+                                  buffer
+                                  <span style="color: #228b22;">&amp;optional</span> _async _subtreep _visible-only
+                                  _body-only _ext-plist _post-process)
+    (<span style="color: #a020f0;">setq</span> my-org-export-last-buffer buffer))
+  (advice-add 'org-export-to-buffer <span style="color: #483d8b;">:after</span> #'my-org-export-to-buffer)
+
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-copy-exported-buffer</span> ()
+    (<span style="color: #a020f0;">interactive</span>)
+    (<span style="color: #a020f0;">when</span> my-org-export-last-buffer
+      (<span style="color: #a020f0;">with-current-buffer</span> my-org-export-last-buffer
+        (mark-whole-buffer)
+        (kill-ring-save (point-min) (point-max))
+        (message <span style="color: #8b2252;">"Copied: %s"</span> my-org-export-last-buffer))
+      (<span style="color: #a020f0;">setq</span> my-org-export-last-buffer nil)))
+  (add-hook 'my-org-export-after-hook #'my-copy-exported-buffer))
 </pre>
 </div>
 </div>
@@ -13453,7 +13470,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
               (<span style="color: #8b2252;">"</span><span style="color: ##3030FF;">FIXME</span><span style="color: #8b2252;">"</span>  . <span style="color: #8b2252;">"#</span><span style="color: #ffffff; background-color: #3030FF;">#3030FF</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #cc9393;">XXX</span><span style="color: #8b2252;">+"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"\\?\\?\\?+"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
-              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
+              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #ff0000;">&#61576;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #ff0000;">red</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #43cd80;">&#61575;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"Seagreen3"</span>)))
       (my-hl-todo-reload))
@@ -13477,7 +13494,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
               (<span style="color: #8b2252;">"</span><span style="color: ##3030FF;">FIXME</span><span style="color: #8b2252;">"</span>  . <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #1e90ff;">DodgerBlue1</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #cc9393;">XXX</span><span style="color: #8b2252;">+"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"\\?\\?\\?+"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
-              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
+              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #ff0000;">&#61576;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #ff0000;">red</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #43cd80;">&#61575;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"Seagreen3"</span>)))
       (my-hl-todo-reload))
@@ -13648,7 +13665,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
 <div class="outline-text-3" id="text-org4b927009">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"ivy"</span>
-<span style="color: #b22222;">;;; </span><span style="color: #b22222;">&#36984;&#25246;&#23550;&#35937;&#12434; "</span><span style="color: #ffa500;">&#61604;</span><span style="color: #b22222;">" &#12395;&#12377;&#12427; (requires all-the-icons.el)</span>
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">&#36984;&#25246;&#23550;&#35937;&#12434; "</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #b22222;">" &#12395;&#12377;&#12427; (requires all-the-icons.el)</span>
   (<span style="color: #a020f0;">defface</span> <span style="color: #a0522d;">my-ivy-arrow-visible</span>
     '((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
       (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #EE6363;">#EE6363</span><span style="color: #8b2252;">"</span>))
@@ -14553,7 +14570,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki Ishikawa</p>
-<p class="date">Created: 2019-12-12 Thu 11:42</p>
+<p class="date">Created: 2019-12-16 Mon 19:50</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
