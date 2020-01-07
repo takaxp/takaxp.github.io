@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-19 Thu 13:52 -->
+<!-- 2020-01-07 Tue 13:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Configurations for GNU Emacs</title>
@@ -320,8 +320,9 @@ for the JavaScript code in this tag.
 <li><a href="#orgb5cd55a9">3.18. [aggressive-indent.el] 即時バッファ整形</a></li>
 <li><a href="#org723e2b73">3.19. [uniquify.el] 同じバッファ名が開かれた場合に区別する</a></li>
 <li><a href="#org982c69d7">3.20. [ws-butler.el] 不要なスペースを自動除去</a></li>
-<li><a href="#orge44eded5">3.21. NSビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
-<li><a href="#org53a63301">3.22. EMPビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
+<li><a href="#orge014847e">3.21. [epa.el] GPGを使う</a></li>
+<li><a href="#orge44eded5">3.22. NSビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
+<li><a href="#org53a63301">3.23. EMPビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
 </ul>
 </li>
 <li><a href="#org35f3bbc9">4. カーソル移動</a>
@@ -445,27 +446,27 @@ for the JavaScript code in this tag.
 <li><a href="#orgec7835e0">6.21. 文字エンコードの表示を明確化</a></li>
 <li><a href="#org0e59b85f">6.22. [delight.el] モードラインのモード名を短縮する</a></li>
 <li><a href="#org74bad2de">6.23. [migemo.el] ローマ字入力で日本語を検索する</a></li>
-<li><a href="#org56d8bf9d">6.24. [helm.el] 続・何でも絞り込みインターフェイス</a></li>
-<li><a href="#org6332fe92">6.25. [git-gutter-fringe] 編集差分をフレーム端で視覚化</a></li>
-<li><a href="#orgd6308db6">6.26. [japanese-holidays] カレンダーをカラフルにする</a></li>
-<li><a href="#org12f72886">6.27. [calendar.el] カレンダーで週番号を表示する</a></li>
-<li><a href="#orgc45b24d4">6.28. [which-key] キーバインドの選択肢をポップアップする</a></li>
-<li><a href="#org467accb9">6.29. [highlight-symbol] 同じ名前のシンボルをハイライトする</a></li>
-<li><a href="#org962224ff">6.30. [all-the-icons.el] フォントでアイコン表示</a></li>
-<li><a href="#orgd92b50db">6.31. [all-the-icons-dired] dired でアイコンを表示</a></li>
-<li><a href="#org402f1293">6.32. [eldoc.el] コンテクストに応じてヘルプを表示</a></li>
-<li><a href="#org138fda77">6.33. [go-eldoc.el] Go用の eldoc</a></li>
-<li><a href="#org7cab354d">6.34. [keycast.el] 入力しているキーとコマンドをモードラインに表示</a></li>
-<li><a href="#orgfa7d126f">6.35. [ivy.el] 続々・何でも絞り込みインターフェイス</a></li>
-<li><a href="#org9c962eaf">6.36. [ivy.el] プロンプトをカスタマイズ</a></li>
-<li><a href="#org45b3667a">6.37. [imenu-list.el] サイドバー的にファイル内容の目次要素を表示</a></li>
+<li><a href="#org6332fe92">6.24. [git-gutter-fringe] 編集差分をフレーム端で視覚化</a></li>
+<li><a href="#orgd6308db6">6.25. [japanese-holidays] カレンダーをカラフルにする</a></li>
+<li><a href="#org12f72886">6.26. [calendar.el] カレンダーで週番号を表示する</a></li>
+<li><a href="#orgc45b24d4">6.27. [which-key] キーバインドの選択肢をポップアップする</a></li>
+<li><a href="#org467accb9">6.28. [highlight-symbol] 同じ名前のシンボルをハイライトする</a></li>
+<li><a href="#org962224ff">6.29. [all-the-icons.el] フォントでアイコン表示</a></li>
+<li><a href="#orgd92b50db">6.30. [all-the-icons-dired] dired でアイコンを表示</a></li>
+<li><a href="#org402f1293">6.31. [eldoc.el] コンテクストに応じてヘルプを表示</a></li>
+<li><a href="#org138fda77">6.32. [go-eldoc.el] Go用の eldoc</a></li>
+<li><a href="#org7cab354d">6.33. [keycast.el] 入力しているキーとコマンドをモードラインに表示</a></li>
+<li><a href="#orgfa7d126f">6.34. [ivy.el] 続々・何でも絞り込みインターフェイス</a></li>
+<li><a href="#org9c962eaf">6.35. [ivy.el] プロンプトをカスタマイズ</a></li>
+<li><a href="#org45b3667a">6.36. [imenu-list.el] サイドバー的にファイル内容の目次要素を表示</a></li>
+<li><a href="#org29951da5">6.37. [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）</a></li>
 <li><a href="#orgf0e91c5a">6.38. <span class="todo TODO">TODO</span> [swiper.el] 文字列探索とプレビューを同時に行う</a></li>
 <li><a href="#org3d431f2e">6.39. <span class="todo TODO">TODO</span> [all-the-icons-ivy] ivy インターフェイスでアイコンを表示する</a></li>
 <li><a href="#org5eaeb687">6.40. <span class="todo TODO">TODO</span> [rainbow-delimiters.el] 対応するカッコに色を付ける</a></li>
 <li><a href="#org7270262d">6.41. <span class="todo TODO">TODO</span> [yascroll.el] フリンジにスクロールバーを出す</a></li>
 <li><a href="#org8ba0784e">6.42. <span class="todo TODO">TODO</span> [dimmer.el] 現在のバッファ以外の輝度を落とす</a></li>
 <li><a href="#org1e701627">6.43. <span class="todo TODO">TODO</span> [hydra.el] コマンドディスパッチャを構築する</a></li>
-<li><a href="#org29951da5">6.44. [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）</a></li>
+<li><a href="#org56d8bf9d">6.44. <span class="done DONE">DONE</span> [helm.el] 続・何でも絞り込みインターフェイス&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
 <li><a href="#orgc00267d7">6.45. <span class="done DONE">DONE</span> バッテリー情報をモードラインに表示する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
 <li><a href="#org205dbe20">6.46. <span class="done DONE">DONE</span> [mode-icons] 使用中のモード表示をアイコンで代替&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
 <li><a href="#org6e56a94f">6.47. <span class="done DONE">DONE</span> [stock-ticker] 株価をモードラインに表示&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
@@ -498,25 +499,26 @@ for the JavaScript code in this tag.
 <li><a href="#orge2f78ad3">8.8. [dired] ファイラのサポートツール&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span></span></a></li>
 <li><a href="#org7c53511f">8.9. [dired-recent.el] 訪問したディレクトリの履歴を取る&#xa0;&#xa0;&#xa0;<span class="tag"><span class="dired">dired</span></span></a></li>
 <li><a href="#orga3cbefa8">8.10. [osx-trash] system-move-file-to-trash を有効にする</a></li>
-<li><a href="#org82bd942f">8.11. [undo-tree] 編集履歴をわかりやすくたどる</a></li>
-<li><a href="#org694ee426">8.12. [undo-propose] undo を編集不可モードで辿る</a></li>
-<li><a href="#orgb8c01946">8.13. [auto-save-buffers.el] 一定間隔でバッファを保存する</a></li>
-<li><a href="#orgab837e6a">8.14. [session.el] 様々な履歴を保存し復元に利用する</a></li>
-<li><a href="#org92404bbd">8.15. [neotree.el] ディレクトリ情報をツリー表示</a></li>
-<li><a href="#orgf2d47943">8.16. [helpful.el] リッチなヘルプページ</a></li>
-<li><a href="#orgc08799d2">8.17. [facecheck.el] クリックしてfaceをチェック</a></li>
-<li><a href="#org0d952d68">8.18. [keyfreq.el] コマンドログ</a></li>
-<li><a href="#orged77c483">8.19. [disk-usage.el] ディスク利用率を調べる</a></li>
-<li><a href="#orgdd1e03ec">8.20. [uptimes.el] Emacsの起動時間を記録する</a></li>
-<li><a href="#orgfd3c67b9">8.21. [ag.el] 検索</a></li>
-<li><a href="#org29c7b6b7">8.22. [counsel-ag.el] 高速全文検索</a></li>
-<li><a href="#org24fd7b68">8.23. [counsel-fzf.el] 高速ファイル検索</a></li>
-<li><a href="#orgc47c1e75">8.24. <span class="done DONE">DONE</span> [wakatime-mode.el] WakaTime を利用して作業記録する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#orgc470d5a3">8.25. <span class="done DONE">DONE</span> [backup-dir.el] バックアップファイルを一箇所に集める&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#org8b2fe680">8.26. <span class="done DONE">DONE</span> バッファ保存時にバックアップファイルを生成する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#orgdba35c9f">8.27. <span class="done DONE">DONE</span> ミニバッファの履歴を保存しリストアする&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#orgead91174">8.28. <span class="done DONE">DONE</span> Emacs終了時に開いていたバッファを起動時に復元する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#org63e50e2c">8.29. <span class="done DONE">DONE</span> 深夜にバッファを自動整理する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org6e71b562">8.11. [undo-fu.el] シンプルな redo を提供してくる</a></li>
+<li><a href="#orgb8c01946">8.12. [auto-save-buffers.el] 一定間隔でバッファを保存する</a></li>
+<li><a href="#orgab837e6a">8.13. [session.el] 様々な履歴を保存し復元に利用する</a></li>
+<li><a href="#org92404bbd">8.14. [neotree.el] ディレクトリ情報をツリー表示</a></li>
+<li><a href="#orgf2d47943">8.15. [helpful.el] リッチなヘルプページ</a></li>
+<li><a href="#orgc08799d2">8.16. [facecheck.el] クリックしてfaceをチェック</a></li>
+<li><a href="#org0d952d68">8.17. [keyfreq.el] コマンドログ</a></li>
+<li><a href="#orged77c483">8.18. [disk-usage.el] ディスク利用率を調べる</a></li>
+<li><a href="#orgdd1e03ec">8.19. [uptimes.el] Emacsの起動時間を記録する</a></li>
+<li><a href="#orgfd3c67b9">8.20. [ag.el] 検索</a></li>
+<li><a href="#org29c7b6b7">8.21. [counsel-ag.el] 高速全文検索</a></li>
+<li><a href="#org24fd7b68">8.22. [counsel-fzf.el] 高速ファイル検索</a></li>
+<li><a href="#org694ee426">8.23. <span class="done DONE">DONE</span> [undo-propose] undo を編集不可モードで辿る&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org82bd942f">8.24. <span class="done DONE">DONE</span> [undo-tree] 編集履歴をわかりやすくたどる&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#orgc47c1e75">8.25. <span class="done DONE">DONE</span> [wakatime-mode.el] WakaTime を利用して作業記録する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#orgc470d5a3">8.26. <span class="done DONE">DONE</span> [backup-dir.el] バックアップファイルを一箇所に集める&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org8b2fe680">8.27. <span class="done DONE">DONE</span> バッファ保存時にバックアップファイルを生成する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#orgdba35c9f">8.28. <span class="done DONE">DONE</span> ミニバッファの履歴を保存しリストアする&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#orgead91174">8.29. <span class="done DONE">DONE</span> Emacs終了時に開いていたバッファを起動時に復元する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org63e50e2c">8.30. <span class="done DONE">DONE</span> 深夜にバッファを自動整理する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
 </ul>
 </li>
 <li><a href="#orgf1b8fa63">9. 開発サポート</a>
@@ -622,23 +624,23 @@ for the JavaScript code in this tag.
 <li><a href="#org5fd484a3">11. フレーム／ウィンドウ制御</a>
 <ul>
 <li><a href="#orgd05fc75a">11.1. 起動時の設定</a></li>
-<li><a href="#org7a20b311">11.2. [olivetti.el] ウィンドウを中央寄せで配置</a></li>
-<li><a href="#org5f12ba92">11.3. [moom.el] キーボードでフレームの場所を移す</a>
+<li><a href="#org5f12ba92">11.2. [moom.el] キーボードでフレームの場所を移す</a>
 <ul>
-<li><a href="#org6e3c20dd">11.3.1. 最大化時にモードラインを消す</a></li>
+<li><a href="#org6e3c20dd">11.2.1. 最大化時にモードラインを消す</a></li>
 </ul>
 </li>
-<li><a href="#org33fd785f">11.4. [winner.el] ウィンドウ構成の履歴を辿る</a></li>
-<li><a href="#orga9be167a">11.5. <span class="todo TODO">TODO</span> [shackle.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Ongoing">Ongoing</span></span></a>
+<li><a href="#org33fd785f">11.3. [winner.el] ウィンドウ構成の履歴を辿る</a></li>
+<li><a href="#orga9be167a">11.4. <span class="todo TODO">TODO</span> [shackle.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Ongoing">Ongoing</span></span></a>
 <ul>
-<li><a href="#org32b579df">11.5.1. checkdoc.el 用の追加設定</a></li>
+<li><a href="#org32b579df">11.4.1. checkdoc.el 用の追加設定</a></li>
 </ul>
 </li>
-<li><a href="#orgdca5e7c2">11.6. <span class="todo TODO">TODO</span> [doom-modeline.el] モードラインをリッチにする</a></li>
-<li><a href="#org4dd0671c">11.7. [e2wm.el] 二画面表示&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#org0c556404">11.8. [tabbar-ruler] バッファをタブ切り替え可能に&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#org6474a498">11.9. [elscreen.el] Emacs バッファをタブ化&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
-<li><a href="#org750d9aa5">11.10. [popwin.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#orgdca5e7c2">11.5. <span class="todo TODO">TODO</span> [doom-modeline.el] モードラインをリッチにする</a></li>
+<li><a href="#org4dd0671c">11.6. [e2wm.el] 二画面表示&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org0c556404">11.7. [tabbar-ruler] バッファをタブ切り替え可能に&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org6474a498">11.8. [elscreen.el] Emacs バッファをタブ化&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org750d9aa5">11.9. [popwin.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org7a20b311">11.10. <span class="done DONE">DONE</span> [olivetti.el] ウィンドウを中央寄せで配置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
 </ul>
 </li>
 <li><a href="#orgf57ce845">12. フォント／配色関連</a>
@@ -668,7 +670,7 @@ for the JavaScript code in this tag.
 <li><a href="#orgcc116051">12.14. [edit-color-stamp] Qt経由でカラーピッカーを使う</a></li>
 <li><a href="#orge836aa4d">12.15. [ivy.el] インターフェイスの配色</a></li>
 <li><a href="#org4b927009">12.16. [ivy.el] 選択行をアイコンで強調</a></li>
-<li><a href="#org36a28b28">12.17. <span class="todo TODO">TODO</span> [volatile-highlights] コピペした領域を強調</a></li>
+<li><a href="#org36a28b28">12.17. [volatile-highlights] コピペした領域を強調</a></li>
 </ul>
 </li>
 <li><a href="#orgb8e84b9a">13. ユーティリティ関数</a>
@@ -676,20 +678,20 @@ for the JavaScript code in this tag.
 <li><a href="#orgbfb695e1">13.1. [pomodoro.el] ポモドーロの実践</a></li>
 <li><a href="#orgc09c0be3">13.2. [pomodoro.el] 続・ポモドーロの実践</a></li>
 <li><a href="#org98f153af">13.3. [google-this.el] 単語をグーグル検索</a></li>
-<li><a href="#org71c49002">13.4. [lingr.el] チャットルームに自動参加</a></li>
-<li><a href="#orgc6fce61d">13.5. [multi-term.el] ターミナル</a></li>
-<li><a href="#org96f7a2a3">13.6. [osx-lib.el] macOS用ユーティリティ&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
-<li><a href="#org72d850dc">13.7. iTerm2 を Emacs から呼び出したい&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
-<li><a href="#org4d91e973">13.8. [counsel-osx-app.el] macOSのアプリケーションを呼び出す&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
-<li><a href="#org32e35e60">13.9. カレントバッファのあるディレクトリをターミナルで表示</a></li>
-<li><a href="#org2906cf09">13.10. [gif-screencast.el] ユーザアクションのたびにスクショを取る</a></li>
-<li><a href="#orged473d8d">13.11. [utility.el] 自作してテスト中の便利関数群</a></li>
-<li><a href="#org72dab3c6">13.12. [manage-minor-mode.el] マイナーモードの視覚的な管理</a></li>
-<li><a href="#org2be833d3">13.13. [lingr.el] lingr にログインする</a></li>
-<li><a href="#org2adaf11c">13.14. 検索語を変えずに counsel-fzf に接続する</a></li>
-<li><a href="#org409d5d63">13.15. <span class="todo TODO">TODO</span> [gitter.el] Gitter にログイン</a></li>
-<li><a href="#orgc75ab540">13.16. <span class="todo TODO">TODO</span> [password-store.el] パスワード管理</a></li>
-<li><a href="#org1141e95f">13.17. <span class="todo TODO">TODO</span> [network-watch.el] ネットワークインターフェイスの状態を監視</a></li>
+<li><a href="#orgc6fce61d">13.4. [multi-term.el] ターミナル</a></li>
+<li><a href="#org96f7a2a3">13.5. [osx-lib.el] macOS用ユーティリティ&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
+<li><a href="#org72d850dc">13.6. iTerm2 を Emacs から呼び出したい&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
+<li><a href="#org4d91e973">13.7. [counsel-osx-app.el] macOSのアプリケーションを呼び出す&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></a></li>
+<li><a href="#org32e35e60">13.8. カレントバッファのあるディレクトリをターミナルで表示</a></li>
+<li><a href="#org2906cf09">13.9. [gif-screencast.el] ユーザアクションのたびにスクショを取る</a></li>
+<li><a href="#orged473d8d">13.10. [utility.el] 自作してテスト中の便利関数群</a></li>
+<li><a href="#org72dab3c6">13.11. [manage-minor-mode.el] マイナーモードの視覚的な管理</a></li>
+<li><a href="#org2adaf11c">13.12. 検索語を変えずに counsel-fzf に接続する</a></li>
+<li><a href="#org409d5d63">13.13. [gitter.el] Gitter にログイン</a></li>
+<li><a href="#orgc75ab540">13.14. <span class="todo TODO">TODO</span> [password-store.el] パスワード管理</a></li>
+<li><a href="#org1141e95f">13.15. <span class="todo TODO">TODO</span> [network-watch.el] ネットワークインターフェイスの状態を監視</a></li>
+<li><a href="#org71c49002">13.16. <span class="done DONE">DONE</span> [lingr.el] チャットルームに自動参加&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
+<li><a href="#org2be833d3">13.17. <span class="done DONE">DONE</span> [lingr.el] lingr にログインする&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></a></li>
 </ul>
 </li>
 <li><a href="#org362fb2dc">14. おわりに</a></li>
@@ -795,7 +797,7 @@ Then load the following at startup<br />
 <h3 id="org2db575a1"><span class="section-number-3">2.2</span> init.el のヘッダ</h3>
 <div class="outline-text-3" id="text-org2db575a1">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">-*- lexical-binding: t -*-</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">init.el --- My init.el -*- lexical-binding: t -*-</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Configurations for Emacs</span>
 <span style="color: #b22222;">;;                                         </span><span style="color: #b22222;">Takaaki ISHIKAWA  <a href="mailto:takaxp%40ieee.org">&lt;takaxp@ieee.org&gt;</a></span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">see also </span><span style="color: #3a5fcd; text-decoration: underline;"><a href="https://takaxp.github.io/init.html">https://takaxp.github.io/init.html</a></span>
@@ -2179,8 +2181,49 @@ Version 27 から <code>C-x C-f</code> のデフォルトが変わったよう�
 </div>
 </div>
 
+<div id="outline-container-orge014847e" class="outline-3">
+<h3 id="orge014847e"><span class="section-number-3">3.21</span> [epa.el] GPGを使う</h3>
+<div class="outline-text-3" id="text-orge014847e">
+<p>
+<code>w32</code> の MSYS2 で gpg を使うと，バージョン情報が "2.2.19-unknown" などとなる．その状況で <code>epg-find-configuration</code> が呼ばれると，内部で生じるエラーが報告されず nil となり， <code>epg.el</code> が以下を報告する．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">GPG error: <span style="color: #8b2252;">"no usable configuration,"</span> OpenPGP
+</pre>
+</div>
+
+<p>
+しかし実際には， <code>epg-find-configuration</code> が <code>epg-check-configuration</code> のエラーを正しく処理していないのが原因であり，この関数のハックが必要となる．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"epa"</span>
+  (<span style="color: #a020f0;">when</span> (eq window-system 'w32)
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">with export GNUPGHOME="/home/taka/.gnupg" in .bashrc</span>
+    (<span style="color: #a020f0;">setq</span> epg-gpg-home-directory <span style="color: #8b2252;">".gnupg"</span>))
+
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-epg-check-configuration</span> (config <span style="color: #228b22;">&amp;optional</span> minimum-version)
+    <span style="color: #8b2252;">"Verify that a sufficient version of GnuPG is installed."</span>
+    (<span style="color: #a020f0;">let</span> ((version (alist-get 'version config)))
+      (<span style="color: #a020f0;">unless</span> (stringp version)
+        (<span style="color: #ff0000; font-weight: bold;">error</span> <span style="color: #8b2252;">"Undetermined version: %S"</span> version))
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">hack for w32</span>
+      (<span style="color: #a020f0;">when</span> (eq window-system 'w32)
+        (<span style="color: #a020f0;">setq</span> version (<span style="color: #a020f0;">or</span> minimum-version
+                          epg-gpg-minimum-version)))
+      <span style="color: #b22222;">;;</span>
+      (<span style="color: #a020f0;">unless</span> (version&lt;= (<span style="color: #a020f0;">or</span> minimum-version
+                             epg-gpg-minimum-version)
+                         version)
+        (<span style="color: #ff0000; font-weight: bold;">error</span> <span style="color: #8b2252;">"Unsupported version: %s"</span> version))))
+  (advice-add 'epg-check-configuration <span style="color: #483d8b;">:override</span> #'my-epg-check-configuration))
+</pre>
+</div>
+</div>
+</div>
 <div id="outline-container-orge44eded5" class="outline-3">
-<h3 id="orge44eded5"><span class="section-number-3">3.21</span> NSビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
+<h3 id="orge44eded5"><span class="section-number-3">3.22</span> NSビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
 <div class="outline-text-3" id="text-orge44eded5">
 <p>
 インラインパッチの適用が前提の設定です． <code>M-SPC/S-SPC</code> で日本語IMEのON/OFFができるようになります．インラインパッチの情報はリンク先にあります．<br />
@@ -2207,17 +2250,30 @@ Version 27 から <code>C-x C-f</code> のデフォルトが変わったよう�
     (<span style="color: #a020f0;">interactive</span>)
     (<span style="color: #a020f0;">if</span> (my-ime-active-p) (my-ime-off) (my-ime-on)))
 
-  (define-key isearch-mode-map (kbd <span style="color: #8b2252;">"M-SPC"</span>) 'my-toggle-ime-ns)
-  (define-key isearch-mode-map (kbd <span style="color: #8b2252;">"S-SPC"</span>) 'my-toggle-ime-ns)
+  (<span style="color: #a020f0;">if</span> (&lt; emacs-major-version 27)
+      (<span style="color: #a020f0;">progn</span>
+        (define-key isearch-mode-map (kbd <span style="color: #8b2252;">"M-SPC"</span>) 'my-toggle-ime-ns)
+        (define-key isearch-mode-map (kbd <span style="color: #8b2252;">"S-SPC"</span>) 'my-toggle-ime-ns))
+    (define-key isearch-mode-map (kbd <span style="color: #8b2252;">"M-SPC"</span>) 'mac-ime-toggle)
+    (define-key isearch-mode-map (kbd <span style="color: #8b2252;">"S-SPC"</span>) 'mac-ime-toggle))
 
-  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-ns-org-heading-auto-ascii</span> ()
-    <span style="color: #8b2252;">"IME off, when the cursor on org headings."</span>
-    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (window-focus-p)
-               (eq major-mode 'org-mode)
-               (<span style="color: #a020f0;">or</span> (looking-at org-heading-regexp)
-                   (equal (buffer-name) org-agenda-buffer-name))
-               (my-ime-active-p))
-      (my-ime-off)))
+  (<span style="color: #a020f0;">if</span> (&lt; emacs-major-version 27)
+      (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-ns-org-heading-auto-ascii</span> ()
+        <span style="color: #8b2252;">"IME off, when the cursor on org headings."</span>
+        (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (window-focus-p)
+                   (eq major-mode 'org-mode)
+                   (<span style="color: #a020f0;">or</span> (looking-at org-heading-regexp)
+                       (equal (buffer-name) org-agenda-buffer-name))
+                   (my-ime-active-p))
+          (my-ime-off)))
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-ns-org-heading-auto-ascii</span> ()
+      <span style="color: #8b2252;">"IME off, when the cursor on org headings."</span>
+      (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (window-focus-p)
+                 (eq major-mode 'org-mode)
+                 (<span style="color: #a020f0;">or</span> (looking-at org-heading-regexp)
+                     (equal (buffer-name) org-agenda-buffer-name))
+                 (mac-ime-active-p))
+        (mac-ime-deactivate))))
 
   <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12459;&#12540;&#12477;&#12523;&#31227;&#21205;&#12391; heading &#12395;&#30041;&#12414;&#12387;&#12383;&#26178;&#12395;IME&#12434;OFF&#12395;&#12377;&#12427;</span>
   (run-with-idle-timer 0.8 t #'my-ns-org-heading-auto-ascii)
@@ -2225,17 +2281,18 @@ Version 27 から <code>C-x C-f</code> のデフォルトが変わったよう�
   <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12459;&#12540;&#12477;&#12523;&#31227;&#21205;&#12391; heading &#12395;&#26469;&#12383;&#12392;&#12365;&#12399;&#21363;&#24231;&#12395;IME&#12434;OFF&#12395;&#12377;&#12427;</span>
   <span style="color: #b22222;">;; </span><span style="color: #b22222;">(add-hook 'after-move-cursor-hook #'my-ns-org-heading-auto-ascii)</span>
 
-  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-ns-ime-restore</span> ()
-    <span style="color: #8b2252;">"Restore the last IME status changed in Emacs."</span>
-    (<span style="color: #a020f0;">if</span> my-ime-last (my-ime-on) (my-ime-off)))
-  (add-hook 'focus-in-hook #'my-ns-ime-restore))
+  (<span style="color: #a020f0;">when</span> (&lt; emacs-major-version 27)
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-ns-ime-restore</span> ()
+      <span style="color: #8b2252;">"Restore the last IME status changed in Emacs."</span>
+      (<span style="color: #a020f0;">if</span> my-ime-last (my-ime-on) (my-ime-off)))
+    (add-hook 'focus-in-hook #'my-ns-ime-restore)))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org53a63301" class="outline-3">
-<h3 id="org53a63301"><span class="section-number-3">3.22</span> EMPビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
+<h3 id="org53a63301"><span class="section-number-3">3.23</span> EMPビルド用設定&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
 <div class="outline-text-3" id="text-org53a63301">
 <p>
 NSビルド版で生じた日本語入力時のチラつきを避けるために，EMP版ビルドに(一時期)浮気しました．以下はその時にNSビルドの振る舞いに近づけるためにがんばった設定です．詳細な情報は，リンク先の記事にあります．<br />
@@ -3141,12 +3198,12 @@ Built-in の time-stamp.el を使う．<br />
     (<span style="color: #a020f0;">setq</span> time-stamp-start <span style="color: #8b2252;">"#\\+date:[ \t]*"</span>)
     (<span style="color: #a020f0;">setq</span> time-stamp-end <span style="color: #8b2252;">"$"</span>)
     (<span style="color: #a020f0;">setq</span> time-stamp-line-limit 10) <span style="color: #b22222;">;; </span><span style="color: #b22222;">def=8</span>
-    (<span style="color: #a020f0;">setq</span> time-stamp-default-format <span style="color: #8b2252;">"%04y-%02m-%02d"</span>)
+    (<span style="color: #a020f0;">setq</span> time-stamp-default-format <span style="color: #8b2252;">"%Y-%02m-%02d"</span>)
 
     (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-time-stamp</span> ()
       (<span style="color: #a020f0;">setq</span> time-stamp-format
             (<span style="color: #a020f0;">if</span> (eq major-mode 'org-mode)
-                <span style="color: #8b2252;">"[%04y-%02m-%02d %3a %02H:%02M]"</span>
+                <span style="color: #8b2252;">"[%Y-%02m-%02d %3a %02H:%02M]"</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">"%04y"</span>
               time-stamp-default-format))
       (<span style="color: #a020f0;">if</span> (boundp 'org-tree-slide-mode)
           (<span style="color: #a020f0;">unless</span> org-tree-slide-mode
@@ -3534,11 +3591,13 @@ gzされた elisp ソースを見るときに， <code>view-mode</code> を使�
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">&#29305;&#23450;&#12398;&#25313;&#24373;&#23376;&#12539;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;</span>
-(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-auto-view-regexp</span> <span style="color: #8b2252;">"\\.el.gz$</span><span style="color: #66CC99;">\\</span><span style="color: #9966CC;">|</span><span style="color: #8b2252;">\\.emacs.d/[</span><span style="color: #8b2252;">^</span><span style="color: #8b2252;">/]+/el-get"</span>)
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-auto-view-regexp</span> <span style="color: #8b2252;">"\\.el.gz$</span><span style="color: #66CC99;">\\</span><span style="color: #9966CC;">|</span><span style="color: #8b2252;">\\.patch$</span><span style="color: #66CC99;">\\</span><span style="color: #9966CC;">|</span><span style="color: #8b2252;">\\.emacs.d/[</span><span style="color: #8b2252;">^</span><span style="color: #8b2252;">/]+/el-get"</span>)
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#29305;&#23450;&#12398;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#65288;&#32118;&#23550;&#12497;&#12473;&#12539;&#12507;&#12540;&#12512;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#20197;&#19979;&#65289;</span>
 (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-auto-view-dirs</span> nil)
 (add-to-list 'my-auto-view-dirs <span style="color: #8b2252;">"~/devel/emacs-head/emacs/"</span>)
+(<span style="color: #a020f0;">when</span> (eq window-system 'w32)
+  (add-to-list 'my-auto-view-dirs <span style="color: #8b2252;">"c:/msys64/mingw64"</span>))
 
 (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-auto-view</span> ()
   (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> my-auto-view-regexp
@@ -3736,9 +3795,9 @@ Built-in の ispell を使う．チェックエンジンは，aspell を利用�
      ((executable-find <span style="color: #8b2252;">"aspell"</span>)
       <span style="color: #b22222;">;; </span><span style="color: #b22222;">(message "--- aspell loaded.")</span>
       (<span style="color: #a020f0;">setq-default</span> ispell-program-name <span style="color: #8b2252;">"aspell"</span>)
-      (<span style="color: #a020f0;">when</span> (eq window-system 'w32)
-        (<span style="color: #a020f0;">setq-default</span> ispell-program-name
-                      <span style="color: #8b2252;">"C:/Program Files/Aspell/bin/aspell.exe"</span>))
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">(when (eq window-system 'w32)</span>
+      <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(setq-default ispell-program-name</span>
+      <span style="color: #b22222;">;;                 </span><span style="color: #b22222;">"C:/Program Files/Aspell/bin/aspell.exe"))</span>
       (<span style="color: #a020f0;">setq</span> ispell-dictionary <span style="color: #8b2252;">"english"</span>)
       <span style="color: #b22222;">;; </span><span style="color: #b22222;">This will also avoid an IM-OFF issue for flyspell-mode.</span>
       <span style="color: #b22222;">;; </span><span style="color: #b22222;">(setq ispell-aspell-supports-utf8 t) ;; Obsolete</span>
@@ -3747,7 +3806,6 @@ Built-in の ispell を使う．チェックエンジンは，aspell を利用�
                    (<span style="color: #8b2252;">"-d"</span> <span style="color: #8b2252;">"en"</span> <span style="color: #8b2252;">"--encoding=utf-8"</span>) nil utf-8)))
       (<span style="color: #a020f0;">setq</span> ispell-personal-dictionary
             <span style="color: #8b2252;">"~/Dropbox/emacs.d/config/aspell.en.pws"</span>))
-
      (t
       nil))))
 </pre>
@@ -4226,7 +4284,8 @@ COBUILD5をデフォルトで使うには，次のサイト参照してくださ
 <h3 id="org98d5c1aa"><span class="section-number-3">5.40</span> [emmet-mode.el] zencoding の後継&#xa0;&#xa0;&#xa0;<span class="tag"><span class="web">web</span></span></h3>
 <div class="outline-text-3" id="text-org98d5c1aa">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">yes</span>
+(<span style="color: #a020f0;">when</span> (autoload-if-found
        '(emmet-mode)
        <span style="color: #8b2252;">"emmet-mode"</span> nil t nil)
 
@@ -4556,7 +4615,8 @@ COBUILD5をデフォルトで使うには，次のサイト参照してくださ
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(autoload-if-found
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">late-init.el</span>
+(autoload-if-found
  '(isolate-quick-add
    isolate-long-add isolate-quick-delete
    isolate-quick-chnge isolate-long-change)
@@ -5436,7 +5496,7 @@ Emacs Version 26.1 からネイティブ実装に切り替わった <code>displa
 <div class="outline-text-3" id="text-org5117762c">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Show clock in in the mode line</span>
-(<span style="color: #a020f0;">setq</span> display-time-format <span style="color: #8b2252;">"%H%M.%S"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">%y%m%d.</span>
+(<span style="color: #a020f0;">setq</span> display-time-format <span style="color: #8b2252;">"%H:%M"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">%y%m%d. ;; "%H%M.%S"</span>
 (<span style="color: #a020f0;">setq</span> display-time-interval 1)
 (<span style="color: #a020f0;">setq</span> display-time-default-load-average nil)
 (<span style="color: #a020f0;">unless</span> noninteractive
@@ -5686,9 +5746,10 @@ paren.el の場合は以下の設定．<br />
 <div id="outline-container-org74bad2de" class="outline-3">
 <h3 id="org74bad2de"><span class="section-number-3">6.23</span> [migemo.el] ローマ字入力で日本語を検索する</h3>
 <div class="outline-text-3" id="text-org74bad2de">
-<p>
-<a href="http://0xcc.net/migemo/#download">http://0xcc.net/migemo/#download</a><br />
-</p>
+<ul class="org-ul">
+<li><a href="http://0xcc.net/migemo/#download">http://0xcc.net/migemo/#download</a><br /></li>
+<li><a href="https://github.com/emacs-jp/migemo">emacs-jp/migemo: emacs migemo client</a><br /></li>
+</ul>
 
 <p>
 以下は，<a href="http://www.kaoriya.net/software/cmigemo">cmigemo</a> を使う設定です．正直なところ，それほどメリットを感じていません．<br />
@@ -5721,126 +5782,8 @@ paren.el の場合は以下の設定．<br />
 </div>
 </div>
 
-<div id="outline-container-org56d8bf9d" class="outline-3">
-<h3 id="org56d8bf9d"><span class="section-number-3">6.24</span> [helm.el] 続・何でも絞り込みインターフェイス</h3>
-<div class="outline-text-3" id="text-org56d8bf9d">
-<p>
-ivyに移行しました．<br />
-</p>
-
-<p>
-<code>M-s</code> を <code>helm-swoop</code> にあてていましたが， <code>M-s</code> を入り口にたくさんの検索系コマンドが割り振られているため <code>M-s M-s</code> に変えました．なお， <code>C-M-r</code> は本来，正規表現での逆検索(<code>isearch-backward-regexp</code>)に割り振らています．また， <code>C-M-l</code> は本来， <code>reposition-window</code> に割り当てられています．<br />
-</p>
-
-<p>
-以下の設定では， <code>helm</code> に関連するモジュールも多数含まれます． <code>helm</code> がキックされるタイミングで有効化させます．<br />
-</p>
-
-<ul class="org-ul">
-<li>helm-google<br /></li>
-<li>helm-swoop<br /></li>
-<li>helm-projectile<br /></li>
-<li>helm-bm<br /></li>
-</ul>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(helm-google)
-       <span style="color: #8b2252;">"helm-google"</span> nil t)
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"helm-google"</span>
-    (custom-set-variables
-     '(helm-google-tld <span style="color: #8b2252;">"co.jp"</span>))))
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(helm-swoop)
-       <span style="color: #8b2252;">"helm-swoop"</span> nil t)
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"postpone"</span>
-        (global-set-key (kbd <span style="color: #8b2252;">"M-s M-s"</span>) 'helm-swoop))
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"helm-swoop"</span>
-    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span> nil t)
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12459;&#12540;&#12477;&#12523;&#12398;&#21336;&#35486;&#12364; org &#12398;&#35211;&#20986;&#12375;&#65288;*&#12398;&#38598;&#12414;&#12426;&#65289;&#12394;&#12425;&#26908;&#32034;&#23550;&#35937;&#12395;&#12375;&#12394;&#12356;&#65294;</span>
-    (<span style="color: #a020f0;">setq</span> helm-swoop-pre-input-function
-          (<span style="color: #a020f0;">lambda</span>()
-            (<span style="color: #a020f0;">unless</span> (thing-at-point-looking-at <span style="color: #8b2252;">"^\\*+"</span>)
-              (thing-at-point 'symbol))))
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#37197;&#33394;&#35373;&#23450;</span>
-    (set-face-attribute
-     'helm-swoop-target-line-face nil <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #FFEDDC;">#FFEDDC</span><span style="color: #8b2252;">"</span>)
-    (set-face-attribute
-     'helm-swoop-target-word-face nil <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #FF5443;">#FF5443</span><span style="color: #8b2252;">"</span>)))
-
-(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(helm-M-x
-         helm-buffers-list helm-recentf
-         helm-locate helm-descbinds
-         helm-occur helm-flycheck helm-bookmarks)
-       <span style="color: #8b2252;">"helm-config"</span> nil t)
-
-  (global-set-key (kbd <span style="color: #8b2252;">"C-x C-b"</span>) 'helm-buffers-list)
-  (global-set-key (kbd <span style="color: #8b2252;">"C-M-r"</span>) 'helm-recentf)
-  (global-set-key (kbd <span style="color: #8b2252;">"M-x"</span>) 'helm-M-x)
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"postpone"</span>
-
-    (global-set-key (kbd <span style="color: #8b2252;">"C-M-l"</span>) 'helm-locate)
-    (global-set-key (kbd <span style="color: #8b2252;">"C-c f b"</span>) 'helm-bookmarks)
-    (global-set-key (kbd <span style="color: #8b2252;">"C-c o"</span>) 'helm-occur)
-    (global-set-key (kbd <span style="color: #8b2252;">"C-h d"</span>) 'helm-descbinds))
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"projectile"</span>
-    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-projectile</span> nil t)
-      <span style="color: #b22222;">;; </span><span style="color: #b22222;">M-x helm-projectile-find-file (C-c p f)</span>
-      (<span style="color: #a020f0;">setq</span> projectile-completion-system 'helm)
-      <span style="color: #b22222;">;; </span><span style="color: #b22222;">projectile.el &#12398;&#12461;&#12540;&#12496;&#12452;&#12531;&#12489;&#12434;&#12458;&#12540;&#12496;&#12540;&#12521;&#12452;&#12489;</span>
-      (helm-projectile-toggle 1)))
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"helm-config"</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(when (require 'helm-files nil t)</span>
-    <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(define-key helm-find-files-map</span>
-    <span style="color: #b22222;">;;     </span><span style="color: #b22222;">(kbd "&lt;tab&gt;") 'helm-execute-persistent-action)</span>
-    <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(define-key helm-read-file-map</span>
-    <span style="color: #b22222;">;;     </span><span style="color: #b22222;">(kbd "&lt;tab&gt;") 'helm-execute-persistent-action))</span>
-
-    (<span style="color: #a020f0;">when</span> (memq window-system '(mac ns))
-      (<span style="color: #a020f0;">setq</span> helm-locate-command <span style="color: #8b2252;">"mdfind -name %s %s"</span>))
-
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'helm-css-scss nil t)</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'helm-emmet nil t)</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'helm-descbinds nil t)</span>
-
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Configure helm-completing-read-handlers-alist after `(helm-mode 1)'</span>
-    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span> nil t)
-      (helm-mode 1))
-
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-find-files &#12434;&#21628;&#12400;&#12379;&#12394;&#12356;</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(add-to-list 'helm-completing-read-handlers-alist '(find-file . nil))</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-mode-ag &#12434;&#21628;&#12400;&#12379;&#12394;&#12356;</span>
-    (add-to-list 'helm-completing-read-handlers-alist '(ag . nil))
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-mode-org-set-tags &#12434;&#21628;&#12400;&#12379;&#12394;&#12356;</span>
-    (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags . nil))
-
-    (<span style="color: #a020f0;">setq</span> helm-display-source-at-screen-top nil)
-    <span style="color: #b22222;">;;         </span><span style="color: #b22222;">(setq helm-display-header-line nil)</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-autoresize-mode &#12434;&#26377;&#21177;&#12395;&#12375;&#12388;&#12388; 30% &#12395;&#22266;&#23450;</span>
-    (<span style="color: #a020f0;">setq</span> helm-autoresize-max-height 30)
-    (<span style="color: #a020f0;">setq</span> helm-autoresize-min-height 30)
-    (set-face-attribute 'helm-source-header nil
-                        <span style="color: #483d8b;">:height</span> 1.0 <span style="color: #483d8b;">:family</span> <span style="color: #8b2252;">"Verdana"</span> <span style="color: #483d8b;">:weight</span> 'normal
-                        <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #666666;">#666666</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #DADADA;">#DADADA</span><span style="color: #8b2252;">"</span>)
-    (helm-autoresize-mode 1)))
-</pre>
-</div>
-</div>
-</div>
-
 <div id="outline-container-org6332fe92" class="outline-3">
-<h3 id="org6332fe92"><span class="section-number-3">6.25</span> [git-gutter-fringe] 編集差分をフレーム端で視覚化</h3>
+<h3 id="org6332fe92"><span class="section-number-3">6.24</span> [git-gutter-fringe] 編集差分をフレーム端で視覚化</h3>
 <div class="outline-text-3" id="text-org6332fe92">
 <p>
 編集差分の視覚化は，元々 git-gutter が提供している機能です．しかし有効にするとフレームの幅が若干広がってしまうので，気になる人は git-gutter-fringe を使えばよいです．<br />
@@ -5905,7 +5848,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-orgd6308db6" class="outline-3">
-<h3 id="orgd6308db6"><span class="section-number-3">6.26</span> [japanese-holidays] カレンダーをカラフルにする</h3>
+<h3 id="orgd6308db6"><span class="section-number-3">6.25</span> [japanese-holidays] カレンダーをカラフルにする</h3>
 <div class="outline-text-3" id="text-orgd6308db6">
 <p>
 ビルドインの <code>holidays</code> と， <code>japanese-holidays</code> を使います．土日祝日に色を着けます．土曜日と日曜祝日で異なる配色にできます．<br />
@@ -5933,7 +5876,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org12f72886" class="outline-3">
-<h3 id="org12f72886"><span class="section-number-3">6.27</span> [calendar.el] カレンダーで週番号を表示する</h3>
+<h3 id="org12f72886"><span class="section-number-3">6.26</span> [calendar.el] カレンダーで週番号を表示する</h3>
 <div class="outline-text-3" id="text-org12f72886">
 <p>
 ビルドインの <code>calendar.el</code> にある <code>calendar-intermonth-text</code> をカスタマイズすると，カレンダーに週番号を表示させることが可能です．ただ， <code>calendar.el</code> に記載されている例だと， <code>calendar-week-start-day</code> が <code>1</code> 以外の時に計算結果がおかしくなるので，次のように <code>calendar-absolute-from-gregorian</code> に渡す値を補正する必要があります．<br />
@@ -5986,7 +5929,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-orgc45b24d4" class="outline-3">
-<h3 id="orgc45b24d4"><span class="section-number-3">6.28</span> [which-key] キーバインドの選択肢をポップアップする</h3>
+<h3 id="orgc45b24d4"><span class="section-number-3">6.27</span> [which-key] キーバインドの選択肢をポップアップする</h3>
 <div class="outline-text-3" id="text-orgc45b24d4">
 <p>
 <code>guide-key.el</code> の後発． <code>guide-key.el</code> の改良でもあり，ディスパッチャが見やすく，直感的でとても使いやすい．<br />
@@ -6009,7 +5952,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org467accb9" class="outline-3">
-<h3 id="org467accb9"><span class="section-number-3">6.29</span> [highlight-symbol] 同じ名前のシンボルをハイライトする</h3>
+<h3 id="org467accb9"><span class="section-number-3">6.28</span> [highlight-symbol] 同じ名前のシンボルをハイライトする</h3>
 <div class="outline-text-3" id="text-org467accb9">
 <p>
 一定時間が過ぎると，カーソル下のワードをバッファ内で検索し，ハイライトしてくれる．殺風景なバッファに動きが出て良い．また， <code>highlight-symbol-nav-mode</code> を使うと，シンボル間を <code>M-n/M-p</code> で移動できるので，毎度検索しなくてよい．<br />
@@ -6032,7 +5975,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org962224ff" class="outline-3">
-<h3 id="org962224ff"><span class="section-number-3">6.30</span> [all-the-icons.el] フォントでアイコン表示</h3>
+<h3 id="org962224ff"><span class="section-number-3">6.29</span> [all-the-icons.el] フォントでアイコン表示</h3>
 <div class="outline-text-3" id="text-org962224ff">
 <p>
 <code>all-the-icons.el</code> を使うと，バッファ内やモードライン，ミニバッファでアイコンを表示できるようになります．<br />
@@ -6049,7 +5992,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-orgd92b50db" class="outline-3">
-<h3 id="orgd92b50db"><span class="section-number-3">6.31</span> [all-the-icons-dired] dired でアイコンを表示</h3>
+<h3 id="orgd92b50db"><span class="section-number-3">6.30</span> [all-the-icons-dired] dired でアイコンを表示</h3>
 <div class="outline-text-3" id="text-orgd92b50db">
 <p>
 <code>dired</code> で，ファイルのアイコンを表示します． <code>all-the-icons</code> をインストール後に， <code>M-x all-the-icons-install-fonts</code> を忘れずに実行する必要があります． <code>neotree</code> の設定は別セクションに記載しています．<br />
@@ -6118,7 +6061,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org402f1293" class="outline-3">
-<h3 id="org402f1293"><span class="section-number-3">6.32</span> [eldoc.el] コンテクストに応じてヘルプを表示</h3>
+<h3 id="org402f1293"><span class="section-number-3">6.31</span> [eldoc.el] コンテクストに応じてヘルプを表示</h3>
 <div class="outline-text-3" id="text-org402f1293">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
@@ -6143,7 +6086,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org138fda77" class="outline-3">
-<h3 id="org138fda77"><span class="section-number-3">6.33</span> [go-eldoc.el] Go用の eldoc</h3>
+<h3 id="org138fda77"><span class="section-number-3">6.32</span> [go-eldoc.el] Go用の eldoc</h3>
 <div class="outline-text-3" id="text-org138fda77">
 <div class="org-src-container">
 <pre class="src src-go"><span style="color: #a020f0;">go</span> get -v <span style="color: #228b22;">github.com</span>/mdempsky/gocode
@@ -6163,7 +6106,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org7cab354d" class="outline-3">
-<h3 id="org7cab354d"><span class="section-number-3">6.34</span> [keycast.el] 入力しているキーとコマンドをモードラインに表示</h3>
+<h3 id="org7cab354d"><span class="section-number-3">6.33</span> [keycast.el] 入力しているキーとコマンドをモードラインに表示</h3>
 <div class="outline-text-3" id="text-org7cab354d">
 <ul class="org-ul">
 <li>入力した文字や発行したコマンドキーをモードラインに表示．コマンドの名前もリアルタイムに表示される．<br /></li>
@@ -6178,7 +6121,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-orgfa7d126f" class="outline-3">
-<h3 id="orgfa7d126f"><span class="section-number-3">6.35</span> [ivy.el] 続々・何でも絞り込みインターフェイス</h3>
+<h3 id="orgfa7d126f"><span class="section-number-3">6.34</span> [ivy.el] 続々・何でも絞り込みインターフェイス</h3>
 <div class="outline-text-3" id="text-orgfa7d126f">
 <p>
 <code>helm</code> から <code>ivy</code> に乗り換えました．移行話は Qiita で（長編）記事にしました．<br />
@@ -6306,7 +6249,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org9c962eaf" class="outline-3">
-<h3 id="org9c962eaf"><span class="section-number-3">6.36</span> [ivy.el] プロンプトをカスタマイズ</h3>
+<h3 id="org9c962eaf"><span class="section-number-3">6.35</span> [ivy.el] プロンプトをカスタマイズ</h3>
 <div class="outline-text-3" id="text-org9c962eaf">
 <p>
 <code>ivy-pre-prompt-function</code> に文字列を返す任意の関数を与えると，プロンプトの前を修飾できます．好みの情報を出力しましょう．<br />
@@ -6329,7 +6272,7 @@ ivyに移行しました．<br />
 </div>
 
 <div id="outline-container-org45b3667a" class="outline-3">
-<h3 id="org45b3667a"><span class="section-number-3">6.37</span> [imenu-list.el] サイドバー的にファイル内容の目次要素を表示</h3>
+<h3 id="org45b3667a"><span class="section-number-3">6.36</span> [imenu-list.el] サイドバー的にファイル内容の目次要素を表示</h3>
 <div class="outline-text-3" id="text-org45b3667a">
 <ul class="org-ul">
 <li><a href="https://github.com/takaxp/imenu-list">takaxp/imenu-list: Emacs plugin to show the current buffer's imenu entries in a seperate buffer</a><br /></li>
@@ -6372,6 +6315,41 @@ ivyに移行しました．<br />
     (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">moom</span> nil t)
       (add-hook 'imenu-list-update-hook #'my-imenu-list-update)
       (advice-add 'imenu-list-quit-window <span style="color: #483d8b;">:after</span> #'my-imenu-list-quit-window))))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org29951da5" class="outline-3">
+<h3 id="org29951da5"><span class="section-number-3">6.37</span> [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）</h3>
+<div class="outline-text-3" id="text-org29951da5">
+<p>
+コマンド履歴を保存．コマンドのイニシャル入力を可能にする．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"prescient"</span>
+  (<span style="color: #a020f0;">setq</span> prescient-aggressive-file-save t) <span style="color: #b22222;">;; </span><span style="color: #b22222;">Merged!</span>
+  (<span style="color: #a020f0;">setq</span> prescient-save-file
+        (expand-file-name <span style="color: #8b2252;">"~/.emacs.d/prescient-save.el"</span>))
+  (prescient-persist-mode 1))
+
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"ivy"</span>
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">prescient</span> nil t)
+             (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ivy-prescient</span> nil t))
+    (<span style="color: #a020f0;">setq</span> ivy-prescient-retain-classic-highlighting t)
+    (<span style="color: #a020f0;">dolist</span> (command '(counsel-world-clock <span style="color: #b22222;">;; </span><span style="color: #b22222;">Merged!</span>
+                       counsel-app))
+      (add-to-list 'ivy-prescient-sort-commands command))
+    (ivy-prescient-mode 1)
+    (<span style="color: #a020f0;">setf</span> (alist-get 'counsel-M-x ivy-re-builders-alist)
+          #'ivy-prescient-re-builder)
+    (<span style="color: #a020f0;">setf</span> (alist-get t ivy-re-builders-alist) #'ivy--regex-ignore-order)))
+
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"company"</span>
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">prescient</span> nil t)
+             (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">company-prescient</span> nil t))
+    (company-prescient-mode 1)))
 </pre>
 </div>
 </div>
@@ -6635,36 +6613,119 @@ ivyに移行しました．<br />
 </div>
 </div>
 
-<div id="outline-container-org29951da5" class="outline-3">
-<h3 id="org29951da5"><span class="section-number-3">6.44</span> [prescient.el] リスト項目の並び替えとイニシャル入力機能（ivy and company）</h3>
-<div class="outline-text-3" id="text-org29951da5">
+<div id="outline-container-org56d8bf9d" class="outline-3">
+<h3 id="org56d8bf9d"><span class="section-number-3">6.44</span> <span class="done DONE">DONE</span> [helm.el] 続・何でも絞り込みインターフェイス&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<div class="outline-text-3" id="text-org56d8bf9d">
 <p>
-コマンド履歴を保存．コマンドのイニシャル入力を可能にする．<br />
+ivyに移行しました．<br />
 </p>
 
+<p>
+<code>M-s</code> を <code>helm-swoop</code> にあてていましたが， <code>M-s</code> を入り口にたくさんの検索系コマンドが割り振られているため <code>M-s M-s</code> に変えました．なお， <code>C-M-r</code> は本来，正規表現での逆検索(<code>isearch-backward-regexp</code>)に割り振らています．また， <code>C-M-l</code> は本来， <code>reposition-window</code> に割り当てられています．<br />
+</p>
+
+<p>
+以下の設定では， <code>helm</code> に関連するモジュールも多数含まれます． <code>helm</code> がキックされるタイミングで有効化させます．<br />
+</p>
+
+<ul class="org-ul">
+<li>helm-google<br /></li>
+<li>helm-swoop<br /></li>
+<li>helm-projectile<br /></li>
+<li>helm-bm<br /></li>
+</ul>
+
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"prescient"</span>
-  (<span style="color: #a020f0;">setq</span> prescient-aggressive-file-save t) <span style="color: #b22222;">;; </span><span style="color: #b22222;">Merged!</span>
-  (<span style="color: #a020f0;">setq</span> prescient-save-file
-        (expand-file-name <span style="color: #8b2252;">"~/.emacs.d/prescient-save.el"</span>))
-  (prescient-persist-mode 1))
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(helm-google)
+       <span style="color: #8b2252;">"helm-google"</span> nil t)
 
-(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"ivy"</span>
-  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">prescient</span> nil t)
-             (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ivy-prescient</span> nil t))
-    (<span style="color: #a020f0;">setq</span> ivy-prescient-retain-classic-highlighting t)
-    (<span style="color: #a020f0;">dolist</span> (command '(counsel-world-clock <span style="color: #b22222;">;; </span><span style="color: #b22222;">Merged!</span>
-                       counsel-app))
-      (add-to-list 'ivy-prescient-sort-commands command))
-    (ivy-prescient-mode 1)
-    (<span style="color: #a020f0;">setf</span> (alist-get 'counsel-M-x ivy-re-builders-alist)
-          #'ivy-prescient-re-builder)
-    (<span style="color: #a020f0;">setf</span> (alist-get t ivy-re-builders-alist) #'ivy--regex-ignore-order)))
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"helm-google"</span>
+    (custom-set-variables
+     '(helm-google-tld <span style="color: #8b2252;">"co.jp"</span>))))
+</pre>
+</div>
 
-(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"company"</span>
-  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">prescient</span> nil t)
-             (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">company-prescient</span> nil t))
-    (company-prescient-mode 1)))
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(helm-swoop)
+       <span style="color: #8b2252;">"helm-swoop"</span> nil t)
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"postpone"</span>
+        (global-set-key (kbd <span style="color: #8b2252;">"M-s M-s"</span>) 'helm-swoop))
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"helm-swoop"</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span> nil t)
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12459;&#12540;&#12477;&#12523;&#12398;&#21336;&#35486;&#12364; org &#12398;&#35211;&#20986;&#12375;&#65288;*&#12398;&#38598;&#12414;&#12426;&#65289;&#12394;&#12425;&#26908;&#32034;&#23550;&#35937;&#12395;&#12375;&#12394;&#12356;&#65294;</span>
+    (<span style="color: #a020f0;">setq</span> helm-swoop-pre-input-function
+          (<span style="color: #a020f0;">lambda</span>()
+            (<span style="color: #a020f0;">unless</span> (thing-at-point-looking-at <span style="color: #8b2252;">"^\\*+"</span>)
+              (thing-at-point 'symbol))))
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#37197;&#33394;&#35373;&#23450;</span>
+    (set-face-attribute
+     'helm-swoop-target-line-face nil <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #FFEDDC;">#FFEDDC</span><span style="color: #8b2252;">"</span>)
+    (set-face-attribute
+     'helm-swoop-target-word-face nil <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #FF5443;">#FF5443</span><span style="color: #8b2252;">"</span>)))
+
+(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(helm-M-x
+         helm-buffers-list helm-recentf
+         helm-locate helm-descbinds
+         helm-occur helm-flycheck helm-bookmarks)
+       <span style="color: #8b2252;">"helm-config"</span> nil t)
+
+  (global-set-key (kbd <span style="color: #8b2252;">"C-x C-b"</span>) 'helm-buffers-list)
+  (global-set-key (kbd <span style="color: #8b2252;">"C-M-r"</span>) 'helm-recentf)
+  (global-set-key (kbd <span style="color: #8b2252;">"M-x"</span>) 'helm-M-x)
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"postpone"</span>
+
+    (global-set-key (kbd <span style="color: #8b2252;">"C-M-l"</span>) 'helm-locate)
+    (global-set-key (kbd <span style="color: #8b2252;">"C-c f b"</span>) 'helm-bookmarks)
+    (global-set-key (kbd <span style="color: #8b2252;">"C-c o"</span>) 'helm-occur)
+    (global-set-key (kbd <span style="color: #8b2252;">"C-h d"</span>) 'helm-descbinds))
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"projectile"</span>
+    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-projectile</span> nil t)
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">M-x helm-projectile-find-file (C-c p f)</span>
+      (<span style="color: #a020f0;">setq</span> projectile-completion-system 'helm)
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">projectile.el &#12398;&#12461;&#12540;&#12496;&#12452;&#12531;&#12489;&#12434;&#12458;&#12540;&#12496;&#12540;&#12521;&#12452;&#12489;</span>
+      (helm-projectile-toggle 1)))
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"helm-config"</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(when (require 'helm-files nil t)</span>
+    <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(define-key helm-find-files-map</span>
+    <span style="color: #b22222;">;;     </span><span style="color: #b22222;">(kbd "&lt;tab&gt;") 'helm-execute-persistent-action)</span>
+    <span style="color: #b22222;">;;   </span><span style="color: #b22222;">(define-key helm-read-file-map</span>
+    <span style="color: #b22222;">;;     </span><span style="color: #b22222;">(kbd "&lt;tab&gt;") 'helm-execute-persistent-action))</span>
+
+    (<span style="color: #a020f0;">when</span> (memq window-system '(mac ns))
+      (<span style="color: #a020f0;">setq</span> helm-locate-command <span style="color: #8b2252;">"mdfind -name %s %s"</span>))
+
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'helm-css-scss nil t)</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'helm-emmet nil t)</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'helm-descbinds nil t)</span>
+
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Configure helm-completing-read-handlers-alist after `(helm-mode 1)'</span>
+    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span> nil t)
+      (helm-mode 1))
+
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-find-files &#12434;&#21628;&#12400;&#12379;&#12394;&#12356;</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(add-to-list 'helm-completing-read-handlers-alist '(find-file . nil))</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-mode-ag &#12434;&#21628;&#12400;&#12379;&#12394;&#12356;</span>
+    (add-to-list 'helm-completing-read-handlers-alist '(ag . nil))
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-mode-org-set-tags &#12434;&#21628;&#12400;&#12379;&#12394;&#12356;</span>
+    (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags . nil))
+
+    (<span style="color: #a020f0;">setq</span> helm-display-source-at-screen-top nil)
+    <span style="color: #b22222;">;;         </span><span style="color: #b22222;">(setq helm-display-header-line nil)</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-autoresize-mode &#12434;&#26377;&#21177;&#12395;&#12375;&#12388;&#12388; 30% &#12395;&#22266;&#23450;</span>
+    (<span style="color: #a020f0;">setq</span> helm-autoresize-max-height 30)
+    (<span style="color: #a020f0;">setq</span> helm-autoresize-min-height 30)
+    (set-face-attribute 'helm-source-header nil
+                        <span style="color: #483d8b;">:height</span> 1.0 <span style="color: #483d8b;">:family</span> <span style="color: #8b2252;">"Verdana"</span> <span style="color: #483d8b;">:weight</span> 'normal
+                        <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #666666;">#666666</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #DADADA;">#DADADA</span><span style="color: #8b2252;">"</span>)
+    (helm-autoresize-mode 1)))
 </pre>
 </div>
 </div>
@@ -7432,16 +7493,33 @@ recentf-auto-cleanup を <code>'mode</code> などにすると起動時にファ
 
   (add-hook 'after-save-hook #'my-auto-backup)
 
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">%y-%m-%d_%M:%S &#12391;&#32066;&#12431;&#12427;&#12501;&#12449;&#12452;&#12523;&#12434;&#26412;&#26469;&#12398;&#12513;&#12472;&#12515;&#12540;&#12514;&#12540;&#12489;&#12391;&#38283;&#12367;</span>
-  (add-to-list 'auto-mode-alist '(<span style="color: #8b2252;">"-[0-9-]\\{8\\}_[0-9:]\\{5\\}$"</span> nil t))
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">%y-%m-%d_%M-%S &#12391;&#32066;&#12431;&#12427;&#12501;&#12449;&#12452;&#12523;&#12434;&#26412;&#26469;&#12398;&#12513;&#12472;&#12515;&#12540;&#12514;&#12540;&#12489;&#12391;&#38283;&#12367;</span>
+  (add-to-list 'auto-mode-alist '(<span style="color: #8b2252;">"-[0-9-]\\{8\\}_[0-9-]\\{5\\}$"</span> nil t))
 
   (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"backup-each-save"</span>
     (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-auto-backup</span> ()
       (<span style="color: #a020f0;">unless</span> (equal (buffer-name) <span style="color: #8b2252;">"recentf"</span>)
         (backup-each-save)))
     (<span style="color: #a020f0;">setq</span> backup-each-save-mirror-location <span style="color: #8b2252;">"~/.emacs.d/backup"</span>)
-    (<span style="color: #a020f0;">setq</span> backup-each-save-time-format <span style="color: #8b2252;">"%y-%m-%d_%M:%S"</span>)
-    (<span style="color: #a020f0;">setq</span> backup-each-save-size-limit 1048576)))
+    (<span style="color: #a020f0;">setq</span> backup-each-save-time-format <span style="color: #8b2252;">"%y-%m-%d_%M-%S"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">do not use ":" for w32</span>
+    (<span style="color: #a020f0;">setq</span> backup-each-save-size-limit 1048576))
+
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-backup-each-save-compute-location</span> (filename)
+    (<span style="color: #a020f0;">let*</span> ((containing-dir (file-name-directory filename))
+           (basename (file-name-nondirectory filename))
+           (backup-container
+            (format <span style="color: #8b2252;">"%s/%s"</span>
+                    backup-each-save-mirror-location
+                    <span style="color: #b22222;">;; </span><span style="color: #b22222;">"c:" is not allowed</span>
+                    (replace-regexp-in-string <span style="color: #8b2252;">":"</span> <span style="color: #8b2252;">""</span> containing-dir))))
+      (<span style="color: #a020f0;">when</span> (not (file-exists-p backup-container))
+        (make-directory backup-container t))
+      (format <span style="color: #8b2252;">"%s/%s-%s"</span> backup-container basename
+              (format-time-string backup-each-save-time-format))))
+
+  (<span style="color: #a020f0;">when</span> (eq window-system 'w32)
+    (advice-add 'backup-each-save-compute-location <span style="color: #483d8b;">:override</span>
+                #'my-backup-each-save-compute-location)))
 </pre>
 </div>
 </div>
@@ -7627,167 +7705,27 @@ recentf-auto-cleanup を <code>'mode</code> などにすると起動時にファ
 </div>
 </div>
 
-<div id="outline-container-org82bd942f" class="outline-3">
-<h3 id="org82bd942f"><span class="section-number-3">8.11</span> [undo-tree] 編集履歴をわかりやすくたどる</h3>
-<div class="outline-text-3" id="text-org82bd942f">
-<p>
-Undoのツリーが表示され，履歴をたどれます． <code>C-x u</code> と <code>q</code> に対して，フレームサイズの変更を紐付けています．また， <code>auto-save-buffers</code> が org-files をどんどん保存して記録してしまうので，ツリーを選んでいる時に auto-save-buffers が発動するのを別途抑制しています．加えて， <code>org-tree-slide</code> でナローイングしていると，タイムスタンプが記録される時に履歴が辿れなくなるので， <code>org-tree-slide</code> が有効の時は，タイムスタンプを押させないように別途制限を加えています．<br />
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(my-undo-tree-visualize)
-       <span style="color: #8b2252;">"undo-tree"</span> nil t)
-
-  (global-set-key (kbd <span style="color: #8b2252;">"C-x u"</span>) 'my-undo-tree-visualize)
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"undo-tree"</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(global-undo-tree-mode)</span>
-    (<span style="color: #a020f0;">setq</span> undo-tree-mode-lighter nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12514;&#12540;&#12489;&#12521;&#12452;&#12531;&#38936;&#22495;&#12434;&#31680;&#32004;</span>
-
-    (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-undo-tree-active</span> nil)
-    (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-undo-tree-width</span> 90)
-
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-tree-visualize</span> ()
-      (<span style="color: #a020f0;">interactive</span>)
-      (undo-tree-mode 1)
-      (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">moom</span> nil t)
-          (moom-change-frame-width-double)
-        (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (not my-undo-tree-active)
-                   (not (eq buffer-undo-list t)))
-          (set-frame-width nil (+ (frame-width) my-undo-tree-width))
-          (<span style="color: #a020f0;">setq</span> my-undo-tree-active t)))
-      (undo-tree-visualize))
-
-    (define-key undo-tree-map (kbd <span style="color: #8b2252;">"C-x u"</span>) 'my-undo-tree-visualize)
-
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-tree-visualizer-quit</span> ()
-      (<span style="color: #a020f0;">interactive</span>)
-      (undo-tree-visualizer-quit)
-      (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">moom</span> nil t)
-          (moom-change-frame-width-single)
-        (delete-window)
-        (<span style="color: #a020f0;">when</span> my-undo-tree-active
-          (set-frame-width nil (- (frame-width) my-undo-tree-width))
-          (<span style="color: #a020f0;">setq</span> my-undo-tree-active nil)))
-      (<span style="color: #a020f0;">when</span> (&lt; (frame-width) 80)
-        (set-frame-width nil 80))
-      (undo-tree-mode -1))
-
-    (define-key undo-tree-visualizer-mode-map (kbd <span style="color: #8b2252;">"q"</span>)
-      'my-undo-tree-visualizer-quit))
-
-  (advice-add 'undo-tree-undo-1 <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
-  (advice-add 'undo-tree-redo-1 <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus))
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org694ee426" class="outline-3">
-<h3 id="org694ee426"><span class="section-number-3">8.12</span> [undo-propose] undo を編集不可モードで辿る</h3>
-<div class="outline-text-3" id="text-org694ee426">
+<div id="outline-container-org6e71b562" class="outline-3">
+<h3 id="org6e71b562"><span class="section-number-3">8.11</span> [undo-fu.el] シンプルな redo を提供してくる</h3>
+<div class="outline-text-3" id="text-org6e71b562">
 <ul class="org-ul">
-<li><a href="https://github.com/jackkamm/undo-propose-el">jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer</a><br /></li>
+<li><a href="https://gitlab.com/ideasman42/emacs-undo-fu">Campbell Barton / emacs-undo-fu · GitLab</a><br /></li>
 </ul>
 
-<p>
-<code>undo</code> する時に，バッファに意図しない変更が加わると面倒なことになります．そこで <code>org-capture</code> なキーバインドで動作する <code>undo-propose</code> を使います．<br />
-</p>
-
-<p>
-<code>undo-propose</code> でモードに入ったら， <code>C-/</code> で <code>undo</code> して，確定するなら <code>C-c C-c</code> ，キャンセルするなら <code>C-c C-k</code> します．オリジナルのバッファを直接変更せず，一時的なバッファで <code>undo</code> してから反映させるのでより安全です．<br />
-</p>
-
-<p>
-次の設定では，標準の <code>undo</code> をオーバーライドするように <code>undo-propose</code> を使います．<br />
-</p>
-
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(undo-propose)
-       <span style="color: #8b2252;">"undo-propose"</span> nil t)
+       '(undo-fu-only-undo undo-fu-only-redo)
+       <span style="color: #8b2252;">"undo-fu"</span> nil t)
 
-  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose</span> ()
-    (<span style="color: #a020f0;">interactive</span>)
-    (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">or</span> (buffer-narrowed-p)
-            (eq major-mode 'org-mode))
-        (undo)
-      (undo-propose)))
-
-  (global-set-key (kbd <span style="color: #8b2252;">"C-/"</span>) 'my-undo-propose)
-
-  <span style="color: #b22222;">;; </span><span style="color: #b22222;">located here intended to share this command with `</span><span style="color: #008b8b;">undo-tree</span><span style="color: #b22222;">'</span>
-  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-org-reveal-and-focus</span> (<span style="color: #228b22;">&amp;optional</span> _arg)
-    <span style="color: #8b2252;">"Reveal a heading and focus on the content."</span>
-    (<span style="color: #a020f0;">when</span> (eq major-mode 'org-mode)
-      (org-overview)
-      (<span style="color: #a020f0;">unless</span> (org-before-first-heading-p)
-        (org-reveal)
-        (org-cycle-hide-drawers 'all)
-        (org-show-entry)
-        (show-children)
-        (org-show-siblings))))
-  (advice-add 'undo <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
-
-  (<span style="color: #a020f0;">eval-when-compile</span>
-    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">undo-propose</span> nil t)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">for `</span><span style="color: #008b8b;">undo-propose-wrap</span><span style="color: #b22222;">'</span>
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"undo-propose"</span>
-    (add-hook 'undo-propose-entry-hook #'undo) <span style="color: #b22222;">;; </span><span style="color: #b22222;">immediate undo</span>
-    (undo-propose-wrap redo)
-
-    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"/"</span>) 'undo)
-    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"q"</span>) 'undo-propose-cancel)
-    (advice-add 'undo-propose-commit <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
-    (advice-add 'undo-propose-squash-commit <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
-
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Moving coursor in `</span><span style="color: #008b8b;">undo-propose-mode</span><span style="color: #b22222;">' will also commit changes.</span>
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-commit</span> ()
-      (<span style="color: #a020f0;">when</span> undo-propose-mode
-        (undo-propose-commit)))
-
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-autocommit-on</span> ()
-      (add-hook 'ah-after-move-cursor-hook 'my-undo-propose-commit))
-    (advice-add 'undo-propose <span style="color: #483d8b;">:after</span> #'my-undo-propose-autocommit-on)
-
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-autocommit-off</span> ()
-      (remove-hook 'ah-after-move-cursor-hook 'my-undo-propose-commit))
-    (add-hook 'undo-propose-done-hook #'my-undo-propose-autocommit-off)
-
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">SPC and RET in `</span><span style="color: #008b8b;">undo-propose-mode</span><span style="color: #b22222;">' will commit changes.</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Additionally, the commands will be executed.</span>
-    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"SPC"</span>) 'undo-propose-commit)
-    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"RET"</span>) 'undo-propose-commit)
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-key-through</span> ()
-      <span style="color: #8b2252;">"Through SPC and RET."</span>
-      (<span style="color: #a020f0;">let</span> ((command (this-command-keys)))
-        (<span style="color: #a020f0;">cond</span> ((equal (kbd <span style="color: #8b2252;">"SPC"</span>) command)
-               (insert <span style="color: #8b2252;">" "</span>))
-              ((equal (kbd <span style="color: #8b2252;">"RET"</span>) command)
-               (electric-newline-and-maybe-indent)))))
-    (advice-add 'undo-propose-commit <span style="color: #483d8b;">:after</span> #'my-undo-propose-key-through)
-
-    (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-undo-propose-modeline</span> '(<span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #FF5d5d;">#FF5d5d</span><span style="color: #8b2252;">"</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span><span style="color: #8b2252;">"</span>))
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-mode-line</span> ()
-      (custom-set-faces
-       `(mode-line ((t (<span style="color: #483d8b;">:background</span>
-                        ,(nth 0 my-undo-propose-modeline)
-                        <span style="color: #483d8b;">:foreground</span>
-                        ,(nth 1 my-undo-propose-modeline)))))))
-
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-mode-line-restore</span> ()
-      (custom-set-faces '(mode-line ((t nil)))))
-
-    (add-hook 'undo-propose-entry-hook #'my-undo-propose-mode-line)
-    (add-hook 'undo-propose-done-hook #'my-undo-propose-mode-line-restore)))
+  (global-set-key (kbd <span style="color: #8b2252;">"C-/"</span>) 'undo-fu-only-undo)
+  (global-set-key (kbd <span style="color: #8b2252;">"C-M-/"</span>) 'undo-fu-only-redo))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgb8c01946" class="outline-3">
-<h3 id="orgb8c01946"><span class="section-number-3">8.13</span> [auto-save-buffers.el] 一定間隔でバッファを保存する</h3>
+<h3 id="orgb8c01946"><span class="section-number-3">8.12</span> [auto-save-buffers.el] 一定間隔でバッファを保存する</h3>
 <div class="outline-text-3" id="text-orgb8c01946">
 <ul class="org-ul">
 <li><a href="http://0xcc.net/misc/auto-save/">http://0xcc.net/misc/auto-save/</a><br /></li>
@@ -7821,7 +7759,7 @@ Undoのツリーが表示され，履歴をたどれます． <code>C-x u</code>
 </div>
 
 <div id="outline-container-orgab837e6a" class="outline-3">
-<h3 id="orgab837e6a"><span class="section-number-3">8.14</span> [session.el] 様々な履歴を保存し復元に利用する</h3>
+<h3 id="orgab837e6a"><span class="section-number-3">8.13</span> [session.el] 様々な履歴を保存し復元に利用する</h3>
 <div class="outline-text-3" id="text-orgab837e6a">
 <p>
 <a href="http://emacs-session.sourceforge.net/">http://emacs-session.sourceforge.net/</a><br />
@@ -7920,7 +7858,7 @@ Org Mode と併用する場合は， my-org-reveal-session-jump の設定が必�
 </div>
 
 <div id="outline-container-org92404bbd" class="outline-3">
-<h3 id="org92404bbd"><span class="section-number-3">8.15</span> [neotree.el] ディレクトリ情報をツリー表示</h3>
+<h3 id="org92404bbd"><span class="section-number-3">8.14</span> [neotree.el] ディレクトリ情報をツリー表示</h3>
 <div class="outline-text-3" id="text-org92404bbd">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
@@ -7978,7 +7916,7 @@ Org Mode と併用する場合は， my-org-reveal-session-jump の設定が必�
 </div>
 
 <div id="outline-container-orgf2d47943" class="outline-3">
-<h3 id="orgf2d47943"><span class="section-number-3">8.16</span> [helpful.el] リッチなヘルプページ</h3>
+<h3 id="orgf2d47943"><span class="section-number-3">8.15</span> [helpful.el] リッチなヘルプページ</h3>
 <div class="outline-text-3" id="text-orgf2d47943">
 <p>
 ヘルプの内容を見やすく構造化して表示してくれます．関数や変数のヘルプだけでなく，キーやマクロなども見やすく表示してくれます．<br />
@@ -8004,7 +7942,7 @@ Org Mode と併用する場合は， my-org-reveal-session-jump の設定が必�
 </div>
 
 <div id="outline-container-orgc08799d2" class="outline-3">
-<h3 id="orgc08799d2"><span class="section-number-3">8.17</span> [facecheck.el] クリックしてfaceをチェック</h3>
+<h3 id="orgc08799d2"><span class="section-number-3">8.16</span> [facecheck.el] クリックしてfaceをチェック</h3>
 <div class="outline-text-3" id="text-orgc08799d2">
 <p>
 マウスクリックでface情報を表示する．マイナーモードを有効にして使います．<br />
@@ -8022,7 +7960,7 @@ Org Mode と併用する場合は， my-org-reveal-session-jump の設定が必�
 </div>
 
 <div id="outline-container-org0d952d68" class="outline-3">
-<h3 id="org0d952d68"><span class="section-number-3">8.18</span> [keyfreq.el] コマンドログ</h3>
+<h3 id="org0d952d68"><span class="section-number-3">8.17</span> [keyfreq.el] コマンドログ</h3>
 <div class="outline-text-3" id="text-org0d952d68">
 <p>
 発行しているコマンドの使用頻度を記録し確認できます．デフォルトで， <code>~/.emacs.keyfreq</code> に情報が記録されます．<br />
@@ -8057,7 +7995,7 @@ Org Mode と併用する場合は， my-org-reveal-session-jump の設定が必�
 </div>
 
 <div id="outline-container-orged77c483" class="outline-3">
-<h3 id="orged77c483"><span class="section-number-3">8.19</span> [disk-usage.el] ディスク利用率を調べる</h3>
+<h3 id="orged77c483"><span class="section-number-3">8.18</span> [disk-usage.el] ディスク利用率を調べる</h3>
 <div class="outline-text-3" id="text-orged77c483">
 <p>
 <code>ncdu</code> コマンドのように，システムのディスク利用率を調べてバッファに一覧表示します．ただ，非同期に対応していないので，普通にシェルで <code>ncdu</code> コマンドを使う方が良い気がします．<br />
@@ -8078,7 +8016,7 @@ Org Mode と併用する場合は， my-org-reveal-session-jump の設定が必�
 </div>
 
 <div id="outline-container-orgdd1e03ec" class="outline-3">
-<h3 id="orgdd1e03ec"><span class="section-number-3">8.20</span> [uptimes.el] Emacsの起動時間を記録する</h3>
+<h3 id="orgdd1e03ec"><span class="section-number-3">8.19</span> [uptimes.el] Emacsの起動時間を記録する</h3>
 <div class="outline-text-3" id="text-orgdd1e03ec">
 <p>
 <a href="https://github.com/davep/uptimes.el">davep/uptimes.el: Uptime tracking system for emacs.</a> を使うと，過去数回の起動・稼働・終了履歴がわかります．<br />
@@ -8117,7 +8055,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 
 <div id="outline-container-orgfd3c67b9" class="outline-3">
-<h3 id="orgfd3c67b9"><span class="section-number-3">8.21</span> [ag.el] 検索</h3>
+<h3 id="orgfd3c67b9"><span class="section-number-3">8.20</span> [ag.el] 検索</h3>
 <div class="outline-text-3" id="text-orgfd3c67b9">
 <p>
 検索には <code>The Silver Searcher</code> を使います．あらかじめインストールしておく必要があります．MacPorts の場合，the_silver_searcher の名称で頒布されています． <code>exec-path</code> に <code>/opt/local/bin</code> が含まれていることを確認してください．<br />
@@ -8167,7 +8105,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 </div>
 <div id="outline-container-org29c7b6b7" class="outline-3">
-<h3 id="org29c7b6b7"><span class="section-number-3">8.22</span> [counsel-ag.el] 高速全文検索</h3>
+<h3 id="org29c7b6b7"><span class="section-number-3">8.21</span> [counsel-ag.el] 高速全文検索</h3>
 <div class="outline-text-3" id="text-org29c7b6b7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found '(counsel-ag) <span style="color: #8b2252;">"counsel"</span> nil t)
@@ -8193,7 +8131,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 
 <div id="outline-container-org24fd7b68" class="outline-3">
-<h3 id="org24fd7b68"><span class="section-number-3">8.23</span> [counsel-fzf.el] 高速ファイル検索</h3>
+<h3 id="org24fd7b68"><span class="section-number-3">8.22</span> [counsel-fzf.el] 高速ファイル検索</h3>
 <div class="outline-text-3" id="text-org24fd7b68">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
@@ -8220,8 +8158,177 @@ Boot                Endtime             Uptime       This emacs
 </div>
 </div>
 
+<div id="outline-container-org694ee426" class="outline-3">
+<h3 id="org694ee426"><span class="section-number-3">8.23</span> <span class="done DONE">DONE</span> [undo-propose] undo を編集不可モードで辿る&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<div class="outline-text-3" id="text-org694ee426">
+<p>
+最近は <b>undo-fu.el</b> を使っています．<br />
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/jackkamm/undo-propose-el">jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer</a><br /></li>
+</ul>
+
+<p>
+<code>undo</code> する時に，バッファに意図しない変更が加わると面倒なことになります．そこで <code>org-capture</code> なキーバインドで動作する <code>undo-propose</code> を使います．<br />
+</p>
+
+<p>
+<code>undo-propose</code> でモードに入ったら， <code>C-/</code> で <code>undo</code> して，確定するなら <code>C-c C-c</code> ，キャンセルするなら <code>C-c C-k</code> します．オリジナルのバッファを直接変更せず，一時的なバッファで <code>undo</code> してから反映させるのでより安全です．<br />
+</p>
+
+<p>
+次の設定では，標準の <code>undo</code> をオーバーライドするように <code>undo-propose</code> を使います．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">late-init.el</span>
+(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(undo-propose)
+       <span style="color: #8b2252;">"undo-propose"</span> nil t)
+
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose</span> ()
+    (<span style="color: #a020f0;">interactive</span>)
+    (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">or</span> (buffer-narrowed-p)
+            (eq major-mode 'org-mode))
+        (undo)
+      (undo-propose)))
+
+  (global-set-key (kbd <span style="color: #8b2252;">"C-/"</span>) 'my-undo-propose)
+
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">located here intended to share this command with `</span><span style="color: #008b8b;">undo-tree</span><span style="color: #b22222;">'</span>
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-org-reveal-and-focus</span> (<span style="color: #228b22;">&amp;optional</span> _arg)
+    <span style="color: #8b2252;">"Reveal a heading and focus on the content."</span>
+    (<span style="color: #a020f0;">when</span> (eq major-mode 'org-mode)
+      (org-overview)
+      (<span style="color: #a020f0;">unless</span> (org-before-first-heading-p)
+        (org-reveal)
+        (org-cycle-hide-drawers 'all)
+        (org-show-entry)
+        (show-children)
+        (org-show-siblings))))
+  (advice-add 'undo <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
+
+  (<span style="color: #a020f0;">eval-when-compile</span>
+    (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">undo-propose</span> nil t)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">for `</span><span style="color: #008b8b;">undo-propose-wrap</span><span style="color: #b22222;">'</span>
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"undo-propose"</span>
+    (add-hook 'undo-propose-entry-hook #'undo) <span style="color: #b22222;">;; </span><span style="color: #b22222;">immediate undo</span>
+    (undo-propose-wrap redo)
+
+    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"/"</span>) 'undo)
+    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"q"</span>) 'undo-propose-cancel)
+    (advice-add 'undo-propose-commit <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
+    (advice-add 'undo-propose-squash-commit <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
+
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Moving coursor in `</span><span style="color: #008b8b;">undo-propose-mode</span><span style="color: #b22222;">' will also commit changes.</span>
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-commit</span> ()
+      (<span style="color: #a020f0;">when</span> undo-propose-mode
+        (undo-propose-commit)))
+
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-autocommit-on</span> ()
+      (add-hook 'ah-after-move-cursor-hook 'my-undo-propose-commit))
+    (advice-add 'undo-propose <span style="color: #483d8b;">:after</span> #'my-undo-propose-autocommit-on)
+
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-autocommit-off</span> ()
+      (remove-hook 'ah-after-move-cursor-hook 'my-undo-propose-commit))
+    (add-hook 'undo-propose-done-hook #'my-undo-propose-autocommit-off)
+
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">SPC and RET in `</span><span style="color: #008b8b;">undo-propose-mode</span><span style="color: #b22222;">' will commit changes.</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">Additionally, the commands will be executed.</span>
+    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"SPC"</span>) 'undo-propose-commit)
+    (define-key undo-propose-mode-map (kbd <span style="color: #8b2252;">"RET"</span>) 'undo-propose-commit)
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-key-through</span> ()
+      <span style="color: #8b2252;">"Through SPC and RET."</span>
+      (<span style="color: #a020f0;">let</span> ((command (this-command-keys)))
+        (<span style="color: #a020f0;">cond</span> ((equal (kbd <span style="color: #8b2252;">"SPC"</span>) command)
+               (insert <span style="color: #8b2252;">" "</span>))
+              ((equal (kbd <span style="color: #8b2252;">"RET"</span>) command)
+               (electric-newline-and-maybe-indent)))))
+    (advice-add 'undo-propose-commit <span style="color: #483d8b;">:after</span> #'my-undo-propose-key-through)
+
+    (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-undo-propose-modeline</span> '(<span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #FF5d5d;">#FF5d5d</span><span style="color: #8b2252;">"</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span><span style="color: #8b2252;">"</span>))
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-mode-line</span> ()
+      (custom-set-faces
+       `(mode-line ((t (<span style="color: #483d8b;">:background</span>
+                        ,(nth 0 my-undo-propose-modeline)
+                        <span style="color: #483d8b;">:foreground</span>
+                        ,(nth 1 my-undo-propose-modeline)))))))
+
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-propose-mode-line-restore</span> ()
+      (custom-set-faces '(mode-line ((t nil)))))
+
+    (add-hook 'undo-propose-entry-hook #'my-undo-propose-mode-line)
+    (add-hook 'undo-propose-done-hook #'my-undo-propose-mode-line-restore)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org82bd942f" class="outline-3">
+<h3 id="org82bd942f"><span class="section-number-3">8.24</span> <span class="done DONE">DONE</span> [undo-tree] 編集履歴をわかりやすくたどる&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<div class="outline-text-3" id="text-org82bd942f">
+<p>
+最近は <b>undo-fu.el</b> を使っています．<br />
+</p>
+
+<p>
+Undoのツリーが表示され，履歴をたどれます． <code>C-x u</code> と <code>q</code> に対して，フレームサイズの変更を紐付けています．また， <code>auto-save-buffers</code> が org-files をどんどん保存して記録してしまうので，ツリーを選んでいる時に auto-save-buffers が発動するのを別途抑制しています．加えて， <code>org-tree-slide</code> でナローイングしていると，タイムスタンプが記録される時に履歴が辿れなくなるので， <code>org-tree-slide</code> が有効の時は，タイムスタンプを押させないように別途制限を加えています．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">late-init.el</span>
+(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(my-undo-tree-visualize)
+       <span style="color: #8b2252;">"undo-tree"</span> nil t)
+
+  (global-set-key (kbd <span style="color: #8b2252;">"C-x u"</span>) 'my-undo-tree-visualize)
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"undo-tree"</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">(global-undo-tree-mode)</span>
+    (<span style="color: #a020f0;">setq</span> undo-tree-mode-lighter nil) <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12514;&#12540;&#12489;&#12521;&#12452;&#12531;&#38936;&#22495;&#12434;&#31680;&#32004;</span>
+
+    (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-undo-tree-active</span> nil)
+    (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-undo-tree-width</span> 90)
+
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-tree-visualize</span> ()
+      (<span style="color: #a020f0;">interactive</span>)
+      (undo-tree-mode 1)
+      (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">moom</span> nil t)
+          (moom-change-frame-width-double)
+        (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> (not my-undo-tree-active)
+                   (not (eq buffer-undo-list t)))
+          (set-frame-width nil (+ (frame-width) my-undo-tree-width))
+          (<span style="color: #a020f0;">setq</span> my-undo-tree-active t)))
+      (undo-tree-visualize))
+
+    (define-key undo-tree-map (kbd <span style="color: #8b2252;">"C-x u"</span>) 'my-undo-tree-visualize)
+
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-undo-tree-visualizer-quit</span> ()
+      (<span style="color: #a020f0;">interactive</span>)
+      (undo-tree-visualizer-quit)
+      (<span style="color: #a020f0;">if</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">moom</span> nil t)
+          (moom-change-frame-width-single)
+        (delete-window)
+        (<span style="color: #a020f0;">when</span> my-undo-tree-active
+          (set-frame-width nil (- (frame-width) my-undo-tree-width))
+          (<span style="color: #a020f0;">setq</span> my-undo-tree-active nil)))
+      (<span style="color: #a020f0;">when</span> (&lt; (frame-width) 80)
+        (set-frame-width nil 80))
+      (undo-tree-mode -1))
+
+    (define-key undo-tree-visualizer-mode-map (kbd <span style="color: #8b2252;">"q"</span>)
+      'my-undo-tree-visualizer-quit))
+
+  (advice-add 'undo-tree-undo-1 <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus)
+  (advice-add 'undo-tree-redo-1 <span style="color: #483d8b;">:after</span> #'my-org-reveal-and-focus))
+</pre>
+</div>
+</div>
+</div>
+
 <div id="outline-container-orgc47c1e75" class="outline-3">
-<h3 id="orgc47c1e75"><span class="section-number-3">8.24</span> <span class="done DONE">DONE</span> [wakatime-mode.el] WakaTime を利用して作業記録する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="orgc47c1e75"><span class="section-number-3">8.25</span> <span class="done DONE">DONE</span> [wakatime-mode.el] WakaTime を利用して作業記録する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-orgc47c1e75">
 <ol class="org-ol">
 <li><a href="https://www.wakati.me/">https://www.wakati.me/</a>（API発行とログGUI表示）<br /></li>
@@ -8246,7 +8353,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 
 <div id="outline-container-orgc470d5a3" class="outline-3">
-<h3 id="orgc470d5a3"><span class="section-number-3">8.25</span> <span class="done DONE">DONE</span> [backup-dir.el] バックアップファイルを一箇所に集める&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="orgc470d5a3"><span class="section-number-3">8.26</span> <span class="done DONE">DONE</span> [backup-dir.el] バックアップファイルを一箇所に集める&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-orgc470d5a3">
 <p>
 <code>backup-each-save</code> を使うようになりました．<br />
@@ -8281,7 +8388,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 
 <div id="outline-container-org8b2fe680" class="outline-3">
-<h3 id="org8b2fe680"><span class="section-number-3">8.26</span> <span class="done DONE">DONE</span> バッファ保存時にバックアップファイルを生成する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="org8b2fe680"><span class="section-number-3">8.27</span> <span class="done DONE">DONE</span> バッファ保存時にバックアップファイルを生成する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-org8b2fe680">
 <p>
 バッファが保存されるとき，必ずバックアップを生成する．<br />
@@ -8297,7 +8404,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 
 <div id="outline-container-orgdba35c9f" class="outline-3">
-<h3 id="orgdba35c9f"><span class="section-number-3">8.27</span> <span class="done DONE">DONE</span> ミニバッファの履歴を保存しリストアする&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="orgdba35c9f"><span class="section-number-3">8.28</span> <span class="done DONE">DONE</span> ミニバッファの履歴を保存しリストアする&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-orgdba35c9f">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">savehist</span> nil t)
@@ -8310,7 +8417,7 @@ Boot                Endtime             Uptime       This emacs
 </div>
 
 <div id="outline-container-orgead91174" class="outline-3">
-<h3 id="orgead91174"><span class="section-number-3">8.28</span> <span class="done DONE">DONE</span> Emacs終了時に開いていたバッファを起動時に復元する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="orgead91174"><span class="section-number-3">8.29</span> <span class="done DONE">DONE</span> Emacs終了時に開いていたバッファを起動時に復元する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-orgead91174">
 <p>
 Built-in の <a href="http://www.emacswiki.org/emacs/DeskTop">desktop.el</a> を使う．<br />
@@ -8333,7 +8440,7 @@ org バッファを CONTENT view で大量に開いていると，再起動が�
 </div>
 
 <div id="outline-container-org63e50e2c" class="outline-3">
-<h3 id="org63e50e2c"><span class="section-number-3">8.29</span> <span class="done DONE">DONE</span> 深夜にバッファを自動整理する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="org63e50e2c"><span class="section-number-3">8.30</span> <span class="done DONE">DONE</span> 深夜にバッファを自動整理する&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-org63e50e2c">
 <p>
 私は頻繁に再起動する派なので，使っていません．<br />
@@ -11123,7 +11230,7 @@ org-mode の表のようにフェイスを統一しています． <code>calfw</
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-org" id="org8f7e97b"><span style="color: #b22222;"># -*- mode: org; -*-</span>
+<pre class="src src-org" id="org5103c2d"><span style="color: #b22222;"># -*- mode: org; -*-</span>
 
 <span style="color: #b22222;">#+html_head: &lt;link rel="stylesheet" type="text/css" href="<a href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css&quot;/">https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/</a>&gt;</span>
 <span style="color: #b22222;">#+html_head: &lt;link rel="stylesheet" type="text/css" href="<a href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css&quot;/">https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/</a>&gt;</span>
@@ -12312,10 +12419,15 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 (add-hook 'input-method-activate-hook #'my-ime-on-cursor)
 (add-hook 'input-method-deactivate-hook #'my-ime-off-cursor)
 
-(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-apply-cursor-config</span> ()
-  (<span style="color: #a020f0;">interactive</span>)
-  (<span style="color: #a020f0;">when</span> (display-graphic-p)
-    (<span style="color: #a020f0;">if</span> (my-ime-active-p) (my-ime-on-cursor) (my-ime-off-cursor))))
+(<span style="color: #a020f0;">if</span> (&lt; emacs-major-version 27)
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-apply-cursor-config</span> ()
+      (<span style="color: #a020f0;">interactive</span>)
+      (<span style="color: #a020f0;">when</span> (display-graphic-p)
+        (<span style="color: #a020f0;">if</span> (my-ime-active-p) (my-ime-on-cursor) (my-ime-off-cursor))))
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-apply-cursor-config</span> ()
+    (<span style="color: #a020f0;">interactive</span>)
+    (<span style="color: #a020f0;">when</span> (display-graphic-p)
+      (<span style="color: #a020f0;">if</span> (mac-ime-active-p) (my-ime-on-cursor) (my-ime-off-cursor)))))
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">(unless (and (memq window-system '(ns mac))</span>
 <span style="color: #b22222;">;;              </span><span style="color: #b22222;">noninteractive)</span>
@@ -12373,10 +12485,17 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
       (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">setq</span> my-ime-before-action (my-ime-active-p))
         (my-ime-off)))
 
-    (add-hook 'activate-mark-hook #'my-ime-off-sticky)
-    (add-hook 'deactivate-mark-hook #'my-ime-on-sticky)
-    (add-hook 'minibuffer-setup-hook #'my-ime-off-sticky)
-    (add-hook 'minibuffer-exit-hook #'my-ime-on-sticky)
+    (<span style="color: #a020f0;">if</span> (&lt; emacs-major-version 27)
+        (<span style="color: #a020f0;">progn</span>
+          <span style="color: #b22222;">;; </span><span style="color: #b22222;">For selected.el</span>
+          (add-hook 'activate-mark-hook #'my-ime-off-sticky)
+          (add-hook 'deactivate-mark-hook #'my-ime-on-sticky)
+          <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12300;M-x &#12354;&#12301;&#23550;&#31574;</span>
+          (add-hook 'minibuffer-setup-hook #'my-ime-off-sticky)
+          (add-hook 'minibuffer-exit-hook #'my-ime-on-sticky))
+      <span style="color: #b22222;">;; </span><span style="color: #b22222;">For selected.el</span>
+      (add-hook 'activate-mark-hook #'mac-ime-deactivate-sticky)
+      (add-hook 'deactivate-mark-hook #'mac-ime-activate-sticky))
 
     <span style="color: #b22222;">;; </span><span style="color: #b22222;">(defun ad:find-file (FILENAME &amp;optional WILDCARDS)</span>
     <span style="color: #b22222;">;;   </span><span style="color: #b22222;">"Extension to find-file as before-find-file-hook."</span>
@@ -12434,42 +12553,8 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 </div>
 
-<div id="outline-container-org7a20b311" class="outline-3">
-<h3 id="org7a20b311"><span class="section-number-3">11.2</span> [olivetti.el] ウィンドウを中央寄せで配置</h3>
-<div class="outline-text-3" id="text-org7a20b311">
-<ul class="org-ul">
-<li><a href="https://github.com/rnkn/olivetti">rnkn/olivetti: Emacs minor mode for a nice writing environment</a><br /></li>
-</ul>
-
-<p>
-<code>moom.el</code> を使ってフレームを最大化したり，画面の半分に配置すると，80桁で表示する領域とウィンドウが占める領域の幅が一致しない場合があります．通常は，フレーム内で左寄せに配置されますが， <code>olivetti</code> を使うと，中央寄せにできます．<br />
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"moom"</span>
-  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">olivetti</span> nil t)
-    (<span style="color: #a020f0;">setq</span> olivetti-lighter nil)
-    (<span style="color: #a020f0;">setq-default</span> olivetti-body-width 80)
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:turn-on-olivetti-mode</span> ()
-      <span style="color: #8b2252;">"Disable `</span><span style="color: #008b8b;">visual-line-mode</span><span style="color: #8b2252;">'."</span>
-      (<span style="color: #a020f0;">unless</span> moom--maximized
-        (olivetti-mode -1))
-      (visual-line-mode -1))
-    (advice-add 'turn-on-olivetti-mode <span style="color: #483d8b;">:after</span> #'ad:turn-on-olivetti-mode)
-    (add-hook 'find-file-hook #'turn-on-olivetti-mode)
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:olivetti:moom-toggle-frame-maximized</span> ()
-      (<span style="color: #a020f0;">if</span> moom--maximized
-          (turn-on-olivetti-mode)
-        (olivetti-mode -1)))
-    (advice-add 'moom-toggle-frame-maximized <span style="color: #483d8b;">:after</span>
-                #'ad:olivetti:moom-toggle-frame-maximized)))
-</pre>
-</div>
-</div>
-</div>
-
 <div id="outline-container-org5f12ba92" class="outline-3">
-<h3 id="org5f12ba92"><span class="section-number-3">11.3</span> [moom.el] キーボードでフレームの場所を移す</h3>
+<h3 id="org5f12ba92"><span class="section-number-3">11.2</span> [moom.el] キーボードでフレームの場所を移す</h3>
 <div class="outline-text-3" id="text-org5f12ba92">
 <p>
 (2017-07-30) frame-ctr から moom.el にリネームしました．Moom は，Many Tricks がリリースするソフトウェアで，今後はこのソフトウェアのポーティングを目指します．<br />
@@ -12563,7 +12648,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org6e3c20dd" class="outline-4">
-<h4 id="org6e3c20dd"><span class="section-number-4">11.3.1</span> 最大化時にモードラインを消す</h4>
+<h4 id="org6e3c20dd"><span class="section-number-4">11.2.1</span> 最大化時にモードラインを消す</h4>
 <div class="outline-text-4" id="text-org6e3c20dd">
 <p>
 バッファの切替時にモードラインの状態を引き継ぐこともできますが，とりあえず想定外にしています．代わりに，必要ならば <code>M-x my-moom-toggle-mode-line</code> で表示可能にしています．<br />
@@ -12647,7 +12732,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org33fd785f" class="outline-3">
-<h3 id="org33fd785f"><span class="section-number-3">11.4</span> [winner.el] ウィンドウ構成の履歴を辿る</h3>
+<h3 id="org33fd785f"><span class="section-number-3">11.3</span> [winner.el] ウィンドウ構成の履歴を辿る</h3>
 <div class="outline-text-3" id="text-org33fd785f">
 <ul class="org-ul">
 <li>ビルトインの <code>winner.el</code> を使います．<br /></li>
@@ -12671,7 +12756,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-orga9be167a" class="outline-3">
-<h3 id="orga9be167a"><span class="section-number-3">11.5</span> <span class="todo TODO">TODO</span> [shackle.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Ongoing">Ongoing</span></span></h3>
+<h3 id="orga9be167a"><span class="section-number-3">11.4</span> <span class="todo TODO">TODO</span> [shackle.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Ongoing">Ongoing</span></span></h3>
 <div class="outline-text-3" id="text-orga9be167a">
 <ul class="org-ul">
 <li>popwin の後発パッケージ<br /></li>
@@ -12701,7 +12786,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org32b579df" class="outline-4">
-<h4 id="org32b579df"><span class="section-number-4">11.5.1</span> checkdoc.el 用の追加設定</h4>
+<h4 id="org32b579df"><span class="section-number-4">11.4.1</span> checkdoc.el 用の追加設定</h4>
 <div class="outline-text-4" id="text-org32b579df">
 <p>
 <code>M-x checkdoc</code> 実行時に <code>checkdoc-minor-mode-map</code> に checkdoc のウィンドウを閉じるキーバインドを設定． <code>q</code> または <code>C-g</code> を押下すると，マイナーモードが終了し，設定したキーバインドが無効になる．マイナーモードが有効な間は， <code>q</code> が占有されてバッファに入力できなくなる．その場合は，必要に応じて <code>M-x my-delete-checkdoc-window</code> を実行する．<br />
@@ -12732,7 +12817,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-orgdca5e7c2" class="outline-3">
-<h3 id="orgdca5e7c2"><span class="section-number-3">11.6</span> <span class="todo TODO">TODO</span> [doom-modeline.el] モードラインをリッチにする</h3>
+<h3 id="orgdca5e7c2"><span class="section-number-3">11.5</span> <span class="todo TODO">TODO</span> [doom-modeline.el] モードラインをリッチにする</h3>
 <div class="outline-text-3" id="text-orgdca5e7c2">
 <ul class="org-ul">
 <li><a href="https://github.com/seagle0128/doom-modeline">seagle0128/doom-modeline: A minimal and modern mode-line</a><br /></li>
@@ -12777,7 +12862,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org4dd0671c" class="outline-3">
-<h3 id="org4dd0671c"><span class="section-number-3">11.7</span> [e2wm.el] 二画面表示&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="org4dd0671c"><span class="section-number-3">11.6</span> [e2wm.el] 二画面表示&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-org4dd0671c">
 <p>
 使用頻度が低くなりました．<br />
@@ -12849,7 +12934,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org0c556404" class="outline-3">
-<h3 id="org0c556404"><span class="section-number-3">11.8</span> [tabbar-ruler] バッファをタブ切り替え可能に&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="org0c556404"><span class="section-number-3">11.7</span> [tabbar-ruler] バッファをタブ切り替え可能に&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-org0c556404">
 <ul class="org-ul">
 <li>不要かな<br /></li>
@@ -12871,7 +12956,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org6474a498" class="outline-3">
-<h3 id="org6474a498"><span class="section-number-3">11.9</span> [elscreen.el] Emacs バッファをタブ化&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="org6474a498"><span class="section-number-3">11.8</span> [elscreen.el] Emacs バッファをタブ化&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-org6474a498">
 <ul class="org-ul">
 <li>cycle-buffer で十分かなと言う感じで不使用になりました．<br /></li>
@@ -12888,7 +12973,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 </div>
 
 <div id="outline-container-org750d9aa5" class="outline-3">
-<h3 id="org750d9aa5"><span class="section-number-3">11.10</span> [popwin.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<h3 id="org750d9aa5"><span class="section-number-3">11.9</span> [popwin.el] ポップアップウィンドウの制御&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
 <div class="outline-text-3" id="text-org750d9aa5">
 <ul class="org-ul">
 <li>現在は緩やかに <code>shackle</code> に移行中です．<br />
@@ -12962,6 +13047,41 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
 
   (<span style="color: #a020f0;">unless</span> noninteractive
     (popwin-mode 1)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7a20b311" class="outline-3">
+<h3 id="org7a20b311"><span class="section-number-3">11.10</span> <span class="done DONE">DONE</span> [olivetti.el] ウィンドウを中央寄せで配置&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<div class="outline-text-3" id="text-org7a20b311">
+<ul class="org-ul">
+<li><a href="https://github.com/rnkn/olivetti">rnkn/olivetti: Emacs minor mode for a nice writing environment</a><br /></li>
+</ul>
+
+<p>
+<code>moom.el</code> を使ってフレームを最大化したり，画面の半分に配置すると，80桁で表示する領域とウィンドウが占める領域の幅が一致しない場合があります．通常は，フレーム内で左寄せに配置されますが， <code>olivetti</code> を使うと，中央寄せにできます．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">late-init.el</span>
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"moom"</span>
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">olivetti</span> nil t)
+    (<span style="color: #a020f0;">setq</span> olivetti-lighter nil)
+    (<span style="color: #a020f0;">setq-default</span> olivetti-body-width 80)
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:turn-on-olivetti-mode</span> ()
+      <span style="color: #8b2252;">"Disable `</span><span style="color: #008b8b;">visual-line-mode</span><span style="color: #8b2252;">'."</span>
+      (<span style="color: #a020f0;">unless</span> moom--maximized
+        (olivetti-mode -1))
+      (visual-line-mode -1))
+    (advice-add 'turn-on-olivetti-mode <span style="color: #483d8b;">:after</span> #'ad:turn-on-olivetti-mode)
+    (add-hook 'find-file-hook #'turn-on-olivetti-mode)
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:olivetti:moom-toggle-frame-maximized</span> ()
+      (<span style="color: #a020f0;">if</span> moom--maximized
+          (turn-on-olivetti-mode)
+        (olivetti-mode -1)))
+    (advice-add 'moom-toggle-frame-maximized <span style="color: #483d8b;">:after</span>
+                #'ad:olivetti:moom-toggle-frame-maximized)))
 </pre>
 </div>
 </div>
@@ -13052,7 +13172,9 @@ Emacs Lisp で正規表現入力をサポートするツールには， <code>M-
     (set-face-background hl-line-face (<span style="color: #a020f0;">if</span> dark <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #594d5d;">#594d5d</span><span style="color: #8b2252;">"</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #fff0de;">#fff0de</span><span style="color: #8b2252;">"</span>))))
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">init</span>
-(<span style="color: #a020f0;">if</span> (my-ime-active-p) (my-ime-on-hline) (my-ime-off-hline))
+(<span style="color: #a020f0;">if</span> (&lt; emacs-major-version 27)
+    (<span style="color: #a020f0;">if</span> (my-ime-active-p) (my-ime-on-hline) (my-ime-off-hline))
+  (<span style="color: #a020f0;">if</span> (mac-ime-active-p) (my-ime-on-hline) (my-ime-off-hline)))
 
 (add-hook 'ah-before-move-cursor-hook #'my-hl-line-enable)
 (run-with-idle-timer my-hl-active-period t #'my-hl-line-disable)
@@ -13527,7 +13649,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
               (<span style="color: #8b2252;">"</span><span style="color: #d0bf8f;">KLUDGE</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #d0bf8f;">#d0bf8f</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #d0bf8f;">HACK</span><span style="color: #8b2252;">"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #d0bf8f;">#d0bf8f</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #d0bf8f;">TEMP</span><span style="color: #8b2252;">"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #d0bf8f;">#d0bf8f</span><span style="color: #8b2252;">"</span>)
-              (<span style="color: #8b2252;">"</span><span style="color: ##3030FF;">FIXME</span><span style="color: #8b2252;">"</span>  . <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #1e90ff;">DodgerBlue1</span><span style="color: #8b2252;">"</span>)
+              (<span style="color: #8b2252;">"</span><span style="color: ##3030FF;">FIXME</span><span style="color: #8b2252;">"</span>  . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #1e90ff;">DodgerBlue1</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #cc9393;">XXX</span><span style="color: #8b2252;">+"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"\\?\\?\\?+"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
@@ -13571,47 +13693,47 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
 
 <div class="org-src-container">
 <pre class="src src-html">
-<span style="color: #ffffff; background-color: #000000;">#000000</span> <span style="color: #ffffff; background-color: #000033;">#000033</span> <span style="color: #ffffff; background-color: #000066;">#000066</span> <span style="color: #ffffff; background-color: #000099;">#000099</span> <span style="color: #ffffff; background-color: #0000CC;">#0000CC</span> <span style="color: #ffffff; background-color: #0000FF;">#0000FF</span>
-<span style="color: #ffffff; background-color: #003300;">#003300</span> <span style="color: #ffffff; background-color: #003333;">#003333</span> <span style="color: #ffffff; background-color: #003366;">#003366</span> <span style="color: #ffffff; background-color: #003399;">#003399</span> <span style="color: #ffffff; background-color: #0033CC;">#0033CC</span> <span style="color: #ffffff; background-color: #0033FF;">#0033FF</span>
-<span style="color: #ffffff; background-color: #006600;">#006600</span> <span style="color: #ffffff; background-color: #006633;">#006633</span> <span style="color: #ffffff; background-color: #006666;">#006666</span> <span style="color: #ffffff; background-color: #006699;">#006699</span> <span style="color: #ffffff; background-color: #0066CC;">#0066CC</span> <span style="color: #ffffff; background-color: #0066FF;">#0066FF</span>
-<span style="color: #ffffff; background-color: #009900;">#009900</span> <span style="color: #ffffff; background-color: #009933;">#009933</span> <span style="color: #ffffff; background-color: #009966;">#009966</span> <span style="color: #ffffff; background-color: #009999;">#009999</span> <span style="color: #ffffff; background-color: #0099CC;">#0099CC</span> <span style="color: #ffffff; background-color: #0099FF;">#0099FF</span>
-<span style="color: #000000; background-color: #00CC00;">#00CC00</span> <span style="color: #000000; background-color: #00CC33;">#00CC33</span> <span style="color: #000000; background-color: #00CC66;">#00CC66</span> <span style="color: #000000; background-color: #00CC99;">#00CC99</span> <span style="color: #000000; background-color: #00CCCC;">#00CCCC</span> <span style="color: #000000; background-color: #00CCFF;">#00CCFF</span>
-<span style="color: #000000; background-color: #00FF00;">#00FF00</span> <span style="color: #000000; background-color: #00FF33;">#00FF33</span> <span style="color: #000000; background-color: #00FF66;">#00FF66</span> <span style="color: #000000; background-color: #00FF99;">#00FF99</span> <span style="color: #000000; background-color: #00FFCC;">#00FFCC</span> <span style="color: #000000; background-color: #00FFFF;">#00FFFF</span>
+#000000 #000033 #000066 #000099 #0000CC #0000FF
+#003300 #003333 #003366 #003399 #0033CC #0033FF
+#006600 #006633 #006666 #006699 #0066CC #0066FF
+#009900 #009933 #009966 #009999 #0099CC #0099FF
+#00CC00 #00CC33 #00CC66 #00CC99 #00CCCC #00CCFF
+#00FF00 #00FF33 #00FF66 #00FF99 #00FFCC #00FFFF
 
-<span style="color: #ffffff; background-color: #330000;">#330000</span> <span style="color: #ffffff; background-color: #330033;">#330033</span> <span style="color: #ffffff; background-color: #330066;">#330066</span> <span style="color: #ffffff; background-color: #330099;">#330099</span> <span style="color: #ffffff; background-color: #3300CC;">#3300CC</span> <span style="color: #ffffff; background-color: #3300FF;">#3300FF</span>
-<span style="color: #ffffff; background-color: #333300;">#333300</span> <span style="color: #ffffff; background-color: #333333;">#333333</span> <span style="color: #ffffff; background-color: #333366;">#333366</span> <span style="color: #ffffff; background-color: #333399;">#333399</span> <span style="color: #ffffff; background-color: #3333CC;">#3333CC</span> <span style="color: #ffffff; background-color: #3333FF;">#3333FF</span>
-<span style="color: #ffffff; background-color: #336600;">#336600</span> <span style="color: #ffffff; background-color: #336633;">#336633</span> <span style="color: #ffffff; background-color: #336666;">#336666</span> <span style="color: #ffffff; background-color: #336699;">#336699</span> <span style="color: #ffffff; background-color: #3366CC;">#3366CC</span> <span style="color: #ffffff; background-color: #3366FF;">#3366FF</span>
-<span style="color: #ffffff; background-color: #339900;">#339900</span> <span style="color: #ffffff; background-color: #339933;">#339933</span> <span style="color: #ffffff; background-color: #339966;">#339966</span> <span style="color: #000000; background-color: #339999;">#339999</span> <span style="color: #000000; background-color: #3399CC;">#3399CC</span> <span style="color: #000000; background-color: #3399FF;">#3399FF</span>
-<span style="color: #000000; background-color: #33CC00;">#33CC00</span> <span style="color: #000000; background-color: #33CC33;">#33CC33</span> <span style="color: #000000; background-color: #33CC66;">#33CC66</span> <span style="color: #000000; background-color: #33CC99;">#33CC99</span> <span style="color: #000000; background-color: #33CCCC;">#33CCCC</span> <span style="color: #000000; background-color: #33CCFF;">#33CCFF</span>
-<span style="color: #000000; background-color: #33FF00;">#33FF00</span> <span style="color: #000000; background-color: #33FF33;">#33FF33</span> <span style="color: #000000; background-color: #33FF66;">#33FF66</span> <span style="color: #000000; background-color: #33FF99;">#33FF99</span> <span style="color: #000000; background-color: #33FFCC;">#33FFCC</span> <span style="color: #000000; background-color: #33FFFF;">#33FFFF</span>
+#330000 #330033 #330066 #330099 #3300CC #3300FF
+#333300 #333333 #333366 #333399 #3333CC #3333FF
+#336600 #336633 #336666 #336699 #3366CC #3366FF
+#339900 #339933 #339966 #339999 #3399CC #3399FF
+#33CC00 #33CC33 #33CC66 #33CC99 #33CCCC #33CCFF
+#33FF00 #33FF33 #33FF66 #33FF99 #33FFCC #33FFFF
 
-<span style="color: #ffffff; background-color: #660000;">#660000</span> <span style="color: #ffffff; background-color: #660033;">#660033</span> <span style="color: #ffffff; background-color: #660066;">#660066</span> <span style="color: #ffffff; background-color: #660099;">#660099</span> <span style="color: #ffffff; background-color: #6600CC;">#6600CC</span> <span style="color: #ffffff; background-color: #6600FF;">#6600FF</span>
-<span style="color: #ffffff; background-color: #663300;">#663300</span> <span style="color: #ffffff; background-color: #663333;">#663333</span> <span style="color: #ffffff; background-color: #663366;">#663366</span> <span style="color: #ffffff; background-color: #663399;">#663399</span> <span style="color: #ffffff; background-color: #6633CC;">#6633CC</span> <span style="color: #ffffff; background-color: #6633FF;">#6633FF</span>
-<span style="color: #ffffff; background-color: #666600;">#666600</span> <span style="color: #ffffff; background-color: #666633;">#666633</span> <span style="color: #ffffff; background-color: #666666;">#666666</span> <span style="color: #ffffff; background-color: #666699;">#666699</span> <span style="color: #ffffff; background-color: #6666CC;">#6666CC</span> <span style="color: #ffffff; background-color: #6666FF;">#6666FF</span>
-<span style="color: #000000; background-color: #669900;">#669900</span> <span style="color: #000000; background-color: #669933;">#669933</span> <span style="color: #000000; background-color: #669966;">#669966</span> <span style="color: #000000; background-color: #669999;">#669999</span> <span style="color: #000000; background-color: #6699CC;">#6699CC</span> <span style="color: #000000; background-color: #6699FF;">#6699FF</span>
-<span style="color: #000000; background-color: #66CC00;">#66CC00</span> <span style="color: #000000; background-color: #66CC33;">#66CC33</span> <span style="color: #000000; background-color: #66CC66;">#66CC66</span> <span style="color: #000000; background-color: #66CC99;">#66CC99</span> <span style="color: #000000; background-color: #66CCCC;">#66CCCC</span> <span style="color: #000000; background-color: #66CCFF;">#66CCFF</span>
-<span style="color: #000000; background-color: #66FF00;">#66FF00</span> <span style="color: #000000; background-color: #66FF33;">#66FF33</span> <span style="color: #000000; background-color: #66FF66;">#66FF66</span> <span style="color: #000000; background-color: #66FF99;">#66FF99</span> <span style="color: #000000; background-color: #66FFCC;">#66FFCC</span> <span style="color: #000000; background-color: #66FFFF;">#66FFFF</span>
+#660000 #660033 #660066 #660099 #6600CC #6600FF
+#663300 #663333 #663366 #663399 #6633CC #6633FF
+#666600 #666633 #666666 #666699 #6666CC #6666FF
+#669900 #669933 #669966 #669999 #6699CC #6699FF
+#66CC00 #66CC33 #66CC66 #66CC99 #66CCCC #66CCFF
+#66FF00 #66FF33 #66FF66 #66FF99 #66FFCC #66FFFF
 
-<span style="color: #ffffff; background-color: #990000;">#990000</span> <span style="color: #ffffff; background-color: #990033;">#990033</span> <span style="color: #ffffff; background-color: #990066;">#990066</span> <span style="color: #ffffff; background-color: #990099;">#990099</span> <span style="color: #ffffff; background-color: #9900CC;">#9900CC</span> <span style="color: #ffffff; background-color: #9900FF;">#9900FF</span>
-<span style="color: #ffffff; background-color: #993300;">#993300</span> <span style="color: #ffffff; background-color: #993333;">#993333</span> <span style="color: #ffffff; background-color: #993366;">#993366</span> <span style="color: #ffffff; background-color: #993399;">#993399</span> <span style="color: #ffffff; background-color: #9933CC;">#9933CC</span> <span style="color: #ffffff; background-color: #9933FF;">#9933FF</span>
-<span style="color: #ffffff; background-color: #996600;">#996600</span> <span style="color: #ffffff; background-color: #996633;">#996633</span> <span style="color: #ffffff; background-color: #996666;">#996666</span> <span style="color: #ffffff; background-color: #996699;">#996699</span> <span style="color: #ffffff; background-color: #9966CC;">#9966CC</span> <span style="color: #ffffff; background-color: #9966FF;">#9966FF</span>
-<span style="color: #000000; background-color: #999900;">#999900</span> <span style="color: #000000; background-color: #999933;">#999933</span> <span style="color: #000000; background-color: #999966;">#999966</span> <span style="color: #000000; background-color: #999999;">#999999</span> <span style="color: #000000; background-color: #9999CC;">#9999CC</span> <span style="color: #000000; background-color: #9999FF;">#9999FF</span>
-<span style="color: #000000; background-color: #99CC00;">#99CC00</span> <span style="color: #000000; background-color: #99CC33;">#99CC33</span> <span style="color: #000000; background-color: #99CC66;">#99CC66</span> <span style="color: #000000; background-color: #99CC99;">#99CC99</span> <span style="color: #000000; background-color: #99CCCC;">#99CCCC</span> <span style="color: #000000; background-color: #99CCFF;">#99CCFF</span>
-<span style="color: #000000; background-color: #99FF00;">#99FF00</span> <span style="color: #000000; background-color: #99FF33;">#99FF33</span> <span style="color: #000000; background-color: #99FF66;">#99FF66</span> <span style="color: #000000; background-color: #99FF99;">#99FF99</span> <span style="color: #000000; background-color: #99FFCC;">#99FFCC</span> <span style="color: #000000; background-color: #99FFFF;">#99FFFF</span>
+#990000 #990033 #990066 #990099 #9900CC #9900FF
+#993300 #993333 #993366 #993399 #9933CC #9933FF
+#996600 #996633 #996666 #996699 #9966CC #9966FF
+#999900 #999933 #999966 #999999 #9999CC #9999FF
+#99CC00 #99CC33 #99CC66 #99CC99 #99CCCC #99CCFF
+#99FF00 #99FF33 #99FF66 #99FF99 #99FFCC #99FFFF
 
-<span style="color: #ffffff; background-color: #CC0000;">#CC0000</span> <span style="color: #ffffff; background-color: #CC0033;">#CC0033</span> <span style="color: #ffffff; background-color: #CC0066;">#CC0066</span> <span style="color: #ffffff; background-color: #CC0099;">#CC0099</span> <span style="color: #ffffff; background-color: #CC00CC;">#CC00CC</span> <span style="color: #ffffff; background-color: #CC00FF;">#CC00FF</span>
-<span style="color: #ffffff; background-color: #CC3300;">#CC3300</span> <span style="color: #ffffff; background-color: #CC3333;">#CC3333</span> <span style="color: #ffffff; background-color: #CC3366;">#CC3366</span> <span style="color: #ffffff; background-color: #CC3399;">#CC3399</span> <span style="color: #ffffff; background-color: #CC33CC;">#CC33CC</span> <span style="color: #ffffff; background-color: #CC33FF;">#CC33FF</span>
-<span style="color: #ffffff; background-color: #CC6600;">#CC6600</span> <span style="color: #ffffff; background-color: #CC6633;">#CC6633</span> <span style="color: #ffffff; background-color: #CC6666;">#CC6666</span> <span style="color: #ffffff; background-color: #CC6699;">#CC6699</span> <span style="color: #000000; background-color: #CC66CC;">#CC66CC</span> <span style="color: #000000; background-color: #CC66FF;">#CC66FF</span>
-<span style="color: #000000; background-color: #CC9900;">#CC9900</span> <span style="color: #000000; background-color: #CC9933;">#CC9933</span> <span style="color: #000000; background-color: #CC9966;">#CC9966</span> <span style="color: #000000; background-color: #CC9999;">#CC9999</span> <span style="color: #000000; background-color: #CC99CC;">#CC99CC</span> <span style="color: #000000; background-color: #CC99FF;">#CC99FF</span>
-<span style="color: #000000; background-color: #CCCC00;">#CCCC00</span> <span style="color: #000000; background-color: #CCCC33;">#CCCC33</span> <span style="color: #000000; background-color: #CCCC66;">#CCCC66</span> <span style="color: #000000; background-color: #CCCC99;">#CCCC99</span> <span style="color: #000000; background-color: #CCCCCC;">#CCCCCC</span> <span style="color: #000000; background-color: #CCCCFF;">#CCCCFF</span>
-<span style="color: #000000; background-color: #CCFF00;">#CCFF00</span> <span style="color: #000000; background-color: #CCFF33;">#CCFF33</span> <span style="color: #000000; background-color: #CCFF66;">#CCFF66</span> <span style="color: #000000; background-color: #CCFF99;">#CCFF99</span> <span style="color: #000000; background-color: #CCFFCC;">#CCFFCC</span> <span style="color: #000000; background-color: #CCFFFF;">#CCFFFF</span>
+#CC0000 #CC0033 #CC0066 #CC0099 #CC00CC #CC00FF
+#CC3300 #CC3333 #CC3366 #CC3399 #CC33CC #CC33FF
+#CC6600 #CC6633 #CC6666 #CC6699 #CC66CC #CC66FF
+#CC9900 #CC9933 #CC9966 #CC9999 #CC99CC #CC99FF
+#CCCC00 #CCCC33 #CCCC66 #CCCC99 #CCCCCC #CCCCFF
+#CCFF00 #CCFF33 #CCFF66 #CCFF99 #CCFFCC #CCFFFF
 
-<span style="color: #ffffff; background-color: #FF0000;">#FF0000</span> <span style="color: #ffffff; background-color: #FF0033;">#FF0033</span> <span style="color: #ffffff; background-color: #FF0066;">#FF0066</span> <span style="color: #ffffff; background-color: #FF0099;">#FF0099</span> <span style="color: #ffffff; background-color: #FF00CC;">#FF00CC</span> <span style="color: #ffffff; background-color: #FF00FF;">#FF00FF</span>
-<span style="color: #ffffff; background-color: #FF3300;">#FF3300</span> <span style="color: #ffffff; background-color: #FF3333;">#FF3333</span> <span style="color: #ffffff; background-color: #FF3366;">#FF3366</span> <span style="color: #ffffff; background-color: #FF3399;">#FF3399</span> <span style="color: #ffffff; background-color: #FF33CC;">#FF33CC</span> <span style="color: #ffffff; background-color: #FF33FF;">#FF33FF</span>
-<span style="color: #ffffff; background-color: #FF6600;">#FF6600</span> <span style="color: #000000; background-color: #FF6633;">#FF6633</span> <span style="color: #000000; background-color: #FF6666;">#FF6666</span> <span style="color: #000000; background-color: #FF6699;">#FF6699</span> <span style="color: #000000; background-color: #FF66CC;">#FF66CC</span> <span style="color: #000000; background-color: #FF66FF;">#FF66FF</span>
-<span style="color: #000000; background-color: #FF9900;">#FF9900</span> <span style="color: #000000; background-color: #FF9933;">#FF9933</span> <span style="color: #000000; background-color: #FF9966;">#FF9966</span> <span style="color: #000000; background-color: #FF9999;">#FF9999</span> <span style="color: #000000; background-color: #FF99CC;">#FF99CC</span> <span style="color: #000000; background-color: #FF99FF;">#FF99FF</span>
-<span style="color: #000000; background-color: #FFCC00;">#FFCC00</span> <span style="color: #000000; background-color: #FFCC33;">#FFCC33</span> <span style="color: #000000; background-color: #FFCC66;">#FFCC66</span> <span style="color: #000000; background-color: #FFCC99;">#FFCC99</span> <span style="color: #000000; background-color: #FFCCCC;">#FFCCCC</span> <span style="color: #000000; background-color: #FFCCFF;">#FFCCFF</span>
-<span style="color: #000000; background-color: #FFFF00;">#FFFF00</span> <span style="color: #000000; background-color: #FFFF33;">#FFFF33</span> <span style="color: #000000; background-color: #FFFF66;">#FFFF66</span> <span style="color: #000000; background-color: #FFFF99;">#FFFF99</span> <span style="color: #000000; background-color: #FFFFCC;">#FFFFCC</span> <span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span>
+#FF0000 #FF0033 #FF0066 #FF0099 #FF00CC #FF00FF
+#FF3300 #FF3333 #FF3366 #FF3399 #FF33CC #FF33FF
+#FF6600 #FF6633 #FF6666 #FF6699 #FF66CC #FF66FF
+#FF9900 #FF9933 #FF9966 #FF9999 #FF99CC #FF99FF
+#FFCC00 #FFCC33 #FFCC66 #FFCC99 #FFCCCC #FFCCFF
+#FFFF00 #FFFF33 #FFFF66 #FFFF99 #FFFFCC #FFFFFF
 
 </pre>
 </div>
@@ -13735,7 +13857,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
 </div>
 
 <div id="outline-container-org36a28b28" class="outline-3">
-<h3 id="org36a28b28"><span class="section-number-3">12.17</span> <span class="todo TODO">TODO</span> [volatile-highlights] コピペした領域を強調</h3>
+<h3 id="org36a28b28"><span class="section-number-3">12.17</span> [volatile-highlights] コピペした領域を強調</h3>
 <div class="outline-text-3" id="text-org36a28b28">
 <p>
 コピペ直後の数秒に限定して，コピペした領域をハイライトします．さらに，所定の間隔で表示色を変えることで，ハイライト色が徐々に消えていくようなエフェクトにしています．<br />
@@ -14159,37 +14281,8 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
 </div>
 </div>
 
-<div id="outline-container-org71c49002" class="outline-3">
-<h3 id="org71c49002"><span class="section-number-3">13.4</span> [lingr.el] チャットルームに自動参加</h3>
-<div class="outline-text-3" id="text-org71c49002">
-<p>
-init.el読書会が毎週土曜日の23時に開催されています．作業に集中していると，ついつい忘れてしまうので，その時間が来たら自動的にログインするように設定しています．ユーザ名とパスワードは，セキュリティを考慮して別なファイルに記載しています．<br />
-</p>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"># late-init.el
-(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(lingr-login my-lingr-login)
-       <span style="color: #8b2252;">"lingr"</span> nil t)
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"lingr"</span>
-    (custom-set-variables
-     '(lingr-icon-mode t)
-     '(lingr-icon-fix-size 24)
-     '(lingr-image-convert-program  (<span style="color: #a020f0;">or</span> (executable-find <span style="color: #8b2252;">"convert"</span>)
-                                        lingr-image-convert-program))))
-
-  (<span style="color: #a020f0;">when</span> (future-time-p <span style="color: #8b2252;">"23:00"</span>)
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">do not use `</span><span style="color: #008b8b;">run-at-time</span><span style="color: #b22222;">' at booting since diary-lib.el</span>
-    <span style="color: #b22222;">;; </span><span style="color: #b22222;">will be loaded. It requires loading cost.</span>
-    (run-at-time <span style="color: #8b2252;">"23:00"</span> nil 'my-lingr-login)))
-</pre>
-</div>
-</div>
-</div>
-
 <div id="outline-container-orgc6fce61d" class="outline-3">
-<h3 id="orgc6fce61d"><span class="section-number-3">13.5</span> [multi-term.el] ターミナル</h3>
+<h3 id="orgc6fce61d"><span class="section-number-3">13.4</span> [multi-term.el] ターミナル</h3>
 <div class="outline-text-3" id="text-orgc6fce61d">
 <p>
 たまに使いたくなるので一応．<br />
@@ -14208,7 +14301,7 @@ init.el読書会が毎週土曜日の23時に開催されています．作業�
 </div>
 
 <div id="outline-container-org96f7a2a3" class="outline-3">
-<h3 id="org96f7a2a3"><span class="section-number-3">13.6</span> [osx-lib.el] macOS用ユーティリティ&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
+<h3 id="org96f7a2a3"><span class="section-number-3">13.5</span> [osx-lib.el] macOS用ユーティリティ&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
 <div class="outline-text-3" id="text-org96f7a2a3">
 <ul class="org-ul">
 <li><a href="https://github.com/raghavgautam/osx-lib">raghavgautam/osx-lib</a><br /></li>
@@ -14245,7 +14338,7 @@ init.el読書会が毎週土曜日の23時に開催されています．作業�
 </div>
 </div>
 <div id="outline-container-org72d850dc" class="outline-3">
-<h3 id="org72d850dc"><span class="section-number-3">13.7</span> iTerm2 を Emacs から呼び出したい&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
+<h3 id="org72d850dc"><span class="section-number-3">13.6</span> iTerm2 を Emacs から呼び出したい&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
 <div class="outline-text-3" id="text-org72d850dc">
 <p>
 <code>C-M-i</code> を iterm2.app の呼び出しに割り当てます．シェルでの作業はどうも <code>eshell</code> では満足できないので．なお flyspell を使っていると，遅延呼び出しした後にキーバインドを奪われるので，取り返します．<br />
@@ -14277,7 +14370,7 @@ init.el読書会が毎週土曜日の23時に開催されています．作業�
 </div>
 
 <div id="outline-container-org4d91e973" class="outline-3">
-<h3 id="org4d91e973"><span class="section-number-3">13.8</span> [counsel-osx-app.el] macOSのアプリケーションを呼び出す&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
+<h3 id="org4d91e973"><span class="section-number-3">13.7</span> [counsel-osx-app.el] macOSのアプリケーションを呼び出す&#xa0;&#xa0;&#xa0;<span class="tag"><span class="macOS">macOS</span></span></h3>
 <div class="outline-text-3" id="text-org4d91e973">
 <p>
 Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Counsel</code> の絞り込みを使います．<br />
@@ -14302,7 +14395,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 
 <div id="outline-container-org32e35e60" class="outline-3">
-<h3 id="org32e35e60"><span class="section-number-3">13.9</span> カレントバッファのあるディレクトリをターミナルで表示</h3>
+<h3 id="org32e35e60"><span class="section-number-3">13.8</span> カレントバッファのあるディレクトリをターミナルで表示</h3>
 <div class="outline-text-3" id="text-org32e35e60">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-c f t"</span>) 'my-open-current-directory-in-terminal)
@@ -14312,7 +14405,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 
 <div id="outline-container-org2906cf09" class="outline-3">
-<h3 id="org2906cf09"><span class="section-number-3">13.10</span> [gif-screencast.el] ユーザアクションのたびにスクショを取る</h3>
+<h3 id="org2906cf09"><span class="section-number-3">13.9</span> [gif-screencast.el] ユーザアクションのたびにスクショを取る</h3>
 <div class="outline-text-3" id="text-org2906cf09">
 <ul class="org-ul">
 <li><a href="https://gitlab.com/ambrevar/emacs-gif-screencast">Ambrevar / emacs-gif-screencast · GitLab</a><br />
@@ -14403,7 +14496,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 
 <div id="outline-container-orged473d8d" class="outline-3">
-<h3 id="orged473d8d"><span class="section-number-3">13.11</span> [utility.el] 自作してテスト中の便利関数群</h3>
+<h3 id="orged473d8d"><span class="section-number-3">13.10</span> [utility.el] 自作してテスト中の便利関数群</h3>
 <div class="outline-text-3" id="text-orged473d8d">
 <p>
 関数定義を<a href="https://pxaka.tokyo/wiki/doku.php?id=emacs:utility.el">別ファイル</a>に分離して，Emacs起動の高速化を図っています．各関数を autoload の管理下において，必要なときにロードするように設定しています．<br />
@@ -14424,7 +14517,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 
 <div id="outline-container-org72dab3c6" class="outline-3">
-<h3 id="org72dab3c6"><span class="section-number-3">13.12</span> [manage-minor-mode.el] マイナーモードの視覚的な管理</h3>
+<h3 id="org72dab3c6"><span class="section-number-3">13.11</span> [manage-minor-mode.el] マイナーモードの視覚的な管理</h3>
 <div class="outline-text-3" id="text-org72dab3c6">
 <p>
 マイナーモードの動作状況を視覚的に確認できます．さらに，モードのON/OFFを指定できます．<br />
@@ -14448,25 +14541,8 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 </div>
 
-<div id="outline-container-org2be833d3" class="outline-3">
-<h3 id="org2be833d3"><span class="section-number-3">13.13</span> [lingr.el] lingr にログインする</h3>
-<div class="outline-text-3" id="text-org2be833d3">
-<div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
-       '(lingr-login)
-       <span style="color: #8b2252;">"lingr"</span> nil t)
-
-  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"lingr"</span>
-    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-lingr-login</span> ()
-      (<span style="color: #a020f0;">when</span> (string= <span style="color: #8b2252;">"Sat"</span> (format-time-string <span style="color: #8b2252;">"%a"</span>))
-        (lingr-login)))))
-</pre>
-</div>
-</div>
-</div>
-
 <div id="outline-container-org2adaf11c" class="outline-3">
-<h3 id="org2adaf11c"><span class="section-number-3">13.14</span> 検索語を変えずに counsel-fzf に接続する</h3>
+<h3 id="org2adaf11c"><span class="section-number-3">13.12</span> 検索語を変えずに counsel-fzf に接続する</h3>
 <div class="outline-text-3" id="text-org2adaf11c">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"counsel"</span>
@@ -14514,17 +14590,18 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 
 <div id="outline-container-org409d5d63" class="outline-3">
-<h3 id="org409d5d63"><span class="section-number-3">13.15</span> <span class="todo TODO">TODO</span> [gitter.el] Gitter にログイン</h3>
+<h3 id="org409d5d63"><span class="section-number-3">13.13</span> [gitter.el] Gitter にログイン</h3>
 <div class="outline-text-3" id="text-org409d5d63">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(autoload-if-found '(gitter) <span style="color: #8b2252;">"gitter"</span>  nil t)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">late-init.el</span>
+(autoload-if-found '(gitter) <span style="color: #8b2252;">"gitter"</span>  nil t)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgc75ab540" class="outline-3">
-<h3 id="orgc75ab540"><span class="section-number-3">13.16</span> <span class="todo TODO">TODO</span> [password-store.el] パスワード管理</h3>
+<h3 id="orgc75ab540"><span class="section-number-3">13.14</span> <span class="todo TODO">TODO</span> [password-store.el] パスワード管理</h3>
 <div class="outline-text-3" id="text-orgc75ab540">
 <ul class="org-ul">
 <li><a href="http://h12.me/article/password-management">http://h12.me/article/password-management</a><br /></li>
@@ -14566,7 +14643,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 
 <div id="outline-container-org1141e95f" class="outline-3">
-<h3 id="org1141e95f"><span class="section-number-3">13.17</span> <span class="todo TODO">TODO</span> [network-watch.el] ネットワークインターフェイスの状態を監視</h3>
+<h3 id="org1141e95f"><span class="section-number-3">13.15</span> <span class="todo TODO">TODO</span> [network-watch.el] ネットワークインターフェイスの状態を監視</h3>
 <div class="outline-text-3" id="text-org1141e95f">
 <ul class="org-ul">
 <li>プロキシ内での挙動は不明．<br /></li>
@@ -14593,6 +14670,52 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 </div>
 </div>
+
+<div id="outline-container-org71c49002" class="outline-3">
+<h3 id="org71c49002"><span class="section-number-3">13.16</span> <span class="done DONE">DONE</span> [lingr.el] チャットルームに自動参加&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<div class="outline-text-3" id="text-org71c49002">
+<p>
+init.el読書会が毎週土曜日の23時に開催されています．作業に集中していると，ついつい忘れてしまうので，その時間が来たら自動的にログインするように設定しています．ユーザ名とパスワードは，セキュリティを考慮して別なファイルに記載しています．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"># late-init.el
+(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(lingr-login my-lingr-login)
+       <span style="color: #8b2252;">"lingr"</span> nil t)
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"lingr"</span>
+    (custom-set-variables
+     '(lingr-icon-mode t)
+     '(lingr-icon-fix-size 24)
+     '(lingr-image-convert-program  (<span style="color: #a020f0;">or</span> (executable-find <span style="color: #8b2252;">"convert"</span>)
+                                        lingr-image-convert-program))))
+
+  (<span style="color: #a020f0;">when</span> (future-time-p <span style="color: #8b2252;">"23:00"</span>)
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">do not use `</span><span style="color: #008b8b;">run-at-time</span><span style="color: #b22222;">' at booting since diary-lib.el</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">will be loaded. It requires loading cost.</span>
+    (run-at-time <span style="color: #8b2252;">"23:00"</span> nil 'my-lingr-login)))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2be833d3" class="outline-3">
+<h3 id="org2be833d3"><span class="section-number-3">13.17</span> <span class="done DONE">DONE</span> [lingr.el] lingr にログインする&#xa0;&#xa0;&#xa0;<span class="tag"><span class="notinuse">notinuse</span></span></h3>
+<div class="outline-text-3" id="text-org2be833d3">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (autoload-if-found
+       '(lingr-login)
+       <span style="color: #8b2252;">"lingr"</span> nil t)
+
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"lingr"</span>
+    (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-lingr-login</span> ()
+      (<span style="color: #a020f0;">when</span> (string= <span style="color: #8b2252;">"Sat"</span> (format-time-string <span style="color: #8b2252;">"%a"</span>))
+        (lingr-login)))))
+</pre>
+</div>
+</div>
+</div>
 </div>
 
 <div id="outline-container-org362fb2dc" class="outline-2">
@@ -14606,7 +14729,7 @@ Emacs から OS のアプリケーションを呼び出します． <code>Ivy/Co
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki Ishikawa</p>
-<p class="date">Created: 2019-12-19 Thu 13:52</p>
+<p class="date">Created: 2020-01-07 Tue 13:00</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
