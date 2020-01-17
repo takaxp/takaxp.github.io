@@ -4,6 +4,9 @@ SRC=$HOME/Dropbox/emacs.d/config
 ART=$HOME/Dropbox/org/articles
 DST=$HOME/devel/git/takaxp.github.io
 
+git fetch
+git pull
+
 if [ -d $SRC -a -d $DST ]; then
     cp $SRC/init.html $DST
     cp $SRC/utility.html $DST
@@ -14,7 +17,6 @@ if [ -d $ART -a -d $DST ]; then
     cp $ART/*.org $DST/articles
 fi
 
-git pull
 git add *.html *.org update.sh
 git add articles/*.html articles/*.org
 git commit
