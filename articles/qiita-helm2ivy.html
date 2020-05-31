@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-14 Sat 11:25 -->
+<!-- 2020-02-17 Mon 16:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>helm を背に ivy の門を叩く</title>
@@ -205,7 +205,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -453,6 +453,9 @@ for the JavaScript code in this tag.
 
   <span style="color: #b22222;">;; </span><span style="color: #b22222;">ESC&#36899;&#25171;&#12391;&#12511;&#12491;&#12496;&#12483;&#12501;&#12449;&#12434;&#38281;&#12376;&#12427;</span>
   (define-key ivy-minibuffer-map (kbd <span style="color: #8b2252;">"&lt;escape&gt;"</span>) 'minibuffer-keyboard-quit)
+
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12503;&#12525;&#12531;&#12503;&#12488;&#12398;&#34920;&#31034;&#12364;&#38263;&#12356;&#26178;&#12395;&#25240;&#12426;&#36820;&#12377;&#65288;&#36984;&#25246;&#20505;&#35036;&#12418;&#25240;&#12426;&#36820;&#12373;&#12428;&#12427;&#65289;</span>
+  (<span style="color: #a020f0;">setq</span> ivy-truncate-lines nil)
 
   <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12522;&#12473;&#12488;&#20808;&#38957;&#12391; `</span><span style="color: #008b8b;">C-p</span><span style="color: #b22222;">' &#12377;&#12427;&#12392;&#12365;&#65292;&#12522;&#12473;&#12488;&#12398;&#26368;&#24460;&#12395;&#31227;&#21205;&#12377;&#12427;</span>
   (<span style="color: #a020f0;">setq</span> ivy-wrap t)
@@ -2013,10 +2016,6 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 いくつかのコマンドは，すでにアイコンを出すように設定されています．アイコンが表示されないコマンドを見つけたら， <code>all-the-icons-ivy-buffer-commands</code> と <code>all-the-icons-ivy-file-commands</code> にコマンドを追加すれば，アイコンが表示されるようになります．<br />
 </p>
 
-<p>
-なお，試した感じでは， <code>all-the-icons-ivy</code> と <code>ivy-rich</code> を併用するのは厳しそうです．<br />
-</p>
-
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">all-the-icons-ivy</span> nil t)
   (<span style="color: #a020f0;">dolist</span> (command '(counsel-projectile-switch-project
@@ -2042,6 +2041,18 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
       (add-hook 'minibuffer-exit-hook #'my-tab-width-original))
 </pre>
 </div>
+
+<p>
+なお，試した感じでは， <code>all-the-icons-ivy</code> と <code>ivy-rich</code> を併用するのは厳しそうです．<br />
+</p>
+
+<p>
+<b>Note: 2020-02-17</b><br />
+<a href="https://qiita.com/ballforest">@ballforest</a> さんからコメントいただきました．両者を併用できる拡張がリリースされたそうです．Thanks!<br />
+</p>
+<ul class="org-ul">
+<li><a href="https://github.com/seagle0128/all-the-icons-ivy-rich">seagle0128/all-the-icons-ivy-rich: Better experience with icons for ivy</a><br /></li>
+</ul>
 </div>
 </div>
 
@@ -2852,7 +2863,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2019-12-14 Sat 11:25</p>
+<p class="date">Created: 2020-02-17 Mon 16:44</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

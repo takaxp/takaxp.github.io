@@ -1177,8 +1177,6 @@ NOTE [2019-11-05 Tue]: macOS Catalina では ="/System/Applications"= も追加�
 
 いくつかのコマンドは，すでにアイコンを出すように設定されています．アイコンが表示されないコマンドを見つけたら， =all-the-icons-ivy-buffer-commands= と =all-the-icons-ivy-file-commands= にコマンドを追加すれば，アイコンが表示されるようになります．
 
-なお，試した感じでは， ~all-the-icons-ivy~ と ~ivy-rich~ を併用するのは厳しそうです．
-
 #+begin_src emacs-lisp
 (when (require 'all-the-icons-ivy nil t)
   (dolist (command '(counsel-projectile-switch-project
@@ -1200,6 +1198,12 @@ NOTE [2019-11-05 Tue]: macOS Catalina では ="/System/Applications"= も追加�
       (add-hook 'minibuffer-setup-hook #'my-tab-width-2)
       (add-hook 'minibuffer-exit-hook #'my-tab-width-original))
 #+end_src
+
+なお，試した感じでは， ~all-the-icons-ivy~ と ~ivy-rich~ を併用するのは厳しそうです．
+
+*Note: 2020-02-17*
+[[https://qiita.com/ballforest][@ballforest]] さんからコメントいただきました．両者を併用できる拡張がリリースされたそうです．Thanks!
+ - [[https://github.com/seagle0128/all-the-icons-ivy-rich][seagle0128/all-the-icons-ivy-rich: Better experience with icons for ivy]]
 
 *** COMMENT all-the-icons は鬼門
     :PROPERTIES:
