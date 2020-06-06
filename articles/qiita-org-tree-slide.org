@@ -13,12 +13,18 @@
 #+end_src
 
 * はじめに
+  :PROPERTIES:
+  :CUSTOM_ID: orgc09c3fcd
+  :END:
 
 この記事は Emacs Advent Calender 2011 の3日目です．前の記事は，[[https://twitter.com/#!/peccul][@peccu]] さんの [[http://d.hatena.ne.jp/peccu/20111202/mew_icloud][MewでiCloudのメールを読み書き]] です．後ろの記事は，[[https://twitter.com/#!/HKe7][@HKe7]] さんの [[http://hke7.wordpress.com/2011/12/03/%E3%83%91%E3%82%B9%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%82%88%E3%81%86-emacs-advent-calendar-jp-2011/][パスをまとめよう (Emacs Advent Calendar jp: 2011)]] です．
 
 私[[https://twitter.com/takaxp][@takaxp]]は，今年3月から自分で elisp を書き始めた elisp 初心者です．Emacs歴12年，Org-mode歴3年です．Emacs Advent Calender には初参戦で，今回は拙作の [[https://github.com/takaxp/org-tree-slide][org-tree-slide.el]] を紹介します．
 
 * これは何？
+  :PROPERTIES:
+  :CUSTOM_ID: org9d46649c
+  :END:
 
 [[https://orgmode.org][org-mode]]の各ツリーを「一枚のスライド」として扱うための elisp です．org-mode ユーザ向けです．
 
@@ -30,6 +36,9 @@
  - narrowing を多用するけど，次のツリーに移るのが面倒
 
 ** 位置づけ
+   :PROPERTIES:
+   :CUSTOM_ID: org6a20416c
+   :END:
 
 org-mode には，バッファの内容を表示するために3つの状態が用意されています．
 
@@ -50,6 +59,9 @@ org-tree-slide は，ここに「第4の状態を追加する」イメージで�
 #+end_export
 
 ** デモ
+   :PROPERTIES:
+   :CUSTOM_ID: orgc37c4daf
+   :END:
 
 百聞は一見に如かず，ということで，実際に使っている動画をご覧ください．音は入っておりません．
 
@@ -58,7 +70,13 @@ org-tree-slide は，ここに「第4の状態を追加する」イメージで�
 #+end_export
 
 * インストール
+  :PROPERTIES:
+  :CUSTOM_ID: orgb37c0f0c
+  :END:
 ** org-tree-slide.el の入手
+   :PROPERTIES:
+   :CUSTOM_ID: orgf809e65e
+   :END:
 
 MEPLAから[[http://melpa.org/#/org-tree-slide][配信している]]ので， M-x list-packages で表示されるリストから選んでインストールできます．
 また org-tree-slide.el を [[https://github.com/takaxp/org-tree-slide][Github]] から入手するか，次を評価してください．
@@ -76,6 +94,9 @@ MEPLAから[[http://melpa.org/#/org-tree-slide][配信している]]ので， M-
 これでインストール完了です．
 
 ** 動作環境
+   :PROPERTIES:
+   :CUSTOM_ID: org1951f68b
+   :END:
 
 以下の環境での動作を確認しています．不具合がありましたらぜひご連絡ください．
 
@@ -89,8 +110,10 @@ MEPLAから[[http://melpa.org/#/org-tree-slide][配信している]]ので， M-
 
 それほど複雑なことはしていないので，多くの環境で動作すると思います((6.33xだとタイマーがうまく動かないようです．))．
 
-
 ** シンプルに使う
+   :PROPERTIES:
+   :CUSTOM_ID: orgc73e31c3
+   :END:
 
 すべてのエフェクトをオフにして，org-tree-slide をシンプルに使うためには，M-x org-tree-slide-simple-profile とします．この設定を常に有効にしておくには，
 
@@ -109,6 +132,9 @@ MEPLAから[[http://melpa.org/#/org-tree-slide][配信している]]ので， M-
 #+end_src
 
 ** スライド番号の表示例
+   :PROPERTIES:
+   :CUSTOM_ID: orgf56bb171
+   :END:
 
 この例は，TODO追跡用のプロファイルを適用した場合です．以下のコマンドでプロファイルを適用できます．
 
@@ -208,8 +234,10 @@ M-x org-tree-slide-narrowing-control-profile
 
 
 
-
 ** 使ってみる
+   :PROPERTIES:
+   :CUSTOM_ID: org5b30d5ad
+   :END:
 
 orgファイルを開いた状態で，M-x org-tree-slide-mode としてマイナーモードを有効にします．スライドショーが自動的に始まります．モードラインにスライド番号，もしくは「TSlide」と表示されることを確認してください．
 
@@ -236,6 +264,9 @@ TODOステータスのツリーだけをスライドショーしたい場合は�
 マイナーモードに対応したため，org-tree-slide-play( =C-x s p= )とorg-tree-slide-stop( =C-x s s= )は M-x org-tree-slide-mode によるトグルになりました．
 
 * プレゼンテーションに使う
+  :PROPERTIES:
+  :CUSTOM_ID: org1966aca6
+  :END:
 
 普段使いでは，前述のシンプルモードがいいでしょう．ただ，スライドショーというからには，プレゼンテーションのための機能とエフェクトが欲しいところですね．
 
@@ -253,6 +284,9 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 - ツリーの見出しを強調する
 
 ** スライドヘッダの表示（デフォルト：ON）
+   :PROPERTIES:
+   :CUSTOM_ID: org3b277f6d
+   :END:
 
 スライドの上部に「タイトル」「日付」「名前」「メールアドレス」を表示します． +将来的には，#+TITLE で指定するファイル名を表示するようにします．調査中φ(. _. )+
 
@@ -276,6 +310,9 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 なお，名前とメールアドレスを省略すると空白となり，タイトルを省略するとバッファ名が使われます．
 
 *** 制御方法
+    :PROPERTIES:
+    :CUSTOM_ID: org1bee77e9
+    :END:
 
  - 起動時にヘッダを表示しないようにする
 #+begin_src emacs-lisp
@@ -288,6 +325,9 @@ M-x org-tree-slide-display-header-toggle
 #+end_src
 
 ** 特定レベル以上のツリーをスキップする（デフォルト：OFF）
+   :PROPERTIES:
+   :CUSTOM_ID: org471d865c
+   :END:
 
 [[https://twitter.com/#!/peccul][@peccu]] さんからコメントをいただいて追加しました．
 
@@ -296,6 +336,9 @@ M-x org-tree-slide-display-header-toggle
 実装してから気づきましたが，この機能は， *説明したくないスライドをスキップする* ためにも使えますね．もしスキップされるツリーに補足資料などが入っているなら，そのツリーにカーソルに移動して =C-<right>= すれば，スキップせずにスライドとして表示できます．
 
 *** 制御方法
+    :PROPERTIES:
+    :CUSTOM_ID: org0e9bb2aa
+    :END:
 
  - レベル4以上((*が4つの見出し))のツリーはスライド化しない
 #+begin_src emacs-lisp
@@ -308,18 +351,27 @@ M-x org-tree-slide-display-header-toggle
 #+end_src
 
 ** 発表時間のカウントダウン（スライド開始時に指定）
+   :PROPERTIES:
+   :CUSTOM_ID: orgba95dfe3
+   :END:
 
 モードラインに発表時間の残り時間を表示します．M-x org-tree-slide-play-with-timer で起動します．発表時間を指定するようにプロンプトが出るので．プレゼン時間を指定します．単位は「分」です．スライド開始と共に，自動的に org-tree-slide-mode が有効になります．
 
 この機能は，単純に org-timer-set-timer を実行しているだけです．6.33x では，C-u 無しで起動した後で， =C-c C-x ;= とすれば，プロンプトがでると思います．が，先ほど確認したらプロンプトは出るけどカウントが始まらない状態でした Orz．今後の課題ということでお許し下さい．．．
 
 ** ツリーをスライドインさせる（デフォルト：ON）
+   :PROPERTIES:
+   :CUSTOM_ID: orgd479b528
+   :END:
 
 スライドを移動すると，ツリーの内容が中央付近から最上部に移動します．ちょっとした動きが出て，スライドの切り替わりをアピールできます．居眠り対策ではありません．
 
 環境に応じて移動スピードが違うようなので，好みの設定を探してみてください．
 
 *** 制御方法
+    :PROPERTIES:
+    :CUSTOM_ID: org8b9b1336
+    :END:
  - 起動時にヘッダを表示しないようにする
 #+begin_src emacs-lisp
 (setq org-tree-slide-slide-in-effect nil)
@@ -344,6 +396,9 @@ M-x org-tree-slide-slide-in-effect-toggle
 スライドスピードの調節は，行数(10[line])×速度(0.02[s/line])=移動時間(0.2[s])と考えてください．実際の振る舞いとはだいぶ差があるので，あくまで目安です．
 
 ** ツリーの見出しを強調する（デフォルト：OFF）
+   :PROPERTIES:
+   :CUSTOM_ID: orge9e93e58
+   :END:
 
 メリハリをつけるために，ツリーの見出しを強調できます．
 
@@ -356,6 +411,9 @@ M-x org-tree-slide-slide-in-effect-toggle
 外部出力解像度が 800×600[画素]の時は，Emacsのウィンドウサイズが横80，縦35程度で十分な表示サイズになります．解像度が高くなると，相対的に文字が小さくなるので，フォントサイズの調節が必須になります．解像度に合わせてフォントサイズを変更する機能を探しています． +あるのかな．+ see [[https://github.com/takaxp/moom][moom.el]]
 
 *** 制御方法
+    :PROPERTIES:
+    :CUSTOM_ID: orgb111755f
+    :END:
 
  - 起動時に見出しを強調する
 #+begin_src emacs-lisp
@@ -376,6 +434,9 @@ M-x org-tree-slide-heading-emphasis-toggle
 | 標準サイズ | C-x C-0      |
 
 ** スライドの開始と終了時に独自の処理を加える（デフォルト：OFF）
+   :PROPERTIES:
+   :CUSTOM_ID: org2755dab2
+   :END:
 
 =org-tree-slide= は，スライド開始時にはプロファイルで指定したカスタマイズを適用し，終了時にはそれらを解いてスライド開始前の状況に戻します．特定のバッファを表示するなどのカスタマイズを加える場合に，次のフックが使えます．
 
@@ -383,6 +444,9 @@ M-x org-tree-slide-heading-emphasis-toggle
  - =org-tree-slide-mode-stop-hook= スライド終了時のフック
 
 *** 制御方法
+    :PROPERTIES:
+    :CUSTOM_ID: org11f3c8eb
+    :END:
 
  - スライド開始時にウィンドウを分割する
 
@@ -399,7 +463,13 @@ M-x org-tree-slide-heading-emphasis-toggle
 #+end_src
 
 * その他の設定
+  :PROPERTIES:
+  :CUSTOM_ID: orgd7e114b1
+  :END:
 ** <left>/<right> 以外でスライドを移動する
+   :PROPERTIES:
+   :CUSTOM_ID: orge8e5af48
+   :END:
 
 org-tree-slide の利用頻度が高くなると，標準の移動のキーバインド（ =C-<left>= / =C-<right>= ）を不自由に感じるかもしれません．これは，バッファを編集しているときはカーソル移動が =C-f= / =C-b= ですが，編集結果を眺めるときに =C-<left>= / =C-<right>= を使うことがあるからです．
 
@@ -426,6 +496,9 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
 新しいキーバインドには，Emacs の編集中に使わないキーを割り当てないと，スライドショーしながら編集するときに面倒なことになりますので，ご注意ください((j/kは危険かと))．
 
 ** 何か重いと感じたら（スライド番号表示方法）
+   :PROPERTIES:
+   :CUSTOM_ID: orgd1fcd220
+   :END:
 
 =org-tree-slide-narrowing-control-profile= のデフォルトの設定では，カーソルが見出し行にあると常にスライド番号を更新します．そのため，一覧表示などで =C-n/C-p= を押しっぱなしにすると，描画が間に合わない可能性があります（ファイルサイズに依存）．そんな時は，スライド番号の表示位置を変えてみてください．
 
@@ -442,6 +515,9 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
 また， =nil= を指定すれば，スライド番号は一切表示されなくなります．
 
 ** 既知の問題
+   :PROPERTIES:
+   :CUSTOM_ID: orgfaf3d7f4
+   :END:
 
  - 複数バッファで org-tree-slide-play を開始するとバグる
 +大問題なので，次の課題として着手します．マイナーモードで回避でしょうか．+ *=> マイナーモードに対応したことで回避！*
@@ -453,10 +529,16 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
  - 見出しを強調しているとき，ヘッダの表示が影響を受ける場合がある．
 
 ** 謝辞
+   :PROPERTIES:
+   :CUSTOM_ID: org0ba1e0f0
+   :END:
 
 ここまでお読みいただき，ありがとうございました m(_ _)m．冒頭でも述べましたが，書いた elisp がまだ数個の素人なので，アドバイス等ございましたらコメントいただければ幸いです．
 
 * おまけ
+  :PROPERTIES:
+  :CUSTOM_ID: org6205b9e1
+  :END:
 
 次を管理しています :-)
 
@@ -464,6 +546,9 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
  - [[http://twitter.com/#!/orgmode_bot][@orgmode_bot アカウント]]
 
 ** org-mode 翻訳プロジェクト
+   :PROPERTIES:
+   :CUSTOM_ID: org0b92e0da
+   :END:
 
 たくさんの有志の方の積極的なご協力の元，org-mode の英語マニュアルを翻訳しています．このプロジェクトの最大の目的は，本家のマニュアルアップデートを継続的にフォローすることです．
 
@@ -474,6 +559,9 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
 このプロジェクトで培ったUTF-8環境下のノウハウは，将来的に本家にフィードバックします．英語を含む多言語の info ファイルが頒布されるようになれば，org-mode の利用者は地球規模で増えるでしょう．
 
 ** @orgmode_bot アカウント
+   :PROPERTIES:
+   :CUSTOM_ID: orga351c2eb
+   :END:
 
 org-mode の関数と，対応するキーバインドを毎日[[https://twitter.com/orgmode_bot][@orgmode_bot]]ツイートしています．org-mode の機能をまったりと知りたい方や，新しい機能を発見したい方は，ぜひフォローしてください．
 
@@ -482,6 +570,9 @@ org-mode の関数と，対応するキーバインドを毎日[[https://twitter
 ユニコーンロゴの利用は，Dominik先生のお墨付き:-)． Org7.8 のリリースに伴い，公式サイトにリンクが張られました！また，日本語ページのコミッタになったので，読みにくい箇所などありましたらお知らせ下さい m(_ _)m
 
 ** おまけのおまけ
+   :PROPERTIES:
+   :CUSTOM_ID: org57a8b055
+   :END:
 
 Emacs で text-mode を使っている人は，すぐに org-mode を使い始めましょう．
 
@@ -492,7 +583,13 @@ Emacs で text-mode を使っている人は，すぐに org-mode を使い始�
 #+end_src
 
 * 付録：関連ツール
+  :PROPERTIES:
+  :CUSTOM_ID: orgff88a839
+  :END:
 ** org-info-js を使う
+   :PROPERTIES:
+   :CUSTOM_ID: org05b0ecf6
+   :END:
 
 org-info-js は，orgファイルをXHTMLエクスポートした後で，info で使うようなショートカットでコンテンツを閲覧するためのモジュールです．
 
@@ -501,6 +598,9 @@ http://orgmode.org/Changes.html#sec-1 に行くと，どんな感じかわかり
 =n= で進んで， =p= で戻ります．この方法は，エクスポートするのが前提なので，リアルタイム編集はできません．
 
 ** org の narrowing を使う
+   :PROPERTIES:
+   :CUSTOM_ID: org9e2a77e5
+   :END:
 
 =<f5>= のトグルでナローイングを切り替えるのは，良く知られた設定です．
 
@@ -511,14 +611,23 @@ http://orgmode.org/Changes.html#sec-1 に行くと，どんな感じかわかり
 これを使えば，orgファイルの任意のツリーにフォーカスして編集できます．ただし，あるツリーにナローイングしているときに，ワンアクションで次のツリーに移れないのが欠点です．
 
 ** org-simple-presentation-mode.el を使う
+   :PROPERTIES:
+   :CUSTOM_ID: org21663de7
+   :END:
 
 [[http://twitter.com/#!/r_takaishi][@r_takaishi]] さんの作品です．[[https://github.com/takaishi/org-simple-presentation][Github]] から入手できます．きちんとしたマイナーモードです．不可視領域を独自に overlay で構築しているのが特徴です．
 
 ** org-tree-slide
+   :PROPERTIES:
+   :CUSTOM_ID: orge4899a40
+   :END:
 
 今回紹介した elisp です．org-simple-presentation-mode が正統派elispとすると，このツールは，いわば「org-mode プログラミング」の産物です．コア機能の多くが org-mode が提供する関数((org.el，2万行を読む！))を利用しているので，elisp 素人な私でも簡単に作ることができました．機能面では，タイマー機能，ヘッダ表示，スライドエフェクト，ツリーの一覧表示に対応しています．実装途中ですが，オートプレイも可能((スライドインエフェクト付きでスライドショーを開始し， =C-x s a= を押すと，自動で進める枚数を指定してください．))です．
 
 * Review
+  :PROPERTIES:
+  :CUSTOM_ID: org549ce1f8
+  :END:
 
  - マスタカさんのブログでご紹介していただきました m(_ _)m
 [[http://masutaka.net/chalow/2012-10-06-1.html][Emacsでお手軽にプレゼンできるorg-tree-slideはかなり良い感じ！]]
