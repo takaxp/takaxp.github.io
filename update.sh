@@ -19,6 +19,7 @@ fi
 
 git add *.html *.org update.sh
 git add articles/*.html articles/*.org
+git add files/*
 git commit
 git push
 
