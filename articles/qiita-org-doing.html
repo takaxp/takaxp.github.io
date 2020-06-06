@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-14 Sat 11:41 -->
+<!-- 2020-06-06 Sat 19:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>簡略フローで doing 再び</title>
@@ -201,50 +201,28 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -346,13 +324,13 @@ for the JavaScript code in this tag.
 を実現できます．これで <code>org-clock-in</code> のし忘れは大幅に減るでしょう．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/a703b7e3-1f6d-4054-1329-a03a16c967a4.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/a703b7e3-1f6d-4054-1329-a03a16c967a4.png" /></p>
 
 <p>
 さらに，最も可能性の高い使い方として「ある heading で工数計測をしながら，他の heading の内容を編集する」という作業スタイルが考えられます．この場合は，計測中の heading と編集中の heading を簡単に往復できると幸せになれるので， <code>org-onit.el</code> は， <code>org-clock-goto</code> を発行した場所にすぐ戻るためのコマンド(<code>org-onit-goto-anchor</code>)も実装しています．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/607adbfb-2902-712c-b87b-479d79aad9e6.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/607adbfb-2902-712c-b87b-479d79aad9e6.png" /></p>
 </div>
 </div>
 
@@ -628,7 +606,7 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 例えば，こうです．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/051d8175-5781-3ab2-103c-0f1d09f82637.png" alt="Screen_Shot_2019-08-30_at_3_39_02.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/051d8175-5781-3ab2-103c-0f1d09f82637.png" alt="Screen_Shot_2019-08-30_at_3_39_02.png" /></p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-clock-frame-title-format
@@ -655,7 +633,7 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 タイトルバーの表示に少し動きをつけたい場合は， <code>(org-onit-get-sign)</code> の戻り値を使ってください．アニメーション表示になります．表示要素は， <code>org-onit-clocking-sign-alist</code> を設定すれば自由に変えられます．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/7861d43f-ea78-95f9-40c1-bb0f4c5dcc71.gif" alt="Untitled1.gif" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/7861d43f-ea78-95f9-40c1-bb0f4c5dcc71.gif" alt="Untitled1.gif" /></p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-clock-frame-title-format
@@ -833,8 +811,8 @@ Org mdoeの工数計測機能を正しく使いこなせば，「文書・アウ
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2019-12-14 Sat 11:41</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2020-06-06 Sat 19:57</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
