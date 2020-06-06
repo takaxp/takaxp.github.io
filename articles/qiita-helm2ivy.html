@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-17 Mon 16:44 -->
+<!-- 2020-06-06 Sat 20:03 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>helm を背に ivy の門を叩く</title>
@@ -201,50 +201,28 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -354,12 +332,12 @@ for the JavaScript code in this tag.
 よければEmacs勉強会の<a href="https://speakerdeck.com/takaxp/counsel">講演資料</a>と<a href="https://gist.github.com/takaxp/86158fe74b8268843571c42b48a4336c">設定集</a>もご参照ください．また， <code>ivy</code> 以外の<a href="https://takaxp.github.io/init.html">設定集</a>も公開しています．この記事の<a href="https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-helm2ivy.org">ソースも公開</a>しています．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif" alt="Untitled.gif" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/49f6248e-470c-83d8-fc21-6e2773848a07.gif" alt="Untitled.gif" /></p>
 <p>
 ↑GUI<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif" alt="Untitled.gif" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif" alt="Untitled.gif" /></p>
 <p>
 ↑ターミナル<br />
 </p>
@@ -503,7 +481,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 <code>swiper</code> は， <code>helm-swoop</code> のような文字列探索機能を提供します．カーソル位置の単語をキーに，バッファ内を探索．絞り込まれた選択候補を <code>C-n/C-p</code> で変えると，それに合わせてバッファの表示も変わり，連続してプレビューできます．なお， <code>swiper-all-thing-at-point</code> も実装されていて，これは開いているすべてのバッファを探索します．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/33506056-af67-6a9f-b1b7-6e61a04a82a2.gif" alt="Untitled.gif" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/33506056-af67-6a9f-b1b7-6e61a04a82a2.gif" alt="Untitled.gif" /></p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">swiper</span> nil t)
@@ -523,7 +501,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 デフォルトの配色は，なかなかに個性的なので自分の好みに書き換えましょう．中途半端に書き換えると，デフォルトの配色が表に出てくるので，次にリストしたフェイスはすべて書き換える方が安全です．なお， <code>(setq ivy-display-style t)</code> とすると，配色を無効にできます．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/744505f0-f2c2-d7aa-a5cf-4aea008f6d2d.png" alt="Screen Shot 2019-08-03 at 13.07.34.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/744505f0-f2c2-d7aa-a5cf-4aea008f6d2d.png" alt="Screen Shot 2019-08-03 at 13.07.34.png" /></p>
 
 <ul class="org-ul">
 <li>ivy-current-match<br />
@@ -535,14 +513,14 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 <li><p>
 パターンマッチした文字列範囲の配色．ただし， <code>ivy-re-builders-alist</code> で指定するフィルタの種別に依存して使われたり，使われなかったりする．デフォルトの <code>ivy--regex-plus</code> の場合は，使われる．<br />
 </p>
-![Screen Shot 2019-08-03 at 12.57.10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/198cc1c6-f676-b703-c121-ec83cab34217.png)</li>
+![Screen Shot 2019-08-03 at 12.57.10.png](https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/198cc1c6-f676-b703-c121-ec83cab34217.png)</li>
 </ul></li>
 <li>ivy-minibuffer-match-face-{2,3,4}<br />
 <ul class="org-ul">
 <li><p>
 検索語のハイライトに使われる．検索語が3つを超える時は，ループして使う．<br />
 </p>
-![Screen Shot 2019-08-03 at 13.02.04.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/64f74be6-f61c-07c6-7750-c409e327bd9e.png)</li>
+![Screen Shot 2019-08-03 at 13.02.04.png](https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/64f74be6-f61c-07c6-7750-c409e327bd9e.png)</li>
 </ul></li>
 </ul>
 
@@ -1215,7 +1193,7 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 また，選択候補が無いと確定してから <code>my-nocand-then-fzf-idle-time</code> 秒後に <code>[y/n]</code> を問うようにカスタマイズできます．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/b9f71785-9ba6-d146-681b-7c275bf03a46.gif" alt="Untitled.gif" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/b9f71785-9ba6-d146-681b-7c275bf03a46.gif" alt="Untitled.gif" /></p>
 
 <p>
 このデモでは，次のフローで所望のファイルを見つけています．<br />
@@ -1592,7 +1570,7 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 <a href="https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/">https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/</a> に公開されているコードをアレンジしました． <code>ivy</code> とは無関係ですが， <code>&lt;f10&gt;</code> で <code>bm.el</code> の <code>bm-toggle</code> を呼び出し， <code>C-&lt;f10&gt;</code> で次のブックマークに移動するように設定しています．詳細は， <a href="https://takaxp.github.io/init.html#orgd5942d14">Configurations for GNU Emacs::4.9 [bm.el] カーソル位置をブックマークして追う</a> を参照ください．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/0c1bb5f2-def7-c0f8-71d7-506adf648815.png" alt="Screen Shot 2019-08-03 at 14.54.29.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/0c1bb5f2-def7-c0f8-71d7-506adf648815.png" alt="Screen Shot 2019-08-03 at 14.54.29.png" /></p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">bm</span> nil t)
@@ -1646,7 +1624,7 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 デフォルトではソートされないので，<a href="https://github.com/raxod502/prescient.el">prescient.el</a> を導入して，直近の選択を上位に移すソーティングと履歴保存を有効にしましょう．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/67564635-e10d-4595-35a7-3080473fef6e.png" alt="Screen Shot 2019-08-03 at 14.49.12.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/67564635-e10d-4595-35a7-3080473fef6e.png" alt="Screen Shot 2019-08-03 at 14.49.12.png" /></p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"ivy"</span>
@@ -1679,7 +1657,7 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 <code>counse.el</code> には Linuxのアプリケーションを呼び出すためのインターフェイスである <code>counsel-linux-app</code> が実装されています． macOS用のコマンドは <a href="https://github.com/d12frosted/counsel-osx-app">counsel-osx-app</a> に公開されています．以前はOS側のランチャーを呼び出して使っていましたが，このコマンドのおかげで，Emacs から直接アプリケーションを呼び出せるので，かなり重宝しています．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/9d840790-b665-fddc-23d2-b4b6d7ecee18.png" alt="Screen Shot 2019-08-03 at 14.56.28.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/9d840790-b665-fddc-23d2-b4b6d7ecee18.png" alt="Screen Shot 2019-08-03 at 14.56.28.png" /></p>
 
 <p>
 <code>counsel-osx-app-location</code> を正しく設定すれば，サブディレクトリに含まれるアプリケーションもリストに入れてくれます．<br />
@@ -1845,7 +1823,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 もう一つの機能として，イニシャル入力が可能になります．例えば <code>counsel-M-x</code> で <code>M-x fap</code> と入力すると， <code>find-file-at-point</code> が最上位で表示されます． <code>counsel-recentf</code> などでは，サブディレクトリの先頭の頭文字を入力すると，当該の情報が上位にきます．慣れれば極めて高速に絞り込みできるようになります．ただ，すべてのコマンドについてイニシャル入力を有効にすると，現状では <code>face</code> を思うように制御できないので， <code>ivy-re-builders-alist</code> を設定して，イニシャル入力を有効化するコマンドを限定することをオススメします．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/ecd14135-2bf9-12bb-b7ab-273444f27a8b.gif" alt="Untitled.gif" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/ecd14135-2bf9-12bb-b7ab-273444f27a8b.gif" alt="Untitled.gif" /></p>
 
 <p>
 イニシャル入力の設定周りがややこしいと感じる場合は，下記設定の2箇所の <code>ivy-re-builders-alist</code> に関わる設定を使わず，代わりに <code>(setq ivy-prescient-enable-filtering nil)</code> を設定すればうまく行きます．このように設定しても，使用履歴の保存には影響がありません．<br />
@@ -1911,7 +1889,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </pre>
 </div>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1c131697-3b3f-b2c4-829c-c9d34addff72.png" alt="Screen Shot 2019-08-03 at 15.05.44.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/1c131697-3b3f-b2c4-829c-c9d34addff72.png" alt="Screen Shot 2019-08-03 at 15.05.44.png" /></p>
 
 <p>
 さらに，以下のようなハックを施すと，プロンプトの前に任意の情報を書き込む事ができます．例えば，プロンプトの上部に一行空行を入れて，さらに，プロンプトの直前にアイコンを入れることも可能です．モードラインを使わない派にオススメの設定です．<br />
@@ -1925,12 +1903,12 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 無事にマージされました． <code>ivy-pre-prompt-function</code> に任意の関数を設定するだけになりました．(update: 2019-08-08)<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea2ce23-c433-7c5a-27da-dd7981934f98.png" alt="Screen Shot 2019-08-03 at 15.07.07.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/3ea2ce23-c433-7c5a-27da-dd7981934f98.png" alt="Screen Shot 2019-08-03 at 15.07.07.png" /></p>
 <p>
 ↑適用前<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/8f54e3d0-7fe4-7b4b-d171-70994d921793.png" alt="Screen Shot 2019-08-03 at 15.07.43.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/8f54e3d0-7fe4-7b4b-d171-70994d921793.png" alt="Screen Shot 2019-08-03 at 15.07.43.png" /></p>
 <p>
 ↑適用後<br />
 </p>
@@ -1956,12 +1934,12 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 <code>ivy-format-functions-alist</code> にカスタマイズした関数を追加すれば，プロンプトの下部に位置するカーソル行の表示を変更できます． <code>all-the-icons</code> を導入して，好みのアイコンでカーソル行のある選択候補を目立たせましょう．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/3ea701d0-7d19-ccd0-e98b-808e1928ac3c.png" alt="Screen Shot 2019-08-03 at 15.10.49.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/3ea701d0-7d19-ccd0-e98b-808e1928ac3c.png" alt="Screen Shot 2019-08-03 at 15.10.49.png" /></p>
 <p>
 ↑適用前（ivy-format-function-arrow利用）<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/65cc0caf-5dae-1962-f6ee-eaed3e4e6609.png" alt="Screen Shot 2019-08-03 at 15.11.10.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/65cc0caf-5dae-1962-f6ee-eaed3e4e6609.png" alt="Screen Shot 2019-08-03 at 15.11.10.png" /></p>
 <p>
 ↑適用後（my-ivy-format-function-arrow利用）<br />
 </p>
@@ -2007,7 +1985,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 <a href="https://github.com/asok/all-the-icons-ivy">all-the-icons-ivy.el</a>は， <code>ivy</code> インターフェイスにアイコンを追加するパッケージです． <code>all-the-icons.el</code> が少々導入の難しいパッケージなのですが，一度設定がうまくいけば，殺伐とした Emacs バッファに安らぎがもたらされます．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/c1b4ad28-aff6-6e56-9e09-8fa5a7c4cf66.png" alt="Screen Shot 2019-08-03 at 15.30.28.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/c1b4ad28-aff6-6e56-9e09-8fa5a7c4cf66.png" alt="Screen Shot 2019-08-03 at 15.30.28.png" /></p>
 <p>
 ↑neotree, dired, ivy のすべてで all-the-icons を使う場合の表示例<br />
 </p>
@@ -2063,14 +2041,14 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 ミニバッファに候補リストを表示する <code>ivy</code> は，大きな画面で横方向に複数のウィンドウを表示する状況で，画面上に無駄なスペースが多く生じます．<a href="https://github.com/Yevgnen/ivy-rich">ivy-rich.el</a>を導入すると，アイコンが追加され，さらに追加の情報が空きスペースに記述されるようになります．<a href="https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf#%E6%A4%9C%E7%B4%A2%E3%81%AA%E3%81%A9%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9----swipercounsel-ivy-rich">Emacsモダン化計画 -かわEmacs編-</a> (by <a href="https://qiita.com/Ladicle">@Ladicle</a>) が詳しいです．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/f3f30fa9-f603-ccb6-dd6c-108bb1c491c1.png" alt="Screen Shot 2019-08-03 at 15.20.31.png" /></p>
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/4d8958f2-173b-4fb3-cba2-cb5587a0aaa8.png" alt="Screen Shot 2019-08-03 at 15.20.09.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/f3f30fa9-f603-ccb6-dd6c-108bb1c491c1.png" alt="Screen Shot 2019-08-03 at 15.20.31.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/4d8958f2-173b-4fb3-cba2-cb5587a0aaa8.png" alt="Screen Shot 2019-08-03 at 15.20.09.png" /></p>
 
 <p>
 ただし，私のように普段は80桁縛りで Emacs を使う人には相性が悪いかもしれません．<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/5d382033-bd2f-16a2-7db1-06ef55248eb3.png" alt="Screen Shot 2019-08-03 at 15.19.54.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/5d382033-bd2f-16a2-7db1-06ef55248eb3.png" alt="Screen Shot 2019-08-03 at 15.19.54.png" /></p>
 <p>
 ↑見切れてしまう&#x2026;<br />
 </p>
@@ -2090,7 +2068,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 <code>ivy-posframe</code> を使うと，通常はミニバッファに表示されるリストを任意の位置に出すことができます．私自身，まだ使いこなせていないので今後の課題です．以下は， <code>counsel-M-x</code> でコマンドリストを表示するときだけカーソル位置にフレームを出す設定です．なお，当初 <code>ivy-posframe</code> はマイナーモード化されておらず不便でしたが，<a href="https://qiita.com/conao3">@conao3</a> 氏の<a href="https://github.com/tumashu/ivy-posframe/pull/43">尽力</a>により，現在は <code>(ivy-posframe-mode 1)</code>, <code>(ivy-posframe-mode -1)</code> で ON/OFFできます．Thanks!<br />
 </p>
 
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1016e998-c672-8d7e-6c2b-9883eb19310c.png" alt="Screen Shot 2019-08-03 at 15.26.44.png" /></p>
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/1016e998-c672-8d7e-6c2b-9883eb19310c.png" alt="Screen Shot 2019-08-03 at 15.26.44.png" /></p>
 <p>
 ↑未調整なため，かなり変<br />
 </p>
@@ -2863,8 +2841,8 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2020-02-17 Mon 16:44</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2020-06-06 Sat 20:03</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
