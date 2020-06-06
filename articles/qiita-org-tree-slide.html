@@ -1,0 +1,1267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-06-06 Sat 22:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>org-modeのツリーでスライドショー</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Takaaki ISHIKAWA" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">org-modeのツリーでスライドショー</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf66aa02">1. はじめに</a></li>
+<li><a href="#org4ef0eb5">2. これは何？</a>
+<ul>
+<li><a href="#org83298d0">2.1. 位置づけ</a></li>
+<li><a href="#orgbfc60d2">2.2. デモ</a></li>
+</ul>
+</li>
+<li><a href="#org46a6eac">3. インストール</a>
+<ul>
+<li><a href="#org22d5cfd">3.1. org-tree-slide.el の入手</a></li>
+<li><a href="#orgea188fe">3.2. 動作環境</a></li>
+<li><a href="#orgb114020">3.3. シンプルに使う</a></li>
+<li><a href="#org691b435">3.4. スライド番号の表示例</a></li>
+<li><a href="#orgd6b2ae2">3.5. 使ってみる</a></li>
+</ul>
+</li>
+<li><a href="#org61facfe">4. プレゼンテーションに使う</a>
+<ul>
+<li><a href="#orgbf66889">4.1. スライドヘッダの表示（デフォルト：ON）</a>
+<ul>
+<li><a href="#org3baf3f2">4.1.1. 制御方法</a></li>
+</ul>
+</li>
+<li><a href="#org5dd2a5c">4.2. 特定レベル以上のツリーをスキップする（デフォルト：OFF）</a>
+<ul>
+<li><a href="#org5de50f4">4.2.1. 制御方法</a></li>
+</ul>
+</li>
+<li><a href="#orgbc8146f">4.3. 発表時間のカウントダウン（スライド開始時に指定）</a></li>
+<li><a href="#orgf656c24">4.4. ツリーをスライドインさせる（デフォルト：ON）</a>
+<ul>
+<li><a href="#orgc249d90">4.4.1. 制御方法</a></li>
+</ul>
+</li>
+<li><a href="#orgd040272">4.5. ツリーの見出しを強調する（デフォルト：OFF）</a>
+<ul>
+<li><a href="#orgb6d6c9c">4.5.1. 制御方法</a></li>
+</ul>
+</li>
+<li><a href="#orgd0cb07d">4.6. スライドの開始と終了時に独自の処理を加える（デフォルト：OFF）</a>
+<ul>
+<li><a href="#org22a2cec">4.6.1. 制御方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga8308ab">5. その他の設定</a>
+<ul>
+<li><a href="#orge16c80c">5.1. &lt;left&gt;/&lt;right&gt; 以外でスライドを移動する</a></li>
+<li><a href="#orgd10b34a">5.2. 何か重いと感じたら（スライド番号表示方法）</a></li>
+<li><a href="#org13beeaa">5.3. 既知の問題</a></li>
+<li><a href="#orge963923">5.4. 謝辞</a></li>
+</ul>
+</li>
+<li><a href="#orgb39277f">6. おまけ</a>
+<ul>
+<li><a href="#orgdf45adc">6.1. org-mode 翻訳プロジェクト</a></li>
+<li><a href="#org4ec701e">6.2. @orgmode_bot アカウント</a></li>
+<li><a href="#orgc80427e">6.3. おまけのおまけ</a></li>
+</ul>
+</li>
+<li><a href="#org00e24de">7. 付録：関連ツール</a>
+<ul>
+<li><a href="#orgfc1f272">7.1. org-info-js を使う</a></li>
+<li><a href="#org426dcb7">7.2. org の narrowing を使う</a></li>
+<li><a href="#org4b953f0">7.3. org-simple-presentation-mode.el を使う</a></li>
+<li><a href="#org392750f">7.4. org-tree-slide</a></li>
+</ul>
+</li>
+<li><a href="#org2ed5c29">8. Review</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf66aa02" class="outline-2">
+<h2 id="orgf66aa02"><span class="section-number-2">1</span> はじめに</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+この記事は Emacs Advent Calender 2011 の3日目です．前の記事は，<a href="https://twitter.com/#!/peccul">@peccu</a> さんの <a href="http://d.hatena.ne.jp/peccu/20111202/mew_icloud">MewでiCloudのメールを読み書き</a> です．後ろの記事は，<a href="https://twitter.com/#!/HKe7">@HKe7</a> さんの <a href="http://hke7.wordpress.com/2011/12/03/%E3%83%91%E3%82%B9%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%82%88%E3%81%86-emacs-advent-calendar-jp-2011/">パスをまとめよう (Emacs Advent Calendar jp: 2011)</a> です．<br />
+</p>
+
+<p>
+私<a href="https://twitter.com/takaxp">@takaxp</a>は，今年3月から自分で elisp を書き始めた elisp 初心者です．Emacs歴12年，Org-mode歴3年です．Emacs Advent Calender には初参戦で，今回は拙作の <a href="https://github.com/takaxp/org-tree-slide">org-tree-slide.el</a> を紹介します．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ef0eb5" class="outline-2">
+<h2 id="org4ef0eb5"><span class="section-number-2">2</span> これは何？</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://orgmode.org">org-mode</a>の各ツリーを「一枚のスライド」として扱うための elisp です．org-mode ユーザ向けです．<br />
+</p>
+
+<p>
+こんな人におすすめです．<br />
+</p>
+
+<ul class="org-ul">
+<li>Emacs でプレゼンテーションしたい！((org-modeでプレゼン内容を組み立てている時に「この話をまた Keynote や Powerpoint でスライドにするの面倒だ」と思ったのが作り始めるきっかけ．))<br /></li>
+<li>長いorgファイル((org-modeで編集されたバッファ))の内容を素早く確認したい<br /></li>
+<li>プレゼンしながら編集もしたい（協調編集((ブレインストーミングをする時に便利です．スライド一枚がホワイトボードに対応すると考えられます．参加者の意見をスライド状のorgファイルにまとめいき，後で適当な形式で出力できます．orgファイルをそのまま配ってもいいし，HTML化，PDF化してもOK．なんなら数式入りのTex経由でPDF化もできます．素晴らしきorg-mode！))）<br /></li>
+<li>narrowing を多用するけど，次のツリーに移るのが面倒<br /></li>
+</ul>
+</div>
+
+<div id="outline-container-org83298d0" class="outline-3">
+<h3 id="org83298d0"><span class="section-number-3">2.1</span> 位置づけ</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+org-mode には，バッファの内容を表示するために3つの状態が用意されています．<br />
+</p>
+
+<ul class="org-ul">
+<li>SHOW ALL（すべての記述内容を表示）<br /></li>
+<li>OVERVIEW（トップレベルの見出しを表示）<br /></li>
+<li>CONTENT（特定レベル以上の見出しを表示）<br /></li>
+</ul>
+
+<p>
+これらの状態は，S-&lt;TAB&gt;を押すことで，循環させながら切り替えられます．数千行の長いファイルも，不要（詳細）な部分を素早く隠せるので，全体を簡単に見通すことができます．<br />
+</p>
+
+<p>
+org-tree-slide は，ここに「第4の状態を追加する」イメージです．<br />
+</p>
+
+<ul class="org-ul">
+<li>org-tree-slide（注目するツリーと包含するツリーの見出しだけを表示）<br /></li>
+</ul>
+
+<p>
+表示の方法を変えるだけなので，org-tree-slide を有効にしても，org-mode の機能をそのまま使えます．また，バッファのアウトラインだけならば CONTENT((M-x org-content)) で確認できますが，ツリーの内容も確認したい場合には，スライド状に表示してくれる org-tree-slide が便利です．<br />
+</p>
+
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/bf963555-5179-9474-73a3-c77f2bdad813.png" alt="第四の状態" /></p>
+</div>
+</div>
+
+<div id="outline-container-orgbfc60d2" class="outline-3">
+<h3 id="orgbfc60d2"><span class="section-number-3">2.2</span> デモ</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+百聞は一見に如かず，ということで，実際に使っている動画をご覧ください．音は入っておりません．<br />
+</p>
+
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/072a87ca-9033-3c24-91eb-f1a1bf158c75.gif" alt="demo" /></p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org46a6eac" class="outline-2">
+<h2 id="org46a6eac"><span class="section-number-2">3</span> インストール</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org22d5cfd" class="outline-3">
+<h3 id="org22d5cfd"><span class="section-number-3">3.1</span> org-tree-slide.el の入手</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+MEPLAから<a href="http://melpa.org/#/org-tree-slide">配信している</a>ので， M-x list-packages で表示されるリストから選んでインストールできます．<br />
+また org-tree-slide.el を <a href="https://github.com/takaxp/org-tree-slide">Github</a> から入手するか，次を評価してください．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(auto-install-from-url <span style="color: #8b2252;">"https://raw.github.com/takaxp/org-tree-slide/master/org-tree-slide.el"</span>)
+</pre>
+</div>
+
+<p>
+入手した org-tree-slide.el を load-path に保存して，.emacs に次を追加します．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-tree-slide</span>)
+</pre>
+</div>
+
+<p>
+これでインストール完了です．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgea188fe" class="outline-3">
+<h3 id="orgea188fe"><span class="section-number-3">3.2</span> 動作環境</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+以下の環境での動作を確認しています．不具合がありましたらぜひご連絡ください．<br />
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">OS</th>
+<th scope="col" class="org-right">Emacs</th>
+<th scope="col" class="org-right">Org mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">MacOSX (Lion)</td>
+<td class="org-right">24.0.91</td>
+<td class="org-right">7.7</td>
+</tr>
+
+<tr>
+<td class="org-left">MacOSX (Lion)</td>
+<td class="org-right">23.3.50</td>
+<td class="org-right">7.7</td>
+</tr>
+
+<tr>
+<td class="org-left">MacOSX (Lion)</td>
+<td class="org-right">23.3.50</td>
+<td class="org-right">6.33x</td>
+</tr>
+
+<tr>
+<td class="org-left">openSUSE (12.1)</td>
+<td class="org-right">23.3.1</td>
+<td class="org-right">6.33x</td>
+</tr>
+
+<tr>
+<td class="org-left">Windows (7)</td>
+<td class="org-right">23.3.1</td>
+<td class="org-right">6.33x</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+それほど複雑なことはしていないので，多くの環境で動作すると思います((6.33xだとタイマーがうまく動かないようです．))．<br />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgb114020" class="outline-3">
+<h3 id="orgb114020"><span class="section-number-3">3.3</span> シンプルに使う</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+すべてのエフェクトをオフにして，org-tree-slide をシンプルに使うためには，M-x org-tree-slide-simple-profile とします．この設定を常に有効にしておくには，<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-tree-slide</span> nil t)
+  (org-tree-slide-simple-profile))
+</pre>
+</div>
+
+<p>
+としておけばOKです．<br />
+</p>
+
+<p>
+マイナーモードに対応したので，次のようにキーバインドを割り当てれば，シングルキーの連打でスライドショーの開始と終了を切り替えられます．また，S-&lt;f8&gt; のトグルで，TODOステータスのツリーだけを追えるようになります． <code>org-tree-slide-modeline-display</code> を <code>'outside</code> か <code>'lighter</code> に設定すれば，モードラインで現在のスライド番号もしくは残りのTODOの数を確認できます．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"&lt;f8&gt;"</span>) 'org-tree-slide-mode)
+(global-set-key (kbd <span style="color: #8b2252;">"S-&lt;f8&gt;"</span>) 'org-tree-slide-skip-done-toggle)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org691b435" class="outline-3">
+<h3 id="org691b435"><span class="section-number-3">3.4</span> スライド番号の表示例</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+この例は，TODO追跡用のプロファイルを適用した場合です．以下のコマンドでプロファイルを適用できます．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">M-x org-tree-slide-narrowing-control-profile
+</pre>
+</div>
+
+<p>
+<code>&lt;f8&gt;</code> で <code>org-tree-slide-mode</code> をトグルすると，ツリーがスライド化してモードラインにスライド番号が表示されます．次の例では，有効なツリー((org-tree-slide-skip-outline-levelを設定しているとカウントしないツリーもあります))は418あり，11番目を表示していることを意味しています．<br />
+</p>
+
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/c476aca7-53b4-4d64-ebd3-a26e2554b353.png" alt="スライド番号／有効なツリーの総数" /></p>
+
+<p>
+<code>S-&lt;f8&gt;</code> で <code>org-tree-slide-skip-done-toggle</code> をトグルすると，スライド番号が変化するのがわかります．TODOステータス((カスタマイズした名称も拾います))になっているツリーが259あり，9番目を表示していることになります．この状態で <code>C-&lt;right&gt;</code> すれば，TODOなツリーだけ連続表示できます．<br />
+</p>
+
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/be734a26-8173-6554-f40b-5c18f27e87b9.png" alt="スライド番号／残されたTODOの数" /></p>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="outline-container-orgd6b2ae2" class="outline-3">
+<h3 id="orgd6b2ae2"><span class="section-number-3">3.5</span> 使ってみる</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+orgファイルを開いた状態で，M-x org-tree-slide-mode としてマイナーモードを有効にします．スライドショーが自動的に始まります．モードラインにスライド番号，もしくは「TSlide」と表示されることを確認してください．<br />
+</p>
+
+<p>
+スライドショーが始まったら， <code>C-&lt;right&gt;</code> でスライドを進めて， <code>C-&lt;left&gt;</code> でスライドを戻します．<a href="http://www.apple.com/stevejobs/">That's simple!</a><br />
+</p>
+
+<p>
+スライドショーの途中でツリーを一覧表示したくなったら，M-x org-tree-slide-content もしくは <code>C-x s c</code> を押します．orgファイルの表示状態が CONTENT になるので，表示したいツリーにカーソル移動させ， <code>C-&lt;right&gt;</code> でスライドショーを再開します((CONTENT の状態でも，TABでツリーを開いてファイルを編集できます．))．<br />
+</p>
+
+<p>
+スライドショーを終了するには，M-x org-tree-slide-mode をもう一度押してマイナーモードを無効にします．モードラインの表示からスライド番号，もしくは「TSlide」が消えます．スライドショーが終了すると， <code>C-&lt;right&gt;</code> / <code>C-&lt;left&gt;</code> を押してもツリーを移動しません．<br />
+</p>
+
+<p>
+TODOステータスのツリーだけをスライドショーしたい場合は， <code>org-tree-slide-skip-done-toggle</code> で切り替えられます．<br />
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">関数名</th>
+<th scope="col" class="org-left">キーバインド</th>
+<th scope="col" class="org-left">アクション</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">org-tree-slide-mode</td>
+<td class="org-left">なし（&lt;f8&gt;などの割り当てを推奨）</td>
+<td class="org-left">開始/終了</td>
+</tr>
+
+<tr>
+<td class="org-left">org-tree-slide-skip-done-toggle</td>
+<td class="org-left">なし（S-&lt;f8&gt;などの割り当てを推奨）</td>
+<td class="org-left">TODOなツリーだけを移動</td>
+</tr>
+
+<tr>
+<td class="org-left">org-tree-slide-content</td>
+<td class="org-left">C-x s c</td>
+<td class="org-left">ツリーの一覧表示</td>
+</tr>
+
+<tr>
+<td class="org-left">org-tree-slide-move-next-tree</td>
+<td class="org-left">C-S-.</td>
+<td class="org-left">次のツリーに移動</td>
+</tr>
+
+<tr>
+<td class="org-left">org-tree-slide-move-previous-tree</td>
+<td class="org-left">C-S-,</td>
+<td class="org-left">前のツリーに移動</td>
+</tr>
+
+<tr>
+<td class="org-left">org-tree-slide-play-with-timer</td>
+<td class="org-left">なし</td>
+<td class="org-left">タイマーを指定してスライドを開始</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+マイナーモードに対応したため，org-tree-slide-play( <code>C-x s p</code> )とorg-tree-slide-stop( <code>C-x s s</code> )は M-x org-tree-slide-mode によるトグルになりました．<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org61facfe" class="outline-2">
+<h2 id="org61facfe"><span class="section-number-2">4</span> プレゼンテーションに使う</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+普段使いでは，前述のシンプルモードがいいでしょう．ただ，スライドショーというからには，プレゼンテーションのための機能とエフェクトが欲しいところですね．<br />
+</p>
+
+<p>
+いくつか実装してあるので以下に紹介します．なお，M-x org-tree-slide-simple-profile を実行した後では，すべてのオプションが強制的に OFF になっているので気をつけてください．<br />
+</p>
+
+<p>
+M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示とスライドインが有効になります．<br />
+</p>
+
+<p>
+機能一覧：<br />
+</p>
+<ul class="org-ul">
+<li>スライドヘッダを表示する<br /></li>
+<li>特定のレベル以下をスキップする<br /></li>
+<li>発表時間をカウントダウンする<br /></li>
+</ul>
+
+<p>
+エフェクト一覧<br />
+</p>
+<ul class="org-ul">
+<li>ツリーをスライドインさせる<br /></li>
+<li>ツリーの見出しを強調する<br /></li>
+</ul>
+</div>
+
+<div id="outline-container-orgbf66889" class="outline-3">
+<h3 id="orgbf66889"><span class="section-number-3">4.1</span> スライドヘッダの表示（デフォルト：ON）</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+スライドの上部に「タイトル」「日付」「名前」「メールアドレス」を表示します． <del>将来的には，#+TITLE で指定するファイル名を表示するようにします．調査中φ(. _. )</del><br />
+</p>
+
+<p>
+日付以外の値はorg-modeのヘッダから抽出しようと試みます．日付はスライドを表示する当日のものを利用します．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">#+TITLE: &#12473;&#12521;&#12452;&#12489;&#12398;&#12479;&#12452;&#12488;&#12523;
+#+AUTHOR: &#21517;&#21069;
+#+EMAIL: hoge@hogehoge.com
+</pre>
+</div>
+
+<p>
+このようにorgバッファで記述されていれば((最初の見出しよりも前の部分に書かれている必要があります))，<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"> [&#12473;&#12521;&#12452;&#12489;&#12398;&#12479;&#12452;&#12488;&#12523;]
+2011-12-31  &#21517;&#21069;  hoge@hogehoge.com<span style="background-color: #ffa500;"> </span>
+</pre>
+</div>
+
+<p>
+という形式でスライドのヘッダを表示します．<br />
+</p>
+
+<p>
+なお，名前とメールアドレスを省略すると空白となり，タイトルを省略するとバッファ名が使われます．<br />
+</p>
+</div>
+
+<div id="outline-container-org3baf3f2" class="outline-4">
+<h4 id="org3baf3f2"><span class="section-number-4">4.1.1</span> 制御方法</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ul class="org-ul">
+<li>起動時にヘッダを表示しないようにする<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-header nil)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>スライドショーの途中でヘッダー表示／非表示を切り替える<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">M-x org-tree-slide-display-header-toggle
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5dd2a5c" class="outline-3">
+<h3 id="org5dd2a5c"><span class="section-number-3">4.2</span> 特定レベル以上のツリーをスキップする（デフォルト：OFF）</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+<a href="https://twitter.com/#!/peccul">@peccu</a> さんからコメントをいただいて追加しました．<br />
+</p>
+
+<p>
+ツリーのレベルが高くなると，ツリーをスライドではなく単純なアイテムとして扱いたくなるかもしれません． <code>org-tree-slide-skip-outline-level</code> を設定すれば，該当するツリーをスライド化せずにスキップできます．<br />
+</p>
+
+<p>
+実装してから気づきましたが，この機能は， <b>説明したくないスライドをスキップする</b> ためにも使えますね．もしスキップされるツリーに補足資料などが入っているなら，そのツリーにカーソルに移動して <code>C-&lt;right&gt;</code> すれば，スキップせずにスライドとして表示できます．<br />
+</p>
+</div>
+
+<div id="outline-container-org5de50f4" class="outline-4">
+<h4 id="org5de50f4"><span class="section-number-4">4.2.1</span> 制御方法</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li>レベル4以上((*が4つの見出し))のツリーはスライド化しない<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-skip-outline-level 4)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>すべてのツリーをスライド化する（デフォルト）<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-skip-outline-level 0)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbc8146f" class="outline-3">
+<h3 id="orgbc8146f"><span class="section-number-3">4.3</span> 発表時間のカウントダウン（スライド開始時に指定）</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+モードラインに発表時間の残り時間を表示します．M-x org-tree-slide-play-with-timer で起動します．発表時間を指定するようにプロンプトが出るので．プレゼン時間を指定します．単位は「分」です．スライド開始と共に，自動的に org-tree-slide-mode が有効になります．<br />
+</p>
+
+<p>
+この機能は，単純に org-timer-set-timer を実行しているだけです．6.33x では，C-u 無しで起動した後で， <code>C-c C-x ;</code> とすれば，プロンプトがでると思います．が，先ほど確認したらプロンプトは出るけどカウントが始まらない状態でした Orz．今後の課題ということでお許し下さい．．．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf656c24" class="outline-3">
+<h3 id="orgf656c24"><span class="section-number-3">4.4</span> ツリーをスライドインさせる（デフォルト：ON）</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+スライドを移動すると，ツリーの内容が中央付近から最上部に移動します．ちょっとした動きが出て，スライドの切り替わりをアピールできます．居眠り対策ではありません．<br />
+</p>
+
+<p>
+環境に応じて移動スピードが違うようなので，好みの設定を探してみてください．<br />
+</p>
+</div>
+
+<div id="outline-container-orgc249d90" class="outline-4">
+<h4 id="orgc249d90"><span class="section-number-4">4.4.1</span> 制御方法</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<ul class="org-ul">
+<li>起動時にヘッダを表示しないようにする<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-slide-in-effect nil)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>スライドインのスピードを調節する（数値を変えてください）<br /></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-slide-in-waiting 0.02)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>スライドインの開始位置を調節する（行数を指定）<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-slide-in-brank-lines 10)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>スライドショーの途中でスライドインエフェクトの有効／無効を切り替える<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">M-x org-tree-slide-slide-in-effect-toggle
+</pre>
+</div>
+
+<p>
+スライドスピードの調節は，行数(10[line])×速度(0.02[s/line])=移動時間(0.2[s])と考えてください．実際の振る舞いとはだいぶ差があるので，あくまで目安です．<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd040272" class="outline-3">
+<h3 id="orgd040272"><span class="section-number-3">4.5</span> ツリーの見出しを強調する（デフォルト：OFF）</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+メリハリをつけるために，ツリーの見出しを強調できます．<br />
+</p>
+
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/e2a14eb8-fb25-a254-dd8b-c778b3c33acd.png" alt="見出しの強調" /></p>
+
+<p>
+もし，文字全体が小さいなと思ったら， <code>C-x C-</code> でフォントサイズを拡大してください．縮小するときは， <code>C-x C--</code> で，標準サイズに戻すときは， <code>C-x C-0</code> です．これらは，face-remap.el の機能です．<br />
+</p>
+
+<p>
+外部出力解像度が 800×600[画素]の時は，Emacsのウィンドウサイズが横80，縦35程度で十分な表示サイズになります．解像度が高くなると，相対的に文字が小さくなるので，フォントサイズの調節が必須になります．解像度に合わせてフォントサイズを変更する機能を探しています． <del>あるのかな．</del> see <a href="https://github.com/takaxp/moom">moom.el</a><br />
+</p>
+</div>
+
+<div id="outline-container-orgb6d6c9c" class="outline-4">
+<h4 id="orgb6d6c9c"><span class="section-number-4">4.5.1</span> 制御方法</h4>
+<div class="outline-text-4" id="text-4-5-1">
+<ul class="org-ul">
+<li>起動時に見出しを強調する<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-heading-emphasis t)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>スライドショーの途中で有効／無効を切り替える<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">M-x org-tree-slide-heading-emphasis-toggle
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>文字サイズを調節する<br /></li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">機能</th>
+<th scope="col" class="org-left">キーバインド</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">文字拡大</td>
+<td class="org-left">C-x C-=</td>
+</tr>
+
+<tr>
+<td class="org-left">文字縮小</td>
+<td class="org-left">C-x C--</td>
+</tr>
+
+<tr>
+<td class="org-left">標準サイズ</td>
+<td class="org-left">C-x C-0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd0cb07d" class="outline-3">
+<h3 id="orgd0cb07d"><span class="section-number-3">4.6</span> スライドの開始と終了時に独自の処理を加える（デフォルト：OFF）</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+<code>org-tree-slide</code> は，スライド開始時にはプロファイルで指定したカスタマイズを適用し，終了時にはそれらを解いてスライド開始前の状況に戻します．特定のバッファを表示するなどのカスタマイズを加える場合に，次のフックが使えます．<br />
+</p>
+
+<ul class="org-ul">
+<li><code>org-tree-slide-mode-play-hook</code> スライド開始時のフック<br /></li>
+<li><code>org-tree-slide-mode-stop-hook</code> スライド終了時のフック<br /></li>
+</ul>
+</div>
+
+<div id="outline-container-org22a2cec" class="outline-4">
+<h4 id="org22a2cec"><span class="section-number-4">4.6.1</span> 制御方法</h4>
+<div class="outline-text-4" id="text-4-6-1">
+<ul class="org-ul">
+<li>スライド開始時にウィンドウを分割する<br /></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-hook 'org-tree-slide-mode-play-hook
+          '(lambda () (split-window-below)))
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>スライド終了時にウィンドウの分割を解く<br /></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(add-hook 'org-tree-slide-mode-stop-hook
+          '(lambda () (delete-window)))
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga8308ab" class="outline-2">
+<h2 id="orga8308ab"><span class="section-number-2">5</span> その他の設定</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orge16c80c" class="outline-3">
+<h3 id="orge16c80c"><span class="section-number-3">5.1</span> &lt;left&gt;/&lt;right&gt; 以外でスライドを移動する</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+org-tree-slide の利用頻度が高くなると，標準の移動のキーバインド（ <code>C-&lt;left&gt;</code> / <code>C-&lt;right&gt;</code> ）を不自由に感じるかもしれません．これは，バッファを編集しているときはカーソル移動が <code>C-f</code> / <code>C-b</code> ですが，編集結果を眺めるときに <code>C-&lt;left&gt;</code> / <code>C-&lt;right&gt;</code> を使うことがあるからです．<br />
+</p>
+
+<p>
+そんな習慣がある方は， <code>C-&lt;left&gt;</code> / <code>C-&lt;right&gt;</code> ではないキーを割り当てます．例えば， <code>&lt;f8&gt;</code> で戻り， <code>&lt;f9&gt;</code> で進むように設定します．この設定は，org-tree-slide でスライドショーしている間だけ有効になります．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"&lt;f9&gt;"</span>)
+  'org-tree-slide-move-previous-tree)
+(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"&lt;f10&gt;"</span>)
+  'org-tree-slide-move-next-tree)
+</pre>
+</div>
+
+<p>
+私はさらに， <code>&lt;f11&gt;</code> を <code>org-tree-slide-content</code> に割り当てています．これにより， <code>&lt;f8&gt;</code> / <code>&lt;f9&gt;</code> / <code>&lt;f10&gt;</code> / <code>&lt;f11&gt;</code> キーで集中管理できます．右手だけで済みます．<br />
+</p>
+
+<p>
+もしくは，マウスアクションに割り当ててもいいかもしれません．ただ，クリックする場所が限定的なので，あまり使い勝手はよくないかもしれません．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"S-&lt;mouse-1&gt;"</span>)
+  'org-tree-slide-move-previous-tree)
+(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"&lt;mouse-1&gt;"</span>)
+  'org-tree-slide-move-next-tree)
+</pre>
+</div>
+
+<p>
+新しいキーバインドには，Emacs の編集中に使わないキーを割り当てないと，スライドショーしながら編集するときに面倒なことになりますので，ご注意ください((j/kは危険かと))．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd10b34a" class="outline-3">
+<h3 id="orgd10b34a"><span class="section-number-3">5.2</span> 何か重いと感じたら（スライド番号表示方法）</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+<code>org-tree-slide-narrowing-control-profile</code> のデフォルトの設定では，カーソルが見出し行にあると常にスライド番号を更新します．そのため，一覧表示などで <code>C-n/C-p</code> を押しっぱなしにすると，描画が間に合わない可能性があります（ファイルサイズに依存）．そんな時は，スライド番号の表示位置を変えてみてください．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-modeline-display 'outside)
+</pre>
+</div>
+
+<p>
+こうすれば，次のように表示位置が変わり動作が軽くなります．ただし，スライド番号の更新は <b>スライドの表示が更新されるときだけ</b> に限定されます．<br />
+</p>
+
+<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/783013e3-f4d0-3fd4-01eb-583c29bb2e4a.png" alt="outside" /></p>
+
+<p>
+また， <code>nil</code> を指定すれば，スライド番号は一切表示されなくなります．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org13beeaa" class="outline-3">
+<h3 id="org13beeaa"><span class="section-number-3">5.3</span> 既知の問題</h3>
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li>複数バッファで org-tree-slide-play を開始するとバグる<br /></li>
+</ul>
+<p>
+<del>大問題なので，次の課題として着手します．マイナーモードで回避でしょうか．</del> <b>=&gt; マイナーモードに対応したことで回避！</b><br />
+</p>
+
+<ul class="org-ul">
+<li>session.el 利用にて，スライド表示中に Emacs を再起動すると narrowing したままになる．<br /></li>
+</ul>
+<p>
+解消方法）org-reveal(C-c C-r) を呼ぶ，もしくは，M-x widen で narrowing を解いて編集後，上書き保存する．session.el は保存時の状態を保持するので注意が必要．同じ事は，M-x org-narrow-to-subtree でも発生します．<br />
+</p>
+
+<ul class="org-ul">
+<li>タイマー周りの制御（スライド終了時にクリアがうまくいかない場合がある）<br /></li>
+<li>見出しを強調しているとき，ヘッダの表示が影響を受ける場合がある．<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge963923" class="outline-3">
+<h3 id="orge963923"><span class="section-number-3">5.4</span> 謝辞</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+ここまでお読みいただき，ありがとうございました m(_ _)m．冒頭でも述べましたが，書いた elisp がまだ数個の素人なので，アドバイス等ございましたらコメントいただければ幸いです．<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb39277f" class="outline-2">
+<h2 id="orgb39277f"><span class="section-number-2">6</span> おまけ</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+次を管理しています :-)<br />
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/org-mode-doc-ja/org-ja">Org-mode マニュアル翻訳プロジェクト</a><br /></li>
+<li><a href="http://twitter.com/#!/orgmode_bot">@orgmode_bot アカウント</a><br /></li>
+</ul>
+</div>
+
+<div id="outline-container-orgdf45adc" class="outline-3">
+<h3 id="orgdf45adc"><span class="section-number-3">6.1</span> org-mode 翻訳プロジェクト</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+たくさんの有志の方の積極的なご協力の元，org-mode の英語マニュアルを翻訳しています．このプロジェクトの最大の目的は，本家のマニュアルアップデートを継続的にフォローすることです．<br />
+</p>
+
+<p>
+このプロジェクトは，Emacs と org-mode が消えない限り永遠に続けます．私の寿命が尽きても誰かが引き継いでくれるはず :-)<br />
+</p>
+
+<p>
+お手伝いくださる方は，Twitter で #org2ja ハッシュタグをつけて叫ぶか，<a href="https://twitter.com/#!/takaxp">@takaxp</a> にメンションを飛ばすか，翻訳作業用の <a href="https://lists.sourceforge.net/lists/listinfo/org2ja-devel">ML</a>((過去ログは非公開にしてあります)) に参加依頼を投げてください．現在は，初期翻訳がほぼ完了し，これから査読作業に入る段階です．バージョン7.5の PDF と INFO を <a href="https://github.com/org-mode-doc-ja/org-ja/tree/master/work">work directory</a> からダウンロードできます．<br />
+</p>
+
+<p>
+このプロジェクトで培ったUTF-8環境下のノウハウは，将来的に本家にフィードバックします．英語を含む多言語の info ファイルが頒布されるようになれば，org-mode の利用者は地球規模で増えるでしょう．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4ec701e" class="outline-3">
+<h3 id="org4ec701e"><span class="section-number-3">6.2</span> @orgmode_bot アカウント</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+org-mode の関数と，対応するキーバインドを毎日<a href="https://twitter.com/orgmode_bot">@orgmode_bot</a>ツイートしています．org-mode の機能をまったりと知りたい方や，新しい機能を発見したい方は，ぜひフォローしてください．<br />
+</p>
+
+<p>
+ツイートは日本語と英語で行なっています．これも将来的には多言語化するつもりです．<br />
+</p>
+
+<p>
+ユニコーンロゴの利用は，Dominik先生のお墨付き:-)． Org7.8 のリリースに伴い，公式サイトにリンクが張られました！また，日本語ページのコミッタになったので，読みにくい箇所などありましたらお知らせ下さい m(_ _)m<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc80427e" class="outline-3">
+<h3 id="orgc80427e"><span class="section-number-3">6.3</span> おまけのおまけ</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Emacs で text-mode を使っている人は，すぐに org-mode を使い始めましょう．<br />
+</p>
+
+<p>
+以下を .emacs に貼るだけでOKです．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">push</span> '(<span style="color: #8b2252;">"\\.txt\\'"</span> . org-mode) auto-mode-alist)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org00e24de" class="outline-2">
+<h2 id="org00e24de"><span class="section-number-2">7</span> 付録：関連ツール</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgfc1f272" class="outline-3">
+<h3 id="orgfc1f272"><span class="section-number-3">7.1</span> org-info-js を使う</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+org-info-js は，orgファイルをXHTMLエクスポートした後で，info で使うようなショートカットでコンテンツを閲覧するためのモジュールです．<br />
+</p>
+
+<p>
+<a href="http://orgmode.org/Changes.html#sec-1">http://orgmode.org/Changes.html#sec-1</a> に行くと，どんな感じかわかります．<br />
+</p>
+
+<p>
+<code>n</code> で進んで， <code>p</code> で戻ります．この方法は，エクスポートするのが前提なので，リアルタイム編集はできません．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org426dcb7" class="outline-3">
+<h3 id="org426dcb7"><span class="section-number-3">7.2</span> org の narrowing を使う</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+<code>&lt;f5&gt;</code> のトグルでナローイングを切り替えるのは，良く知られた設定です．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key org-mode-map (kbd <span style="color: #8b2252;">"&lt;f5&gt;"</span>) 'org-narrow-to-subtree)
+</pre>
+</div>
+
+<p>
+これを使えば，orgファイルの任意のツリーにフォーカスして編集できます．ただし，あるツリーにナローイングしているときに，ワンアクションで次のツリーに移れないのが欠点です．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4b953f0" class="outline-3">
+<h3 id="org4b953f0"><span class="section-number-3">7.3</span> org-simple-presentation-mode.el を使う</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+<a href="http://twitter.com/#!/r_takaishi">@r_takaishi</a> さんの作品です．<a href="https://github.com/takaishi/org-simple-presentation">Github</a> から入手できます．きちんとしたマイナーモードです．不可視領域を独自に overlay で構築しているのが特徴です．<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org392750f" class="outline-3">
+<h3 id="org392750f"><span class="section-number-3">7.4</span> org-tree-slide</h3>
+<div class="outline-text-3" id="text-7-4">
+<p>
+今回紹介した elisp です．org-simple-presentation-mode が正統派elispとすると，このツールは，いわば「org-mode プログラミング」の産物です．コア機能の多くが org-mode が提供する関数((org.el，2万行を読む！))を利用しているので，elisp 素人な私でも簡単に作ることができました．機能面では，タイマー機能，ヘッダ表示，スライドエフェクト，ツリーの一覧表示に対応しています．実装途中ですが，オートプレイも可能((スライドインエフェクト付きでスライドショーを開始し， <code>C-x s a</code> を押すと，自動で進める枚数を指定してください．))です．<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2ed5c29" class="outline-2">
+<h2 id="org2ed5c29"><span class="section-number-2">8</span> Review</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>マスタカさんのブログでご紹介していただきました m(_ _)m<br /></li>
+</ul>
+<p>
+<a href="http://masutaka.net/chalow/2012-10-06-1.html">Emacsでお手軽にプレゼンできるorg-tree-slideはかなり良い感じ！</a><br />
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Takaaki ISHIKAWA</p>
+<p class="date">Created: 2020-06-06 Sat 22:48</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

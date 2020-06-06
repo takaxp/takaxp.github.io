@@ -70,13 +70,13 @@
 を実現できます．これで =org-clock-in= のし忘れは大幅に減るでしょう．
 
 #+begin_export html
-<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/a703b7e3-1f6d-4054-1329-a03a16c967a4.png" /></p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/a703b7e3-1f6d-4054-1329-a03a16c967a4.png" /></p>
 #+end_export
 
 さらに，最も可能性の高い使い方として「ある heading で工数計測をしながら，他の heading の内容を編集する」という作業スタイルが考えられます．この場合は，計測中の heading と編集中の heading を簡単に往復できると幸せになれるので， =org-onit.el= は， ~org-clock-goto~ を発行した場所にすぐ戻るためのコマンド(~org-onit-goto-anchor~)も実装しています．
 
 #+begin_export html
-<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/607adbfb-2902-712c-b87b-479d79aad9e6.png" /></p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/607adbfb-2902-712c-b87b-479d79aad9e6.png" /></p>
 #+end_export
 
 * インストールと設定
@@ -257,7 +257,7 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 例えば，こうです．
 
 #+begin_export html
-<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/051d8175-5781-3ab2-103c-0f1d09f82637.png" alt="Screen_Shot_2019-08-30_at_3_39_02.png" /></p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/051d8175-5781-3ab2-103c-0f1d09f82637.png" alt="Screen_Shot_2019-08-30_at_3_39_02.png" /></p>
 #+end_export
 
 #+begin_src emacs-lisp
@@ -283,7 +283,7 @@ Org mode に慣れてくると，タスクリストを特定の heading に集�
 タイトルバーの表示に少し動きをつけたい場合は， =(org-onit-get-sign)= の戻り値を使ってください．アニメーション表示になります．表示要素は， =org-onit-clocking-sign-alist= を設定すれば自由に変えられます．
 
 #+begin_export html
-<p><img src="https://raw.githubusercontent.com/takaxp/takaxp.github.io/master/files/201x/7861d43f-ea78-95f9-40c1-bb0f4c5dcc71.gif" alt="Untitled1.gif" /></p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/7861d43f-ea78-95f9-40c1-bb0f4c5dcc71.gif" alt="Untitled1.gif" /></p>
 #+end_export
 
 #+begin_src emacs-lisp
