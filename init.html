@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-06-25 Thu 23:05 -->
+<!-- 2020-07-07 Tue 03:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Configurations for GNU Emacs</title>
@@ -4528,6 +4528,7 @@ COBUILD5をデフォルトで使うには，次のサイト参照してくださ
       <span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key selected-keymap (kbd "f") #'my-helpful) ;; will be deleted</span>
       (define-key selected-keymap (kbd <span style="color: #8b2252;">"v"</span>) #'my-helpful-variable))
     (define-key selected-keymap (kbd <span style="color: #8b2252;">"w"</span>) #'osx-dictionary-search-pointer)
+    (define-key selected-keymap (kbd <span style="color: #8b2252;">"d"</span>) #'osx-dictionary-search-pointer)
     (define-key selected-keymap (kbd <span style="color: #8b2252;">"5"</span>) #'query-replace-from-region)
     (define-key selected-keymap (kbd <span style="color: #8b2252;">"g"</span>) #'my-google-this)
     (define-key selected-keymap (kbd <span style="color: #8b2252;">"s"</span>) #'osx-lib-say-region)
@@ -6631,10 +6632,10 @@ paren.el の場合は以下の設定．<br />
     (<span style="color: #a020f0;">defhydra</span> hydra-timestamp (<span style="color: #483d8b;">:color</span> <span style="color: #ffffff; background-color: #0000ff;">blue</span> <span style="color: #483d8b;">:hint</span> none)
       <span style="color: #8b2252;">"</span>
 <span style="color: #8b2252;">   === Timestamp ===</span>
-<span style="color: #8b2252;">0. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?i? (_i_so 8601)   </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?n? (_n_ow)   </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?w? (_w_eek)   </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?a? (week-d_a_y)</span>
-<span style="color: #8b2252;">_1_. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?t? (ISO 8601 including _t_imezone)</span>
-<span style="color: #8b2252;">_2_. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?r?    (Org Mode: _r_ight now)</span>
-<span style="color: #8b2252;">_3_. </span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;"> ?s?          (Org Mode: by _s_elect)                             _q_uit</span>
+<span style="color: #8b2252;">0. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?i? (_i_so 8601)   </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?n? (_n_ow)   </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?w? (_w_eek)   </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?a? (week-d_a_y)</span>
+<span style="color: #8b2252;">_1_. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?t? (ISO 8601 including _t_imezone)</span>
+<span style="color: #8b2252;">_2_. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?r?    (Org Mode: _r_ight now)</span>
+<span style="color: #8b2252;">_3_. </span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;"> ?s?          (Org Mode: by _s_elect)                             _q_uit</span>
 <span style="color: #8b2252;">"</span>
       (<span style="color: #8b2252;">"q"</span> nil)
       (<span style="color: #8b2252;">"i"</span> help/insert-datestamp (format-time-string <span style="color: #8b2252;">"%F"</span>))
@@ -10538,7 +10539,7 @@ Emacs を起動している限り，いつでもどこでもメモを記録で�
           ))
 
   <span style="color: #b22222;">;; </span><span style="color: #b22222;">(setq org-agenda-current-time-string "&lt;  d('- ' &#65394;&#65423;&#65402;&#65402;)")</span>
-  (<span style="color: #a020f0;">setq</span> org-agenda-current-time-string <span style="color: #8b2252;">"&lt; &#65394;&#65423;&#65402;&#65402;"</span>)
+  (<span style="color: #a020f0;">setq</span> org-agenda-current-time-string <span style="color: #8b2252;">"&lt;&lt;  &#65394;&#65423;&#65402;&#65402;"</span>)
   (<span style="color: #a020f0;">setq</span> org-agenda-timegrid-use-ampm t)
 
   (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"moom"</span>
@@ -10856,6 +10857,18 @@ Emacs を起動している限り，いつでもどこでもメモを記録で�
            `(<span style="color: #a020f0;">lambda</span> ()
               (<span style="color: #a020f0;">setq</span> org-agenda-files ',org-agenda-files)
               (org-agenda-to-appt t '((headline <span style="color: #8b2252;">"</span><span style="color: #FF0000;">TODO</span><span style="color: #8b2252;">"</span>)))
+              (<span style="color: #a020f0;">let</span> ((msgs appt-time-msg-list))
+                (<span style="color: #a020f0;">setq</span> appt-time-msg-list nil)
+                (<span style="color: #a020f0;">dolist</span> (msg msgs)
+                  (add-to-list 'appt-time-msg-list
+                               (<span style="color: #a020f0;">let</span> ((match (string-match
+                                             org-tag-group-re (nth 1 msg))))
+                                 (<span style="color: #a020f0;">when</span> match
+                                   <span style="color: #b22222;">;; </span><span style="color: #b22222;">(message "%s -- %s" (org-trim (substring (nth 1 msg) 0 match)) (nth 1 msg))</span>
+                                   (list (nth 0 msg)
+                                         (org-trim (substring (nth 1 msg)
+                                                              0 match)) <span style="color: #b22222;">;; </span><span style="color: ##3030FF;">FIXME</span>
+                                         (nth 2 msg)))) <span style="color: #ff0000; font-weight: bold;">t)))</span>
               appt-time-msg-list)
            (<span style="color: #a020f0;">lambda</span> (result)
              (<span style="color: #a020f0;">setq</span> appt-time-msg-list result)
@@ -11331,7 +11344,7 @@ org-mode の表のようにフェイスを統一しています． <code>calfw</
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-org" id="org4275259"><span style="color: #b22222;"># -*- mode: org; -*-</span>
+<pre class="src src-org" id="org88f6e4d"><span style="color: #b22222;"># -*- mode: org; -*-</span>
 
 <span style="color: #b22222;">#+html_head: &lt;link rel="stylesheet" type="text/css" href="<a href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css&quot;/">https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/</a>&gt;</span>
 <span style="color: #b22222;">#+html_head: &lt;link rel="stylesheet" type="text/css" href="<a href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css&quot;/">https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/</a>&gt;</span>
@@ -12727,6 +12740,7 @@ Papers3.app は，各文献に <code>papers3://</code> で始まるURIを割り�
     (<span style="color: #a020f0;">setq</span> moom-command-with-centering nil)
     (<span style="color: #a020f0;">setq</span> moom-lighter <span style="color: #8b2252;">"M"</span>)
     (<span style="color: #a020f0;">setq</span> moom-verbose t)
+    (<span style="color: #a020f0;">setq</span> moom-multi-monitors-support t)
     (moom-mode 1)
     (my-font-config)))  <span style="color: #b22222;">;; </span><span style="color: #b22222;">this could increase `</span><span style="color: #008b8b;">postpone-init-time</span><span style="color: #b22222;">'.</span>
 
@@ -13744,7 +13758,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
               (<span style="color: #8b2252;">"</span><span style="color: ##3030FF;">FIXME</span><span style="color: #8b2252;">"</span>  . <span style="color: #8b2252;">"#</span><span style="color: #ffffff; background-color: #3030FF;">#3030FF</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #cc9393;">XXX</span><span style="color: #8b2252;">+"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"\\?\\?\\?+"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
-              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
+              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #ff0000;">&#61576;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #ff0000;">red</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #43cd80;">&#61575;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"Seagreen3"</span>)))
       (my-hl-todo-reload))
@@ -13768,7 +13782,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
               (<span style="color: #8b2252;">"</span><span style="color: ##3030FF;">FIXME</span><span style="color: #8b2252;">"</span>  . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #1e90ff;">DodgerBlue1</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #cc9393;">XXX</span><span style="color: #8b2252;">+"</span>   . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"\\?\\?\\?+"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #cc9393;">#cc9393</span><span style="color: #8b2252;">"</span>)
-              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;">&#61604;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
+              (<span style="color: #8b2252;">"</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #ff0000;">&#61576;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #ff0000;">red</span><span style="color: #8b2252;">"</span>)
               (<span style="color: #8b2252;">"</span><span style="color: #43cd80;">&#61575;</span><span style="color: #8b2252;">"</span> . <span style="color: #8b2252;">"Seagreen3"</span>)))
       (my-hl-todo-reload))
@@ -13939,7 +13953,7 @@ Built-in の <a href="http://www.emacswiki.org/emacs/DiffMode">diff-mode.el</a> 
 <div class="outline-text-3" id="text-org4b927009">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"ivy"</span>
-<span style="color: #b22222;">;;; </span><span style="color: #b22222;">&#36984;&#25246;&#23550;&#35937;&#12434; "</span><span style="color: #ffa500;">&#61604;</span><span style="color: #b22222;">" &#12395;&#12377;&#12427; (requires all-the-icons.el)</span>
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">&#36984;&#25246;&#23550;&#35937;&#12434; "</span><span style="color: #ffa500;"><i class="far fa-hand-point-right"></i></span><span style="color: #b22222;">" &#12395;&#12377;&#12427; (requires all-the-icons.el)</span>
   (<span style="color: #a020f0;">defface</span> <span style="color: #a0522d;">my-ivy-arrow-visible</span>
     '((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
       (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #EE6363;">#EE6363</span><span style="color: #8b2252;">"</span>))
@@ -14846,7 +14860,7 @@ init.el読書会が毎週土曜日の23時に開催されています．作業�
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki Ishikawa</p>
-<p class="date">Created: 2020-06-25 Thu 23:05</p>
+<p class="date">Created: 2020-07-07 Tue 03:15</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
