@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-06-07 Sun 01:22 -->
+<!-- 2020-11-24 Tue 22:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>org-modeのツリーでスライドショー</title>
@@ -193,36 +193,58 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
-<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script type="text/javascript">
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
 <!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.cacheClassElem = elem.className;
-         elem.cacheClassTarget = target.className;
-         target.className = "code-highlighted";
-         elem.className   = "code-highlighted";
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(elem.cacheClassElem)
-         elem.className = elem.cacheClassElem;
-       if(elem.cacheClassTarget)
-         target.className = elem.cacheClassTarget;
-     }
-    /*]]>*///-->
-// @license-end
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
 </script>
 </head>
 <body>
@@ -396,7 +418,7 @@ MEPLAから<a href="http://melpa.org/#/org-tree-slide">配信している</a>の
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(auto-install-from-url <span style="color: #98c379;">"https://raw.github.com/takaxp/org-tree-slide/master/org-tree-slide.el"</span>)
+<pre class="src src-emacs-lisp">(auto-install-from-url <span style="color: #8b2252;">"https://raw.github.com/takaxp/org-tree-slide/master/org-tree-slide.el"</span>)
 </pre>
 </div>
 
@@ -405,7 +427,7 @@ MEPLAから<a href="http://melpa.org/#/org-tree-slide">配信している</a>の
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">org-tree-slide</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-tree-slide</span>)
 </pre>
 </div>
 
@@ -486,7 +508,7 @@ MEPLAから<a href="http://melpa.org/#/org-tree-slide">配信している</a>の
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">org-tree-slide</span> nil t)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">org-tree-slide</span> nil t)
   (org-tree-slide-simple-profile))
 </pre>
 </div>
@@ -500,8 +522,8 @@ MEPLAから<a href="http://melpa.org/#/org-tree-slide">配信している</a>の
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #98c379;">"&lt;f8&gt;"</span>) 'org-tree-slide-mode)
-(global-set-key (kbd <span style="color: #98c379;">"S-&lt;f8&gt;"</span>) 'org-tree-slide-skip-done-toggle)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"&lt;f8&gt;"</span>) 'org-tree-slide-mode)
+(global-set-key (kbd <span style="color: #8b2252;">"S-&lt;f8&gt;"</span>) 'org-tree-slide-skip-done-toggle)
 </pre>
 </div>
 </div>
@@ -776,7 +798,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 <li>起動時にヘッダを表示しないようにする<br /></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-header nil)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-header nil)
 </pre>
 </div>
 
@@ -814,7 +836,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 <li>レベル4以上((*が4つの見出し))のツリーはスライド化しない<br /></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-skip-outline-level 4)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-skip-outline-level 4)
 </pre>
 </div>
 
@@ -822,7 +844,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 <li>すべてのツリーをスライド化する（デフォルト）<br /></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-skip-outline-level 0)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-skip-outline-level 0)
 </pre>
 </div>
 </div>
@@ -861,7 +883,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 <li>起動時にヘッダを表示しないようにする<br /></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-slide-in-effect nil)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-slide-in-effect nil)
 </pre>
 </div>
 
@@ -870,7 +892,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-slide-in-waiting 0.02)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-slide-in-waiting 0.02)
 </pre>
 </div>
 
@@ -878,7 +900,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 <li>スライドインの開始位置を調節する（行数を指定）<br /></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-slide-in-brank-lines 10)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-slide-in-brank-lines 10)
 </pre>
 </div>
 
@@ -922,7 +944,7 @@ M-x org-tree-slide-presentation-profile を実行すると，ヘッダ表示と�
 <li>起動時に見出しを強調する<br /></li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-heading-emphasis t)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-heading-emphasis t)
 </pre>
 </div>
 
@@ -1029,9 +1051,9 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(define-key org-tree-slide-mode-map (kbd <span style="color: #98c379;">"&lt;f9&gt;"</span>)
+<pre class="src src-emacs-lisp">(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"&lt;f9&gt;"</span>)
   'org-tree-slide-move-previous-tree)
-(define-key org-tree-slide-mode-map (kbd <span style="color: #98c379;">"&lt;f10&gt;"</span>)
+(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"&lt;f10&gt;"</span>)
   'org-tree-slide-move-next-tree)
 </pre>
 </div>
@@ -1045,9 +1067,9 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(define-key org-tree-slide-mode-map (kbd <span style="color: #98c379;">"S-&lt;mouse-1&gt;"</span>)
+<pre class="src src-emacs-lisp">(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"S-&lt;mouse-1&gt;"</span>)
   'org-tree-slide-move-previous-tree)
-(define-key org-tree-slide-mode-map (kbd <span style="color: #98c379;">"&lt;mouse-1&gt;"</span>)
+(define-key org-tree-slide-mode-map (kbd <span style="color: #8b2252;">"&lt;mouse-1&gt;"</span>)
   'org-tree-slide-move-next-tree)
 </pre>
 </div>
@@ -1066,7 +1088,7 @@ org-tree-slide の利用頻度が高くなると，標準の移動のキーバ�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> org-tree-slide-modeline-display 'outside)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> org-tree-slide-modeline-display 'outside)
 </pre>
 </div>
 
@@ -1179,7 +1201,7 @@ Emacs で text-mode を使っている人は，すぐに org-mode を使い始�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">push</span> '(<span style="color: #98c379;">"\\.txt\\'"</span> . org-mode) auto-mode-alist)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">push</span> '(<span style="color: #8b2252;">"\\.txt\\'"</span> . org-mode) auto-mode-alist)
 </pre>
 </div>
 </div>
@@ -1215,7 +1237,7 @@ org-info-js は，orgファイルをXHTMLエクスポートした後で，info �
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(define-key org-mode-map (kbd <span style="color: #98c379;">"&lt;f5&gt;"</span>) 'org-narrow-to-subtree)
+<pre class="src src-emacs-lisp">(define-key org-mode-map (kbd <span style="color: #8b2252;">"&lt;f5&gt;"</span>) 'org-narrow-to-subtree)
 </pre>
 </div>
 
@@ -1258,8 +1280,8 @@ org-info-js は，orgファイルをXHTMLエクスポートした後で，info �
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2020-06-07 Sun 01:22</p>
-<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2020-11-24 Tue 22:55</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
