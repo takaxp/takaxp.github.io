@@ -715,6 +715,23 @@ sorted.  FUNCTION must be a function of one argument."
      "^/private\\.*" "^/var/folders\\.*" "/TAGS$")))
 #+end_src
 
+** counsel-mark-ring
+   :PROPERTIES:
+   :CUSTOM_ID: orgdb39c7c8
+   :END:
+
+マーク位置をたどることができます．意図せずカーソルが飛んでしまっても，少し前の編集箇所にカーソルを戻せるようになります．ただしデフォルトのままでは，履歴がソートされてしまうので，時系列に並ぶように設定を変更します．
+
+#+begin_src emacs-lisp
+(with-eval-after-load "ivy"
+  ;; counsel-mark-ring のリストをソートさせない
+  (setf (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
+
+(global-set-key (kbd "C-,") 'counsel-mark-ring)
+(with-eval-after-load "flyspell"
+  (define-key flyspell-mode-map (kbd "C-,") 'counsel-mark-ring))
+#+end_src
+
 * パッケージの移行
   :PROPERTIES:
   :CUSTOM_ID: orga31c060c
