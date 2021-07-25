@@ -36,14 +36,10 @@
 
 よければEmacs勉強会の[[https://speakerdeck.com/takaxp/counsel][講演資料]]と[[https://gist.github.com/takaxp/86158fe74b8268843571c42b48a4336c][設定集]]もご参照ください．また， ~ivy~ 以外の[[https://takaxp.github.io/init.html][設定集]]も公開しています．この記事の[[https://github.com/takaxp/takaxp.github.io/blob/master/articles/qiita-helm2ivy.org][ソースも公開]]しています．
 
-#+begin_export html
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif" alt="Untitled.gif" /></p>
-#+end_export
+#+HTML: <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/49f6248e-470c-83d8-fc21-6e2773848a07.gif" alt="Untitled.gif" /></p>
 ↑GUI
 
-#+begin_export html
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif" alt="Untitled.gif" /></p>
-#+end_export
+#+HTML: <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/1a932caf-5f7f-5408-4e58-8386e7f1a4bb.gif" alt="Untitled.gif" /></p>
 ↑ターミナル
 
 * インストール
