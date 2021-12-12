@@ -559,6 +559,13 @@ sorted.  FUNCTION must be a function of one argument."
 
 と設定しておけば， =counsel-ag= 使用中に =M-o= せず直接 =C-x C-d= すれば =counsel-cd= を呼べます．
 
+最後に，デフォルトだと3文字入力しないと検索が発動しませんが，2文字の文字列でも検索可能にしています．
+
+#+begin_src emacs-lisp
+;; 2文字でも検索が発動するようにする
+(add-to-list 'ivy-more-chars-alist '(counsel-ag . 2))
+#+end_src
+
 ** counsel-fzf
    :PROPERTIES:
    :CUSTOM_ID: org2a6189cb

@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-12 Mon 00:14 -->
+<!-- 2021-12-05 Sun 20:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>helm を背に ivy の門を叩く</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Takaaki ISHIKAWA" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -41,21 +42,21 @@
   pre.src {
     position: relative;
     overflow: auto;
-    padding-top: 1.2em;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
   pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -191,7 +192,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
@@ -200,35 +200,13 @@
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">helm を背に ivy の門を叩く</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
 <li><a href="#orge9d4c263">1. はじめに</a></li>
 <li><a href="#org167e9720">2. インストール</a>
@@ -313,7 +291,7 @@
 </div>
 
 <div id="outline-container-orge9d4c263" class="outline-2">
-<h2 id="orge9d4c263"><span class="section-number-2">1</span> はじめに</h2>
+<h2 id="orge9d4c263"><span class="section-number-2">1.</span> はじめに</h2>
 <div class="outline-text-2" id="text-orge9d4c263">
 <p>
 <code>ivy</code> は， <code>helm</code> と双璧を成す Emacs の補完システムです．リスト表示された多くの選択肢から，自分が使いたいものを高速に絞り込んで，効率良く選び出す．このシンプル，かつ極めて重要なタスクを， <code>ivy</code> や <code>helm</code> が手助けしてくれます．<br />
@@ -344,7 +322,7 @@
 </div>
 
 <div id="outline-container-org167e9720" class="outline-2">
-<h2 id="org167e9720"><span class="section-number-2">2</span> インストール</h2>
+<h2 id="org167e9720"><span class="section-number-2">2.</span> インストール</h2>
 <div class="outline-text-2" id="text-org167e9720">
 <p>
 いくつかのインストール方法がありますが，パッケージ管理ツールを使うのが楽です． <code>ivy.el</code> をインストールする時は，プリセット関数を集めている <code>counsel.el</code> と， <code>helm-swoop</code> 相当の機能を提供する <code>swiper.el</code> も同時に入れるのが一般的です．<br />
@@ -364,28 +342,28 @@
 </div>
 
 <div id="outline-container-orgd13e9732" class="outline-3">
-<h3 id="orgd13e9732"><span class="section-number-3">2.1</span> MELPA</h3>
+<h3 id="orgd13e9732"><span class="section-number-3">2.1.</span> MELPA</h3>
 <div class="outline-text-3" id="text-orgd13e9732">
 <p>
 <code>counsel</code> をインストールします．Cask使いの場合は，一行追加で．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(depends-on <span style="color: #98c379;">"counsel"</span>)
+<pre class="src src-emacs-lisp">(depends-on <span style="color: #8b2252;">"counsel"</span>)
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org4c857a1f" class="outline-3">
-<h3 id="org4c857a1f"><span class="section-number-3">2.2</span> el-get</h3>
+<h3 id="org4c857a1f"><span class="section-number-3">2.2.</span> el-get</h3>
 <div class="outline-text-3" id="text-org4c857a1f">
 <p>
 <code>swiper</code> のリポジトリを指定します．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(el-get-bundle <span style="color: #98c379;">"abo-abo/swiper"</span>)
+<pre class="src src-emacs-lisp">(el-get-bundle <span style="color: #8b2252;">"abo-abo/swiper"</span>)
 </pre>
 </div>
 </div>
@@ -393,14 +371,14 @@
 </div>
 
 <div id="outline-container-org3f430ac1" class="outline-2">
-<h2 id="org3f430ac1"><span class="section-number-2">3</span> 基本設定</h2>
+<h2 id="org3f430ac1"><span class="section-number-2">3.</span> 基本設定</h2>
 <div class="outline-text-2" id="text-org3f430ac1">
 <p>
 ここでは基本的な設定と配色， <code>ivy</code> の流儀と選択候補のソーティング変数を紹介します．<br />
 </p>
 </div>
 <div id="outline-container-org274217e9" class="outline-3">
-<h3 id="org274217e9"><span class="section-number-3">3.1</span> 設定例</h3>
+<h3 id="org274217e9"><span class="section-number-3">3.1.</span> 設定例</h3>
 <div class="outline-text-3" id="text-org274217e9">
 <p>
 個別の設定や細かなハックに移る前に，まずは，これさえあればとりあえず動くという設定を施します．<br />
@@ -408,36 +386,36 @@
 </div>
 
 <div id="outline-container-orgf51368a4" class="outline-4">
-<h4 id="orgf51368a4"><span class="section-number-4">3.1.1</span> ivy.el</h4>
+<h4 id="orgf51368a4"><span class="section-number-4">3.1.1.</span> ivy.el</h4>
 <div class="outline-text-4" id="text-orgf51368a4">
 <p>
 まずは <code>ivy</code> を使えるようにします．ほぼ素のままで良いです．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">ivy</span> nil t)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">ivy</span><span style="background-color: #DEEDFF;"> nil t)
+</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">M-o &#12434; ivy-hydra-read-action &#12395;&#21106;&#12426;&#24403;&#12390;&#12427;&#65294;</span>
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ivy-hydra</span> nil t)
+    (<span style="color: #a020f0;">setq</span> ivy-read-action-function #'ivy-hydra-read-action))
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">M-o &#12434; ivy-hydra-read-action &#12395;&#21106;&#12426;&#24403;&#12390;&#12427;&#65294;</span>
-  (<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">ivy-hydra</span> nil t)
-    (<span style="color: #c678dd;">setq</span> ivy-read-action-function #'ivy-hydra-read-action))
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">`</span><span style="color: #008b8b;">ivy-switch-buffer</span><span style="color: #b22222;">' (C-x b) &#12398;&#12522;&#12473;&#12488;&#12395; recent files &#12392; bookmark &#12434;&#21547;&#12417;&#12427;&#65294;</span>
+  (<span style="color: #a020f0;">setq</span> ivy-use-virtual-buffers t)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">`</span><span style="color: #d19a66;">ivy-switch-buffer</span><span style="color: #5C6370;">' (C-x b) &#12398;&#12522;&#12473;&#12488;&#12395; recent files &#12392; bookmark &#12434;&#21547;&#12417;&#12427;&#65294;</span>
-  (<span style="color: #c678dd;">setq</span> ivy-use-virtual-buffers t)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12511;&#12491;&#12496;&#12483;&#12501;&#12449;&#12391;&#12467;&#12510;&#12531;&#12489;&#30330;&#34892;&#12434;&#35469;&#12417;&#12427;</span>
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">setq</span> enable-recursive-minibuffers t)
+    (minibuffer-depth-indicate-mode 1)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#20309;&#22238;&#23652;&#20837;&#12387;&#12383;&#12363;&#12503;&#12525;&#12531;&#12503;&#12488;&#12395;&#34920;&#31034;&#65294;</span>
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12511;&#12491;&#12496;&#12483;&#12501;&#12449;&#12391;&#12467;&#12510;&#12531;&#12489;&#30330;&#34892;&#12434;&#35469;&#12417;&#12427;</span>
-  (<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">setq</span> enable-recursive-minibuffers t)
-    (minibuffer-depth-indicate-mode 1)) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#20309;&#22238;&#23652;&#20837;&#12387;&#12383;&#12363;&#12503;&#12525;&#12531;&#12503;&#12488;&#12395;&#34920;&#31034;&#65294;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">ESC&#36899;&#25171;&#12391;&#12511;&#12491;&#12496;&#12483;&#12501;&#12449;&#12434;&#38281;&#12376;&#12427;</span>
+  (define-key ivy-minibuffer-map (kbd <span style="color: #8b2252;">"&lt;escape&gt;"</span>) 'minibuffer-keyboard-quit)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">ESC&#36899;&#25171;&#12391;&#12511;&#12491;&#12496;&#12483;&#12501;&#12449;&#12434;&#38281;&#12376;&#12427;</span>
-  (define-key ivy-minibuffer-map (kbd <span style="color: #98c379;">"&lt;escape&gt;"</span>) 'minibuffer-keyboard-quit)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12503;&#12525;&#12531;&#12503;&#12488;&#12398;&#34920;&#31034;&#12364;&#38263;&#12356;&#26178;&#12395;&#25240;&#12426;&#36820;&#12377;&#65288;&#36984;&#25246;&#20505;&#35036;&#12418;&#25240;&#12426;&#36820;&#12373;&#12428;&#12427;&#65289;</span>
+  (<span style="color: #a020f0;">setq</span> ivy-truncate-lines nil)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12503;&#12525;&#12531;&#12503;&#12488;&#12398;&#34920;&#31034;&#12364;&#38263;&#12356;&#26178;&#12395;&#25240;&#12426;&#36820;&#12377;&#65288;&#36984;&#25246;&#20505;&#35036;&#12418;&#25240;&#12426;&#36820;&#12373;&#12428;&#12427;&#65289;</span>
-  (<span style="color: #c678dd;">setq</span> ivy-truncate-lines nil)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12522;&#12473;&#12488;&#20808;&#38957;&#12391; `</span><span style="color: #008b8b;">C-p</span><span style="color: #b22222;">' &#12377;&#12427;&#12392;&#12365;&#65292;&#12522;&#12473;&#12488;&#12398;&#26368;&#24460;&#12395;&#31227;&#21205;&#12377;&#12427;</span>
+  (<span style="color: #a020f0;">setq</span> ivy-wrap t)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12522;&#12473;&#12488;&#20808;&#38957;&#12391; `</span><span style="color: #d19a66;">C-p</span><span style="color: #5C6370;">' &#12377;&#12427;&#12392;&#12365;&#65292;&#12522;&#12473;&#12488;&#12398;&#26368;&#24460;&#12395;&#31227;&#21205;&#12377;&#12427;</span>
-  (<span style="color: #c678dd;">setq</span> ivy-wrap t)
-
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
   (ivy-mode 1))
 </pre>
 </div>
@@ -449,24 +427,24 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 
 <div id="outline-container-org08aa4ebe" class="outline-4">
-<h4 id="org08aa4ebe"><span class="section-number-4">3.1.2</span> counsel.el</h4>
+<h4 id="org08aa4ebe"><span class="section-number-4">3.1.2.</span> counsel.el</h4>
 <div class="outline-text-4" id="text-org08aa4ebe">
 <p>
 <code>counsel.el</code> は， <code>ivy</code> の骨格関数である <code>ivy-read</code> を様々なコマンドに拡張し，それらをプリセットとして収録しています．全文探索の <code>counsel-ag</code> など，よく使うコマンドを別途インストールする必要がありません．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">counsel</span> nil t)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">counsel</span><span style="background-color: #DEEDFF;"> nil t)
+</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12461;&#12540;&#12496;&#12452;&#12531;&#12489;&#12399;&#19968;&#20363;&#12391;&#12377;&#65294;&#22909;&#12415;&#12395;&#22793;&#12360;&#12414;&#12375;&#12423;&#12358;&#65294;</span>
+  (global-set-key (kbd <span style="color: #8b2252;">"M-x"</span>) 'counsel-M-x)
+  (global-set-key (kbd <span style="color: #8b2252;">"M-y"</span>) 'counsel-yank-pop)
+  (global-set-key (kbd <span style="color: #8b2252;">"C-M-z"</span>) 'counsel-fzf)
+  (global-set-key (kbd <span style="color: #8b2252;">"C-M-r"</span>) 'counsel-recentf)
+  (global-set-key (kbd <span style="color: #8b2252;">"C-x C-b"</span>) 'counsel-ibuffer)
+  (global-set-key (kbd <span style="color: #8b2252;">"C-M-f"</span>) 'counsel-ag)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12461;&#12540;&#12496;&#12452;&#12531;&#12489;&#12399;&#19968;&#20363;&#12391;&#12377;&#65294;&#22909;&#12415;&#12395;&#22793;&#12360;&#12414;&#12375;&#12423;&#12358;&#65294;</span>
-  (global-set-key (kbd <span style="color: #98c379;">"M-x"</span>) 'counsel-M-x)
-  (global-set-key (kbd <span style="color: #98c379;">"M-y"</span>) 'counsel-yank-pop)
-  (global-set-key (kbd <span style="color: #98c379;">"C-M-z"</span>) 'counsel-fzf)
-  (global-set-key (kbd <span style="color: #98c379;">"C-M-r"</span>) 'counsel-recentf)
-  (global-set-key (kbd <span style="color: #98c379;">"C-x C-b"</span>) 'counsel-ibuffer)
-  (global-set-key (kbd <span style="color: #98c379;">"C-M-f"</span>) 'counsel-ag)
-
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
   (counsel-mode 1))
 </pre>
 </div>
@@ -474,7 +452,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 
 <div id="outline-container-org1c87aa63" class="outline-4">
-<h4 id="org1c87aa63"><span class="section-number-4">3.1.3</span> swiper</h4>
+<h4 id="org1c87aa63"><span class="section-number-4">3.1.3.</span> swiper</h4>
 <div class="outline-text-4" id="text-org1c87aa63">
 <p>
 <code>swiper</code> は， <code>helm-swoop</code> のような文字列探索機能を提供します．カーソル位置の単語をキーに，バッファ内を探索．絞り込まれた選択候補を <code>C-n/C-p</code> で変えると，それに合わせてバッファの表示も変わり，連続してプレビューできます．なお， <code>swiper-all-thing-at-point</code> も実装されていて，これは開いているすべてのバッファを探索します．<br />
@@ -483,10 +461,10 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/33506056-af67-6a9f-b1b7-6e61a04a82a2.gif" alt="Untitled.gif" /></p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">swiper</span> nil t)
-
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12461;&#12540;&#12496;&#12452;&#12531;&#12489;&#12399;&#19968;&#20363;&#12391;&#12377;&#65294;&#22909;&#12415;&#12395;&#22793;&#12360;&#12414;&#12375;&#12423;&#12358;&#65294;</span>
-  (global-set-key (kbd <span style="color: #98c379;">"M-s M-s"</span>) 'swiper-thing-at-point))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">swiper</span><span style="background-color: #DEEDFF;"> nil t)
+</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12461;&#12540;&#12496;&#12452;&#12531;&#12489;&#12399;&#19968;&#20363;&#12391;&#12377;&#65294;&#22909;&#12415;&#12395;&#22793;&#12360;&#12414;&#12375;&#12423;&#12358;&#65294;</span>
+  (global-set-key (kbd <span style="color: #8b2252;">"M-s M-s"</span>) 'swiper-thing-at-point))
 </pre>
 </div>
 </div>
@@ -494,7 +472,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 
 <div id="outline-container-org4bf2eeb9" class="outline-3">
-<h3 id="org4bf2eeb9"><span class="section-number-3">3.2</span> 検索語のハイライト</h3>
+<h3 id="org4bf2eeb9"><span class="section-number-3">3.2.</span> 検索語のハイライト</h3>
 <div class="outline-text-3" id="text-org4bf2eeb9">
 <p>
 デフォルトの配色は，なかなかに個性的なので自分の好みに書き換えましょう．中途半端に書き換えると，デフォルトの配色が表に出てくるので，次にリストしたフェイスはすべて書き換える方が安全です．なお， <code>(setq ivy-display-style t)</code> とすると，配色を無効にできます．<br />
@@ -528,31 +506,31 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(custom-set-faces
- '(ivy-current-match
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(custom-set-faces
+</span> '(ivy-current-match
    ((((class color) (background light))
-     <span style="color: #56b6c2;">:background</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #FFF3F3;">#FFF3F3</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:distant-foreground</span> <span style="color: #98c379;">"</span><span style="color: #ffffff; background-color: #000000;">#000000</span><span style="color: #98c379;">"</span>)
+     <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #FFF3F3;">#FFF3F3</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:distant-foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #000000;">#000000</span><span style="color: #8b2252;">"</span>)
     (((class color) (background dark))
-     <span style="color: #56b6c2;">:background</span> <span style="color: #98c379;">"</span><span style="color: #ffffff; background-color: #404040;">#404040</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:distant-foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #abb2bf;">#abb2bf</span><span style="color: #98c379;">"</span>)))
+     <span style="color: #483d8b;">:background</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #404040;">#404040</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:distant-foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #abb2bf;">#abb2bf</span><span style="color: #8b2252;">"</span>)))
  '(ivy-minibuffer-match-face-1
-   ((((class color) (background light)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #ffffff; background-color: #666666;">#666666</span><span style="color: #98c379;">"</span>)
-    (((class color) (background dark)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #999999;">#999999</span><span style="color: #98c379;">"</span>)))
+   ((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #666666;">#666666</span><span style="color: #8b2252;">"</span>)
+    (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #999999;">#999999</span><span style="color: #8b2252;">"</span>)))
  '(ivy-minibuffer-match-face-2
-   ((((class color) (background light)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #ffffff; background-color: #c03333;">#c03333</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:underline</span> t)
-    (((class color) (background dark)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #ffffff; background-color: #e04444;">#e04444</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:underline</span> t)))
+   ((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #c03333;">#c03333</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:underline</span> t)
+    (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #e04444;">#e04444</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:underline</span> t)))
  '(ivy-minibuffer-match-face-3
-   ((((class color) (background light)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #8585ff;">#8585ff</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:underline</span> t)
-    (((class color) (background dark)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #7777ff;">#7777ff</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:underline</span> t)))
+   ((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #8585ff;">#8585ff</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:underline</span> t)
+    (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #7777ff;">#7777ff</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:underline</span> t)))
  '(ivy-minibuffer-match-face-4
-   ((((class color) (background light)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #439943;">#439943</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:underline</span> t)
-    (((class color) (background dark)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #33bb33;">#33bb33</span><span style="color: #98c379;">"</span> <span style="color: #56b6c2;">:underline</span> t))))
+   ((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #439943;">#439943</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:underline</span> t)
+    (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #33bb33;">#33bb33</span><span style="color: #8b2252;">"</span> <span style="color: #483d8b;">:underline</span> t))))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org2b3e5a15" class="outline-3">
-<h3 id="org2b3e5a15"><span class="section-number-3">3.3</span> まず始めに知っておくべき機能</h3>
+<h3 id="org2b3e5a15"><span class="section-number-3">3.3.</span> まず始めに知っておくべき機能</h3>
 <div class="outline-text-3" id="text-org2b3e5a15">
 <p>
 <code>ivy</code> への移行に際して，知っておくべきデフォルト機能・コマンドがあります．それらは <code>helm</code> とは流儀が異なるので，少々戸惑うかもしれませんが，すぐ慣れます．<br />
@@ -624,7 +602,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 
 <div id="outline-container-orgf1acb8b7" class="outline-3">
-<h3 id="orgf1acb8b7"><span class="section-number-3">3.4</span> ソーティングとフィルタ設定</h3>
+<h3 id="orgf1acb8b7"><span class="section-number-3">3.4.</span> ソーティングとフィルタ設定</h3>
 <div class="outline-text-3" id="text-orgf1acb8b7">
 <p>
 少し細かい話になりますが， <code>ivy</code> には絞り込み時の振る舞いに影響する重要な変数がいくつか定義されています．基本的に「すべてのコマンドに対する設定（全体設定）」と「個別のコマンドに対する設定」の双方を定義できます．<br />
@@ -697,7 +675,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 
 <div id="outline-container-org71ddcbba" class="outline-2">
-<h2 id="org71ddcbba"><span class="section-number-2">4</span> デフォルト機能を便利に使う</h2>
+<h2 id="org71ddcbba"><span class="section-number-2">4.</span> デフォルト機能を便利に使う</h2>
 <div class="outline-text-2" id="text-org71ddcbba">
 <p>
 <code>ivy-mode</code> を使えるようになったら，まず <code>counsel.el</code> にプリセットされているデフォルト機能から使い始めましょう．いくつかをピックアップして紹介します．必要に応じてカスタマイズすれば，さらに便利に使えるようになります．<br />
@@ -705,7 +683,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-10-23 Wed]</s
 </div>
 
 <div id="outline-container-orge203be3c" class="outline-3">
-<h3 id="orge203be3c"><span class="section-number-3">4.1</span> counsel.el にプリセットされているコマンド</h3>
+<h3 id="orge203be3c"><span class="section-number-3">4.1.</span> counsel.el にプリセットされているコマンド</h3>
 <div class="outline-text-3" id="text-orge203be3c">
 <p>
 counsel.el (0.12.0) には，82個のコマンドが実装されています．頻繁に使うであろうコマンドと，注目のコマンドを抜粋します．完全なリストは，記事の下に示します．<br />
@@ -820,7 +798,7 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 
 <div id="outline-container-org44cd0144" class="outline-3">
-<h3 id="org44cd0144"><span class="section-number-3">4.2</span> org.el と共に使う</h3>
+<h3 id="org44cd0144"><span class="section-number-3">4.2.</span> org.el と共に使う</h3>
 <div class="outline-text-3" id="text-org44cd0144">
 <p>
 <code>counsel.el</code> には，<a href="https://orgmode.org/">org mode</a> ユーザ向けのコマンドとして， <code>counsel-org-tag</code>, <code>counsel-org-tag-agenda</code>, <code>counsel-org-goto</code>, <code>counsel-org-goto-all</code>, <code>counsel-org-file</code>, <code>counsel-org-entity</code>, <code>counsel-org-capture</code>, <code>counsel-org-agenda-headlines</code> が実装されています．<br />
@@ -844,34 +822,34 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">swiper</span> nil t)
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:swiper-thing-at-point</span> ()
-    <span style="color: #98c379;">"`</span><span style="color: #d19a66;">swiper</span><span style="color: #98c379;">' with `</span><span style="color: #d19a66;">ivy-thing-at-point</span><span style="color: #98c379;">'."</span>
-    (<span style="color: #c678dd;">interactive</span>)
-    (<span style="color: #c678dd;">let</span> ((thing (<span style="color: #c678dd;">if</span> (thing-at-point-looking-at <span style="color: #98c379;">"^\\*+"</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">swiper</span> nil t)
+<span style="background-color: #DEEDFF;">  (</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">ad:swiper-thing-at-point</span><span style="background-color: #DEEDFF;"> ()
+</span>    <span style="color: #8b2252;">"`</span><span style="color: #008b8b;">swiper</span><span style="color: #8b2252;">' with `</span><span style="color: #008b8b;">ivy-thing-at-point</span><span style="color: #8b2252;">'."</span>
+    (<span style="color: #a020f0;">interactive</span>)
+    (<span style="color: #a020f0;">let</span> ((thing (<span style="color: #a020f0;">if</span> (thing-at-point-looking-at <span style="color: #8b2252;">"^\\*+"</span>)
                      nil
                    (ivy-thing-at-point))))
-      (<span style="color: #c678dd;">when</span> (use-region-p)
+      (<span style="color: #a020f0;">when</span> (use-region-p)
         (deactivate-mark))
       (swiper thing)))
 
-  (advice-add 'swiper-thing-at-point <span style="color: #56b6c2;">:override</span> #'ad:swiper-thing-at-point))
+  (advice-add 'swiper-thing-at-point <span style="color: #483d8b;">:override</span> #'ad:swiper-thing-at-point))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org568fe5e5" class="outline-3">
-<h3 id="org568fe5e5"><span class="section-number-3">4.3</span> dired.el と共に使う</h3>
+<h3 id="org568fe5e5"><span class="section-number-3">4.3.</span> dired.el と共に使う</h3>
 <div class="outline-text-3" id="text-org568fe5e5">
 <p>
 <code>ivy-dired-history</code> を導入すると， dired (<code>C-x d</code>) で訪問した場所を記録してソート表示してくれます．さらに，diredにコピー(<code>C</code>)と移動(<code>R</code>)機能を与えてくれます．ただし，コピーや移動先の表示順位を上げる機能ではないので要注意です．履歴の保存は， <code>session.el</code> で明示的に管理しています．一般には <code>savehist</code> を使うことが推奨されているようです．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">ivy-dired-history</span> nil t)
-  (define-key dired-mode-map <span style="color: #98c379;">","</span> 'dired)
-  (<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"session"</span>
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">ivy-dired-history</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (define-key dired-mode-map <span style="color: #8b2252;">","</span> 'dired)
+  (<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"session"</span>
     (add-to-list 'session-globals-include 'ivy-dired-history-variable)))
 </pre>
 </div>
@@ -883,22 +861,22 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 
 <div id="outline-container-org3bd7a24d" class="outline-3">
-<h3 id="org3bd7a24d"><span class="section-number-3">4.4</span> magit.el と共に使う</h3>
+<h3 id="org3bd7a24d"><span class="section-number-3">4.4.</span> magit.el と共に使う</h3>
 <div class="outline-text-3" id="text-org3bd7a24d">
 <p>
 <code>magit</code> の branch の選択などが <code>ivy</code> インターフェイスになります．後述の <code>prescient.el</code> を導入すれば，選択項目を上に上げたり，履歴を保存できます．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"magit"</span>
-  (<span style="color: #c678dd;">setq</span> magit-completing-read-function 'ivy-completing-read))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"magit"</span><span style="background-color: #DEEDFF;">
+</span>  (<span style="color: #a020f0;">setq</span> magit-completing-read-function 'ivy-completing-read))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orga507874d" class="outline-3">
-<h3 id="orga507874d"><span class="section-number-3">4.5</span> eldoc.el と共に使う</h3>
+<h3 id="orga507874d"><span class="section-number-3">4.5.</span> eldoc.el と共に使う</h3>
 <div class="outline-text-3" id="text-orga507874d">
 <p>
 <code>eldoc</code> は <code>eldoc-idle-delay</code> の値を用いて一定時間が経過したらミニバッファに情報を出します． <code>helm</code> は別ウィンドウに情報を出すため衝突しませんが， <code>ivy</code> はミニバッファを使うため，高頻度で衝突します． <code>eldoc-message</code> をハックします．<br />
@@ -909,53 +887,53 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"eldoc"</span>
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:eldoc-message</span> (f <span style="color: #CFCB90;">&amp;optional</span> string)
-    (<span style="color: #c678dd;">unless</span> (active-minibuffer-window)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"eldoc"</span><span style="background-color: #DEEDFF;">
+</span>  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:eldoc-message</span> (f <span style="color: #228b22;">&amp;optional</span> string)
+    (<span style="color: #a020f0;">unless</span> (active-minibuffer-window)
       (funcall f string)))
-  (advice-add 'eldoc-message <span style="color: #56b6c2;">:around</span> #'ad:eldoc-message))
+  (advice-add 'eldoc-message <span style="color: #483d8b;">:around</span> #'ad:eldoc-message))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgc151f9eb" class="outline-3">
-<h3 id="orgc151f9eb"><span class="section-number-3">4.6</span> mic-paren.el と共に使う</h3>
+<h3 id="orgc151f9eb"><span class="section-number-3">4.6.</span> mic-paren.el と共に使う</h3>
 <div class="outline-text-3" id="text-orgc151f9eb">
 <p>
 <code>eldoc</code> と同様に，ミニバッファで衝突します．以下のコードで回避できます．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"mic-paren"</span>
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:mic-paren-highlight</span> (f)
-    (<span style="color: #c678dd;">if</span> (active-minibuffer-window)
-        (<span style="color: #c678dd;">let</span> ((paren-display-message 'never))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"mic-paren"</span><span style="background-color: #DEEDFF;">
+</span>  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:mic-paren-highlight</span> (f)
+    (<span style="color: #a020f0;">if</span> (active-minibuffer-window)
+        (<span style="color: #a020f0;">let</span> ((paren-display-message 'never))
           (funcall f))
       (funcall f)))
-  (advice-add 'mic-paren-highlight <span style="color: #56b6c2;">:around</span> #'ad:mic-paren-highlight))
+  (advice-add 'mic-paren-highlight <span style="color: #483d8b;">:around</span> #'ad:mic-paren-highlight))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org3c7fd0b2" class="outline-3">
-<h3 id="org3c7fd0b2"><span class="section-number-3">4.7</span> counsel-find-file を使わない</h3>
+<h3 id="org3c7fd0b2"><span class="section-number-3">4.7.</span> counsel-find-file を使わない</h3>
 <div class="outline-text-3" id="text-org3c7fd0b2">
 <p>
 <code>counsel-find-file</code> が <code>find-file</code> を置き換えますが，私は素の <code>find-file</code> を気に入っているので， <code>counsel-find-file</code> を無効化します．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">completion-in-region-function &#12418;&#19968;&#26178;&#30340;&#12395;&#12487;&#12501;&#12457;&#12395;&#25147;&#12373;&#12394;&#12356;&#12392;&#65292;TAB&#35036;&#23436;&#26178;&#12395;</span>
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">ivy &#12364;&#26377;&#21177;&#21270;&#12373;&#12428;&#12390;&#12375;&#12414;&#12358;&#65294;</span>
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-disable-counsel-find-file</span> (<span style="color: #CFCB90;">&amp;rest</span> args)
-  <span style="color: #98c379;">"Disable `</span><span style="color: #d19a66;">counsel-find-file</span><span style="color: #98c379;">' and use the original `</span><span style="color: #d19a66;">find-file</span><span style="color: #98c379;">' with ARGS."</span>
-  (<span style="color: #c678dd;">let</span> ((completing-read-function #'completing-read-default)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">completion-in-region-function &#12418;&#19968;&#26178;&#30340;&#12395;&#12487;&#12501;&#12457;&#12395;&#25147;&#12373;&#12394;&#12356;&#12392;&#65292;TAB&#35036;&#23436;&#26178;&#12395;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">ivy &#12364;&#26377;&#21177;&#21270;&#12373;&#12428;&#12390;&#12375;&#12414;&#12358;&#65294;</span>
+<span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">my-disable-counsel-find-file</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #228b22; background-color: #DEEDFF;">&amp;rest</span><span style="background-color: #DEEDFF;"> args)
+</span>  <span style="color: #8b2252;">"Disable `</span><span style="color: #008b8b;">counsel-find-file</span><span style="color: #8b2252;">' and use the original `</span><span style="color: #008b8b;">find-file</span><span style="color: #8b2252;">' with ARGS."</span>
+  (<span style="color: #a020f0;">let</span> ((completing-read-function #'completing-read-default)
         (completion-in-region-function #'completion--in-region))
     (apply #'read-file-name-default args)))
-(<span style="color: #c678dd;">setq</span> read-file-name-function #'my-disable-counsel-find-file)
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(counsel-mode 1) &#12434;&#35373;&#23450;&#12375;&#12390;&#12418; counsel-find-file &#12364;&#21628;&#12400;&#12428;&#12394;&#12356;&#12424;&#12358;&#12395;&#12377;&#12427;&#65294;</span>
+(<span style="color: #a020f0;">setq</span> read-file-name-function #'my-disable-counsel-find-file)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(counsel-mode 1) &#12434;&#35373;&#23450;&#12375;&#12390;&#12418; counsel-find-file &#12364;&#21628;&#12400;&#12428;&#12394;&#12356;&#12424;&#12358;&#12395;&#12377;&#12427;&#65294;</span>
 (define-key counsel-mode-map [remap find-file]  nil)
 </pre>
 </div>
@@ -969,14 +947,14 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> counsel-find-file-ignore-regexp (regexp-opt completion-ignored-extensions))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgcdbabc35" class="outline-3">
-<h3 id="orgcdbabc35"><span class="section-number-3">4.8</span> find-library のバグを回避</h3>
+<h3 id="orgcdbabc35"><span class="section-number-3">4.8.</span> find-library のバグを回避</h3>
 <div class="outline-text-3" id="text-orgcdbabc35">
 <p>
 厳密に言えばバグではないのですが，最初に <code>find-library</code> を使うと，大量の <code>./</code> を表示する問題があります．これは <code>find-library</code> ではなく <code>counsel-find-library</code> を直接呼べば回避できます．しかし， <code>M-x</code> した時のコマンド候補には依然として <code>find-library</code> が出てきますので，誤選択の原因になります．<br />
@@ -987,10 +965,10 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">find-func</span> nil t)
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">find-library</span> (library)
-    <span style="color: #98c379;">"Override the original `</span><span style="color: #d19a66;">find-library</span><span style="color: #98c379;">' to hide in command list."</span>
-    (<span style="color: #c678dd;">prog1</span>
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">find-func</span> nil t)
+<span style="background-color: #DEEDFF;">  (</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">find-library</span><span style="background-color: #DEEDFF;"> (library)
+</span>    <span style="color: #8b2252;">"Override the original `</span><span style="color: #008b8b;">find-library</span><span style="color: #8b2252;">' to hide in command list."</span>
+    (<span style="color: #a020f0;">prog1</span>
         (switch-to-buffer (find-file-noselect (find-library-name library)))
       (run-hooks 'find-function-after-hook))))
 </pre>
@@ -999,7 +977,7 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </div>
 
 <div id="outline-container-org3af34267" class="outline-3">
-<h3 id="org3af34267"><span class="section-number-3">4.9</span> counsel-M-x</h3>
+<h3 id="org3af34267"><span class="section-number-3">4.9.</span> counsel-M-x</h3>
 <div class="outline-text-3" id="text-org3af34267">
 <p>
 <code>helm</code> や <code>ivy</code> を使う大きな目的として，コマンドの絞り込みがあります． <code>helm</code> から <code>ivy</code> に移行すると， <code>M-x</code> の印象がかなり違うので，必要に応じて <code>helm</code> 流になるように設定して使います．4点ほど設定・カスタマイズします．<br />
@@ -1010,9 +988,9 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">smex</span> nil t)
-  (<span style="color: #c678dd;">setq</span> smex-history-length 35)
-  (<span style="color: #c678dd;">setq</span> smex-completion-method 'ivy))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">smex</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (<span style="color: #a020f0;">setq</span> smex-history-length 35)
+  (<span style="color: #a020f0;">setq</span> smex-completion-method 'ivy))
 </pre>
 </div>
 
@@ -1021,14 +999,14 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> ivy-initial-inputs-alist
-      '((org-agenda-refile . <span style="color: #98c379;">"^"</span>)
-        (org-capture-refile . <span style="color: #98c379;">"^"</span>)
-        <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(counsel-M-x . "^") ;; &#21066;&#38500;&#65294;&#24517;&#35201;&#12395;&#24540;&#12376;&#12390;&#20182;&#12398;&#12467;&#12510;&#12531;&#12489;&#12418;&#38500;&#22806;&#12377;&#12427;&#65294;</span>
-        (counsel-describe-function . <span style="color: #98c379;">"^"</span>)
-        (counsel-describe-variable . <span style="color: #98c379;">"^"</span>)
-        (Man-completion-table . <span style="color: #98c379;">"^"</span>)
-        (woman . <span style="color: #98c379;">"^"</span>)))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">setq</span><span style="background-color: #DEEDFF;"> ivy-initial-inputs-alist
+</span>      '((org-agenda-refile . <span style="color: #8b2252;">"^"</span>)
+        (org-capture-refile . <span style="color: #8b2252;">"^"</span>)
+        <span style="color: #b22222;">;; </span><span style="color: #b22222;">(counsel-M-x . "^") ;; &#21066;&#38500;&#65294;&#24517;&#35201;&#12395;&#24540;&#12376;&#12390;&#20182;&#12398;&#12467;&#12510;&#12531;&#12489;&#12418;&#38500;&#22806;&#12377;&#12427;&#65294;</span>
+        (counsel-describe-function . <span style="color: #8b2252;">"^"</span>)
+        (counsel-describe-variable . <span style="color: #8b2252;">"^"</span>)
+        (Man-completion-table . <span style="color: #8b2252;">"^"</span>)
+        (woman . <span style="color: #8b2252;">"^"</span>)))
 </pre>
 </div>
 
@@ -1037,7 +1015,7 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setf</span> (alist-get 'counsel-M-x ivy-re-builders-alist) #'ivy--regex-ignore-order)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setf</span> (alist-get 'counsel-M-x ivy-re-builders-alist) #'ivy--regex-ignore-order)
 </pre>
 </div>
 
@@ -1046,19 +1024,19 @@ counsel.el (0.12.0) には，82個のコマンドが実装されています．�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ivy--sort-by-len</span> (name candidates)
-  <span style="color: #98c379;">"Sort CANDIDATES based on similarity of their length with NAME."</span>
-  (<span style="color: #c678dd;">let</span> ((name-len (length name))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">ivy--sort-by-len</span><span style="background-color: #DEEDFF;"> (name candidates)
+</span>  <span style="color: #8b2252;">"Sort CANDIDATES based on similarity of their length with NAME."</span>
+  (<span style="color: #a020f0;">let</span> ((name-len (length name))
         (candidates-count (length candidates)))
-    (<span style="color: #c678dd;">if</span> (&lt; 500 candidates-count)
+    (<span style="color: #a020f0;">if</span> (&lt; 500 candidates-count)
         candidates
       (seq-sort-by #'length
-                   (<span style="color: #c678dd;">lambda</span> (a b)
+                   (<span style="color: #a020f0;">lambda</span> (a b)
                      (&lt; (abs (- name-len a))
                         (abs (- name-len b))))
                    candidates))))
 
-(<span style="color: #c678dd;">setf</span> (alist-get 'counsel-M-x ivy-sort-matches-functions-alist)
+(<span style="color: #a020f0;">setf</span> (alist-get 'counsel-M-x ivy-sort-matches-functions-alist)
       #'ivy--sort-by-len)
 </pre>
 </div>
@@ -1071,12 +1049,12 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">unless</span> (fboundp 'seq-sort-by)
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">seq-sort-by</span> (<span style="color: #c678dd;">function</span> pred sequence)
-    <span style="color: #98c379;">"Sort SEQUENCE using PRED as a comparison function.</span>
-<span style="color: #98c379;">Elements of SEQUENCE are transformed by FUNCTION before being</span>
-<span style="color: #98c379;">sorted.  FUNCTION must be a function of one argument."</span>
-    (seq-sort (<span style="color: #c678dd;">lambda</span> (a b)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">unless</span> (fboundp 'seq-sort-by)
+<span style="background-color: #DEEDFF;">  (</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">seq-sort-by</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">function</span><span style="background-color: #DEEDFF;"> pred sequence)
+</span>    <span style="color: #8b2252;">"Sort SEQUENCE using PRED as a comparison function.</span>
+<span style="color: #8b2252;">Elements of SEQUENCE are transformed by FUNCTION before being</span>
+<span style="color: #8b2252;">sorted.  FUNCTION must be a function of one argument."</span>
+    (seq-sort (<span style="color: #a020f0;">lambda</span> (a b)
                 (funcall pred
                          (funcall function a)
                          (funcall function b)))
@@ -1087,20 +1065,20 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 
 <div id="outline-container-org8d690a73" class="outline-3">
-<h3 id="org8d690a73"><span class="section-number-3">4.10</span> counsel-ag</h3>
+<h3 id="org8d690a73"><span class="section-number-3">4.10.</span> counsel-ag</h3>
 <div class="outline-text-3" id="text-org8d690a73">
 <p>
 <code>counsel-ag</code> は， <code>grep</code> と同様に全文検索する <code>ag</code> コマンドのインターフェイスを提供します．私はカーソル位置の単語を使って全文検索する頻度が高いので，そのようにハックします．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:counsel-ag</span> (f <span style="color: #CFCB90;">&amp;optional</span> initial-input initial-directory extra-ag-args ag-prompt caller)
-  (apply f (<span style="color: #c678dd;">or</span> initial-input (ivy-thing-at-point))
-         (<span style="color: #c678dd;">unless</span> current-prefix-arg
-           (<span style="color: #c678dd;">or</span> initial-directory default-directory))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">ad:counsel-ag</span><span style="background-color: #DEEDFF;"> (f </span><span style="color: #228b22; background-color: #DEEDFF;">&amp;optional</span><span style="background-color: #DEEDFF;"> initial-input initial-directory extra-ag-args ag-prompt caller)
+</span>  (apply f (<span style="color: #a020f0;">or</span> initial-input (ivy-thing-at-point))
+         (<span style="color: #a020f0;">unless</span> current-prefix-arg
+           (<span style="color: #a020f0;">or</span> initial-directory default-directory))
          extra-ag-args ag-prompt caller))
 
-(advice-add 'counsel-ag <span style="color: #56b6c2;">:around</span> #'ad:counsel-ag)
+(advice-add 'counsel-ag <span style="color: #483d8b;">:around</span> #'ad:counsel-ag)
 </pre>
 </div>
 
@@ -1109,15 +1087,15 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">directory &#12434;&#25351;&#23450;&#12375;&#12390; ag &#12420;&#12426;&#30452;&#12375;&#65294;&#12463;&#12456;&#12522;&#12399;&#20877;&#21033;&#29992;&#12377;&#12427;</span>
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-counsel-ag-in-dir</span> (_arg)
-  <span style="color: #98c379;">"Search again with new root directory."</span>
-  (<span style="color: #c678dd;">let</span> ((current-prefix-arg '(4)))
-    (counsel-ag ivy-text nil <span style="color: #98c379;">""</span>))) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">also disable extra-ag-args</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">directory &#12434;&#25351;&#23450;&#12375;&#12390; ag &#12420;&#12426;&#30452;&#12375;&#65294;&#12463;&#12456;&#12522;&#12399;&#20877;&#21033;&#29992;&#12377;&#12427;</span>
+<span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">my-counsel-ag-in-dir</span><span style="background-color: #DEEDFF;"> (_arg)
+</span>  <span style="color: #8b2252;">"Search again with new root directory."</span>
+  (<span style="color: #a020f0;">let</span> ((current-prefix-arg '(4)))
+    (counsel-ag ivy-text nil <span style="color: #8b2252;">""</span>))) <span style="color: #b22222;">;; </span><span style="color: #b22222;">also disable extra-ag-args</span>
 
 (ivy-add-actions
  'counsel-ag
- '((<span style="color: #98c379;">"r"</span> my-counsel-ag-in-dir <span style="color: #98c379;">"search in directory"</span>)))
+ '((<span style="color: #8b2252;">"r"</span> my-counsel-ag-in-dir <span style="color: #8b2252;">"search in directory"</span>)))
 </pre>
 </div>
 
@@ -1126,31 +1104,41 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(define-key counsel-ag-map (kbd <span style="color: #98c379;">"C-x C-d"</span>) 'counsel-cd)
+<pre class="src src-emacs-lisp">(define-key counsel-ag-map (kbd <span style="color: #8b2252;">"C-x C-d"</span>) 'counsel-cd)
 </pre>
 </div>
 
 <p>
 と設定しておけば， <code>counsel-ag</code> 使用中に <code>M-o</code> せず直接 <code>C-x C-d</code> すれば <code>counsel-cd</code> を呼べます．<br />
 </p>
+
+<p>
+最後に，デフォルトだと3文字入力しないと検索が発動しませんが，2文字の文字列でも検索可能にしています．<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span style="color: #b22222; background-color: #DEEDFF;">;; </span><span style="color: #b22222; background-color: #DEEDFF;">2&#25991;&#23383;&#12391;&#12418;&#26908;&#32034;&#12364;&#30330;&#21205;&#12377;&#12427;&#12424;&#12358;&#12395;&#12377;&#12427;</span><span style="background-color: #DEEDFF;">
+</span>(add-to-list 'ivy-more-chars-alist '(counsel-ag . 2))
+</pre>
+</div>
 </div>
 </div>
 
 <div id="outline-container-org2a6189cb" class="outline-3">
-<h3 id="org2a6189cb"><span class="section-number-3">4.11</span> counsel-fzf</h3>
+<h3 id="org2a6189cb"><span class="section-number-3">4.11.</span> counsel-fzf</h3>
 <div class="outline-text-3" id="text-org2a6189cb">
 <p>
 <code>counsel-ag</code> の場合と同様に，カーソル位置の単語を使って <code>counsel-fzf</code> を起動するようにハックします．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:counsel-fzf</span> (f <span style="color: #CFCB90;">&amp;optional</span> initial-input initial-directory fzf-prompt)
-  (apply f (<span style="color: #c678dd;">or</span> initial-input
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">ad:counsel-fzf</span><span style="background-color: #DEEDFF;"> (f </span><span style="color: #228b22; background-color: #DEEDFF;">&amp;optional</span><span style="background-color: #DEEDFF;"> initial-input initial-directory fzf-prompt)
+</span>  (apply f (<span style="color: #a020f0;">or</span> initial-input
                (ivy-thing-at-point))
-         (<span style="color: #c678dd;">or</span> initial-directory default-directory)
+         (<span style="color: #a020f0;">or</span> initial-directory default-directory)
          fzf-prompt))
 
-(advice-add 'counsel-fzf <span style="color: #56b6c2;">:around</span> #'ad:counsel-fzf)
+(advice-add 'counsel-fzf <span style="color: #483d8b;">:around</span> #'ad:counsel-fzf)
 </pre>
 </div>
 
@@ -1159,22 +1147,22 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-counsel-fzf-in-dir</span> (_arg)
-  <span style="color: #98c379;">"Search again with new root directory."</span>
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">my-counsel-fzf-in-dir</span><span style="background-color: #DEEDFF;"> (_arg)
+</span>  <span style="color: #8b2252;">"Search again with new root directory."</span>
   (counsel-fzf ivy-text
                (read-directory-name
                 (concat (car (split-string counsel-fzf-cmd))
-                        <span style="color: #98c379;">" in directory: "</span>))))
+                        <span style="color: #8b2252;">" in directory: "</span>))))
 
 (ivy-add-actions
  'counsel-fzf
- '((<span style="color: #98c379;">"r"</span> my-counsel-fzf-in-dir <span style="color: #98c379;">"search in directory"</span>)))
+ '((<span style="color: #8b2252;">"r"</span> my-counsel-fzf-in-dir <span style="color: #8b2252;">"search in directory"</span>)))
 </pre>
 </div>
 </div>
 
 <div id="outline-container-org1735b8ea" class="outline-4">
-<h4 id="org1735b8ea"><span class="section-number-4">4.11.1</span> 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）</h4>
+<h4 id="org1735b8ea"><span class="section-number-4">4.11.1.</span> 検索語を入力してもヒットしないとき counsel-fzf に誘導する（半自動）</h4>
 <div class="outline-text-4" id="text-org1735b8ea">
 <p>
 <code>ivy</code> で検索語を入力しても，ヒットしないことがよくあります．入力ミス等なら再入力で済みますが，実は <code>recentf</code> に記録されていないだけ，とか，探索範囲が狭すぎるだけなこともあります．そんな時は，検索語を再入力せずに探索範囲だけを広げたいと思うでしょう．<br />
@@ -1207,48 +1195,48 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#30330;&#21205;&#12377;&#12427;&#12467;&#12510;&#12531;&#12489;&#12434;&#38480;&#23450;</span>
-(<span style="color: #c678dd;">defcustom</span> <span style="color: #e5c07b;">my-nocand-then-fzf-commands</span> '(counsel-find-flie
-                                         counsel-recentf
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">&#30330;&#21205;&#12377;&#12427;&#12467;&#12510;&#12531;&#12489;&#12434;&#38480;&#23450;</span>
+<span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defcustom</span><span style="background-color: #DEEDFF;"> </span><span style="color: #a0522d; background-color: #DEEDFF;">my-nocand-then-fzf-commands</span><span style="background-color: #DEEDFF;"> '(counsel-find-flie
+</span>                                         counsel-recentf
                                          counsel-projectile-find-file
                                          counsel-projectile-switch-project)
-  <span style="color: #98c379;">"List of commands for applying extension no candidates then `</span><span style="color: #d19a66;">counsel-fzf</span><span style="color: #98c379;">'."</span>
-  <span style="color: #56b6c2;">:group</span> 'ivy
-  <span style="color: #56b6c2;">:type</span> '(list symbol))
+  <span style="color: #8b2252;">"List of commands for applying extension no candidates then `</span><span style="color: #008b8b;">counsel-fzf</span><span style="color: #8b2252;">'."</span>
+  <span style="color: #483d8b;">:group</span> 'ivy
+  <span style="color: #483d8b;">:type</span> '(list symbol))
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#28961;&#24540;&#31572;&#12398;&#26178;[y/n]&#12434;&#20986;&#12377;&#65294;&#24453;&#12385;&#26178;&#38291;&#12434;[s]&#12391;&#25351;&#23450;</span>
-(<span style="color: #c678dd;">defcustom</span> <span style="color: #e5c07b;">my-nocand-then-fzf-idle-time</span> 0.8
-  <span style="color: #98c379;">"Idle time for showing prompt."</span>
-  <span style="color: #56b6c2;">:group</span> 'ivy
-  <span style="color: #56b6c2;">:type</span> 'float)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#28961;&#24540;&#31572;&#12398;&#26178;[y/n]&#12434;&#20986;&#12377;&#65294;&#24453;&#12385;&#26178;&#38291;&#12434;[s]&#12391;&#25351;&#23450;</span>
+(<span style="color: #a020f0;">defcustom</span> <span style="color: #a0522d;">my-nocand-then-fzf-idle-time</span> 0.8
+  <span style="color: #8b2252;">"Idle time for showing prompt."</span>
+  <span style="color: #483d8b;">:group</span> 'ivy
+  <span style="color: #483d8b;">:type</span> 'float)
 
-(<span style="color: #c678dd;">defvar</span> <span style="color: #e5c07b;">my--nocand-then-fzf</span> t)
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-nocand-then-fzf-reset</span> ()
-  (<span style="color: #c678dd;">setq</span> my--nocand-then-fzf t))
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my--nocand-then-fzf</span> t)
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-nocand-then-fzf-reset</span> ()
+  (<span style="color: #a020f0;">setq</span> my--nocand-then-fzf t))
 
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-nocand-then-fzf</span> (prompt)
-  (<span style="color: #c678dd;">when</span> (= ivy--length 0)
-    (<span style="color: #c678dd;">if</span> (eq (read-char prompt) ?y) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">y-or-n-p is not applicable</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-nocand-then-fzf</span> (prompt)
+  (<span style="color: #a020f0;">when</span> (= ivy--length 0)
+    (<span style="color: #a020f0;">if</span> (eq (read-char prompt) ?y) <span style="color: #b22222;">;; </span><span style="color: #b22222;">y-or-n-p is not applicable</span>
         (ivy-exit-with-action
-         (<span style="color: #c678dd;">lambda</span> (x)
+         (<span style="color: #a020f0;">lambda</span> (x)
            (counsel-fzf ivy-text default-directory)))
-      (<span style="color: #c678dd;">setq</span> my--nocand-then-fzf nil))))
+      (<span style="color: #a020f0;">setq</span> my--nocand-then-fzf nil))))
 
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:fzf:ivy--insert-prompt</span> ()
-  (<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">and</span> my--nocand-then-fzf
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">ad:fzf:ivy--insert-prompt</span> ()
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">and</span> my--nocand-then-fzf
              (memq (ivy-state-caller ivy-last) my-nocand-then-fzf-commands)
              (= ivy--length 0))
-    (<span style="color: #c678dd;">let*</span> ((std-props '(front-sticky t rear-nonsticky t field t read-only t))
-           (prompt (concat (my-ivy-prompt-prefix) <span style="color: #98c379;">"Switch to Counsel-fzf? [y/n] "</span>)))
+    (<span style="color: #a020f0;">let*</span> ((std-props '(front-sticky t rear-nonsticky t field t read-only t))
+           (prompt (concat (my-ivy-prompt-prefix) <span style="color: #8b2252;">"Switch to Counsel-fzf? [y/n] "</span>)))
       (set-text-properties 0 (length prompt)
                            `(face minibuffer-prompt ,@std-props) prompt)
       (run-with-idle-timer my-nocand-then-fzf-idle-time
                            nil #'my-nocand-then-fzf prompt))))
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">ivy--insert-prompt &#12434; adivce &#12377;&#12427;&#65294;</span>
-(advice-add 'ivy--insert-prompt <span style="color: #56b6c2;">:before</span> #'ad:fzf:ivy--insert-prompt)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">ivy--insert-prompt &#12434; adivce &#12377;&#12427;&#65294;</span>
+(advice-add 'ivy--insert-prompt <span style="color: #483d8b;">:before</span> #'ad:fzf:ivy--insert-prompt)
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12475;&#12483;&#12471;&#12519;&#12531;&#12434;&#25244;&#12369;&#12383;&#12425;&#12501;&#12521;&#12464;&#12434;&#25147;&#12377;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12475;&#12483;&#12471;&#12519;&#12531;&#12434;&#25244;&#12369;&#12383;&#12425;&#12501;&#12521;&#12464;&#12434;&#25147;&#12377;</span>
 (add-hook 'minibuffer-setup-hook #'my-nocand-then-fzf-reset)
 (add-hook 'minibuffer-exit-hook #'my-nocand-then-fzf-reset)
 </pre>
@@ -1258,28 +1246,28 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 
 <div id="outline-container-org87d665a3" class="outline-3">
-<h3 id="org87d665a3"><span class="section-number-3">4.12</span> counsel-recentf</h3>
+<h3 id="org87d665a3"><span class="section-number-3">4.12.</span> counsel-recentf</h3>
 <div class="outline-text-3" id="text-org87d665a3">
 <p>
 デフォルトでは <code>/</code> からファイルの表示が始まりますが， <code>~</code> から始める方が好みなので <code>counsel-recentf</code> を再設定します．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">ad:counsel-recentf</span> ()
-  <span style="color: #98c379;">"Find a file on `</span><span style="color: #d19a66;">recentf-list</span><span style="color: #98c379;">'."</span>
-  (<span style="color: #c678dd;">interactive</span>)
-  (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">recentf</span>)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">ad:counsel-recentf</span><span style="background-color: #DEEDFF;"> ()
+</span>  <span style="color: #8b2252;">"Find a file on `</span><span style="color: #008b8b;">recentf-list</span><span style="color: #8b2252;">'."</span>
+  (<span style="color: #a020f0;">interactive</span>)
+  (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">recentf</span>)
   (recentf-mode)
-  (ivy-read <span style="color: #98c379;">"Recentf: "</span>
-            (<span style="color: #c678dd;">progn</span>
-              (mapcar #'substring-no-properties recentf-list) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">no need?</span>
-              (mapcar #'abbreviate-file-name recentf-list)) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">~/</span>
-            <span style="color: #56b6c2;">:action</span> (<span style="color: #c678dd;">lambda</span> (f)
-                      (<span style="color: #c678dd;">with-ivy-window</span>
+  (ivy-read <span style="color: #8b2252;">"Recentf: "</span>
+            (<span style="color: #a020f0;">progn</span>
+              (mapcar #'substring-no-properties recentf-list) <span style="color: #b22222;">;; </span><span style="color: #b22222;">no need?</span>
+              (mapcar #'abbreviate-file-name recentf-list)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">~/</span>
+            <span style="color: #483d8b;">:action</span> (<span style="color: #a020f0;">lambda</span> (f)
+                      (<span style="color: #a020f0;">with-ivy-window</span>
                         (find-file f)))
-            <span style="color: #56b6c2;">:require-match</span> t
-            <span style="color: #56b6c2;">:caller</span> 'counsel-recentf))
-(advice-add 'counsel-recentf <span style="color: #56b6c2;">:override</span> #'ad:counsel-recentf)
+            <span style="color: #483d8b;">:require-match</span> t
+            <span style="color: #483d8b;">:caller</span> 'counsel-recentf))
+(advice-add 'counsel-recentf <span style="color: #483d8b;">:override</span> #'ad:counsel-recentf)
 </pre>
 </div>
 
@@ -1288,15 +1276,15 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#20197;&#19979;&#12398;&#38306;&#25968;&#12399;&#65292;counsel-projectile-* &#12392; counsel-recentf &#12395;&#12406;&#12425;&#19979;&#12370;&#12427;&#65294;</span>
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-counsel-fzf-in-default-dir</span> (_arg)
-  <span style="color: #98c379;">"Search the current directory with fzf."</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">&#20197;&#19979;&#12398;&#38306;&#25968;&#12399;&#65292;counsel-projectile-* &#12392; counsel-recentf &#12395;&#12406;&#12425;&#19979;&#12370;&#12427;&#65294;</span>
+<span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">my-counsel-fzf-in-default-dir</span><span style="background-color: #DEEDFF;"> (_arg)
+</span>  <span style="color: #8b2252;">"Search the current directory with fzf."</span>
   (counsel-fzf ivy-text default-directory))
 
-<span style="color: #5C6370;">;; </span><span style="color: #5C6370;">add an action for counsel-recentf (M-o z)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">add an action for counsel-recentf (M-o z)</span>
 (ivy-add-actions
  'counsel-recentf
- '((<span style="color: #98c379;">"z"</span> my-counsel-fzf-in-default-dir <span style="color: #98c379;">"switch to fzf"</span>)))
+ '((<span style="color: #8b2252;">"z"</span> my-counsel-fzf-in-default-dir <span style="color: #8b2252;">"switch to fzf"</span>)))
 </pre>
 </div>
 
@@ -1305,30 +1293,30 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(custom-set-variables
- '(recentf-exclude
-   '(<span style="color: #98c379;">".recentf"</span> <span style="color: #98c379;">"bookmarks"</span> <span style="color: #98c379;">"org-recent-headings.dat"</span> <span style="color: #98c379;">"^/tmp\\.*"</span>
-     <span style="color: #98c379;">"^/private\\.*"</span> <span style="color: #98c379;">"^/var/folders\\.*"</span> <span style="color: #98c379;">"/TAGS$"</span>)))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(custom-set-variables
+</span> '(recentf-exclude
+   '(<span style="color: #8b2252;">".recentf"</span> <span style="color: #8b2252;">"bookmarks"</span> <span style="color: #8b2252;">"org-recent-headings.dat"</span> <span style="color: #8b2252;">"^/tmp\\.*"</span>
+     <span style="color: #8b2252;">"^/private\\.*"</span> <span style="color: #8b2252;">"^/var/folders\\.*"</span> <span style="color: #8b2252;">"/TAGS$"</span>)))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgdb39c7c8" class="outline-3">
-<h3 id="orgdb39c7c8"><span class="section-number-3">4.13</span> counsel-mark-ring</h3>
+<h3 id="orgdb39c7c8"><span class="section-number-3">4.13.</span> counsel-mark-ring</h3>
 <div class="outline-text-3" id="text-orgdb39c7c8">
 <p>
 マーク位置をたどることができます．意図せずカーソルが飛んでしまっても，少し前の編集箇所にカーソルを戻せるようになります．ただしデフォルトのままでは，履歴がソートされてしまうので，時系列に並ぶように設定を変更します．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"ivy"</span>
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">counsel-mark-ring &#12398;&#12522;&#12473;&#12488;&#12434;&#12477;&#12540;&#12488;&#12373;&#12379;&#12394;&#12356;</span>
-  (<span style="color: #c678dd;">setf</span> (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"ivy"</span><span style="background-color: #DEEDFF;">
+</span>  <span style="color: #b22222;">;; </span><span style="color: #b22222;">counsel-mark-ring &#12398;&#12522;&#12473;&#12488;&#12434;&#12477;&#12540;&#12488;&#12373;&#12379;&#12394;&#12356;</span>
+  (<span style="color: #a020f0;">setf</span> (alist-get 'counsel-mark-ring ivy-sort-functions-alist) nil))
 
-(global-set-key (kbd <span style="color: #98c379;">"C-,"</span>) 'counsel-mark-ring)
-(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"flyspell"</span>
-  (define-key flyspell-mode-map (kbd <span style="color: #98c379;">"C-,"</span>) 'counsel-mark-ring))
+(global-set-key (kbd <span style="color: #8b2252;">"C-,"</span>) 'counsel-mark-ring)
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"flyspell"</span>
+  (define-key flyspell-mode-map (kbd <span style="color: #8b2252;">"C-,"</span>) 'counsel-mark-ring))
 </pre>
 </div>
 </div>
@@ -1336,7 +1324,7 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 
 <div id="outline-container-orga31c060c" class="outline-2">
-<h2 id="orga31c060c"><span class="section-number-2">5</span> パッケージの移行</h2>
+<h2 id="orga31c060c"><span class="section-number-2">5.</span> パッケージの移行</h2>
 <div class="outline-text-2" id="text-orga31c060c">
 <p>
 <code>helm</code> で便利に使っていた外部パッケージは，同等の機能を <code>ivy</code> 向けに提供するパッケージが公開されています．一部は，フラグメントとして公開されているものです．幸いながら，私はほぼすべてのパッケージを無事に移行できました．<br />
@@ -1344,7 +1332,7 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 
 <div id="outline-container-org734d8fd7" class="outline-3">
-<h3 id="org734d8fd7"><span class="section-number-3">5.1</span> helm と ivy-counsel のコマンド対応表</h3>
+<h3 id="org734d8fd7"><span class="section-number-3">5.1.</span> helm と ivy-counsel のコマンド対応表</h3>
 <div class="outline-text-3" id="text-org734d8fd7">
 <p>
 個人的に <code>helm</code> で依存していたコマンドの対応表です．現在メインで使用しているコマンドは概ねカバーしています．表中の「X」は，デフォルト実装されているコマンドを表します．<br />
@@ -1544,46 +1532,46 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 </div>
 
 <div id="outline-container-org6b050be4" class="outline-3">
-<h3 id="org6b050be4"><span class="section-number-3">5.2</span> counsel-flycheck (fragment)</h3>
+<h3 id="org6b050be4"><span class="section-number-3">5.2.</span> counsel-flycheck (fragment)</h3>
 <div class="outline-text-3" id="text-org6b050be4">
 <p>
 <a href="https://github.com/nathankot/dotemacs/blob/master/init.el#L709">https://github.com/nathankot/dotemacs/blob/master/init.el#L709</a> にありますので．拝借しました．関数名を変更して， <code>caller</code> を追加しています．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defvar</span> <span style="color: #e5c07b;">counsel-flycheck-history</span> nil
-  <span style="color: #98c379;">"History for `</span><span style="color: #d19a66;">counsel-flycheck</span><span style="color: #98c379;">'"</span>)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defvar</span><span style="background-color: #DEEDFF;"> </span><span style="color: #a0522d; background-color: #DEEDFF;">counsel-flycheck-history</span><span style="background-color: #DEEDFF;"> nil
+</span>  <span style="color: #8b2252;">"History for `</span><span style="color: #008b8b;">counsel-flycheck</span><span style="color: #8b2252;">'"</span>)
 
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">counsel-flycheck</span> ()
-  (<span style="color: #c678dd;">interactive</span>)
-  (<span style="color: #c678dd;">if</span> (not (<span style="color: #c678dd;">bound-and-true-p</span> flycheck-mode))
-      (message <span style="color: #98c379;">"Flycheck mode is not available or enabled"</span>)
-    (ivy-read <span style="color: #98c379;">"Error: "</span>
-              (<span style="color: #c678dd;">let</span> ((source-buffer (current-buffer)))
-                (<span style="color: #c678dd;">with-current-buffer</span>
-                    (<span style="color: #c678dd;">or</span> (get-buffer flycheck-error-list-buffer)
-                        (<span style="color: #c678dd;">progn</span>
-                          (<span style="color: #c678dd;">with-current-buffer</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">counsel-flycheck</span> ()
+  (<span style="color: #a020f0;">interactive</span>)
+  (<span style="color: #a020f0;">if</span> (not (<span style="color: #a020f0;">bound-and-true-p</span> flycheck-mode))
+      (message <span style="color: #8b2252;">"Flycheck mode is not available or enabled"</span>)
+    (ivy-read <span style="color: #8b2252;">"Error: "</span>
+              (<span style="color: #a020f0;">let</span> ((source-buffer (current-buffer)))
+                (<span style="color: #a020f0;">with-current-buffer</span>
+                    (<span style="color: #a020f0;">or</span> (get-buffer flycheck-error-list-buffer)
+                        (<span style="color: #a020f0;">progn</span>
+                          (<span style="color: #a020f0;">with-current-buffer</span>
                               (get-buffer-create flycheck-error-list-buffer)
                             (flycheck-error-list-mode)
                             (current-buffer))))
                   (flycheck-error-list-set-source source-buffer)
                   (flycheck-error-list-reset-filter)
                   (revert-buffer t t t)
-                  (split-string (buffer-string) <span style="color: #98c379;">"\n"</span> t <span style="color: #98c379;">" *"</span>)))
-              <span style="color: #56b6c2;">:action</span> (<span style="color: #c678dd;">lambda</span> (s <span style="color: #CFCB90;">&amp;rest</span> _)
-                        (<span style="color: #c678dd;">-when-let*</span> ( (<span style="color: #ff982d; font-weight: bold;">error</span> (get-text-property 0 'tabulated-list-id s))
+                  (split-string (buffer-string) <span style="color: #8b2252;">"\n"</span> t <span style="color: #8b2252;">" *"</span>)))
+              <span style="color: #483d8b;">:action</span> (<span style="color: #a020f0;">lambda</span> (s <span style="color: #228b22;">&amp;rest</span> _)
+                        (<span style="color: #a020f0;">-when-let*</span> ( (<span style="color: #ff0000; font-weight: bold;">error</span> (get-text-property 0 'tabulated-list-id s))
                                       (pos (flycheck-error-pos error)) )
                           (goto-char (flycheck-error-pos error))))
-              <span style="color: #56b6c2;">:history</span> 'counsel-flycheck-history
-              <span style="color: #56b6c2;">:caller</span> 'counsel-flycheck)))
+              <span style="color: #483d8b;">:history</span> 'counsel-flycheck-history
+              <span style="color: #483d8b;">:caller</span> 'counsel-flycheck)))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org3d746f6e" class="outline-3">
-<h3 id="org3d746f6e"><span class="section-number-3">5.3</span> counsel-bm (fragment)</h3>
+<h3 id="org3d746f6e"><span class="section-number-3">5.3.</span> counsel-bm (fragment)</h3>
 <div class="outline-text-3" id="text-org3d746f6e">
 <p>
 <a href="https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/">https://www.reddit.com/r/emacs/comments/700xck/ivy_with_bmel_bookmark_manager/</a> に公開されているコードをアレンジしました． <code>ivy</code> とは無関係ですが， <code>&lt;f10&gt;</code> で <code>bm.el</code> の <code>bm-toggle</code> を呼び出し， <code>C-&lt;f10&gt;</code> で次のブックマークに移動するように設定しています．詳細は， <a href="https://takaxp.github.io/init.html#orgd5942d14">Configurations for GNU Emacs::4.9 [bm.el] カーソル位置をブックマークして追う</a> を参照ください．<br />
@@ -1592,48 +1580,48 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/0c1bb5f2-def7-c0f8-71d7-506adf648815.png" alt="Screen Shot 2019-08-03 at 14.54.29.png" /></p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">bm</span> nil t)
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">counsel-bm-get-list</span> (bookmark-overlays)
-    (-map (<span style="color: #c678dd;">lambda</span> (bm)
-            (<span style="color: #c678dd;">with-current-buffer</span> (overlay-buffer bm)
-              (<span style="color: #c678dd;">let*</span> ((line (replace-regexp-in-string
-                            <span style="color: #98c379;">"\n$"</span> <span style="color: #98c379;">""</span>
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">bm</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">counsel-bm-get-list</span> (bookmark-overlays)
+    (-map (<span style="color: #a020f0;">lambda</span> (bm)
+            (<span style="color: #a020f0;">with-current-buffer</span> (overlay-buffer bm)
+              (<span style="color: #a020f0;">let*</span> ((line (replace-regexp-in-string
+                            <span style="color: #8b2252;">"\n$"</span> <span style="color: #8b2252;">""</span>
                             (buffer-substring (overlay-start bm)
                                               (overlay-end bm))))
-                     <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">line numbers start on 1</span>
+                     <span style="color: #b22222;">;; </span><span style="color: #b22222;">line numbers start on 1</span>
                      (line-num
                       (+ 1 (count-lines (point-min) (overlay-start bm))))
-                     (name (format <span style="color: #98c379;">"%s:%d - %s"</span> (buffer-name) line-num line)))
+                     (name (format <span style="color: #8b2252;">"%s:%d - %s"</span> (buffer-name) line-num line)))
                 `(,name . ,bm))))
           bookmark-overlays))
 
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">counsel-bm</span> ()
-    (<span style="color: #c678dd;">interactive</span>)
-    (<span style="color: #c678dd;">let*</span> ((bm-list (counsel-bm-get-list (bm-overlays-lifo-order t)))
-           (bm-hash-table (make-hash-table <span style="color: #56b6c2;">:test</span> 'equal))
-           (search-list (-map (<span style="color: #c678dd;">lambda</span> (bm) (car bm)) bm-list)))
-      (-each bm-list (<span style="color: #c678dd;">lambda</span> (bm)
+  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">counsel-bm</span> ()
+    (<span style="color: #a020f0;">interactive</span>)
+    (<span style="color: #a020f0;">let*</span> ((bm-list (counsel-bm-get-list (bm-overlays-lifo-order t)))
+           (bm-hash-table (make-hash-table <span style="color: #483d8b;">:test</span> 'equal))
+           (search-list (-map (<span style="color: #a020f0;">lambda</span> (bm) (car bm)) bm-list)))
+      (-each bm-list (<span style="color: #a020f0;">lambda</span> (bm)
                        (puthash (car bm) (cdr bm) bm-hash-table)
                        ))
-      (ivy-read <span style="color: #98c379;">"Find bookmark(bm.el): "</span>
+      (ivy-read <span style="color: #8b2252;">"Find bookmark(bm.el): "</span>
                 search-list
-                <span style="color: #56b6c2;">:require-match</span> t
-                <span style="color: #56b6c2;">:keymap</span> counsel-describe-map
-                <span style="color: #56b6c2;">:action</span> (<span style="color: #c678dd;">lambda</span> (chosen)
-                          (<span style="color: #c678dd;">let</span> ((bookmark (gethash chosen bm-hash-table)))
+                <span style="color: #483d8b;">:require-match</span> t
+                <span style="color: #483d8b;">:keymap</span> counsel-describe-map
+                <span style="color: #483d8b;">:action</span> (<span style="color: #a020f0;">lambda</span> (chosen)
+                          (<span style="color: #a020f0;">let</span> ((bookmark (gethash chosen bm-hash-table)))
                             (switch-to-buffer (overlay-buffer bookmark))
                             (bm-goto bookmark)
                             ))
-                <span style="color: #56b6c2;">:sort</span> t)))
+                <span style="color: #483d8b;">:sort</span> t)))
 
-  (global-set-key (kbd <span style="color: #98c379;">"&lt;S-f10&gt;"</span>) 'counsel-bm))
+  (global-set-key (kbd <span style="color: #8b2252;">"&lt;S-f10&gt;"</span>) 'counsel-bm))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orge691cf84" class="outline-3">
-<h3 id="orge691cf84"><span class="section-number-3">5.4</span> counsel-world-clock.el</h3>
+<h3 id="orge691cf84"><span class="section-number-3">5.4.</span> counsel-world-clock.el</h3>
 <div class="outline-text-3" id="text-orge691cf84">
 <p>
 <a href="https://github.com/kchenphy/counsel-world-clock">counsel-world-clock</a> は，タイムゾーンから時刻と時差を調べるツールです．ビルトインの <code>display-time-world</code> でも似たことができますが， <code>ivy</code> でタイムゾーンを絞り込めるので圧倒的に便利です．<br />
@@ -1646,31 +1634,31 @@ see <a href="https://github.com/abo-abo/swiper/issues/1294">https://github.com/a
 <p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/12232/67564635-e10d-4595-35a7-3080473fef6e.png" alt="Screen Shot 2019-08-03 at 14.49.12.png" /></p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"ivy"</span>
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">package &#32076;&#30001;&#12398;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;&#12394;&#12425;&#65292;M-x counsel-world-clock &#12391;&#12377;&#12368;&#20351;&#12360;&#12427;&#65294;</span>
-  (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">counsel-world-clock</span> nil t))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"ivy"</span><span style="background-color: #DEEDFF;">
+</span>  <span style="color: #b22222;">;; </span><span style="color: #b22222;">package &#32076;&#30001;&#12398;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;&#12394;&#12425;&#65292;M-x counsel-world-clock &#12391;&#12377;&#12368;&#20351;&#12360;&#12427;&#65294;</span>
+  (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">counsel-world-clock</span> nil t))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org544cbfff" class="outline-3">
-<h3 id="org544cbfff"><span class="section-number-3">5.5</span> counsel-selected.el</h3>
+<h3 id="org544cbfff"><span class="section-number-3">5.5.</span> counsel-selected.el</h3>
 <div class="outline-text-3" id="text-org544cbfff">
 <p>
 拙作の <a href="https://github.com/takaxp/helm-selected">helm-selected</a> を <code>ivy</code> に移植しました．どちらかといえば，絞り込みしたいと言うより，領域選択から <code>l</code> 押下で，メニューを表示し，設定項目を思い出すために使います．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">counsel-selected</span> nil t)
-  (define-key selected-keymap (kbd <span style="color: #98c379;">"l"</span>) 'counsel-selected))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">counsel-selected</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (define-key selected-keymap (kbd <span style="color: #8b2252;">"l"</span>) 'counsel-selected))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org0c6e754b" class="outline-3">
-<h3 id="org0c6e754b"><span class="section-number-3">5.6</span> counsel-osx-app.el</h3>
+<h3 id="org0c6e754b"><span class="section-number-3">5.6.</span> counsel-osx-app.el</h3>
 <div class="outline-text-3" id="text-org0c6e754b">
 <p>
 <code>counse.el</code> には Linuxのアプリケーションを呼び出すためのインターフェイスである <code>counsel-linux-app</code> が実装されています． macOS用のコマンドは <a href="https://github.com/d12frosted/counsel-osx-app">counsel-osx-app</a> に公開されています．以前はOS側のランチャーを呼び出して使っていましたが，このコマンドのおかげで，Emacs から直接アプリケーションを呼び出せるので，かなり重宝しています．<br />
@@ -1687,48 +1675,48 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #98c379;">"C-M-1"</span>) 'counsel-osx-app)
-(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"counsel-osx-app"</span>
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(global-set-key (kbd </span><span style="color: #8b2252; background-color: #DEEDFF;">"C-M-1"</span><span style="background-color: #DEEDFF;">) 'counsel-osx-app)
+</span>(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"counsel-osx-app"</span>
   (custom-set-variables
    '(counsel-osx-app-location
-     '(<span style="color: #98c379;">"/Applications"</span> <span style="color: #98c379;">"/Applications/Utilities"</span>
-       <span style="color: #98c379;">"/System/Applications"</span>
-       <span style="color: #98c379;">"/Applications/Microsoft Remote Desktop.localized"</span>))))
+     '(<span style="color: #8b2252;">"/Applications"</span> <span style="color: #8b2252;">"/Applications/Utilities"</span>
+       <span style="color: #8b2252;">"/System/Applications"</span>
+       <span style="color: #8b2252;">"/Applications/Microsoft Remote Desktop.localized"</span>))))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org343549ff" class="outline-3">
-<h3 id="org343549ff"><span class="section-number-3">5.7</span> counsel-projectile.el</h3>
+<h3 id="org343549ff"><span class="section-number-3">5.7.</span> counsel-projectile.el</h3>
 <div class="outline-text-3" id="text-org343549ff">
 <p>
 <a href="https://github.com/ericdanan/counsel-projectile">counsel-projectile.el</a>は， <code>projectile.el</code> に <code>ivy</code> インターフェイスを提供するパッケージです． <code>projectile-find-file</code> は <code>counsel-git</code> に近い気もします．下記の <code>my-counsel-fzf-in-default-dir</code> は， <code>counsel-recentf</code> に紐付けたアクションと同じです．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#20197;&#19979;&#12398;&#38306;&#25968;&#12399;&#65292;counsel-projectile-* &#12392; counsel-recentf &#12395;&#12406;&#12425;&#19979;&#12370;&#12427;&#65294;</span>
-(<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-counsel-fzf-in-default-dir</span> (_arg)
-  <span style="color: #98c379;">"Search the current directory with fzf."</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">&#20197;&#19979;&#12398;&#38306;&#25968;&#12399;&#65292;counsel-projectile-* &#12392; counsel-recentf &#12395;&#12406;&#12425;&#19979;&#12370;&#12427;&#65294;</span>
+<span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defun</span><span style="background-color: #DEEDFF;"> </span><span style="color: #0000ff; background-color: #DEEDFF;">my-counsel-fzf-in-default-dir</span><span style="background-color: #DEEDFF;"> (_arg)
+</span>  <span style="color: #8b2252;">"Search the current directory with fzf."</span>
   (counsel-fzf ivy-text default-directory))
 
-(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"projectile"</span>
-  (<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">counsel-projectile</span> nil t)
-    <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">M-o z &#12391; fzf &#12434;&#21628;&#12403;&#20986;&#12379;&#12427;&#65294;</span>
-    <span style="color: #5C6370;">;; </span><span style="color: #3a5fcd; text-decoration: underline;"><a href="https://twitter.com/takaxp/status/1134481340458360832">https://twitter.com/takaxp/status/1134481340458360832</a></span>
-    <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12354;&#12428;&#65292;&#12371;&#12428;&#12394;&#12435;&#12391;&#21205;&#12356;&#12390;&#12427;&#12398;&#65311;&#38306;&#25968;&#12395; add-to-list &#12391;&#12365;&#12427;&#12398;&#65311;</span>
-    <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#20197;&#19979;&#12398;2&#12388;&#12398;&#38306;&#25968;&#12399;&#65292;&#21205;&#30340;&#12395;&#29983;&#25104;&#12373;&#12428;&#12427; defcustom &#12391;&#35215;&#23450;&#12373;&#12428;&#12427;&#65294;&#12377;&#12372;&#12356;&#65294;</span>
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"projectile"</span>
+  (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">counsel-projectile</span> nil t)
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">M-o z &#12391; fzf &#12434;&#21628;&#12403;&#20986;&#12379;&#12427;&#65294;</span>
+    <span style="color: #b22222;">;; </span><span style="color: #3a5fcd; text-decoration: underline;"><a href="https://twitter.com/takaxp/status/1134481340458360832">https://twitter.com/takaxp/status/113448134045836083</a><a href="https://twitter.com/takaxp/status/1134481340458360832">2</a></span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12354;&#12428;&#65292;&#12371;&#12428;&#12394;&#12435;&#12391;&#21205;&#12356;&#12390;&#12427;&#12398;&#65311;&#38306;&#25968;&#12395; add-to-list &#12391;&#12365;&#12427;&#12398;&#65311;</span>
+    <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#20197;&#19979;&#12398;2&#12388;&#12398;&#38306;&#25968;&#12399;&#65292;&#21205;&#30340;&#12395;&#29983;&#25104;&#12373;&#12428;&#12427; defcustom &#12391;&#35215;&#23450;&#12373;&#12428;&#12427;&#65294;&#12377;&#12372;&#12356;&#65294;</span>
     (add-to-list 'counsel-projectile-switch-project-action
-                 '(<span style="color: #98c379;">"z"</span> my-counsel-fzf-in-default-dir
-                   <span style="color: #98c379;">"switch to fzf"</span>) <span style="color: #ff982d; font-weight: bold;">t)</span>
+                 '(<span style="color: #8b2252;">"z"</span> my-counsel-fzf-in-default-dir
+                   <span style="color: #8b2252;">"switch to fzf"</span>) <span style="color: #ff0000; font-weight: bold;">t)</span>
     (add-to-list 'counsel-projectile-find-file-action
-                 '(<span style="color: #98c379;">"z"</span> my-counsel-fzf-in-default-dir
-                   <span style="color: #98c379;">"switch to fzf"</span>) <span style="color: #ff982d; font-weight: bold;">t)</span>
+                 '(<span style="color: #8b2252;">"z"</span> my-counsel-fzf-in-default-dir
+                   <span style="color: #8b2252;">"switch to fzf"</span>) <span style="color: #ff0000; font-weight: bold;">t)</span>
 
-    (<span style="color: #c678dd;">setq</span> projectile-completion-system 'ivy)
-    (<span style="color: #c678dd;">setq</span> counsel-projectile-sort-files t) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#24403;&#35442;&#12503;&#12525;&#12472;&#12455;&#12463;&#12488;&#20869;&#12522;&#12473;&#12488;&#12434;&#12477;&#12540;&#12488;</span>
-    (<span style="color: #c678dd;">setq</span> counsel-projectile-sort-projects t) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12503;&#12525;&#12472;&#12455;&#12463;&#12488;&#12522;&#12473;&#12488;&#12434;&#12477;&#12540;&#12488;</span>
-    (define-key projectile-mode-map (kbd <span style="color: #98c379;">"C-c p"</span>) 'projectile-command-map)
+    (<span style="color: #a020f0;">setq</span> projectile-completion-system 'ivy)
+    (<span style="color: #a020f0;">setq</span> counsel-projectile-sort-files t) <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#24403;&#35442;&#12503;&#12525;&#12472;&#12455;&#12463;&#12488;&#20869;&#12522;&#12473;&#12488;&#12434;&#12477;&#12540;&#12488;</span>
+    (<span style="color: #a020f0;">setq</span> counsel-projectile-sort-projects t) <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12503;&#12525;&#12472;&#12455;&#12463;&#12488;&#12522;&#12473;&#12488;&#12434;&#12477;&#12540;&#12488;</span>
+    (define-key projectile-mode-map (kbd <span style="color: #8b2252;">"C-c p"</span>) 'projectile-command-map)
     (counsel-projectile-mode 1)))
 </pre>
 </div>
@@ -1736,16 +1724,16 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org85e54c66" class="outline-3">
-<h3 id="org85e54c66"><span class="section-number-3">5.8</span> counsel-gtags.el</h3>
+<h3 id="org85e54c66"><span class="section-number-3">5.8.</span> counsel-gtags.el</h3>
 <div class="outline-text-3" id="text-org85e54c66">
 <p>
 安全安心の @syohex製 <a href="https://github.com/syohex/emacs-counsel-gtags">https://github.com/syohex/emacs-counsel-gtags</a><br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">counsel-gtags</span> nil t)
-  (<span style="color: #c678dd;">setq</span> counsel-gtags-update-interval-second 10)
-  (<span style="color: #c678dd;">dolist</span> (hook '(c-mode-hook c++-mode-hook))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">counsel-gtags</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (<span style="color: #a020f0;">setq</span> counsel-gtags-update-interval-second 10)
+  (<span style="color: #a020f0;">dolist</span> (hook '(c-mode-hook c++-mode-hook))
     (add-hook hook 'counsel-gtags-mode)))
 </pre>
 </div>
@@ -1753,23 +1741,23 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org36eb5423" class="outline-3">
-<h3 id="org36eb5423"><span class="section-number-3">5.9</span> flyspell-correct-ivy.el</h3>
+<h3 id="org36eb5423"><span class="section-number-3">5.9.</span> flyspell-correct-ivy.el</h3>
 <div class="outline-text-3" id="text-org36eb5423">
 <p>
 <a href="https://github.com/d12frosted/flyspell-correct">flyspell-correct.el</a> は， <code>flyspell</code> の <code>ivy</code> インターフェイスです．私は使用頻度が高いので，このパッケージが使えるのは必須要件です．当初，新しい単語を追加する <code>save</code> を helm のように，<a href="https://github.com/d12frosted/flyspell-correct/issues/10">選択リストに含める方法</a>を選択しましたが， <code>ivy</code> を使い込んでいくうちに， <code>M-o</code> で追加メニューを表示する <code>ivy</code> のお作法になれる方が生産的と気づきました．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">flyspell-correct-ivy</span> nil t)
-  (<span style="color: #c678dd;">setq</span> flyspell-correct-interface '#'flyspell-correct-ivy)
-  (global-set-key (kbd <span style="color: #98c379;">"&lt;f7&gt;"</span>) 'flyspell-correct-word-generic))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">flyspell-correct-ivy</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (<span style="color: #a020f0;">setq</span> flyspell-correct-interface '#'flyspell-correct-ivy)
+  (global-set-key (kbd <span style="color: #8b2252;">"&lt;f7&gt;"</span>) 'flyspell-correct-word-generic))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org23357a4c" class="outline-3">
-<h3 id="org23357a4c"><span class="section-number-3">5.10</span> ivy-pass.el</h3>
+<h3 id="org23357a4c"><span class="section-number-3">5.10.</span> ivy-pass.el</h3>
 <div class="outline-text-3" id="text-org23357a4c">
 <p>
 特に設定はしていませんが，基本的にバグっている気がします．私の環境だけかもしれません&#x2026;<br />
@@ -1782,7 +1770,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org032ae679" class="outline-3">
-<h3 id="org032ae679"><span class="section-number-3">5.11</span> org-recent-headings.el</h3>
+<h3 id="org032ae679"><span class="section-number-3">5.11.</span> org-recent-headings.el</h3>
 <div class="outline-text-3" id="text-org032ae679">
 <p>
 最近使用した <code>org mode</code> の見出しを <b>高精度に</b> 記録してくれる <a href="https://github.com/alphapapa/org-recent-headings">org-recent-headings.el</a> の <code>ivy</code> インターフェイスです．とても便利でオススメなのです． <del>が，残念ながら，org の HEAD では壊れて使えないため，少し前の version で使ってください．動作確認ができたら，記事を後日更新します．</del><br />
@@ -1797,23 +1785,23 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #5C6370;">;; </span><span style="color: #5C6370;">for Ivy interface</span>
-(global-set-key (kbd <span style="color: #98c379;">"C-c f r"</span>) 'org-recent-headings-ivy)
+<pre class="src src-emacs-lisp"><span style="color: #b22222; background-color: #DEEDFF;">;; </span><span style="color: #b22222; background-color: #DEEDFF;">for Ivy interface</span><span style="background-color: #DEEDFF;">
+</span>(global-set-key (kbd <span style="color: #8b2252;">"C-c f r"</span>) 'org-recent-headings-ivy)
 
-(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"org-recent-headings"</span>
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12487;&#12501;&#12457;&#12523;&#12488;&#12391;&#12399; `</span><span style="color: #d19a66;">ivy-string&lt;</span><span style="color: #5C6370;">' &#12364;&#20351;&#12431;&#12428;&#12390;&#12375;&#12414;&#12356;&#65292;&#20351;&#29992;&#23653;&#27508;&#12364;&#21453;&#26144;&#12373;&#12428;&#12394;&#12356;&#65294;</span>
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12388;&#12414;&#12426;&#65292; recent-headings.dat &#12395;&#35352;&#37682;&#12373;&#12428;&#12383;&#38918;&#12364;&#21453;&#26144;&#12373;&#12428;&#12394;&#12356;&#65294;</span>
-  (<span style="color: #c678dd;">setf</span> (alist-get 'org-recent-headings-ivy ivy-sort-functions-alist) nil)
+(<span style="color: #a020f0;">with-eval-after-load</span> <span style="color: #8b2252;">"org-recent-headings"</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12487;&#12501;&#12457;&#12523;&#12488;&#12391;&#12399; `</span><span style="color: #008b8b;">ivy-string&lt;</span><span style="color: #b22222;">' &#12364;&#20351;&#12431;&#12428;&#12390;&#12375;&#12414;&#12356;&#65292;&#20351;&#29992;&#23653;&#27508;&#12364;&#21453;&#26144;&#12373;&#12428;&#12394;&#12356;&#65294;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12388;&#12414;&#12426;&#65292; recent-headings.dat &#12395;&#35352;&#37682;&#12373;&#12428;&#12383;&#38918;&#12364;&#21453;&#26144;&#12373;&#12428;&#12394;&#12356;&#65294;</span>
+  (<span style="color: #a020f0;">setf</span> (alist-get 'org-recent-headings-ivy ivy-sort-functions-alist) nil)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#23653;&#27508;&#12398;&#20445;&#23384;&#20808;&#12434;&#35519;&#25972;</span>
-  (<span style="color: #c678dd;">setq</span> org-recent-headings-save-file <span style="color: #98c379;">"~/.emacs.d/org-recent-headings.dat"</span>)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#23653;&#27508;&#12398;&#20445;&#23384;&#20808;&#12434;&#35519;&#25972;</span>
+  (<span style="color: #a020f0;">setq</span> org-recent-headings-save-file <span style="color: #8b2252;">"~/.emacs.d/org-recent-headings.dat"</span>)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#36984;&#25246;&#12375;&#12383;&#31623;&#25152;&#12395;&#30452;&#25509;&#31227;&#21205;&#12377;&#12427; (C-M-n/C-M-p &#12398;&#12503;&#12524;&#12499;&#12517;&#12540;&#12399;&#21177;&#12363;&#12394;&#12356;)</span>
-  (<span style="color: #c678dd;">setq</span> org-recent-headings-show-entry-function
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#36984;&#25246;&#12375;&#12383;&#31623;&#25152;&#12395;&#30452;&#25509;&#31227;&#21205;&#12377;&#12427; (C-M-n/C-M-p &#12398;&#12503;&#12524;&#12499;&#12517;&#12540;&#12399;&#21177;&#12363;&#12394;&#12356;)</span>
+  (<span style="color: #a020f0;">setq</span> org-recent-headings-show-entry-function
         'org-recent-headings--show-entry-direct)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#23653;&#27508;&#12398;&#26356;&#26032;&#12434;&#12461;&#12483;&#12463;&#12377;&#12427;&#12467;&#12510;&#12531;&#12489;&#12398;&#25351;&#23450;</span>
-  (<span style="color: #c678dd;">setq</span> org-recent-headings-advise-functions
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#23653;&#27508;&#12398;&#26356;&#26032;&#12434;&#12461;&#12483;&#12463;&#12377;&#12427;&#12467;&#12510;&#12531;&#12489;&#12398;&#25351;&#23450;</span>
+  (<span style="color: #a020f0;">setq</span> org-recent-headings-advise-functions
         '(org-agenda-goto
           org-agenda-show
           org-agenda-show-mouse
@@ -1823,7 +1811,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
           org-tree-to-indirect-buffer
           org-bookmark-jump))
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
   (org-recent-headings-mode))
 </pre>
 </div>
@@ -1832,7 +1820,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org4d46e531" class="outline-2">
-<h2 id="org4d46e531"><span class="section-number-2">6</span> prescient.el</h2>
+<h2 id="org4d46e531"><span class="section-number-2">6.</span> prescient.el</h2>
 <div class="outline-text-2" id="text-org4d46e531">
 <p>
 <a href="https://github.com/raxod502/prescient.el">ivy-prescient.el</a> を導入すると，各 <code>ivy</code> インターフェイスの使用履歴が記録され，最近選択した項目を上位に出してくれるようになります．ただし，すべてのコマンドが影響下に入るわけではなく， <code>ivy-read</code> に正しく <code>:caller</code> が設定されている場合に限られます．また， <code>:sort nil</code> または <code>:sort</code> 設定が存在しない <code>ivy-read</code> の場合は， <code>ivy-prescient-sort-commands</code> に対象コマンドを追加することで， <code>ivy-prescient.el</code> の影響下に置くことができます．<br />
@@ -1853,43 +1841,43 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">prescient</span> nil t)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">prescient</span><span style="background-color: #DEEDFF;"> nil t)
+</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">ivy &#12452;&#12531;&#12479;&#12540;&#12501;&#12455;&#12452;&#12473;&#12391;&#12467;&#12510;&#12531;&#12489;&#12434;&#23455;&#34892;&#12377;&#12427;&#12383;&#12403;&#12395;&#65292;&#12461;&#12515;&#12483;&#12471;&#12517;&#12434;&#12501;&#12449;&#12452;&#12523;&#20445;&#23384;</span>
+  (<span style="color: #a020f0;">setq</span> prescient-aggressive-file-save t)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">ivy &#12452;&#12531;&#12479;&#12540;&#12501;&#12455;&#12452;&#12473;&#12391;&#12467;&#12510;&#12531;&#12489;&#12434;&#23455;&#34892;&#12377;&#12427;&#12383;&#12403;&#12395;&#65292;&#12461;&#12515;&#12483;&#12471;&#12517;&#12434;&#12501;&#12449;&#12452;&#12523;&#20445;&#23384;</span>
-  (<span style="color: #c678dd;">setq</span> prescient-aggressive-file-save t)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12501;&#12449;&#12452;&#12523;&#12398;&#20445;&#23384;&#20808;</span>
+  (<span style="color: #a020f0;">setq</span> prescient-save-file
+        (expand-file-name <span style="color: #8b2252;">"~/.emacs.d/prescient-save.el"</span>))
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12501;&#12449;&#12452;&#12523;&#12398;&#20445;&#23384;&#20808;</span>
-  (<span style="color: #c678dd;">setq</span> prescient-save-file
-        (expand-file-name <span style="color: #98c379;">"~/.emacs.d/prescient-save.el"</span>))
-
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12450;&#12463;&#12486;&#12451;&#12505;&#12540;&#12488;</span>
   (prescient-persist-mode 1))
 
-(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">ivy-prescient</span> nil t)
+(<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ivy-prescient</span> nil t)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">=ivy= &#12398; face &#24773;&#22577;&#12434;&#24341;&#12365;&#32153;&#12368;&#65288;&#12383;&#12384;&#12375;&#65292;&#23436;&#20840;&#12391;&#12399;&#12394;&#12356;&#21360;&#35937;&#65289;</span>
-  (<span style="color: #c678dd;">setq</span> ivy-prescient-retain-classic-highlighting t)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">=ivy= &#12398; face &#24773;&#22577;&#12434;&#24341;&#12365;&#32153;&#12368;&#65288;&#12383;&#12384;&#12375;&#65292;&#23436;&#20840;&#12391;&#12399;&#12394;&#12356;&#21360;&#35937;&#65289;</span>
+  (<span style="color: #a020f0;">setq</span> ivy-prescient-retain-classic-highlighting t)
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12467;&#12510;&#12531;&#12489;&#12434;&#36861;&#21152;</span>
-  (<span style="color: #c678dd;">dolist</span> (command '(counsel-world-clock <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">Merged!</span>
-                     counsel-app)) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">add :caller</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12467;&#12510;&#12531;&#12489;&#12434;&#36861;&#21152;</span>
+  (<span style="color: #a020f0;">dolist</span> (command '(counsel-world-clock <span style="color: #b22222;">;; </span><span style="color: #b22222;">Merged!</span>
+                     counsel-app)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add :caller</span>
     (add-to-list 'ivy-prescient-sort-commands command))
 
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">&#12501;&#12451;&#12523;&#12479;&#12398;&#24433;&#38911;&#31684;&#22258;&#12434;&#38480;&#23450;&#12377;&#12427;&#65294;&#20197;&#19979;&#12398;3&#12388;&#12399;&#38918;&#30058;&#12364;&#37325;&#35201;&#65294;</span>
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(1) &#12510;&#12452;&#12490;&#12540;&#12514;&#12540;&#12489;&#12398;&#26377;&#21177;&#21270;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#12501;&#12451;&#12523;&#12479;&#12398;&#24433;&#38911;&#31684;&#22258;&#12434;&#38480;&#23450;&#12377;&#12427;&#65294;&#20197;&#19979;&#12398;3&#12388;&#12399;&#38918;&#30058;&#12364;&#37325;&#35201;&#65294;</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">(1) &#12510;&#12452;&#12490;&#12540;&#12514;&#12540;&#12489;&#12398;&#26377;&#21177;&#21270;</span>
   (ivy-prescient-mode 1)
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(2) =counsel-M-x= &#12434;&#12452;&#12491;&#12471;&#12515;&#12523;&#20837;&#21147;&#23550;&#24540;&#12395;&#12377;&#12427;</span>
-  (<span style="color: #c678dd;">setf</span> (alist-get 'counsel-M-x ivy-re-builders-alist)
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">(2) =counsel-M-x= &#12434;&#12452;&#12491;&#12471;&#12515;&#12523;&#20837;&#21147;&#23550;&#24540;&#12395;&#12377;&#12427;</span>
+  (<span style="color: #a020f0;">setf</span> (alist-get 'counsel-M-x ivy-re-builders-alist)
         #'ivy-prescient-re-builder)
-  <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">(3) &#12487;&#12501;&#12457;&#12523;&#12488;&#12398;&#12452;&#12491;&#12471;&#12515;&#12523;&#20837;&#21147;&#12434;&#19978;&#26360;&#12365;&#12377;&#12427;</span>
-  (<span style="color: #c678dd;">setf</span> (alist-get t ivy-re-builders-alist) #'ivy--regex-ignore-order))
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">(3) &#12487;&#12501;&#12457;&#12523;&#12488;&#12398;&#12452;&#12491;&#12471;&#12515;&#12523;&#20837;&#21147;&#12434;&#19978;&#26360;&#12365;&#12377;&#12427;</span>
+  (<span style="color: #a020f0;">setf</span> (alist-get t ivy-re-builders-alist) #'ivy--regex-ignore-order))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgcc69d139" class="outline-2">
-<h2 id="orgcc69d139"><span class="section-number-2">7</span> 視覚化</h2>
+<h2 id="orgcc69d139"><span class="section-number-2">7.</span> 視覚化</h2>
 <div class="outline-text-2" id="text-orgcc69d139">
 <p>
 <code>ivy</code> の良いところは，アイコンを導入して視覚的な見やすさを簡単に向上できるところです．プロンプト，候補リストにアイコンを導入すると，選択対象がどのカテゴリのファイルなのかをファイル名や拡張子ではなく，アイコンで視覚的に把握できるようになります．<br />
@@ -1897,14 +1885,14 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-orgcb168e7e" class="outline-3">
-<h3 id="orgcb168e7e"><span class="section-number-3">7.1</span> プロンプトを改良</h3>
+<h3 id="orgcb168e7e"><span class="section-number-3">7.1.</span> プロンプトを改良</h3>
 <div class="outline-text-3" id="text-orgcb168e7e">
 <p>
 プロンプトは，選択候補の数とコマンド名の組み合わせで構成されます． <code>ivy-count-format</code> をカスタマイズすれば，現在のカーソル位置が，候補リストの何番目に位置するかも表示できます．<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">setq</span> ivy-count-format <span style="color: #98c379;">"(%d/%d) "</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">setq</span> ivy-count-format <span style="color: #8b2252;">"(%d/%d) "</span>)
 </pre>
 </div>
 
@@ -1933,21 +1921,21 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"ivy"</span>
-  (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-pre-prompt-function</span> ()
-    (<span style="color: #c678dd;">if</span> window-system
-        (format <span style="color: #98c379;">"%s\n%s "</span>
-                (make-string (frame-width) ?\x5F) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">"__"</span>
-                (all-the-icons-faicon <span style="color: #98c379;">"sort-amount-asc"</span>)) <span style="color: #5C6370;">;; </span><span style="color: #5C6370;">"&#61792;"</span>
-      (format <span style="color: #98c379;">"%s\n"</span> (make-string (1- (frame-width)) ?\x2D))))
-  (<span style="color: #c678dd;">setq</span> ivy-pre-prompt-function #'my-pre-prompt-function))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"ivy"</span><span style="background-color: #DEEDFF;">
+</span>  (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-pre-prompt-function</span> ()
+    (<span style="color: #a020f0;">if</span> window-system
+        (format <span style="color: #8b2252;">"%s\n%s "</span>
+                (make-string (frame-width) ?\x5F) <span style="color: #b22222;">;; </span><span style="color: #b22222;">"__"</span>
+                (all-the-icons-faicon <span style="color: #8b2252;">"sort-amount-asc"</span>)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">"&#61792;"</span>
+      (format <span style="color: #8b2252;">"%s\n"</span> (make-string (1- (frame-width)) ?\x2D))))
+  (<span style="color: #a020f0;">setq</span> ivy-pre-prompt-function #'my-pre-prompt-function))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org36c91268" class="outline-3">
-<h3 id="org36c91268"><span class="section-number-3">7.2</span> 現在の選択候補をわかりやすくする</h3>
+<h3 id="org36c91268"><span class="section-number-3">7.2.</span> 現在の選択候補をわかりやすくする</h3>
 <div class="outline-text-3" id="text-org36c91268">
 <p>
 <code>ivy-format-functions-alist</code> にカスタマイズした関数を追加すれば，プロンプトの下部に位置するカーソル行の表示を変更できます． <code>all-the-icons</code> を導入して，好みのアイコンでカーソル行のある選択候補を目立たせましょう．<br />
@@ -1964,41 +1952,41 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">defface</span> <span style="color: #e5c07b;">my-ivy-arrow-visible</span>
-  '((((class color) (background light)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #98c379;">"</span>)
-    (((class color) (background dark)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #EE6363;">#EE6363</span><span style="color: #98c379;">"</span>))
-  <span style="color: #98c379;">"Face used by Ivy for highlighting the arrow."</span>)
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">defface</span><span style="background-color: #DEEDFF;"> </span><span style="color: #a0522d; background-color: #DEEDFF;">my-ivy-arrow-visible</span><span style="background-color: #DEEDFF;">
+</span>  '((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #ffa500;">orange</span><span style="color: #8b2252;">"</span>)
+    (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #EE6363;">#EE6363</span><span style="color: #8b2252;">"</span>))
+  <span style="color: #8b2252;">"Face used by Ivy for highlighting the arrow."</span>)
 
-(<span style="color: #c678dd;">defface</span> <span style="color: #e5c07b;">my-ivy-arrow-invisible</span>
-  '((((class color) (background light)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span><span style="color: #98c379;">"</span>)
-    (((class color) (background dark)) <span style="color: #56b6c2;">:foreground</span> <span style="color: #98c379;">"</span><span style="color: #ffffff; background-color: #31343F;">#31343F</span><span style="color: #98c379;">"</span>))
-  <span style="color: #98c379;">"Face used by Ivy for highlighting the invisible arrow."</span>)
+(<span style="color: #a020f0;">defface</span> <span style="color: #a0522d;">my-ivy-arrow-invisible</span>
+  '((((class color) (background light)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #000000; background-color: #FFFFFF;">#FFFFFF</span><span style="color: #8b2252;">"</span>)
+    (((class color) (background dark)) <span style="color: #483d8b;">:foreground</span> <span style="color: #8b2252;">"</span><span style="color: #ffffff; background-color: #31343F;">#31343F</span><span style="color: #8b2252;">"</span>))
+  <span style="color: #8b2252;">"Face used by Ivy for highlighting the invisible arrow."</span>)
 
-(<span style="color: #c678dd;">if</span> window-system
-    (<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">all-the-icons</span> nil t)
-      (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-ivy-format-function-arrow</span> (cands)
-        <span style="color: #98c379;">"Transform CANDS into a string for minibuffer."</span>
+(<span style="color: #a020f0;">if</span> window-system
+    (<span style="color: #a020f0;">when</span> (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">all-the-icons</span> nil t)
+      (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-ivy-format-function-arrow</span> (cands)
+        <span style="color: #8b2252;">"Transform CANDS into a string for minibuffer."</span>
         (ivy--format-function-generic
-         (<span style="color: #c678dd;">lambda</span> (str)
+         (<span style="color: #a020f0;">lambda</span> (str)
            (concat (all-the-icons-faicon
-                    <span style="color: #98c379;">"hand-o-right"</span>
-                    <span style="color: #56b6c2;">:v-adjust</span> -0.2 <span style="color: #56b6c2;">:face</span> 'my-ivy-arrow-visible)
-                   <span style="color: #98c379;">" "</span> (ivy--add-face str 'ivy-current-match)))
-         (<span style="color: #c678dd;">lambda</span> (str)
+                    <span style="color: #8b2252;">"hand-o-right"</span>
+                    <span style="color: #483d8b;">:v-adjust</span> -0.2 <span style="color: #483d8b;">:face</span> 'my-ivy-arrow-visible)
+                   <span style="color: #8b2252;">" "</span> (ivy--add-face str 'ivy-current-match)))
+         (<span style="color: #a020f0;">lambda</span> (str)
            (concat (all-the-icons-faicon
-                    <span style="color: #98c379;">"hand-o-right"</span> <span style="color: #56b6c2;">:face</span> 'my-ivy-arrow-invisible) <span style="color: #98c379;">" "</span> str))
+                    <span style="color: #8b2252;">"hand-o-right"</span> <span style="color: #483d8b;">:face</span> 'my-ivy-arrow-invisible) <span style="color: #ff0000; font-weight: bold;">" "</span><span style="color: #ff0000; font-weight: bold;"> str))</span>
          cands
-         <span style="color: #98c379;">"\n"</span>))
-      (<span style="color: #c678dd;">setq</span> ivy-format-functions-alist
+         <span style="color: #8b2252;">"\n"</span>))
+      (<span style="color: #a020f0;">setq</span> ivy-format-functions-alist
             '((t . my-ivy-format-function-arrow))))
-  (<span style="color: #c678dd;">setq</span> ivy-format-functions-alist '((t . ivy-format-function-arrow))))
+  (<span style="color: #a020f0;">setq</span> ivy-format-functions-alist '((t . ivy-format-function-arrow))))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-orgba4997bf" class="outline-3">
-<h3 id="orgba4997bf"><span class="section-number-3">7.3</span> all-the-icons-ivy.el</h3>
+<h3 id="orgba4997bf"><span class="section-number-3">7.3.</span> all-the-icons-ivy.el</h3>
 <div class="outline-text-3" id="text-orgba4997bf">
 <p>
 <a href="https://github.com/asok/all-the-icons-ivy">all-the-icons-ivy.el</a>は， <code>ivy</code> インターフェイスにアイコンを追加するパッケージです． <code>all-the-icons.el</code> が少々導入の難しいパッケージなのですが，一度設定がうまくいけば，殺伐とした Emacs バッファに安らぎがもたらされます．<br />
@@ -2014,8 +2002,8 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">all-the-icons-ivy</span> nil t)
-  (<span style="color: #c678dd;">dolist</span> (command '(counsel-projectile-switch-project
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">all-the-icons-ivy</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (<span style="color: #a020f0;">dolist</span> (command '(counsel-projectile-switch-project
                      counsel-ibuffer))
     (add-to-list 'all-the-icons-ivy-buffer-commands command))
   (all-the-icons-ivy-setup))
@@ -2027,13 +2015,13 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"all-the-icons-ivy"</span>
-      (<span style="color: #c678dd;">defvar</span> <span style="color: #e5c07b;">my-tab-width</span> tab-width)
-      (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-tab-width-2</span> () (<span style="color: #c678dd;">setq</span> tab-width 2))
-      (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-tab-width-1</span> () (<span style="color: #c678dd;">setq</span> tab-width 1))
-      (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-tab-width-8</span> () (<span style="color: #c678dd;">setq</span> tab-width 8))
-      (<span style="color: #c678dd;">defun</span> <span style="color: #61afef;">my-tab-width-original</span> ()
-        (<span style="color: #c678dd;">setq</span> tab-width my-tab-width))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"all-the-icons-ivy"</span><span style="background-color: #DEEDFF;">
+</span>      (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">my-tab-width</span> tab-width)
+      (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-tab-width-2</span> () (<span style="color: #a020f0;">setq</span> tab-width 2))
+      (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-tab-width-1</span> () (<span style="color: #a020f0;">setq</span> tab-width 1))
+      (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-tab-width-8</span> () (<span style="color: #a020f0;">setq</span> tab-width 8))
+      (<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">my-tab-width-original</span> ()
+        (<span style="color: #a020f0;">setq</span> tab-width my-tab-width))
       (add-hook 'minibuffer-setup-hook #'my-tab-width-2)
       (add-hook 'minibuffer-exit-hook #'my-tab-width-original))
 </pre>
@@ -2054,7 +2042,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-orga174352e" class="outline-3">
-<h3 id="orga174352e"><span class="section-number-3">7.4</span> ivy-rich.el</h3>
+<h3 id="orga174352e"><span class="section-number-3">7.4.</span> ivy-rich.el</h3>
 <div class="outline-text-3" id="text-orga174352e">
 <p>
 ミニバッファに候補リストを表示する <code>ivy</code> は，大きな画面で横方向に複数のウィンドウを表示する状況で，画面上に無駄なスペースが多く生じます．<a href="https://github.com/Yevgnen/ivy-rich">ivy-rich.el</a>を導入すると，アイコンが追加され，さらに追加の情報が空きスペースに記述されるようになります．<a href="https://qiita.com/Ladicle/items/feb5f9dce9adf89652cf#%E6%A4%9C%E7%B4%A2%E3%81%AA%E3%81%A9%E3%81%AE%E8%A3%9C%E5%AE%8C%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9----swipercounsel-ivy-rich">Emacsモダン化計画 -かわEmacs編-</a> (by <a href="https://qiita.com/Ladicle">@Ladicle</a>) が詳しいです．<br />
@@ -2073,15 +2061,15 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">when</span> (<span style="color: #c678dd;">require</span> '<span style="color: #d19a66;">ivy-rich</span> nil t)
-  (ivy-rich-mode 1))
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">when</span><span style="background-color: #DEEDFF;"> (</span><span style="color: #a020f0; background-color: #DEEDFF;">require</span><span style="background-color: #DEEDFF;"> '</span><span style="color: #008b8b; background-color: #DEEDFF;">ivy-rich</span><span style="background-color: #DEEDFF;"> nil t)
+</span>  (ivy-rich-mode 1))
 </pre>
 </div>
 </div>
 </div>
 
 <div id="outline-container-org2560e400" class="outline-3">
-<h3 id="org2560e400"><span class="section-number-3">7.5</span> ivy-posframe.el</h3>
+<h3 id="org2560e400"><span class="section-number-3">7.5.</span> ivy-posframe.el</h3>
 <div class="outline-text-3" id="text-org2560e400">
 <p>
 <code>ivy-posframe</code> を使うと，通常はミニバッファに表示されるリストを任意の位置に出すことができます．私自身，まだ使いこなせていないので今後の課題です．以下は， <code>counsel-M-x</code> でコマンドリストを表示するときだけカーソル位置にフレームを出す設定です．なお，当初 <code>ivy-posframe</code> はマイナーモード化されておらず不便でしたが，<a href="https://qiita.com/conao3">@conao3</a> 氏の<a href="https://github.com/tumashu/ivy-posframe/pull/43">尽力</a>により，現在は <code>(ivy-posframe-mode 1)</code>, <code>(ivy-posframe-mode -1)</code> で ON/OFFできます．Thanks!<br />
@@ -2093,8 +2081,8 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(<span style="color: #c678dd;">with-eval-after-load</span> <span style="color: #98c379;">"ivy-posframe"</span>
-  (<span style="color: #c678dd;">setq</span> ivy-posframe-display-functions-alist
+<pre class="src src-emacs-lisp"><span style="background-color: #DEEDFF;">(</span><span style="color: #a020f0; background-color: #DEEDFF;">with-eval-after-load</span><span style="background-color: #DEEDFF;"> </span><span style="color: #8b2252; background-color: #DEEDFF;">"ivy-posframe"</span><span style="background-color: #DEEDFF;">
+</span>  (<span style="color: #a020f0;">setq</span> ivy-posframe-display-functions-alist
         '((counsel-M-x . ivy-posframe-display-at-point)
           (t           . ivy-posframe-display)))
   (ivy-posframe-mode 1))
@@ -2105,11 +2093,11 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-orgd2891ac2" class="outline-2">
-<h2 id="orgd2891ac2"><span class="section-number-2">8</span> 分析</h2>
+<h2 id="orgd2891ac2"><span class="section-number-2">8.</span> 分析</h2>
 <div class="outline-text-2" id="text-orgd2891ac2">
 </div>
 <div id="outline-container-orgc6d6e652" class="outline-3">
-<h3 id="orgc6d6e652"><span class="section-number-3">8.1</span> 読み込みコスト</h3>
+<h3 id="orgc6d6e652"><span class="section-number-3">8.1.</span> 読み込みコスト</h3>
 <div class="outline-text-3" id="text-orgc6d6e652">
 <p>
 <code>ivy.el</code> と <code>helm.el</code> の読み込み時間の計測を比較しました．それぞれ依存関係のパッケージの読み込みを含みます．計測は私の貧弱環境です．3回平均の単位は[ms]です．<br />
@@ -2180,7 +2168,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-orgd0debb44" class="outline-3">
-<h3 id="orgd0debb44"><span class="section-number-3">8.2</span> パッケージサイズ</h3>
+<h3 id="orgd0debb44"><span class="section-number-3">8.2.</span> パッケージサイズ</h3>
 <div class="outline-text-3" id="text-orgd0debb44">
 <p>
 <code>ivy</code> と <code>helm</code> でMELPA経由でインストールする場合のパッケージサイズを比較します．バイトコンパイル済みです．単位は[MB]です．<br />
@@ -2347,7 +2335,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org1164ffc7" class="outline-3">
-<h3 id="org1164ffc7"><span class="section-number-3">8.3</span> helm と共存の可能性</h3>
+<h3 id="org1164ffc7"><span class="section-number-3">8.3.</span> helm と共存の可能性</h3>
 <div class="outline-text-3" id="text-org1164ffc7">
 <p>
 いくつかのコマンドを試しましたが，基本的に共存できる印象です．ただ同一のインターフェイスを使う方が効率が上がると思いますので，どうしても移行困難なコマンドに限定して併用するのが良さそうです．例えば， <code>org-trello</code> が <code>helm</code> に依存しているので，私はしばらく <code>helm</code> 環境を残すことになりそうです．<br />
@@ -2360,7 +2348,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-orgba310b20" class="outline-3">
-<h3 id="orgba310b20"><span class="section-number-3">8.4</span> counsel.el にプリセットされている ivy-read 一覧</h3>
+<h3 id="orgba310b20"><span class="section-number-3">8.4.</span> counsel.el にプリセットされている ivy-read 一覧</h3>
 <div class="outline-text-3" id="text-orgba310b20">
 <p>
 実装されているコマンド一覧です． <code>autoload</code> 指定された関数は85個ありますが，エイリアスだったりするので，有効なのは82個です．意外なコマンドがすでに実装されているかもしれないので，一度，ざっと目を通してみてはいかがでしょう．<br />
@@ -2806,7 +2794,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org7633081f" class="outline-2">
-<h2 id="org7633081f"><span class="section-number-2">9</span> まとめ</h2>
+<h2 id="org7633081f"><span class="section-number-2">9.</span> まとめ</h2>
 <div class="outline-text-2" id="text-org7633081f">
 <p>
 この記事では（長々と） <code>helm</code> から <code>ivy</code> に移行した時に得られた知見と設定について解説しました．幸いながら，私の <code>helm</code> の利用レベルはそれほど高くなく，移行しても全く後悔はないですが， <code>helm</code> への依存度がより高い人の場合は，色々と気に入らない点があるかもしれません．また， <code>org-trello.el</code> 等， <code>helm</code> 依存で <code>ivy</code> が使えないパッケージもまだあるので，移行に慎重な人は，依存しているパッケージの <code>ivy</code> インターフェイスが存在するかを一度確認してみることをオススメします．それ以外の人は，もう「えいや！」で移行しても後悔しないと思います．<br />
@@ -2829,7 +2817,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-orgc046d2bb" class="outline-2">
-<h2 id="orgc046d2bb"><span class="section-number-2">10</span> 謝辞</h2>
+<h2 id="orgc046d2bb"><span class="section-number-2">10.</span> 謝辞</h2>
 <div class="outline-text-2" id="text-orgc046d2bb">
 <ul class="org-ul">
 <li>数ヶ月に渡り，私の <code>helm2ivy</code> を Twitter 上で見守ってくださった心優しい Emacs ユーザの方々に感謝いたします．励ましの声が無ければ，この記事は生まれませんでした．<br /></li>
@@ -2839,7 +2827,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 
 <div id="outline-container-org2a731b5d" class="outline-2">
-<h2 id="org2a731b5d"><span class="section-number-2">11</span> References</h2>
+<h2 id="org2a731b5d"><span class="section-number-2">11.</span> References</h2>
 <div class="outline-text-2" id="text-org2a731b5d">
 <ul class="org-ul">
 <li><a href="https://oremacs.com/swiper/">Ivy User Manual</a><br /></li>
@@ -2860,7 +2848,7 @@ NOTE <span class="timestamp-wrapper"><span class="timestamp">[2019-11-05 Tue]</s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2021-07-12 Mon 00:14</p>
+<p class="date">Created: 2021-12-05 Sun 20:46</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
