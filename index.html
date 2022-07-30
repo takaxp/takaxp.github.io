@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-11-24 Tue 22:53 -->
+<!-- 2022-07-30 Sat 21:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>My Online Documents</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Takaaki ISHIKAWA" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +41,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -191,7 +192,6 @@
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { width: 90%; }
-  /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
@@ -199,81 +199,34 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">My Online Documents</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbfb1751">1. Configurations for GNU Emacs</a></li>
-<li><a href="#org264ceca">2. Org Mode Manual (Japanese translation)</a></li>
-<li><a href="#orge1a70ba">3. Articles</a></li>
-<li><a href="#orgd84abcb">4. Talks</a></li>
-<li><a href="#org67a314e">5. Links</a></li>
+<li><a href="#org3fe319c">1. Configurations for GNU Emacs</a></li>
+<li><a href="#org0ddfb0e">2. Org Mode Manual (Japanese translation)</a></li>
+<li><a href="#org6fae871">3. Articles</a></li>
+<li><a href="#orgcfe8019">4. Talks</a></li>
+<li><a href="#org8f3a068">5. Links</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgbfb1751" class="outline-2">
-<h2 id="orgbfb1751"><span class="section-number-2">1</span> Configurations for GNU Emacs</h2>
+<div id="outline-container-org3fe319c" class="outline-2">
+<h2 id="org3fe319c"><span class="section-number-2">1.</span> Configurations for GNU Emacs</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li><a href="./init.html">init.el</a><br /></li>
-<li><a href="./utility.html">utility.el</a><br /></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org264ceca" class="outline-2">
-<h2 id="org264ceca"><span class="section-number-2">2</span> Org Mode Manual (Japanese translation)</h2>
+<div id="outline-container-org0ddfb0e" class="outline-2">
+<h2 id="org0ddfb0e"><span class="section-number-2">2.</span> Org Mode Manual (Japanese translation)</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li><a href="./org-ja.html">org-ja.html (v7.5)</a><br /></li>
@@ -281,8 +234,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orge1a70ba" class="outline-2">
-<h2 id="orge1a70ba"><span class="section-number-2">3</span> Articles</h2>
+<div id="outline-container-org6fae871" class="outline-2">
+<h2 id="org6fae871"><span class="section-number-2">3.</span> Articles</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li><a href="./articles/qiita-helm2ivy.html">Switching from helm to ivy</a><br /></li>
@@ -292,8 +245,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgd84abcb" class="outline-2">
-<h2 id="orgd84abcb"><span class="section-number-2">4</span> Talks</h2>
+<div id="outline-container-orgcfe8019" class="outline-2">
+<h2 id="orgcfe8019"><span class="section-number-2">4.</span> Talks</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><a href="./event/vimconf2018.html">VimConf 2018</a><br /></li>
@@ -301,8 +254,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org67a314e" class="outline-2">
-<h2 id="org67a314e"><span class="section-number-2">5</span> Links</h2>
+<div id="outline-container-org8f3a068" class="outline-2">
+<h2 id="org8f3a068"><span class="section-number-2">5.</span> Links</h2>
 <div class="outline-text-2" id="text-5">
 <ul class="org-ul">
 <li><a href="https://about.me/takaxp">https://about.me/takaxp</a><br /></li>
@@ -312,10 +265,10 @@ for the JavaScript code in this tag.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2020-06-06 Sat 23:04</p>
+<p class="date">Date: 2022-07-30 Sat 21:12</p>
 <p class="author">Author: Takaaki ISHIKAWA</p>
-<p class="date">Created: 2020-11-24 Tue 22:53</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2022-07-30 Sat 21:15</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
