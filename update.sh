@@ -9,7 +9,7 @@ git pull
 
 if [ -d $SRC -a -d $DST ]; then
     cp $SRC/init.html $DST
-    cp $SRC/utility.html $DST
+#    cp $SRC/utility.html $DST
 fi
 
 if [ -d $ART -a -d $DST ]; then
