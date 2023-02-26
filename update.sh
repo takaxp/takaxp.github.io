@@ -20,7 +20,7 @@ fi
 git add *.html *.org update.sh
 git add articles/*.html articles/*.org
 git add files/*
-git commit
+git commit -m 'Updates'
 git push
 
 echo "--- done."
